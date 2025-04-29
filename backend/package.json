@@ -1,0 +1,50 @@
+{
+  "name": "aplikasi-pengelolaan-tugas-internal",
+  "version": "1.0.0",
+  "description": "aplikasi backend untuk mencatat aktivitas dan kinerja harian PNS, dengan sistem pengingat otomatis, pelaporan bulanan, dan sistem reward untuk meningkatkan kedisiplinan dan motivasi kerja.",
+  "keywords": [
+    "PNS",
+    "activity",
+    "tracker",
+    "performance",
+    "reminder",
+    "reward",
+    "task-management",
+    "discipline",
+    "firebase",
+    "react-native"
+  ],
+  "homepage": "https://github.com/Ridho-arachman/Aplikasi-Pengelolaan-Tugas-Internal-Kominfo#readme",
+  "bugs": {
+    "url": "https://github.com/Ridho-arachman/Aplikasi-Pengelolaan-Tugas-Internal-Kominfo/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ridho-arachman/Aplikasi-Pengelolaan-Tugas-Internal-Kominfo.git"
+  },
+  "license": "ISC",
+  "author": "MUHAMMAD RIDHO ARACHMAN",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "test": "jest",
+    "lint": "eslint .",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "@prisma/client": "^6.7.0",
+    "express": "^5.1.0",
+    "passport": "^0.7.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.25.1",
+    "eslint": "^9.25.1",
+    "eslint-config-prettier": "^10.1.2",
+    "eslint-plugin-prettier": "^5.2.6",
+    "globals": "^16.0.0",
+    "nodemon": "^3.1.10",
+    "prettier": "^3.5.3",
+    "prisma": "^6.7.0"
+  }
+}
