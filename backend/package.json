@@ -29,8 +29,9 @@
   "scripts": {
     "dev": "nodemon index.js",
     "test": "jest",
-    "lint": "eslint .",
-    "format": "prettier --write ."
+    "migrate": "npx prisma migrate dev",
+    "studio": "npx prisma studio",
+    "generate": "npx prisma generate"
   },
   "dependencies": {
     "@prisma/client": "^6.7.0",

@@ -1,19 +1,12 @@
-import express from 'express';
+const express = require("express");
+const userRoutes = require("./src/routes/user.router");
 
 const app = express();
 
-// Parse JSON
 app.use(express.json());
-
-// Middleware tambahan yang biasanya digunakan:
-app.use(cors()); // Untuk mengizinkan CORS (Cross-Origin)
-app.use(morgan('dev')); // Untuk log request ke terminal
-app.use(express.urlencoded({ extended: true })); // Untuk parsing form (x-www-form-urlencoded)
+app.use(express.urlencoded({ extended: true }));
 
 // Routes
-app.use('/api/users', userRoutes);
+app.use("/api/user", userRoutes);
 
-// Error handling middleware (harus diletakkan setelah route)
-app.use(errorHandler);
-
-export default app;
+module.exports = app;
