@@ -19,7 +19,7 @@ model Jabatan{
 model User {
   nip String @db.VarChar(18) @id
   nama String @db.VarChar(255)
-  password String @db.VarChar(255)
+  password String @db.VarChar(255) 
   role Role @default(user)
   kd_jabatan String
   nip_atasan String? @db.VarChar(18)
