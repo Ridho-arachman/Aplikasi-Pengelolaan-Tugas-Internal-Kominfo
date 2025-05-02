@@ -1,4 +1,4 @@
-const laporanServices = require("../services/laporan.services");
+const laporanServices = require("../services/laporan.service");
 
 const GetLaporan = async (req, res) => {
   const { id } = req.params;

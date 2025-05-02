@@ -1,4 +1,4 @@
-const prisma = require("./prisma.services");
+const prisma = require("./prisma.service");
 
 const getLaporan = async (id) => {
   return await prisma.laporan.findUnique({
