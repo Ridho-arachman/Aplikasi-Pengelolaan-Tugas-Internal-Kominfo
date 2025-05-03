@@ -56,7 +56,7 @@ describe("Integration test for Jabatan routes", () => {
       .put(`/api/jabatan/${createdJabatan.kd_jabatan}`)
       .send({ nama_jabatan: "Kepala Bidang TI" });
 
-    expect(res.status).toBe(201);
+    expect(res.status).toBe(200);
     expect(res.body).toHaveProperty("status", "success");
     expect(res.body.data.nama_jabatan).toBe("Kepala Bidang TI");
   });
@@ -66,8 +66,9 @@ describe("Integration test for Jabatan routes", () => {
     const res = await request(app).delete(
       `/api/jabatan/${createdJabatan.kd_jabatan}`
     );
-    expect(res.status).toBe(201);
+    expect(res.status).toBe(200);
     expect(res.body).toHaveProperty("status", "success");
+    expect(res.body).toHaveProperty("message", "Jabatan berhasil dihapus");
   });
 
   // Confirm deletion

@@ -60,9 +60,9 @@ const UpdateJabatan = async (req, res) => {
   const { nama_jabatan } = req.body;
   try {
     const data = await jabatanServices.updateJabatan(kd_jabatan, nama_jabatan);
-    return res.status(201).json({
+    return res.status(200).json({
       status: "success",
-      message: "User berhasil diupdate",
+      message: "Jabatan berhasil diupdate",
       data,
     });
   } catch (err) {
@@ -92,9 +92,9 @@ const DeleteJabatan = async (req, res) => {
   const { kd_jabatan } = req.params;
   try {
     const data = await jabatanServices.deleteJabatan(kd_jabatan);
-    return res.status(201).json({
+    return res.status(200).json({
       status: "success",
-      message: "User berhasil dihapus",
+      message: "Jabatan berhasil dihapus",
       data,
     });
   } catch (err) {
