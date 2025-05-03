@@ -1,6 +1,6 @@
 const request = require("supertest");
-const app = require("../../../app"); // Pastikan path ke app.js benar
-const prisma = require("../../services/prisma.service");
+const app = require("../../../app");
+const prisma = require("../../lib/prisma");
 
 describe("Integration test for Jabatan routes", () => {
   beforeAll(async () => {

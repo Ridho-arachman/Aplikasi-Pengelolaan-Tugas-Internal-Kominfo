@@ -1,4 +1,4 @@
-const prisma = require("./prisma.service");
+const prisma = require("../lib/prisma");
 
 const createJabatan = async (data) => {
   return await prisma.jabatan.create({ data });
