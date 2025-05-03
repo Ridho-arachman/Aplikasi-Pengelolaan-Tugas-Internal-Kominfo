@@ -74,6 +74,17 @@ model PengumpulanTugas {
 
   tugas Tugas @relation(fields: [kd_tugas],references: [kd_tugas])
   user User @relation(fields: [user_nip],references: [nip])
+  rating Rating[]
+}
+
+model Rating {
+  kd_rating String   @id @default(cuid())
+  kd_pengumpulan_tugas   String   
+  nilai      Float    
+  komentar   String?  
+  created_at DateTime @default(now())
+
+  tugas      PengumpulanTugas @relation(fields: [kd_pengumpulan_tugas], references: [kd_pengumpulan_tugas])  // Relasi ke tugas yang diberi rating
 }
 
 

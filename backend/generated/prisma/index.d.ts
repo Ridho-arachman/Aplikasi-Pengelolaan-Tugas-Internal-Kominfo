@@ -38,6 +38,11 @@ export type Laporan = $Result.DefaultSelection<Prisma.$LaporanPayload>
  * 
  */
 export type PengumpulanTugas = $Result.DefaultSelection<Prisma.$PengumpulanTugasPayload>
+/**
+ * Model Rating
+ * 
+ */
+export type Rating = $Result.DefaultSelection<Prisma.$RatingPayload>
 
 /**
  * Enums
@@ -271,6 +276,16 @@ export class PrismaClient<
     * ```
     */
   get pengumpulanTugas(): Prisma.PengumpulanTugasDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.rating`: Exposes CRUD operations for the **Rating** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Ratings
+    * const ratings = await prisma.rating.findMany()
+    * ```
+    */
+  get rating(): Prisma.RatingDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -715,7 +730,8 @@ export namespace Prisma {
     User: 'User',
     Tugas: 'Tugas',
     Laporan: 'Laporan',
-    PengumpulanTugas: 'PengumpulanTugas'
+    PengumpulanTugas: 'PengumpulanTugas',
+    Rating: 'Rating'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -734,7 +750,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "jabatan" | "user" | "tugas" | "laporan" | "pengumpulanTugas"
+      modelProps: "jabatan" | "user" | "tugas" | "laporan" | "pengumpulanTugas" | "rating"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1068,6 +1084,72 @@ export namespace Prisma {
           }
         }
       }
+      Rating: {
+        payload: Prisma.$RatingPayload<ExtArgs>
+        fields: Prisma.RatingFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.RatingFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RatingPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.RatingFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RatingPayload>
+          }
+          findFirst: {
+            args: Prisma.RatingFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RatingPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.RatingFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RatingPayload>
+          }
+          findMany: {
+            args: Prisma.RatingFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RatingPayload>[]
+          }
+          create: {
+            args: Prisma.RatingCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RatingPayload>
+          }
+          createMany: {
+            args: Prisma.RatingCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.RatingDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RatingPayload>
+          }
+          update: {
+            args: Prisma.RatingUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RatingPayload>
+          }
+          deleteMany: {
+            args: Prisma.RatingDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.RatingUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.RatingUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RatingPayload>
+          }
+          aggregate: {
+            args: Prisma.RatingAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateRating>
+          }
+          groupBy: {
+            args: Prisma.RatingGroupByArgs<ExtArgs>
+            result: $Utils.Optional<RatingGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.RatingCountArgs<ExtArgs>
+            result: $Utils.Optional<RatingCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1157,6 +1239,7 @@ export namespace Prisma {
     tugas?: TugasOmit
     laporan?: LaporanOmit
     pengumpulanTugas?: PengumpulanTugasOmit
+    rating?: RatingOmit
   }
 
   /* Types for Logging */
@@ -1363,6 +1446,37 @@ export namespace Prisma {
    */
   export type TugasCountOutputTypeCountPengumpulan_tugasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PengumpulanTugasWhereInput
+  }
+
+
+  /**
+   * Count Type PengumpulanTugasCountOutputType
+   */
+
+  export type PengumpulanTugasCountOutputType = {
+    rating: number
+  }
+
+  export type PengumpulanTugasCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    rating?: boolean | PengumpulanTugasCountOutputTypeCountRatingArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PengumpulanTugasCountOutputType without action
+   */
+  export type PengumpulanTugasCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PengumpulanTugasCountOutputType
+     */
+    select?: PengumpulanTugasCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PengumpulanTugasCountOutputType without action
+   */
+  export type PengumpulanTugasCountOutputTypeCountRatingArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RatingWhereInput
   }
 
 
@@ -5532,6 +5646,8 @@ export namespace Prisma {
     updated_at?: boolean
     tugas?: boolean | TugasDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
+    rating?: boolean | PengumpulanTugas$ratingArgs<ExtArgs>
+    _count?: boolean | PengumpulanTugasCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["pengumpulanTugas"]>
 
 
@@ -5552,6 +5668,8 @@ export namespace Prisma {
   export type PengumpulanTugasInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tugas?: boolean | TugasDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
+    rating?: boolean | PengumpulanTugas$ratingArgs<ExtArgs>
+    _count?: boolean | PengumpulanTugasCountOutputTypeDefaultArgs<ExtArgs>
   }
 
   export type $PengumpulanTugasPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5559,6 +5677,7 @@ export namespace Prisma {
     objects: {
       tugas: Prisma.$TugasPayload<ExtArgs>
       user: Prisma.$UserPayload<ExtArgs>
+      rating: Prisma.$RatingPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       kd_pengumpulan_tugas: string
@@ -5912,6 +6031,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     tugas<T extends TugasDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TugasDefaultArgs<ExtArgs>>): Prisma__TugasClient<$Result.GetResult<Prisma.$TugasPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    rating<T extends PengumpulanTugas$ratingArgs<ExtArgs> = {}>(args?: Subset<T, PengumpulanTugas$ratingArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RatingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6293,6 +6413,30 @@ export namespace Prisma {
   }
 
   /**
+   * PengumpulanTugas.rating
+   */
+  export type PengumpulanTugas$ratingArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Rating
+     */
+    select?: RatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Rating
+     */
+    omit?: RatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RatingInclude<ExtArgs> | null
+    where?: RatingWhereInput
+    orderBy?: RatingOrderByWithRelationInput | RatingOrderByWithRelationInput[]
+    cursor?: RatingWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RatingScalarFieldEnum | RatingScalarFieldEnum[]
+  }
+
+  /**
    * PengumpulanTugas without action
    */
   export type PengumpulanTugasDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6308,6 +6452,969 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: PengumpulanTugasInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Rating
+   */
+
+  export type AggregateRating = {
+    _count: RatingCountAggregateOutputType | null
+    _avg: RatingAvgAggregateOutputType | null
+    _sum: RatingSumAggregateOutputType | null
+    _min: RatingMinAggregateOutputType | null
+    _max: RatingMaxAggregateOutputType | null
+  }
+
+  export type RatingAvgAggregateOutputType = {
+    nilai: number | null
+  }
+
+  export type RatingSumAggregateOutputType = {
+    nilai: number | null
+  }
+
+  export type RatingMinAggregateOutputType = {
+    kd_rating: string | null
+    kd_pengumpulan_tugas: string | null
+    nilai: number | null
+    komentar: string | null
+    created_at: Date | null
+  }
+
+  export type RatingMaxAggregateOutputType = {
+    kd_rating: string | null
+    kd_pengumpulan_tugas: string | null
+    nilai: number | null
+    komentar: string | null
+    created_at: Date | null
+  }
+
+  export type RatingCountAggregateOutputType = {
+    kd_rating: number
+    kd_pengumpulan_tugas: number
+    nilai: number
+    komentar: number
+    created_at: number
+    _all: number
+  }
+
+
+  export type RatingAvgAggregateInputType = {
+    nilai?: true
+  }
+
+  export type RatingSumAggregateInputType = {
+    nilai?: true
+  }
+
+  export type RatingMinAggregateInputType = {
+    kd_rating?: true
+    kd_pengumpulan_tugas?: true
+    nilai?: true
+    komentar?: true
+    created_at?: true
+  }
+
+  export type RatingMaxAggregateInputType = {
+    kd_rating?: true
+    kd_pengumpulan_tugas?: true
+    nilai?: true
+    komentar?: true
+    created_at?: true
+  }
+
+  export type RatingCountAggregateInputType = {
+    kd_rating?: true
+    kd_pengumpulan_tugas?: true
+    nilai?: true
+    komentar?: true
+    created_at?: true
+    _all?: true
+  }
+
+  export type RatingAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Rating to aggregate.
+     */
+    where?: RatingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Ratings to fetch.
+     */
+    orderBy?: RatingOrderByWithRelationInput | RatingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: RatingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Ratings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Ratings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Ratings
+    **/
+    _count?: true | RatingCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: RatingAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: RatingSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: RatingMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: RatingMaxAggregateInputType
+  }
+
+  export type GetRatingAggregateType<T extends RatingAggregateArgs> = {
+        [P in keyof T & keyof AggregateRating]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateRating[P]>
+      : GetScalarType<T[P], AggregateRating[P]>
+  }
+
+
+
+
+  export type RatingGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RatingWhereInput
+    orderBy?: RatingOrderByWithAggregationInput | RatingOrderByWithAggregationInput[]
+    by: RatingScalarFieldEnum[] | RatingScalarFieldEnum
+    having?: RatingScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: RatingCountAggregateInputType | true
+    _avg?: RatingAvgAggregateInputType
+    _sum?: RatingSumAggregateInputType
+    _min?: RatingMinAggregateInputType
+    _max?: RatingMaxAggregateInputType
+  }
+
+  export type RatingGroupByOutputType = {
+    kd_rating: string
+    kd_pengumpulan_tugas: string
+    nilai: number
+    komentar: string | null
+    created_at: Date
+    _count: RatingCountAggregateOutputType | null
+    _avg: RatingAvgAggregateOutputType | null
+    _sum: RatingSumAggregateOutputType | null
+    _min: RatingMinAggregateOutputType | null
+    _max: RatingMaxAggregateOutputType | null
+  }
+
+  type GetRatingGroupByPayload<T extends RatingGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<RatingGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof RatingGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], RatingGroupByOutputType[P]>
+            : GetScalarType<T[P], RatingGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type RatingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    kd_rating?: boolean
+    kd_pengumpulan_tugas?: boolean
+    nilai?: boolean
+    komentar?: boolean
+    created_at?: boolean
+    tugas?: boolean | PengumpulanTugasDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["rating"]>
+
+
+
+  export type RatingSelectScalar = {
+    kd_rating?: boolean
+    kd_pengumpulan_tugas?: boolean
+    nilai?: boolean
+    komentar?: boolean
+    created_at?: boolean
+  }
+
+  export type RatingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"kd_rating" | "kd_pengumpulan_tugas" | "nilai" | "komentar" | "created_at", ExtArgs["result"]["rating"]>
+  export type RatingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tugas?: boolean | PengumpulanTugasDefaultArgs<ExtArgs>
+  }
+
+  export type $RatingPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Rating"
+    objects: {
+      tugas: Prisma.$PengumpulanTugasPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      kd_rating: string
+      kd_pengumpulan_tugas: string
+      nilai: number
+      komentar: string | null
+      created_at: Date
+    }, ExtArgs["result"]["rating"]>
+    composites: {}
+  }
+
+  type RatingGetPayload<S extends boolean | null | undefined | RatingDefaultArgs> = $Result.GetResult<Prisma.$RatingPayload, S>
+
+  type RatingCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<RatingFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: RatingCountAggregateInputType | true
+    }
+
+  export interface RatingDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Rating'], meta: { name: 'Rating' } }
+    /**
+     * Find zero or one Rating that matches the filter.
+     * @param {RatingFindUniqueArgs} args - Arguments to find a Rating
+     * @example
+     * // Get one Rating
+     * const rating = await prisma.rating.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends RatingFindUniqueArgs>(args: SelectSubset<T, RatingFindUniqueArgs<ExtArgs>>): Prisma__RatingClient<$Result.GetResult<Prisma.$RatingPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Rating that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {RatingFindUniqueOrThrowArgs} args - Arguments to find a Rating
+     * @example
+     * // Get one Rating
+     * const rating = await prisma.rating.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends RatingFindUniqueOrThrowArgs>(args: SelectSubset<T, RatingFindUniqueOrThrowArgs<ExtArgs>>): Prisma__RatingClient<$Result.GetResult<Prisma.$RatingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Rating that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RatingFindFirstArgs} args - Arguments to find a Rating
+     * @example
+     * // Get one Rating
+     * const rating = await prisma.rating.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends RatingFindFirstArgs>(args?: SelectSubset<T, RatingFindFirstArgs<ExtArgs>>): Prisma__RatingClient<$Result.GetResult<Prisma.$RatingPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Rating that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RatingFindFirstOrThrowArgs} args - Arguments to find a Rating
+     * @example
+     * // Get one Rating
+     * const rating = await prisma.rating.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends RatingFindFirstOrThrowArgs>(args?: SelectSubset<T, RatingFindFirstOrThrowArgs<ExtArgs>>): Prisma__RatingClient<$Result.GetResult<Prisma.$RatingPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Ratings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RatingFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Ratings
+     * const ratings = await prisma.rating.findMany()
+     * 
+     * // Get first 10 Ratings
+     * const ratings = await prisma.rating.findMany({ take: 10 })
+     * 
+     * // Only select the `kd_rating`
+     * const ratingWithKd_ratingOnly = await prisma.rating.findMany({ select: { kd_rating: true } })
+     * 
+     */
+    findMany<T extends RatingFindManyArgs>(args?: SelectSubset<T, RatingFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RatingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Rating.
+     * @param {RatingCreateArgs} args - Arguments to create a Rating.
+     * @example
+     * // Create one Rating
+     * const Rating = await prisma.rating.create({
+     *   data: {
+     *     // ... data to create a Rating
+     *   }
+     * })
+     * 
+     */
+    create<T extends RatingCreateArgs>(args: SelectSubset<T, RatingCreateArgs<ExtArgs>>): Prisma__RatingClient<$Result.GetResult<Prisma.$RatingPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Ratings.
+     * @param {RatingCreateManyArgs} args - Arguments to create many Ratings.
+     * @example
+     * // Create many Ratings
+     * const rating = await prisma.rating.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends RatingCreateManyArgs>(args?: SelectSubset<T, RatingCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Rating.
+     * @param {RatingDeleteArgs} args - Arguments to delete one Rating.
+     * @example
+     * // Delete one Rating
+     * const Rating = await prisma.rating.delete({
+     *   where: {
+     *     // ... filter to delete one Rating
+     *   }
+     * })
+     * 
+     */
+    delete<T extends RatingDeleteArgs>(args: SelectSubset<T, RatingDeleteArgs<ExtArgs>>): Prisma__RatingClient<$Result.GetResult<Prisma.$RatingPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Rating.
+     * @param {RatingUpdateArgs} args - Arguments to update one Rating.
+     * @example
+     * // Update one Rating
+     * const rating = await prisma.rating.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends RatingUpdateArgs>(args: SelectSubset<T, RatingUpdateArgs<ExtArgs>>): Prisma__RatingClient<$Result.GetResult<Prisma.$RatingPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Ratings.
+     * @param {RatingDeleteManyArgs} args - Arguments to filter Ratings to delete.
+     * @example
+     * // Delete a few Ratings
+     * const { count } = await prisma.rating.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends RatingDeleteManyArgs>(args?: SelectSubset<T, RatingDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Ratings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RatingUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Ratings
+     * const rating = await prisma.rating.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends RatingUpdateManyArgs>(args: SelectSubset<T, RatingUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Rating.
+     * @param {RatingUpsertArgs} args - Arguments to update or create a Rating.
+     * @example
+     * // Update or create a Rating
+     * const rating = await prisma.rating.upsert({
+     *   create: {
+     *     // ... data to create a Rating
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Rating we want to update
+     *   }
+     * })
+     */
+    upsert<T extends RatingUpsertArgs>(args: SelectSubset<T, RatingUpsertArgs<ExtArgs>>): Prisma__RatingClient<$Result.GetResult<Prisma.$RatingPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Ratings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RatingCountArgs} args - Arguments to filter Ratings to count.
+     * @example
+     * // Count the number of Ratings
+     * const count = await prisma.rating.count({
+     *   where: {
+     *     // ... the filter for the Ratings we want to count
+     *   }
+     * })
+    **/
+    count<T extends RatingCountArgs>(
+      args?: Subset<T, RatingCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], RatingCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Rating.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RatingAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends RatingAggregateArgs>(args: Subset<T, RatingAggregateArgs>): Prisma.PrismaPromise<GetRatingAggregateType<T>>
+
+    /**
+     * Group by Rating.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RatingGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends RatingGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: RatingGroupByArgs['orderBy'] }
+        : { orderBy?: RatingGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, RatingGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRatingGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Rating model
+   */
+  readonly fields: RatingFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Rating.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__RatingClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    tugas<T extends PengumpulanTugasDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PengumpulanTugasDefaultArgs<ExtArgs>>): Prisma__PengumpulanTugasClient<$Result.GetResult<Prisma.$PengumpulanTugasPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Rating model
+   */
+  interface RatingFieldRefs {
+    readonly kd_rating: FieldRef<"Rating", 'String'>
+    readonly kd_pengumpulan_tugas: FieldRef<"Rating", 'String'>
+    readonly nilai: FieldRef<"Rating", 'Float'>
+    readonly komentar: FieldRef<"Rating", 'String'>
+    readonly created_at: FieldRef<"Rating", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Rating findUnique
+   */
+  export type RatingFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Rating
+     */
+    select?: RatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Rating
+     */
+    omit?: RatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RatingInclude<ExtArgs> | null
+    /**
+     * Filter, which Rating to fetch.
+     */
+    where: RatingWhereUniqueInput
+  }
+
+  /**
+   * Rating findUniqueOrThrow
+   */
+  export type RatingFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Rating
+     */
+    select?: RatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Rating
+     */
+    omit?: RatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RatingInclude<ExtArgs> | null
+    /**
+     * Filter, which Rating to fetch.
+     */
+    where: RatingWhereUniqueInput
+  }
+
+  /**
+   * Rating findFirst
+   */
+  export type RatingFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Rating
+     */
+    select?: RatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Rating
+     */
+    omit?: RatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RatingInclude<ExtArgs> | null
+    /**
+     * Filter, which Rating to fetch.
+     */
+    where?: RatingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Ratings to fetch.
+     */
+    orderBy?: RatingOrderByWithRelationInput | RatingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Ratings.
+     */
+    cursor?: RatingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Ratings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Ratings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Ratings.
+     */
+    distinct?: RatingScalarFieldEnum | RatingScalarFieldEnum[]
+  }
+
+  /**
+   * Rating findFirstOrThrow
+   */
+  export type RatingFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Rating
+     */
+    select?: RatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Rating
+     */
+    omit?: RatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RatingInclude<ExtArgs> | null
+    /**
+     * Filter, which Rating to fetch.
+     */
+    where?: RatingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Ratings to fetch.
+     */
+    orderBy?: RatingOrderByWithRelationInput | RatingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Ratings.
+     */
+    cursor?: RatingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Ratings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Ratings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Ratings.
+     */
+    distinct?: RatingScalarFieldEnum | RatingScalarFieldEnum[]
+  }
+
+  /**
+   * Rating findMany
+   */
+  export type RatingFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Rating
+     */
+    select?: RatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Rating
+     */
+    omit?: RatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RatingInclude<ExtArgs> | null
+    /**
+     * Filter, which Ratings to fetch.
+     */
+    where?: RatingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Ratings to fetch.
+     */
+    orderBy?: RatingOrderByWithRelationInput | RatingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Ratings.
+     */
+    cursor?: RatingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Ratings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Ratings.
+     */
+    skip?: number
+    distinct?: RatingScalarFieldEnum | RatingScalarFieldEnum[]
+  }
+
+  /**
+   * Rating create
+   */
+  export type RatingCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Rating
+     */
+    select?: RatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Rating
+     */
+    omit?: RatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RatingInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Rating.
+     */
+    data: XOR<RatingCreateInput, RatingUncheckedCreateInput>
+  }
+
+  /**
+   * Rating createMany
+   */
+  export type RatingCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Ratings.
+     */
+    data: RatingCreateManyInput | RatingCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Rating update
+   */
+  export type RatingUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Rating
+     */
+    select?: RatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Rating
+     */
+    omit?: RatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RatingInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Rating.
+     */
+    data: XOR<RatingUpdateInput, RatingUncheckedUpdateInput>
+    /**
+     * Choose, which Rating to update.
+     */
+    where: RatingWhereUniqueInput
+  }
+
+  /**
+   * Rating updateMany
+   */
+  export type RatingUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Ratings.
+     */
+    data: XOR<RatingUpdateManyMutationInput, RatingUncheckedUpdateManyInput>
+    /**
+     * Filter which Ratings to update
+     */
+    where?: RatingWhereInput
+    /**
+     * Limit how many Ratings to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Rating upsert
+   */
+  export type RatingUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Rating
+     */
+    select?: RatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Rating
+     */
+    omit?: RatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RatingInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Rating to update in case it exists.
+     */
+    where: RatingWhereUniqueInput
+    /**
+     * In case the Rating found by the `where` argument doesn't exist, create a new Rating with this data.
+     */
+    create: XOR<RatingCreateInput, RatingUncheckedCreateInput>
+    /**
+     * In case the Rating was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<RatingUpdateInput, RatingUncheckedUpdateInput>
+  }
+
+  /**
+   * Rating delete
+   */
+  export type RatingDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Rating
+     */
+    select?: RatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Rating
+     */
+    omit?: RatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RatingInclude<ExtArgs> | null
+    /**
+     * Filter which Rating to delete.
+     */
+    where: RatingWhereUniqueInput
+  }
+
+  /**
+   * Rating deleteMany
+   */
+  export type RatingDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Ratings to delete
+     */
+    where?: RatingWhereInput
+    /**
+     * Limit how many Ratings to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Rating without action
+   */
+  export type RatingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Rating
+     */
+    select?: RatingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Rating
+     */
+    omit?: RatingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RatingInclude<ExtArgs> | null
   }
 
 
@@ -6389,6 +7496,17 @@ export namespace Prisma {
   export type PengumpulanTugasScalarFieldEnum = (typeof PengumpulanTugasScalarFieldEnum)[keyof typeof PengumpulanTugasScalarFieldEnum]
 
 
+  export const RatingScalarFieldEnum: {
+    kd_rating: 'kd_rating',
+    kd_pengumpulan_tugas: 'kd_pengumpulan_tugas',
+    nilai: 'nilai',
+    komentar: 'komentar',
+    created_at: 'created_at'
+  };
+
+  export type RatingScalarFieldEnum = (typeof RatingScalarFieldEnum)[keyof typeof RatingScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -6455,6 +7573,15 @@ export namespace Prisma {
   export type PengumpulanTugasOrderByRelevanceFieldEnum = (typeof PengumpulanTugasOrderByRelevanceFieldEnum)[keyof typeof PengumpulanTugasOrderByRelevanceFieldEnum]
 
 
+  export const RatingOrderByRelevanceFieldEnum: {
+    kd_rating: 'kd_rating',
+    kd_pengumpulan_tugas: 'kd_pengumpulan_tugas',
+    komentar: 'komentar'
+  };
+
+  export type RatingOrderByRelevanceFieldEnum = (typeof RatingOrderByRelevanceFieldEnum)[keyof typeof RatingOrderByRelevanceFieldEnum]
+
+
   /**
    * Field references
    */
@@ -6499,6 +7626,13 @@ export namespace Prisma {
    * Reference to a field of type 'StatusPengumpulanTugas'
    */
   export type EnumStatusPengumpulanTugasFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatusPengumpulanTugas'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
     
 
 
@@ -6794,6 +7928,7 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"PengumpulanTugas"> | Date | string
     tugas?: XOR<TugasScalarRelationFilter, TugasWhereInput>
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    rating?: RatingListRelationFilter
   }
 
   export type PengumpulanTugasOrderByWithRelationInput = {
@@ -6808,6 +7943,7 @@ export namespace Prisma {
     updated_at?: SortOrder
     tugas?: TugasOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
+    rating?: RatingOrderByRelationAggregateInput
     _relevance?: PengumpulanTugasOrderByRelevanceInput
   }
 
@@ -6826,6 +7962,7 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"PengumpulanTugas"> | Date | string
     tugas?: XOR<TugasScalarRelationFilter, TugasWhereInput>
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    rating?: RatingListRelationFilter
   }, "kd_pengumpulan_tugas">
 
   export type PengumpulanTugasOrderByWithAggregationInput = {
@@ -6856,6 +7993,64 @@ export namespace Prisma {
     status?: EnumStatusPengumpulanTugasWithAggregatesFilter<"PengumpulanTugas"> | $Enums.StatusPengumpulanTugas
     created_at?: DateTimeWithAggregatesFilter<"PengumpulanTugas"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"PengumpulanTugas"> | Date | string
+  }
+
+  export type RatingWhereInput = {
+    AND?: RatingWhereInput | RatingWhereInput[]
+    OR?: RatingWhereInput[]
+    NOT?: RatingWhereInput | RatingWhereInput[]
+    kd_rating?: StringFilter<"Rating"> | string
+    kd_pengumpulan_tugas?: StringFilter<"Rating"> | string
+    nilai?: FloatFilter<"Rating"> | number
+    komentar?: StringNullableFilter<"Rating"> | string | null
+    created_at?: DateTimeFilter<"Rating"> | Date | string
+    tugas?: XOR<PengumpulanTugasScalarRelationFilter, PengumpulanTugasWhereInput>
+  }
+
+  export type RatingOrderByWithRelationInput = {
+    kd_rating?: SortOrder
+    kd_pengumpulan_tugas?: SortOrder
+    nilai?: SortOrder
+    komentar?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    tugas?: PengumpulanTugasOrderByWithRelationInput
+    _relevance?: RatingOrderByRelevanceInput
+  }
+
+  export type RatingWhereUniqueInput = Prisma.AtLeast<{
+    kd_rating?: string
+    AND?: RatingWhereInput | RatingWhereInput[]
+    OR?: RatingWhereInput[]
+    NOT?: RatingWhereInput | RatingWhereInput[]
+    kd_pengumpulan_tugas?: StringFilter<"Rating"> | string
+    nilai?: FloatFilter<"Rating"> | number
+    komentar?: StringNullableFilter<"Rating"> | string | null
+    created_at?: DateTimeFilter<"Rating"> | Date | string
+    tugas?: XOR<PengumpulanTugasScalarRelationFilter, PengumpulanTugasWhereInput>
+  }, "kd_rating">
+
+  export type RatingOrderByWithAggregationInput = {
+    kd_rating?: SortOrder
+    kd_pengumpulan_tugas?: SortOrder
+    nilai?: SortOrder
+    komentar?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    _count?: RatingCountOrderByAggregateInput
+    _avg?: RatingAvgOrderByAggregateInput
+    _max?: RatingMaxOrderByAggregateInput
+    _min?: RatingMinOrderByAggregateInput
+    _sum?: RatingSumOrderByAggregateInput
+  }
+
+  export type RatingScalarWhereWithAggregatesInput = {
+    AND?: RatingScalarWhereWithAggregatesInput | RatingScalarWhereWithAggregatesInput[]
+    OR?: RatingScalarWhereWithAggregatesInput[]
+    NOT?: RatingScalarWhereWithAggregatesInput | RatingScalarWhereWithAggregatesInput[]
+    kd_rating?: StringWithAggregatesFilter<"Rating"> | string
+    kd_pengumpulan_tugas?: StringWithAggregatesFilter<"Rating"> | string
+    nilai?: FloatWithAggregatesFilter<"Rating"> | number
+    komentar?: StringNullableWithAggregatesFilter<"Rating"> | string | null
+    created_at?: DateTimeWithAggregatesFilter<"Rating"> | Date | string
   }
 
   export type JabatanCreateInput = {
@@ -7147,6 +8342,7 @@ export namespace Prisma {
     updated_at?: Date | string
     tugas: TugasCreateNestedOneWithoutPengumpulan_tugasInput
     user: UserCreateNestedOneWithoutPengumpulan_tugasInput
+    rating?: RatingCreateNestedManyWithoutTugasInput
   }
 
   export type PengumpulanTugasUncheckedCreateInput = {
@@ -7159,6 +8355,7 @@ export namespace Prisma {
     status?: $Enums.StatusPengumpulanTugas
     created_at?: Date | string
     updated_at?: Date | string
+    rating?: RatingUncheckedCreateNestedManyWithoutTugasInput
   }
 
   export type PengumpulanTugasUpdateInput = {
@@ -7171,6 +8368,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     tugas?: TugasUpdateOneRequiredWithoutPengumpulan_tugasNestedInput
     user?: UserUpdateOneRequiredWithoutPengumpulan_tugasNestedInput
+    rating?: RatingUpdateManyWithoutTugasNestedInput
   }
 
   export type PengumpulanTugasUncheckedUpdateInput = {
@@ -7183,6 +8381,7 @@ export namespace Prisma {
     status?: EnumStatusPengumpulanTugasFieldUpdateOperationsInput | $Enums.StatusPengumpulanTugas
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    rating?: RatingUncheckedUpdateManyWithoutTugasNestedInput
   }
 
   export type PengumpulanTugasCreateManyInput = {
@@ -7217,6 +8416,61 @@ export namespace Prisma {
     status?: EnumStatusPengumpulanTugasFieldUpdateOperationsInput | $Enums.StatusPengumpulanTugas
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RatingCreateInput = {
+    kd_rating?: string
+    nilai: number
+    komentar?: string | null
+    created_at?: Date | string
+    tugas: PengumpulanTugasCreateNestedOneWithoutRatingInput
+  }
+
+  export type RatingUncheckedCreateInput = {
+    kd_rating?: string
+    kd_pengumpulan_tugas: string
+    nilai: number
+    komentar?: string | null
+    created_at?: Date | string
+  }
+
+  export type RatingUpdateInput = {
+    kd_rating?: StringFieldUpdateOperationsInput | string
+    nilai?: FloatFieldUpdateOperationsInput | number
+    komentar?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    tugas?: PengumpulanTugasUpdateOneRequiredWithoutRatingNestedInput
+  }
+
+  export type RatingUncheckedUpdateInput = {
+    kd_rating?: StringFieldUpdateOperationsInput | string
+    kd_pengumpulan_tugas?: StringFieldUpdateOperationsInput | string
+    nilai?: FloatFieldUpdateOperationsInput | number
+    komentar?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RatingCreateManyInput = {
+    kd_rating?: string
+    kd_pengumpulan_tugas: string
+    nilai: number
+    komentar?: string | null
+    created_at?: Date | string
+  }
+
+  export type RatingUpdateManyMutationInput = {
+    kd_rating?: StringFieldUpdateOperationsInput | string
+    nilai?: FloatFieldUpdateOperationsInput | number
+    komentar?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RatingUncheckedUpdateManyInput = {
+    kd_rating?: StringFieldUpdateOperationsInput | string
+    kd_pengumpulan_tugas?: StringFieldUpdateOperationsInput | string
+    nilai?: FloatFieldUpdateOperationsInput | number
+    komentar?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -7568,6 +8822,16 @@ export namespace Prisma {
     isNot?: TugasWhereInput
   }
 
+  export type RatingListRelationFilter = {
+    every?: RatingWhereInput
+    some?: RatingWhereInput
+    none?: RatingWhereInput
+  }
+
+  export type RatingOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type PengumpulanTugasOrderByRelevanceInput = {
     fields: PengumpulanTugasOrderByRelevanceFieldEnum | PengumpulanTugasOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -7618,6 +8882,76 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumStatusPengumpulanTugasFilter<$PrismaModel>
     _max?: NestedEnumStatusPengumpulanTugasFilter<$PrismaModel>
+  }
+
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type PengumpulanTugasScalarRelationFilter = {
+    is?: PengumpulanTugasWhereInput
+    isNot?: PengumpulanTugasWhereInput
+  }
+
+  export type RatingOrderByRelevanceInput = {
+    fields: RatingOrderByRelevanceFieldEnum | RatingOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type RatingCountOrderByAggregateInput = {
+    kd_rating?: SortOrder
+    kd_pengumpulan_tugas?: SortOrder
+    nilai?: SortOrder
+    komentar?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type RatingAvgOrderByAggregateInput = {
+    nilai?: SortOrder
+  }
+
+  export type RatingMaxOrderByAggregateInput = {
+    kd_rating?: SortOrder
+    kd_pengumpulan_tugas?: SortOrder
+    nilai?: SortOrder
+    komentar?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type RatingMinOrderByAggregateInput = {
+    kd_rating?: SortOrder
+    kd_pengumpulan_tugas?: SortOrder
+    nilai?: SortOrder
+    komentar?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type RatingSumOrderByAggregateInput = {
+    nilai?: SortOrder
+  }
+
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
   }
 
   export type UserCreateNestedManyWithoutJabatanInput = {
@@ -7966,6 +9300,20 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type RatingCreateNestedManyWithoutTugasInput = {
+    create?: XOR<RatingCreateWithoutTugasInput, RatingUncheckedCreateWithoutTugasInput> | RatingCreateWithoutTugasInput[] | RatingUncheckedCreateWithoutTugasInput[]
+    connectOrCreate?: RatingCreateOrConnectWithoutTugasInput | RatingCreateOrConnectWithoutTugasInput[]
+    createMany?: RatingCreateManyTugasInputEnvelope
+    connect?: RatingWhereUniqueInput | RatingWhereUniqueInput[]
+  }
+
+  export type RatingUncheckedCreateNestedManyWithoutTugasInput = {
+    create?: XOR<RatingCreateWithoutTugasInput, RatingUncheckedCreateWithoutTugasInput> | RatingCreateWithoutTugasInput[] | RatingUncheckedCreateWithoutTugasInput[]
+    connectOrCreate?: RatingCreateOrConnectWithoutTugasInput | RatingCreateOrConnectWithoutTugasInput[]
+    createMany?: RatingCreateManyTugasInputEnvelope
+    connect?: RatingWhereUniqueInput | RatingWhereUniqueInput[]
+  }
+
   export type EnumStatusPengumpulanTugasFieldUpdateOperationsInput = {
     set?: $Enums.StatusPengumpulanTugas
   }
@@ -7984,6 +9332,56 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutPengumpulan_tugasInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPengumpulan_tugasInput, UserUpdateWithoutPengumpulan_tugasInput>, UserUncheckedUpdateWithoutPengumpulan_tugasInput>
+  }
+
+  export type RatingUpdateManyWithoutTugasNestedInput = {
+    create?: XOR<RatingCreateWithoutTugasInput, RatingUncheckedCreateWithoutTugasInput> | RatingCreateWithoutTugasInput[] | RatingUncheckedCreateWithoutTugasInput[]
+    connectOrCreate?: RatingCreateOrConnectWithoutTugasInput | RatingCreateOrConnectWithoutTugasInput[]
+    upsert?: RatingUpsertWithWhereUniqueWithoutTugasInput | RatingUpsertWithWhereUniqueWithoutTugasInput[]
+    createMany?: RatingCreateManyTugasInputEnvelope
+    set?: RatingWhereUniqueInput | RatingWhereUniqueInput[]
+    disconnect?: RatingWhereUniqueInput | RatingWhereUniqueInput[]
+    delete?: RatingWhereUniqueInput | RatingWhereUniqueInput[]
+    connect?: RatingWhereUniqueInput | RatingWhereUniqueInput[]
+    update?: RatingUpdateWithWhereUniqueWithoutTugasInput | RatingUpdateWithWhereUniqueWithoutTugasInput[]
+    updateMany?: RatingUpdateManyWithWhereWithoutTugasInput | RatingUpdateManyWithWhereWithoutTugasInput[]
+    deleteMany?: RatingScalarWhereInput | RatingScalarWhereInput[]
+  }
+
+  export type RatingUncheckedUpdateManyWithoutTugasNestedInput = {
+    create?: XOR<RatingCreateWithoutTugasInput, RatingUncheckedCreateWithoutTugasInput> | RatingCreateWithoutTugasInput[] | RatingUncheckedCreateWithoutTugasInput[]
+    connectOrCreate?: RatingCreateOrConnectWithoutTugasInput | RatingCreateOrConnectWithoutTugasInput[]
+    upsert?: RatingUpsertWithWhereUniqueWithoutTugasInput | RatingUpsertWithWhereUniqueWithoutTugasInput[]
+    createMany?: RatingCreateManyTugasInputEnvelope
+    set?: RatingWhereUniqueInput | RatingWhereUniqueInput[]
+    disconnect?: RatingWhereUniqueInput | RatingWhereUniqueInput[]
+    delete?: RatingWhereUniqueInput | RatingWhereUniqueInput[]
+    connect?: RatingWhereUniqueInput | RatingWhereUniqueInput[]
+    update?: RatingUpdateWithWhereUniqueWithoutTugasInput | RatingUpdateWithWhereUniqueWithoutTugasInput[]
+    updateMany?: RatingUpdateManyWithWhereWithoutTugasInput | RatingUpdateManyWithWhereWithoutTugasInput[]
+    deleteMany?: RatingScalarWhereInput | RatingScalarWhereInput[]
+  }
+
+  export type PengumpulanTugasCreateNestedOneWithoutRatingInput = {
+    create?: XOR<PengumpulanTugasCreateWithoutRatingInput, PengumpulanTugasUncheckedCreateWithoutRatingInput>
+    connectOrCreate?: PengumpulanTugasCreateOrConnectWithoutRatingInput
+    connect?: PengumpulanTugasWhereUniqueInput
+  }
+
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type PengumpulanTugasUpdateOneRequiredWithoutRatingNestedInput = {
+    create?: XOR<PengumpulanTugasCreateWithoutRatingInput, PengumpulanTugasUncheckedCreateWithoutRatingInput>
+    connectOrCreate?: PengumpulanTugasCreateOrConnectWithoutRatingInput
+    upsert?: PengumpulanTugasUpsertWithoutRatingInput
+    connect?: PengumpulanTugasWhereUniqueInput
+    update?: XOR<XOR<PengumpulanTugasUpdateToOneWithWhereWithoutRatingInput, PengumpulanTugasUpdateWithoutRatingInput>, PengumpulanTugasUncheckedUpdateWithoutRatingInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -8165,6 +9563,33 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumStatusPengumpulanTugasFilter<$PrismaModel>
     _max?: NestedEnumStatusPengumpulanTugasFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
   }
 
   export type UserCreateWithoutJabatanInput = {
@@ -8390,6 +9815,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     tugas: TugasCreateNestedOneWithoutPengumpulan_tugasInput
+    rating?: RatingCreateNestedManyWithoutTugasInput
   }
 
   export type PengumpulanTugasUncheckedCreateWithoutUserInput = {
@@ -8401,6 +9827,7 @@ export namespace Prisma {
     status?: $Enums.StatusPengumpulanTugas
     created_at?: Date | string
     updated_at?: Date | string
+    rating?: RatingUncheckedCreateNestedManyWithoutTugasInput
   }
 
   export type PengumpulanTugasCreateOrConnectWithoutUserInput = {
@@ -8621,6 +10048,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     user: UserCreateNestedOneWithoutPengumpulan_tugasInput
+    rating?: RatingCreateNestedManyWithoutTugasInput
   }
 
   export type PengumpulanTugasUncheckedCreateWithoutTugasInput = {
@@ -8632,6 +10060,7 @@ export namespace Prisma {
     status?: $Enums.StatusPengumpulanTugas
     created_at?: Date | string
     updated_at?: Date | string
+    rating?: RatingUncheckedCreateNestedManyWithoutTugasInput
   }
 
   export type PengumpulanTugasCreateOrConnectWithoutTugasInput = {
@@ -8833,6 +10262,30 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutPengumpulan_tugasInput, UserUncheckedCreateWithoutPengumpulan_tugasInput>
   }
 
+  export type RatingCreateWithoutTugasInput = {
+    kd_rating?: string
+    nilai: number
+    komentar?: string | null
+    created_at?: Date | string
+  }
+
+  export type RatingUncheckedCreateWithoutTugasInput = {
+    kd_rating?: string
+    nilai: number
+    komentar?: string | null
+    created_at?: Date | string
+  }
+
+  export type RatingCreateOrConnectWithoutTugasInput = {
+    where: RatingWhereUniqueInput
+    create: XOR<RatingCreateWithoutTugasInput, RatingUncheckedCreateWithoutTugasInput>
+  }
+
+  export type RatingCreateManyTugasInputEnvelope = {
+    data: RatingCreateManyTugasInput | RatingCreateManyTugasInput[]
+    skipDuplicates?: boolean
+  }
+
   export type TugasUpsertWithoutPengumpulan_tugasInput = {
     update: XOR<TugasUpdateWithoutPengumpulan_tugasInput, TugasUncheckedUpdateWithoutPengumpulan_tugasInput>
     create: XOR<TugasCreateWithoutPengumpulan_tugasInput, TugasUncheckedCreateWithoutPengumpulan_tugasInput>
@@ -8905,6 +10358,97 @@ export namespace Prisma {
     bawahan?: UserUncheckedUpdateManyWithoutAtasanNestedInput
     tugas?: TugasUncheckedUpdateManyWithoutUserNestedInput
     laporan?: LaporanUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type RatingUpsertWithWhereUniqueWithoutTugasInput = {
+    where: RatingWhereUniqueInput
+    update: XOR<RatingUpdateWithoutTugasInput, RatingUncheckedUpdateWithoutTugasInput>
+    create: XOR<RatingCreateWithoutTugasInput, RatingUncheckedCreateWithoutTugasInput>
+  }
+
+  export type RatingUpdateWithWhereUniqueWithoutTugasInput = {
+    where: RatingWhereUniqueInput
+    data: XOR<RatingUpdateWithoutTugasInput, RatingUncheckedUpdateWithoutTugasInput>
+  }
+
+  export type RatingUpdateManyWithWhereWithoutTugasInput = {
+    where: RatingScalarWhereInput
+    data: XOR<RatingUpdateManyMutationInput, RatingUncheckedUpdateManyWithoutTugasInput>
+  }
+
+  export type RatingScalarWhereInput = {
+    AND?: RatingScalarWhereInput | RatingScalarWhereInput[]
+    OR?: RatingScalarWhereInput[]
+    NOT?: RatingScalarWhereInput | RatingScalarWhereInput[]
+    kd_rating?: StringFilter<"Rating"> | string
+    kd_pengumpulan_tugas?: StringFilter<"Rating"> | string
+    nilai?: FloatFilter<"Rating"> | number
+    komentar?: StringNullableFilter<"Rating"> | string | null
+    created_at?: DateTimeFilter<"Rating"> | Date | string
+  }
+
+  export type PengumpulanTugasCreateWithoutRatingInput = {
+    kd_pengumpulan_tugas?: string
+    tanggal_pengumpulan: Date | string
+    file_path: string
+    catatan: string
+    status?: $Enums.StatusPengumpulanTugas
+    created_at?: Date | string
+    updated_at?: Date | string
+    tugas: TugasCreateNestedOneWithoutPengumpulan_tugasInput
+    user: UserCreateNestedOneWithoutPengumpulan_tugasInput
+  }
+
+  export type PengumpulanTugasUncheckedCreateWithoutRatingInput = {
+    kd_pengumpulan_tugas?: string
+    kd_tugas: string
+    user_nip: string
+    tanggal_pengumpulan: Date | string
+    file_path: string
+    catatan: string
+    status?: $Enums.StatusPengumpulanTugas
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type PengumpulanTugasCreateOrConnectWithoutRatingInput = {
+    where: PengumpulanTugasWhereUniqueInput
+    create: XOR<PengumpulanTugasCreateWithoutRatingInput, PengumpulanTugasUncheckedCreateWithoutRatingInput>
+  }
+
+  export type PengumpulanTugasUpsertWithoutRatingInput = {
+    update: XOR<PengumpulanTugasUpdateWithoutRatingInput, PengumpulanTugasUncheckedUpdateWithoutRatingInput>
+    create: XOR<PengumpulanTugasCreateWithoutRatingInput, PengumpulanTugasUncheckedCreateWithoutRatingInput>
+    where?: PengumpulanTugasWhereInput
+  }
+
+  export type PengumpulanTugasUpdateToOneWithWhereWithoutRatingInput = {
+    where?: PengumpulanTugasWhereInput
+    data: XOR<PengumpulanTugasUpdateWithoutRatingInput, PengumpulanTugasUncheckedUpdateWithoutRatingInput>
+  }
+
+  export type PengumpulanTugasUpdateWithoutRatingInput = {
+    kd_pengumpulan_tugas?: StringFieldUpdateOperationsInput | string
+    tanggal_pengumpulan?: DateTimeFieldUpdateOperationsInput | Date | string
+    file_path?: StringFieldUpdateOperationsInput | string
+    catatan?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusPengumpulanTugasFieldUpdateOperationsInput | $Enums.StatusPengumpulanTugas
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    tugas?: TugasUpdateOneRequiredWithoutPengumpulan_tugasNestedInput
+    user?: UserUpdateOneRequiredWithoutPengumpulan_tugasNestedInput
+  }
+
+  export type PengumpulanTugasUncheckedUpdateWithoutRatingInput = {
+    kd_pengumpulan_tugas?: StringFieldUpdateOperationsInput | string
+    kd_tugas?: StringFieldUpdateOperationsInput | string
+    user_nip?: StringFieldUpdateOperationsInput | string
+    tanggal_pengumpulan?: DateTimeFieldUpdateOperationsInput | Date | string
+    file_path?: StringFieldUpdateOperationsInput | string
+    catatan?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusPengumpulanTugasFieldUpdateOperationsInput | $Enums.StatusPengumpulanTugas
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserCreateManyJabatanInput = {
@@ -9101,6 +10645,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     tugas?: TugasUpdateOneRequiredWithoutPengumpulan_tugasNestedInput
+    rating?: RatingUpdateManyWithoutTugasNestedInput
   }
 
   export type PengumpulanTugasUncheckedUpdateWithoutUserInput = {
@@ -9112,6 +10657,7 @@ export namespace Prisma {
     status?: EnumStatusPengumpulanTugasFieldUpdateOperationsInput | $Enums.StatusPengumpulanTugas
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    rating?: RatingUncheckedUpdateManyWithoutTugasNestedInput
   }
 
   export type PengumpulanTugasUncheckedUpdateManyWithoutUserInput = {
@@ -9145,6 +10691,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutPengumpulan_tugasNestedInput
+    rating?: RatingUpdateManyWithoutTugasNestedInput
   }
 
   export type PengumpulanTugasUncheckedUpdateWithoutTugasInput = {
@@ -9156,6 +10703,7 @@ export namespace Prisma {
     status?: EnumStatusPengumpulanTugasFieldUpdateOperationsInput | $Enums.StatusPengumpulanTugas
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    rating?: RatingUncheckedUpdateManyWithoutTugasNestedInput
   }
 
   export type PengumpulanTugasUncheckedUpdateManyWithoutTugasInput = {
@@ -9167,6 +10715,34 @@ export namespace Prisma {
     status?: EnumStatusPengumpulanTugasFieldUpdateOperationsInput | $Enums.StatusPengumpulanTugas
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RatingCreateManyTugasInput = {
+    kd_rating?: string
+    nilai: number
+    komentar?: string | null
+    created_at?: Date | string
+  }
+
+  export type RatingUpdateWithoutTugasInput = {
+    kd_rating?: StringFieldUpdateOperationsInput | string
+    nilai?: FloatFieldUpdateOperationsInput | number
+    komentar?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RatingUncheckedUpdateWithoutTugasInput = {
+    kd_rating?: StringFieldUpdateOperationsInput | string
+    nilai?: FloatFieldUpdateOperationsInput | number
+    komentar?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RatingUncheckedUpdateManyWithoutTugasInput = {
+    kd_rating?: StringFieldUpdateOperationsInput | string
+    nilai?: FloatFieldUpdateOperationsInput | number
+    komentar?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

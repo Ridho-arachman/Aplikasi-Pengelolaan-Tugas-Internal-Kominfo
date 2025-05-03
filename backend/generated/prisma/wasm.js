@@ -169,6 +169,14 @@ exports.Prisma.PengumpulanTugasScalarFieldEnum = {
   updated_at: 'updated_at'
 };
 
+exports.Prisma.RatingScalarFieldEnum = {
+  kd_rating: 'kd_rating',
+  kd_pengumpulan_tugas: 'kd_pengumpulan_tugas',
+  nilai: 'nilai',
+  komentar: 'komentar',
+  created_at: 'created_at'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -213,6 +221,12 @@ exports.Prisma.PengumpulanTugasOrderByRelevanceFieldEnum = {
   file_path: 'file_path',
   catatan: 'catatan'
 };
+
+exports.Prisma.RatingOrderByRelevanceFieldEnum = {
+  kd_rating: 'kd_rating',
+  kd_pengumpulan_tugas: 'kd_pengumpulan_tugas',
+  komentar: 'komentar'
+};
 exports.Role = exports.$Enums.Role = {
   user: 'user',
   admin: 'admin'
@@ -243,7 +257,8 @@ exports.Prisma.ModelName = {
   User: 'User',
   Tugas: 'Tugas',
   Laporan: 'Laporan',
-  PengumpulanTugas: 'PengumpulanTugas'
+  PengumpulanTugas: 'PengumpulanTugas',
+  Rating: 'Rating'
 };
 
 /**
