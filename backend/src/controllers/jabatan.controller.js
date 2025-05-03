@@ -6,7 +6,7 @@ const CreateJabatan = async (req, res) => {
     const data = await jabatanServices.createJabatan(req.body); // Pastikan Anda menggunakan async/await atau promise jika diperlukan
     return res.status(201).json({
       status: "success",
-      message: "User berhasil dibuat",
+      message: "Jabatan berhasil dibuat",
       data,
     });
   } catch (err) {
@@ -26,25 +26,33 @@ const CreateJabatan = async (req, res) => {
 
 const GetJabatan = async (req, res) => {
   const { kd_jabatan } = req.params;
-  const { nama_jabatan } = req.body;
+  try {
+    const data = await jabatanServices.getJabatan(kd_jabatan);
 
-  const data = await jabatanServices.getJabatan(kd_jabatan, nama_jabatan);
-  if (!data) {
-    return res
-      .status(404)
-      .json({ status: "failed", message: "Jabatan tidak ditemukan" });
+    if (!data)
+      return res
+        .status(404)
+        .json({ status: "failed", message: "Jabatan tidak ditemukan" });
+
+    return res.json({ status: "success", data });
+  } catch (error) {
+    return res.status(500).json({ status: "error", message: error.message });
   }
-  return res.json({ status: "success", data });
 };
 
 const GetAllJabatan = async (req, res) => {
-  const data = await jabatanServices.getAllJabatan();
-  if (data.length === 0) {
+  const { kd_jabatan, nama_jabatan } = req.query;
+  const data = await jabatanServices.getAllJabatan(kd_jabatan, nama_jabatan);
+  if (data.length === 0)
     return res
       .status(404)
       .json({ status: "failed", message: "Jabatan belum ada" });
+
+  try {
+    return res.json({ status: "success", data });
+  } catch (error) {
+    return res.status(500).json({ status: "error", message: error.message });
   }
-  return res.json({ status: "success", data });
 };
 
 const UpdateJabatan = async (req, res) => {

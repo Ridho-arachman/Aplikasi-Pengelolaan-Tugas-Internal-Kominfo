@@ -12,6 +12,13 @@ const getJabatanSchema = z.object({
   kd_jabatan: z
     .string("Kode Jabatan harus berupa string")
     .cuid("Kode Jabatan tidak valid"),
+});
+
+const getAllJabatanSchema = z.object({
+  kd_jabatan: z
+    .string("Kode Jabatan harus berupa string")
+    .cuid("Kode Jabatan tidak valid")
+    .optional(),
   nama_jabatan: z
     .string("Nama Jabatan harus berupa string")
     .trim()
@@ -42,4 +49,5 @@ module.exports = {
   getJabatanSchema,
   updateJabatanSchema,
   deleteJabatanSchema,
+  getAllJabatanSchema,
 };

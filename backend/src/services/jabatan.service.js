@@ -4,22 +4,21 @@ const createJabatan = async (data) => {
   return await prisma.jabatan.create({ data });
 };
 
-const getJabatan = async (kd_jabatan, nama_jabatan) => {
-  if (kd_jabatan) {
-    return await prisma.jabatan.findUnique({
-      where: {
-        kd_jabatan,
-      },
-    });
-  }
+const getJabatan = async (kd_jabatan) => {
   return await prisma.jabatan.findUnique({
     where: {
-      nama_jabatan,
+      kd_jabatan,
     },
   });
 };
 
-const getAllJabatan = async () => {
+const getAllJabatan = async (kd_jabatan, nama_jabatan) => {
+  if (kd_jabatan)
+    return await prisma.jabatan.findMany({ where: { kd_jabatan } });
+
+  if (nama_jabatan)
+    return await prisma.jabatan.findMany({ where: { nama_jabatan } });
+
   return await prisma.jabatan.findMany();
 };
 
