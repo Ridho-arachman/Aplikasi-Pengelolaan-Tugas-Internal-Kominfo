@@ -7,6 +7,10 @@ describe("Integration test for Jabatan routes", () => {
     await prisma.jabatan.deleteMany();
   });
 
+  afterAll(async () => {
+    await prisma.$disconnect();
+  });
+
   let createdJabatan;
 
   // Create

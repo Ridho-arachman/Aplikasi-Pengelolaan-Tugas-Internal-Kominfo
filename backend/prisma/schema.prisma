@@ -11,9 +11,10 @@ datasource db {
 
 model Jabatan{
   kd_jabatan String @id @default(cuid())
-  nama_jabatan String @db.VarChar(255) @unique
+  nama_jabatan String  @db.VarChar(255) @unique
 
   user User[]
+  history HistoryJabatan[]
 }
 
 model User {
@@ -21,32 +22,57 @@ model User {
   nama String @db.VarChar(255)
   password String @db.VarChar(255) 
   role Role @default(user)
-  kd_jabatan String
-  nip_atasan String? @db.VarChar(18)
+  kd_jabatan String 
+  nip_atasan String? @db.VarChar(18) 
   created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  updated_at DateTime @updatedAt 
+  @@index([nip_atasan])
+  @@index([kd_jabatan])
+
+
+  atasan User? @relation("Atasan", fields: [nip_atasan], references: [nip],onDelete:SetNull,onUpdate: Cascade)
+  jabatan Jabatan @relation(fields: [kd_jabatan],references: [kd_jabatan],onDelete: NoAction,onUpdate: Cascade)
 
   bawahan User[] @relation("Atasan")
-  atasan User? @relation("Atasan", fields: [nip_atasan], references: [nip])
-
-  jabatan Jabatan @relation(fields: [kd_jabatan],references: [kd_jabatan])
+  history HistoryJabatan[]
   tugas Tugas[]
   laporan Laporan[]
   pengumpulan_tugas PengumpulanTugas[]
 }
 
+model HistoryJabatan {
+  id               String   @id @default(cuid())  
+  user_nip         String   
+  kd_jabatan       String  
+  tanggal_mulai    DateTime 
+  tanggal_akhir   DateTime? 
+  created_at       DateTime @default(now()) 
+  updated_at       DateTime @updatedAt 
+
+  user             User     @relation(fields: [user_nip], references: [nip],onDelete:Cascade,onUpdate: Cascade)
+  jabatan          Jabatan  @relation(fields: [kd_jabatan], references: [kd_jabatan],onDelete:NoAction,onUpdate: Cascade)
+
+  @@index([user_nip])
+  @@index([kd_jabatan])
+}
+
+
 model Tugas{
   kd_tugas String @id @default(cuid())
   judul String @db.VarChar(255)
   deskripsi String @db.Text
-  user_nip String
+  user_nip String @db.VarChar(18)
   status StatusTugas @default(pending)
   deadline DateTime
   prioritas Prioritas
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
-  user User @relation(fields: [user_nip], references: [nip])
+   @@index([user_nip])
+  // @@index([status])
+  // @@index([deadline])
+
+  user User @relation(fields: [user_nip], references: [nip],onDelete: Cascade,onUpdate: Cascade)
   pengumpulan_tugas PengumpulanTugas[]
 }
 
@@ -54,23 +80,28 @@ model Laporan {
   kd_laporan String @id @default(cuid())
   isi_laporan String @db.Text
   judul_laporan String @db.VarChar(255)
-  user_nip String
+  user_nip String @db.VarChar(18)
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+    @@index([user_nip])
 
-  user User @relation(fields: [user_nip],references: [nip])
+
+  user User @relation(fields: [user_nip],references: [nip],onDelete: Cascade,onUpdate: Cascade)
 }
 
 model PengumpulanTugas {
   kd_pengumpulan_tugas String @id @default(cuid())
   kd_tugas String
-  user_nip String
+  user_nip String @db.VarChar(18)
   tanggal_pengumpulan DateTime
   file_path String
   catatan String @db.Text
   status StatusPengumpulanTugas @default(menunggu)
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+
+  @@index([kd_tugas])
+@@index([user_nip])
 
   tugas Tugas @relation(fields: [kd_tugas],references: [kd_tugas])
   user User @relation(fields: [user_nip],references: [nip])
@@ -84,7 +115,9 @@ model Rating {
   komentar   String?  
   created_at DateTime @default(now())
 
-  tugas      PengumpulanTugas @relation(fields: [kd_pengumpulan_tugas], references: [kd_pengumpulan_tugas])  // Relasi ke tugas yang diberi rating
+  @@index([kd_pengumpulan_tugas])
+
+  pengumpulanTugas PengumpulanTugas @relation(fields: [kd_pengumpulan_tugas], references: [kd_pengumpulan_tugas]) 
 }
 
 

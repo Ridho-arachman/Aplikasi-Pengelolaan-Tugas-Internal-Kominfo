@@ -1,8 +1,8 @@
-const prisma = require("../src/lib/prisma");
-const jabatanService = require("../src/services/jabatan.service");
+const prisma = require("../../lib/prisma");
+const jabatanService = require("../../services/jabatan.service");
 
 // Mock semua fungsi Prisma yang digunakan
-jest.mock("../src/lib/prisma", () => ({
+jest.mock("../../lib/prisma", () => ({
   jabatan: {
     create: jest.fn(),
     findUnique: jest.fn(),

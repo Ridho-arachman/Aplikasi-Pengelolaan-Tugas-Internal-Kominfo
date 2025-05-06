@@ -136,6 +136,16 @@ exports.Prisma.UserScalarFieldEnum = {
   updated_at: 'updated_at'
 };
 
+exports.Prisma.HistoryJabatanScalarFieldEnum = {
+  id: 'id',
+  user_nip: 'user_nip',
+  kd_jabatan: 'kd_jabatan',
+  tanggal_mulai: 'tanggal_mulai',
+  tanggal_akhir: 'tanggal_akhir',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
 exports.Prisma.TugasScalarFieldEnum = {
   kd_tugas: 'kd_tugas',
   judul: 'judul',
@@ -200,6 +210,12 @@ exports.Prisma.UserOrderByRelevanceFieldEnum = {
   nip_atasan: 'nip_atasan'
 };
 
+exports.Prisma.HistoryJabatanOrderByRelevanceFieldEnum = {
+  id: 'id',
+  user_nip: 'user_nip',
+  kd_jabatan: 'kd_jabatan'
+};
+
 exports.Prisma.TugasOrderByRelevanceFieldEnum = {
   kd_tugas: 'kd_tugas',
   judul: 'judul',
@@ -255,6 +271,7 @@ exports.StatusPengumpulanTugas = exports.$Enums.StatusPengumpulanTugas = {
 exports.Prisma.ModelName = {
   Jabatan: 'Jabatan',
   User: 'User',
+  HistoryJabatan: 'HistoryJabatan',
   Tugas: 'Tugas',
   Laporan: 'Laporan',
   PengumpulanTugas: 'PengumpulanTugas',

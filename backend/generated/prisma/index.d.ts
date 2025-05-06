@@ -24,6 +24,11 @@ export type Jabatan = $Result.DefaultSelection<Prisma.$JabatanPayload>
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 /**
+ * Model HistoryJabatan
+ * 
+ */
+export type HistoryJabatan = $Result.DefaultSelection<Prisma.$HistoryJabatanPayload>
+/**
  * Model Tugas
  * 
  */
@@ -246,6 +251,16 @@ export class PrismaClient<
     * ```
     */
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.historyJabatan`: Exposes CRUD operations for the **HistoryJabatan** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more HistoryJabatans
+    * const historyJabatans = await prisma.historyJabatan.findMany()
+    * ```
+    */
+  get historyJabatan(): Prisma.HistoryJabatanDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.tugas`: Exposes CRUD operations for the **Tugas** model.
@@ -728,6 +743,7 @@ export namespace Prisma {
   export const ModelName: {
     Jabatan: 'Jabatan',
     User: 'User',
+    HistoryJabatan: 'HistoryJabatan',
     Tugas: 'Tugas',
     Laporan: 'Laporan',
     PengumpulanTugas: 'PengumpulanTugas',
@@ -750,7 +766,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "jabatan" | "user" | "tugas" | "laporan" | "pengumpulanTugas" | "rating"
+      modelProps: "jabatan" | "user" | "historyJabatan" | "tugas" | "laporan" | "pengumpulanTugas" | "rating"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -883,6 +899,72 @@ export namespace Prisma {
           count: {
             args: Prisma.UserCountArgs<ExtArgs>
             result: $Utils.Optional<UserCountAggregateOutputType> | number
+          }
+        }
+      }
+      HistoryJabatan: {
+        payload: Prisma.$HistoryJabatanPayload<ExtArgs>
+        fields: Prisma.HistoryJabatanFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.HistoryJabatanFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HistoryJabatanPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.HistoryJabatanFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HistoryJabatanPayload>
+          }
+          findFirst: {
+            args: Prisma.HistoryJabatanFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HistoryJabatanPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.HistoryJabatanFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HistoryJabatanPayload>
+          }
+          findMany: {
+            args: Prisma.HistoryJabatanFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HistoryJabatanPayload>[]
+          }
+          create: {
+            args: Prisma.HistoryJabatanCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HistoryJabatanPayload>
+          }
+          createMany: {
+            args: Prisma.HistoryJabatanCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.HistoryJabatanDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HistoryJabatanPayload>
+          }
+          update: {
+            args: Prisma.HistoryJabatanUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HistoryJabatanPayload>
+          }
+          deleteMany: {
+            args: Prisma.HistoryJabatanDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.HistoryJabatanUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.HistoryJabatanUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HistoryJabatanPayload>
+          }
+          aggregate: {
+            args: Prisma.HistoryJabatanAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateHistoryJabatan>
+          }
+          groupBy: {
+            args: Prisma.HistoryJabatanGroupByArgs<ExtArgs>
+            result: $Utils.Optional<HistoryJabatanGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.HistoryJabatanCountArgs<ExtArgs>
+            result: $Utils.Optional<HistoryJabatanCountAggregateOutputType> | number
           }
         }
       }
@@ -1236,6 +1318,7 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     jabatan?: JabatanOmit
     user?: UserOmit
+    historyJabatan?: HistoryJabatanOmit
     tugas?: TugasOmit
     laporan?: LaporanOmit
     pengumpulanTugas?: PengumpulanTugasOmit
@@ -1335,10 +1418,12 @@ export namespace Prisma {
 
   export type JabatanCountOutputType = {
     user: number
+    history: number
   }
 
   export type JabatanCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | JabatanCountOutputTypeCountUserArgs
+    history?: boolean | JabatanCountOutputTypeCountHistoryArgs
   }
 
   // Custom InputTypes
@@ -1359,6 +1444,13 @@ export namespace Prisma {
     where?: UserWhereInput
   }
 
+  /**
+   * JabatanCountOutputType without action
+   */
+  export type JabatanCountOutputTypeCountHistoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: HistoryJabatanWhereInput
+  }
+
 
   /**
    * Count Type UserCountOutputType
@@ -1366,6 +1458,7 @@ export namespace Prisma {
 
   export type UserCountOutputType = {
     bawahan: number
+    history: number
     tugas: number
     laporan: number
     pengumpulan_tugas: number
@@ -1373,6 +1466,7 @@ export namespace Prisma {
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     bawahan?: boolean | UserCountOutputTypeCountBawahanArgs
+    history?: boolean | UserCountOutputTypeCountHistoryArgs
     tugas?: boolean | UserCountOutputTypeCountTugasArgs
     laporan?: boolean | UserCountOutputTypeCountLaporanArgs
     pengumpulan_tugas?: boolean | UserCountOutputTypeCountPengumpulan_tugasArgs
@@ -1394,6 +1488,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountBawahanArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: UserWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountHistoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: HistoryJabatanWhereInput
   }
 
   /**
@@ -1625,6 +1726,7 @@ export namespace Prisma {
     kd_jabatan?: boolean
     nama_jabatan?: boolean
     user?: boolean | Jabatan$userArgs<ExtArgs>
+    history?: boolean | Jabatan$historyArgs<ExtArgs>
     _count?: boolean | JabatanCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["jabatan"]>
 
@@ -1638,6 +1740,7 @@ export namespace Prisma {
   export type JabatanOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"kd_jabatan" | "nama_jabatan", ExtArgs["result"]["jabatan"]>
   export type JabatanInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | Jabatan$userArgs<ExtArgs>
+    history?: boolean | Jabatan$historyArgs<ExtArgs>
     _count?: boolean | JabatanCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -1645,6 +1748,7 @@ export namespace Prisma {
     name: "Jabatan"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>[]
+      history: Prisma.$HistoryJabatanPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       kd_jabatan: string
@@ -1990,6 +2094,7 @@ export namespace Prisma {
   export interface Prisma__JabatanClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends Jabatan$userArgs<ExtArgs> = {}>(args?: Subset<T, Jabatan$userArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    history<T extends Jabatan$historyArgs<ExtArgs> = {}>(args?: Subset<T, Jabatan$historyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HistoryJabatanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2388,6 +2493,30 @@ export namespace Prisma {
   }
 
   /**
+   * Jabatan.history
+   */
+  export type Jabatan$historyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HistoryJabatan
+     */
+    select?: HistoryJabatanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HistoryJabatan
+     */
+    omit?: HistoryJabatanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HistoryJabatanInclude<ExtArgs> | null
+    where?: HistoryJabatanWhereInput
+    orderBy?: HistoryJabatanOrderByWithRelationInput | HistoryJabatanOrderByWithRelationInput[]
+    cursor?: HistoryJabatanWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: HistoryJabatanScalarFieldEnum | HistoryJabatanScalarFieldEnum[]
+  }
+
+  /**
    * Jabatan without action
    */
   export type JabatanDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2594,9 +2723,10 @@ export namespace Prisma {
     nip_atasan?: boolean
     created_at?: boolean
     updated_at?: boolean
-    bawahan?: boolean | User$bawahanArgs<ExtArgs>
     atasan?: boolean | User$atasanArgs<ExtArgs>
     jabatan?: boolean | JabatanDefaultArgs<ExtArgs>
+    bawahan?: boolean | User$bawahanArgs<ExtArgs>
+    history?: boolean | User$historyArgs<ExtArgs>
     tugas?: boolean | User$tugasArgs<ExtArgs>
     laporan?: boolean | User$laporanArgs<ExtArgs>
     pengumpulan_tugas?: boolean | User$pengumpulan_tugasArgs<ExtArgs>
@@ -2618,9 +2748,10 @@ export namespace Prisma {
 
   export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"nip" | "nama" | "password" | "role" | "kd_jabatan" | "nip_atasan" | "created_at" | "updated_at", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    bawahan?: boolean | User$bawahanArgs<ExtArgs>
     atasan?: boolean | User$atasanArgs<ExtArgs>
     jabatan?: boolean | JabatanDefaultArgs<ExtArgs>
+    bawahan?: boolean | User$bawahanArgs<ExtArgs>
+    history?: boolean | User$historyArgs<ExtArgs>
     tugas?: boolean | User$tugasArgs<ExtArgs>
     laporan?: boolean | User$laporanArgs<ExtArgs>
     pengumpulan_tugas?: boolean | User$pengumpulan_tugasArgs<ExtArgs>
@@ -2630,9 +2761,10 @@ export namespace Prisma {
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
-      bawahan: Prisma.$UserPayload<ExtArgs>[]
       atasan: Prisma.$UserPayload<ExtArgs> | null
       jabatan: Prisma.$JabatanPayload<ExtArgs>
+      bawahan: Prisma.$UserPayload<ExtArgs>[]
+      history: Prisma.$HistoryJabatanPayload<ExtArgs>[]
       tugas: Prisma.$TugasPayload<ExtArgs>[]
       laporan: Prisma.$LaporanPayload<ExtArgs>[]
       pengumpulan_tugas: Prisma.$PengumpulanTugasPayload<ExtArgs>[]
@@ -2986,9 +3118,10 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    bawahan<T extends User$bawahanArgs<ExtArgs> = {}>(args?: Subset<T, User$bawahanArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     atasan<T extends User$atasanArgs<ExtArgs> = {}>(args?: Subset<T, User$atasanArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     jabatan<T extends JabatanDefaultArgs<ExtArgs> = {}>(args?: Subset<T, JabatanDefaultArgs<ExtArgs>>): Prisma__JabatanClient<$Result.GetResult<Prisma.$JabatanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    bawahan<T extends User$bawahanArgs<ExtArgs> = {}>(args?: Subset<T, User$bawahanArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    history<T extends User$historyArgs<ExtArgs> = {}>(args?: Subset<T, User$historyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HistoryJabatanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     tugas<T extends User$tugasArgs<ExtArgs> = {}>(args?: Subset<T, User$tugasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TugasPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     laporan<T extends User$laporanArgs<ExtArgs> = {}>(args?: Subset<T, User$laporanArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LaporanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     pengumpulan_tugas<T extends User$pengumpulan_tugasArgs<ExtArgs> = {}>(args?: Subset<T, User$pengumpulan_tugasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PengumpulanTugasPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -3372,6 +3505,25 @@ export namespace Prisma {
   }
 
   /**
+   * User.atasan
+   */
+  export type User$atasanArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
    * User.bawahan
    */
   export type User$bawahanArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3396,22 +3548,27 @@ export namespace Prisma {
   }
 
   /**
-   * User.atasan
+   * User.history
    */
-  export type User$atasanArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$historyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the HistoryJabatan
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: HistoryJabatanSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the User
+     * Omit specific fields from the HistoryJabatan
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: HistoryJabatanOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserInclude<ExtArgs> | null
-    where?: UserWhereInput
+    include?: HistoryJabatanInclude<ExtArgs> | null
+    where?: HistoryJabatanWhereInput
+    orderBy?: HistoryJabatanOrderByWithRelationInput | HistoryJabatanOrderByWithRelationInput[]
+    cursor?: HistoryJabatanWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: HistoryJabatanScalarFieldEnum | HistoryJabatanScalarFieldEnum[]
   }
 
   /**
@@ -3502,6 +3659,961 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: UserInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model HistoryJabatan
+   */
+
+  export type AggregateHistoryJabatan = {
+    _count: HistoryJabatanCountAggregateOutputType | null
+    _min: HistoryJabatanMinAggregateOutputType | null
+    _max: HistoryJabatanMaxAggregateOutputType | null
+  }
+
+  export type HistoryJabatanMinAggregateOutputType = {
+    id: string | null
+    user_nip: string | null
+    kd_jabatan: string | null
+    tanggal_mulai: Date | null
+    tanggal_akhir: Date | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type HistoryJabatanMaxAggregateOutputType = {
+    id: string | null
+    user_nip: string | null
+    kd_jabatan: string | null
+    tanggal_mulai: Date | null
+    tanggal_akhir: Date | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type HistoryJabatanCountAggregateOutputType = {
+    id: number
+    user_nip: number
+    kd_jabatan: number
+    tanggal_mulai: number
+    tanggal_akhir: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type HistoryJabatanMinAggregateInputType = {
+    id?: true
+    user_nip?: true
+    kd_jabatan?: true
+    tanggal_mulai?: true
+    tanggal_akhir?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type HistoryJabatanMaxAggregateInputType = {
+    id?: true
+    user_nip?: true
+    kd_jabatan?: true
+    tanggal_mulai?: true
+    tanggal_akhir?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type HistoryJabatanCountAggregateInputType = {
+    id?: true
+    user_nip?: true
+    kd_jabatan?: true
+    tanggal_mulai?: true
+    tanggal_akhir?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type HistoryJabatanAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which HistoryJabatan to aggregate.
+     */
+    where?: HistoryJabatanWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of HistoryJabatans to fetch.
+     */
+    orderBy?: HistoryJabatanOrderByWithRelationInput | HistoryJabatanOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: HistoryJabatanWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` HistoryJabatans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` HistoryJabatans.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned HistoryJabatans
+    **/
+    _count?: true | HistoryJabatanCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: HistoryJabatanMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: HistoryJabatanMaxAggregateInputType
+  }
+
+  export type GetHistoryJabatanAggregateType<T extends HistoryJabatanAggregateArgs> = {
+        [P in keyof T & keyof AggregateHistoryJabatan]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateHistoryJabatan[P]>
+      : GetScalarType<T[P], AggregateHistoryJabatan[P]>
+  }
+
+
+
+
+  export type HistoryJabatanGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: HistoryJabatanWhereInput
+    orderBy?: HistoryJabatanOrderByWithAggregationInput | HistoryJabatanOrderByWithAggregationInput[]
+    by: HistoryJabatanScalarFieldEnum[] | HistoryJabatanScalarFieldEnum
+    having?: HistoryJabatanScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: HistoryJabatanCountAggregateInputType | true
+    _min?: HistoryJabatanMinAggregateInputType
+    _max?: HistoryJabatanMaxAggregateInputType
+  }
+
+  export type HistoryJabatanGroupByOutputType = {
+    id: string
+    user_nip: string
+    kd_jabatan: string
+    tanggal_mulai: Date
+    tanggal_akhir: Date | null
+    created_at: Date
+    updated_at: Date
+    _count: HistoryJabatanCountAggregateOutputType | null
+    _min: HistoryJabatanMinAggregateOutputType | null
+    _max: HistoryJabatanMaxAggregateOutputType | null
+  }
+
+  type GetHistoryJabatanGroupByPayload<T extends HistoryJabatanGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<HistoryJabatanGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof HistoryJabatanGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], HistoryJabatanGroupByOutputType[P]>
+            : GetScalarType<T[P], HistoryJabatanGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type HistoryJabatanSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user_nip?: boolean
+    kd_jabatan?: boolean
+    tanggal_mulai?: boolean
+    tanggal_akhir?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    jabatan?: boolean | JabatanDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["historyJabatan"]>
+
+
+
+  export type HistoryJabatanSelectScalar = {
+    id?: boolean
+    user_nip?: boolean
+    kd_jabatan?: boolean
+    tanggal_mulai?: boolean
+    tanggal_akhir?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type HistoryJabatanOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "user_nip" | "kd_jabatan" | "tanggal_mulai" | "tanggal_akhir" | "created_at" | "updated_at", ExtArgs["result"]["historyJabatan"]>
+  export type HistoryJabatanInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    jabatan?: boolean | JabatanDefaultArgs<ExtArgs>
+  }
+
+  export type $HistoryJabatanPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "HistoryJabatan"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      jabatan: Prisma.$JabatanPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      user_nip: string
+      kd_jabatan: string
+      tanggal_mulai: Date
+      tanggal_akhir: Date | null
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["historyJabatan"]>
+    composites: {}
+  }
+
+  type HistoryJabatanGetPayload<S extends boolean | null | undefined | HistoryJabatanDefaultArgs> = $Result.GetResult<Prisma.$HistoryJabatanPayload, S>
+
+  type HistoryJabatanCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<HistoryJabatanFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: HistoryJabatanCountAggregateInputType | true
+    }
+
+  export interface HistoryJabatanDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['HistoryJabatan'], meta: { name: 'HistoryJabatan' } }
+    /**
+     * Find zero or one HistoryJabatan that matches the filter.
+     * @param {HistoryJabatanFindUniqueArgs} args - Arguments to find a HistoryJabatan
+     * @example
+     * // Get one HistoryJabatan
+     * const historyJabatan = await prisma.historyJabatan.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends HistoryJabatanFindUniqueArgs>(args: SelectSubset<T, HistoryJabatanFindUniqueArgs<ExtArgs>>): Prisma__HistoryJabatanClient<$Result.GetResult<Prisma.$HistoryJabatanPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one HistoryJabatan that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {HistoryJabatanFindUniqueOrThrowArgs} args - Arguments to find a HistoryJabatan
+     * @example
+     * // Get one HistoryJabatan
+     * const historyJabatan = await prisma.historyJabatan.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends HistoryJabatanFindUniqueOrThrowArgs>(args: SelectSubset<T, HistoryJabatanFindUniqueOrThrowArgs<ExtArgs>>): Prisma__HistoryJabatanClient<$Result.GetResult<Prisma.$HistoryJabatanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first HistoryJabatan that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HistoryJabatanFindFirstArgs} args - Arguments to find a HistoryJabatan
+     * @example
+     * // Get one HistoryJabatan
+     * const historyJabatan = await prisma.historyJabatan.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends HistoryJabatanFindFirstArgs>(args?: SelectSubset<T, HistoryJabatanFindFirstArgs<ExtArgs>>): Prisma__HistoryJabatanClient<$Result.GetResult<Prisma.$HistoryJabatanPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first HistoryJabatan that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HistoryJabatanFindFirstOrThrowArgs} args - Arguments to find a HistoryJabatan
+     * @example
+     * // Get one HistoryJabatan
+     * const historyJabatan = await prisma.historyJabatan.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends HistoryJabatanFindFirstOrThrowArgs>(args?: SelectSubset<T, HistoryJabatanFindFirstOrThrowArgs<ExtArgs>>): Prisma__HistoryJabatanClient<$Result.GetResult<Prisma.$HistoryJabatanPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more HistoryJabatans that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HistoryJabatanFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all HistoryJabatans
+     * const historyJabatans = await prisma.historyJabatan.findMany()
+     * 
+     * // Get first 10 HistoryJabatans
+     * const historyJabatans = await prisma.historyJabatan.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const historyJabatanWithIdOnly = await prisma.historyJabatan.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends HistoryJabatanFindManyArgs>(args?: SelectSubset<T, HistoryJabatanFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HistoryJabatanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a HistoryJabatan.
+     * @param {HistoryJabatanCreateArgs} args - Arguments to create a HistoryJabatan.
+     * @example
+     * // Create one HistoryJabatan
+     * const HistoryJabatan = await prisma.historyJabatan.create({
+     *   data: {
+     *     // ... data to create a HistoryJabatan
+     *   }
+     * })
+     * 
+     */
+    create<T extends HistoryJabatanCreateArgs>(args: SelectSubset<T, HistoryJabatanCreateArgs<ExtArgs>>): Prisma__HistoryJabatanClient<$Result.GetResult<Prisma.$HistoryJabatanPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many HistoryJabatans.
+     * @param {HistoryJabatanCreateManyArgs} args - Arguments to create many HistoryJabatans.
+     * @example
+     * // Create many HistoryJabatans
+     * const historyJabatan = await prisma.historyJabatan.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends HistoryJabatanCreateManyArgs>(args?: SelectSubset<T, HistoryJabatanCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a HistoryJabatan.
+     * @param {HistoryJabatanDeleteArgs} args - Arguments to delete one HistoryJabatan.
+     * @example
+     * // Delete one HistoryJabatan
+     * const HistoryJabatan = await prisma.historyJabatan.delete({
+     *   where: {
+     *     // ... filter to delete one HistoryJabatan
+     *   }
+     * })
+     * 
+     */
+    delete<T extends HistoryJabatanDeleteArgs>(args: SelectSubset<T, HistoryJabatanDeleteArgs<ExtArgs>>): Prisma__HistoryJabatanClient<$Result.GetResult<Prisma.$HistoryJabatanPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one HistoryJabatan.
+     * @param {HistoryJabatanUpdateArgs} args - Arguments to update one HistoryJabatan.
+     * @example
+     * // Update one HistoryJabatan
+     * const historyJabatan = await prisma.historyJabatan.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends HistoryJabatanUpdateArgs>(args: SelectSubset<T, HistoryJabatanUpdateArgs<ExtArgs>>): Prisma__HistoryJabatanClient<$Result.GetResult<Prisma.$HistoryJabatanPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more HistoryJabatans.
+     * @param {HistoryJabatanDeleteManyArgs} args - Arguments to filter HistoryJabatans to delete.
+     * @example
+     * // Delete a few HistoryJabatans
+     * const { count } = await prisma.historyJabatan.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends HistoryJabatanDeleteManyArgs>(args?: SelectSubset<T, HistoryJabatanDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more HistoryJabatans.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HistoryJabatanUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many HistoryJabatans
+     * const historyJabatan = await prisma.historyJabatan.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends HistoryJabatanUpdateManyArgs>(args: SelectSubset<T, HistoryJabatanUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one HistoryJabatan.
+     * @param {HistoryJabatanUpsertArgs} args - Arguments to update or create a HistoryJabatan.
+     * @example
+     * // Update or create a HistoryJabatan
+     * const historyJabatan = await prisma.historyJabatan.upsert({
+     *   create: {
+     *     // ... data to create a HistoryJabatan
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the HistoryJabatan we want to update
+     *   }
+     * })
+     */
+    upsert<T extends HistoryJabatanUpsertArgs>(args: SelectSubset<T, HistoryJabatanUpsertArgs<ExtArgs>>): Prisma__HistoryJabatanClient<$Result.GetResult<Prisma.$HistoryJabatanPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of HistoryJabatans.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HistoryJabatanCountArgs} args - Arguments to filter HistoryJabatans to count.
+     * @example
+     * // Count the number of HistoryJabatans
+     * const count = await prisma.historyJabatan.count({
+     *   where: {
+     *     // ... the filter for the HistoryJabatans we want to count
+     *   }
+     * })
+    **/
+    count<T extends HistoryJabatanCountArgs>(
+      args?: Subset<T, HistoryJabatanCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], HistoryJabatanCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a HistoryJabatan.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HistoryJabatanAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends HistoryJabatanAggregateArgs>(args: Subset<T, HistoryJabatanAggregateArgs>): Prisma.PrismaPromise<GetHistoryJabatanAggregateType<T>>
+
+    /**
+     * Group by HistoryJabatan.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HistoryJabatanGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends HistoryJabatanGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: HistoryJabatanGroupByArgs['orderBy'] }
+        : { orderBy?: HistoryJabatanGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, HistoryJabatanGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetHistoryJabatanGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the HistoryJabatan model
+   */
+  readonly fields: HistoryJabatanFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for HistoryJabatan.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__HistoryJabatanClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    jabatan<T extends JabatanDefaultArgs<ExtArgs> = {}>(args?: Subset<T, JabatanDefaultArgs<ExtArgs>>): Prisma__JabatanClient<$Result.GetResult<Prisma.$JabatanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the HistoryJabatan model
+   */
+  interface HistoryJabatanFieldRefs {
+    readonly id: FieldRef<"HistoryJabatan", 'String'>
+    readonly user_nip: FieldRef<"HistoryJabatan", 'String'>
+    readonly kd_jabatan: FieldRef<"HistoryJabatan", 'String'>
+    readonly tanggal_mulai: FieldRef<"HistoryJabatan", 'DateTime'>
+    readonly tanggal_akhir: FieldRef<"HistoryJabatan", 'DateTime'>
+    readonly created_at: FieldRef<"HistoryJabatan", 'DateTime'>
+    readonly updated_at: FieldRef<"HistoryJabatan", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * HistoryJabatan findUnique
+   */
+  export type HistoryJabatanFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HistoryJabatan
+     */
+    select?: HistoryJabatanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HistoryJabatan
+     */
+    omit?: HistoryJabatanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HistoryJabatanInclude<ExtArgs> | null
+    /**
+     * Filter, which HistoryJabatan to fetch.
+     */
+    where: HistoryJabatanWhereUniqueInput
+  }
+
+  /**
+   * HistoryJabatan findUniqueOrThrow
+   */
+  export type HistoryJabatanFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HistoryJabatan
+     */
+    select?: HistoryJabatanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HistoryJabatan
+     */
+    omit?: HistoryJabatanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HistoryJabatanInclude<ExtArgs> | null
+    /**
+     * Filter, which HistoryJabatan to fetch.
+     */
+    where: HistoryJabatanWhereUniqueInput
+  }
+
+  /**
+   * HistoryJabatan findFirst
+   */
+  export type HistoryJabatanFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HistoryJabatan
+     */
+    select?: HistoryJabatanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HistoryJabatan
+     */
+    omit?: HistoryJabatanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HistoryJabatanInclude<ExtArgs> | null
+    /**
+     * Filter, which HistoryJabatan to fetch.
+     */
+    where?: HistoryJabatanWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of HistoryJabatans to fetch.
+     */
+    orderBy?: HistoryJabatanOrderByWithRelationInput | HistoryJabatanOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for HistoryJabatans.
+     */
+    cursor?: HistoryJabatanWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` HistoryJabatans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` HistoryJabatans.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of HistoryJabatans.
+     */
+    distinct?: HistoryJabatanScalarFieldEnum | HistoryJabatanScalarFieldEnum[]
+  }
+
+  /**
+   * HistoryJabatan findFirstOrThrow
+   */
+  export type HistoryJabatanFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HistoryJabatan
+     */
+    select?: HistoryJabatanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HistoryJabatan
+     */
+    omit?: HistoryJabatanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HistoryJabatanInclude<ExtArgs> | null
+    /**
+     * Filter, which HistoryJabatan to fetch.
+     */
+    where?: HistoryJabatanWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of HistoryJabatans to fetch.
+     */
+    orderBy?: HistoryJabatanOrderByWithRelationInput | HistoryJabatanOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for HistoryJabatans.
+     */
+    cursor?: HistoryJabatanWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` HistoryJabatans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` HistoryJabatans.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of HistoryJabatans.
+     */
+    distinct?: HistoryJabatanScalarFieldEnum | HistoryJabatanScalarFieldEnum[]
+  }
+
+  /**
+   * HistoryJabatan findMany
+   */
+  export type HistoryJabatanFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HistoryJabatan
+     */
+    select?: HistoryJabatanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HistoryJabatan
+     */
+    omit?: HistoryJabatanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HistoryJabatanInclude<ExtArgs> | null
+    /**
+     * Filter, which HistoryJabatans to fetch.
+     */
+    where?: HistoryJabatanWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of HistoryJabatans to fetch.
+     */
+    orderBy?: HistoryJabatanOrderByWithRelationInput | HistoryJabatanOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing HistoryJabatans.
+     */
+    cursor?: HistoryJabatanWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` HistoryJabatans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` HistoryJabatans.
+     */
+    skip?: number
+    distinct?: HistoryJabatanScalarFieldEnum | HistoryJabatanScalarFieldEnum[]
+  }
+
+  /**
+   * HistoryJabatan create
+   */
+  export type HistoryJabatanCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HistoryJabatan
+     */
+    select?: HistoryJabatanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HistoryJabatan
+     */
+    omit?: HistoryJabatanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HistoryJabatanInclude<ExtArgs> | null
+    /**
+     * The data needed to create a HistoryJabatan.
+     */
+    data: XOR<HistoryJabatanCreateInput, HistoryJabatanUncheckedCreateInput>
+  }
+
+  /**
+   * HistoryJabatan createMany
+   */
+  export type HistoryJabatanCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many HistoryJabatans.
+     */
+    data: HistoryJabatanCreateManyInput | HistoryJabatanCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * HistoryJabatan update
+   */
+  export type HistoryJabatanUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HistoryJabatan
+     */
+    select?: HistoryJabatanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HistoryJabatan
+     */
+    omit?: HistoryJabatanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HistoryJabatanInclude<ExtArgs> | null
+    /**
+     * The data needed to update a HistoryJabatan.
+     */
+    data: XOR<HistoryJabatanUpdateInput, HistoryJabatanUncheckedUpdateInput>
+    /**
+     * Choose, which HistoryJabatan to update.
+     */
+    where: HistoryJabatanWhereUniqueInput
+  }
+
+  /**
+   * HistoryJabatan updateMany
+   */
+  export type HistoryJabatanUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update HistoryJabatans.
+     */
+    data: XOR<HistoryJabatanUpdateManyMutationInput, HistoryJabatanUncheckedUpdateManyInput>
+    /**
+     * Filter which HistoryJabatans to update
+     */
+    where?: HistoryJabatanWhereInput
+    /**
+     * Limit how many HistoryJabatans to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * HistoryJabatan upsert
+   */
+  export type HistoryJabatanUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HistoryJabatan
+     */
+    select?: HistoryJabatanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HistoryJabatan
+     */
+    omit?: HistoryJabatanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HistoryJabatanInclude<ExtArgs> | null
+    /**
+     * The filter to search for the HistoryJabatan to update in case it exists.
+     */
+    where: HistoryJabatanWhereUniqueInput
+    /**
+     * In case the HistoryJabatan found by the `where` argument doesn't exist, create a new HistoryJabatan with this data.
+     */
+    create: XOR<HistoryJabatanCreateInput, HistoryJabatanUncheckedCreateInput>
+    /**
+     * In case the HistoryJabatan was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<HistoryJabatanUpdateInput, HistoryJabatanUncheckedUpdateInput>
+  }
+
+  /**
+   * HistoryJabatan delete
+   */
+  export type HistoryJabatanDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HistoryJabatan
+     */
+    select?: HistoryJabatanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HistoryJabatan
+     */
+    omit?: HistoryJabatanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HistoryJabatanInclude<ExtArgs> | null
+    /**
+     * Filter which HistoryJabatan to delete.
+     */
+    where: HistoryJabatanWhereUniqueInput
+  }
+
+  /**
+   * HistoryJabatan deleteMany
+   */
+  export type HistoryJabatanDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which HistoryJabatans to delete
+     */
+    where?: HistoryJabatanWhereInput
+    /**
+     * Limit how many HistoryJabatans to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * HistoryJabatan without action
+   */
+  export type HistoryJabatanDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HistoryJabatan
+     */
+    select?: HistoryJabatanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HistoryJabatan
+     */
+    omit?: HistoryJabatanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HistoryJabatanInclude<ExtArgs> | null
   }
 
 
@@ -6653,7 +7765,7 @@ export namespace Prisma {
     nilai?: boolean
     komentar?: boolean
     created_at?: boolean
-    tugas?: boolean | PengumpulanTugasDefaultArgs<ExtArgs>
+    pengumpulanTugas?: boolean | PengumpulanTugasDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["rating"]>
 
 
@@ -6668,13 +7780,13 @@ export namespace Prisma {
 
   export type RatingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"kd_rating" | "kd_pengumpulan_tugas" | "nilai" | "komentar" | "created_at", ExtArgs["result"]["rating"]>
   export type RatingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    tugas?: boolean | PengumpulanTugasDefaultArgs<ExtArgs>
+    pengumpulanTugas?: boolean | PengumpulanTugasDefaultArgs<ExtArgs>
   }
 
   export type $RatingPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Rating"
     objects: {
-      tugas: Prisma.$PengumpulanTugasPayload<ExtArgs>
+      pengumpulanTugas: Prisma.$PengumpulanTugasPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       kd_rating: string
@@ -7022,7 +8134,7 @@ export namespace Prisma {
    */
   export interface Prisma__RatingClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    tugas<T extends PengumpulanTugasDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PengumpulanTugasDefaultArgs<ExtArgs>>): Prisma__PengumpulanTugasClient<$Result.GetResult<Prisma.$PengumpulanTugasPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    pengumpulanTugas<T extends PengumpulanTugasDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PengumpulanTugasDefaultArgs<ExtArgs>>): Prisma__PengumpulanTugasClient<$Result.GetResult<Prisma.$PengumpulanTugasPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7454,6 +8566,19 @@ export namespace Prisma {
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+  export const HistoryJabatanScalarFieldEnum: {
+    id: 'id',
+    user_nip: 'user_nip',
+    kd_jabatan: 'kd_jabatan',
+    tanggal_mulai: 'tanggal_mulai',
+    tanggal_akhir: 'tanggal_akhir',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type HistoryJabatanScalarFieldEnum = (typeof HistoryJabatanScalarFieldEnum)[keyof typeof HistoryJabatanScalarFieldEnum]
+
+
   export const TugasScalarFieldEnum: {
     kd_tugas: 'kd_tugas',
     judul: 'judul',
@@ -7540,6 +8665,15 @@ export namespace Prisma {
   };
 
   export type UserOrderByRelevanceFieldEnum = (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]
+
+
+  export const HistoryJabatanOrderByRelevanceFieldEnum: {
+    id: 'id',
+    user_nip: 'user_nip',
+    kd_jabatan: 'kd_jabatan'
+  };
+
+  export type HistoryJabatanOrderByRelevanceFieldEnum = (typeof HistoryJabatanOrderByRelevanceFieldEnum)[keyof typeof HistoryJabatanOrderByRelevanceFieldEnum]
 
 
   export const TugasOrderByRelevanceFieldEnum: {
@@ -7653,12 +8787,14 @@ export namespace Prisma {
     kd_jabatan?: StringFilter<"Jabatan"> | string
     nama_jabatan?: StringFilter<"Jabatan"> | string
     user?: UserListRelationFilter
+    history?: HistoryJabatanListRelationFilter
   }
 
   export type JabatanOrderByWithRelationInput = {
     kd_jabatan?: SortOrder
     nama_jabatan?: SortOrder
     user?: UserOrderByRelationAggregateInput
+    history?: HistoryJabatanOrderByRelationAggregateInput
     _relevance?: JabatanOrderByRelevanceInput
   }
 
@@ -7669,6 +8805,7 @@ export namespace Prisma {
     OR?: JabatanWhereInput[]
     NOT?: JabatanWhereInput | JabatanWhereInput[]
     user?: UserListRelationFilter
+    history?: HistoryJabatanListRelationFilter
   }, "kd_jabatan" | "nama_jabatan">
 
   export type JabatanOrderByWithAggregationInput = {
@@ -7699,9 +8836,10 @@ export namespace Prisma {
     nip_atasan?: StringNullableFilter<"User"> | string | null
     created_at?: DateTimeFilter<"User"> | Date | string
     updated_at?: DateTimeFilter<"User"> | Date | string
-    bawahan?: UserListRelationFilter
     atasan?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     jabatan?: XOR<JabatanScalarRelationFilter, JabatanWhereInput>
+    bawahan?: UserListRelationFilter
+    history?: HistoryJabatanListRelationFilter
     tugas?: TugasListRelationFilter
     laporan?: LaporanListRelationFilter
     pengumpulan_tugas?: PengumpulanTugasListRelationFilter
@@ -7716,9 +8854,10 @@ export namespace Prisma {
     nip_atasan?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    bawahan?: UserOrderByRelationAggregateInput
     atasan?: UserOrderByWithRelationInput
     jabatan?: JabatanOrderByWithRelationInput
+    bawahan?: UserOrderByRelationAggregateInput
+    history?: HistoryJabatanOrderByRelationAggregateInput
     tugas?: TugasOrderByRelationAggregateInput
     laporan?: LaporanOrderByRelationAggregateInput
     pengumpulan_tugas?: PengumpulanTugasOrderByRelationAggregateInput
@@ -7737,9 +8876,10 @@ export namespace Prisma {
     nip_atasan?: StringNullableFilter<"User"> | string | null
     created_at?: DateTimeFilter<"User"> | Date | string
     updated_at?: DateTimeFilter<"User"> | Date | string
-    bawahan?: UserListRelationFilter
     atasan?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     jabatan?: XOR<JabatanScalarRelationFilter, JabatanWhereInput>
+    bawahan?: UserListRelationFilter
+    history?: HistoryJabatanListRelationFilter
     tugas?: TugasListRelationFilter
     laporan?: LaporanListRelationFilter
     pengumpulan_tugas?: PengumpulanTugasListRelationFilter
@@ -7771,6 +8911,75 @@ export namespace Prisma {
     nip_atasan?: StringNullableWithAggregatesFilter<"User"> | string | null
     created_at?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"User"> | Date | string
+  }
+
+  export type HistoryJabatanWhereInput = {
+    AND?: HistoryJabatanWhereInput | HistoryJabatanWhereInput[]
+    OR?: HistoryJabatanWhereInput[]
+    NOT?: HistoryJabatanWhereInput | HistoryJabatanWhereInput[]
+    id?: StringFilter<"HistoryJabatan"> | string
+    user_nip?: StringFilter<"HistoryJabatan"> | string
+    kd_jabatan?: StringFilter<"HistoryJabatan"> | string
+    tanggal_mulai?: DateTimeFilter<"HistoryJabatan"> | Date | string
+    tanggal_akhir?: DateTimeNullableFilter<"HistoryJabatan"> | Date | string | null
+    created_at?: DateTimeFilter<"HistoryJabatan"> | Date | string
+    updated_at?: DateTimeFilter<"HistoryJabatan"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    jabatan?: XOR<JabatanScalarRelationFilter, JabatanWhereInput>
+  }
+
+  export type HistoryJabatanOrderByWithRelationInput = {
+    id?: SortOrder
+    user_nip?: SortOrder
+    kd_jabatan?: SortOrder
+    tanggal_mulai?: SortOrder
+    tanggal_akhir?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    user?: UserOrderByWithRelationInput
+    jabatan?: JabatanOrderByWithRelationInput
+    _relevance?: HistoryJabatanOrderByRelevanceInput
+  }
+
+  export type HistoryJabatanWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: HistoryJabatanWhereInput | HistoryJabatanWhereInput[]
+    OR?: HistoryJabatanWhereInput[]
+    NOT?: HistoryJabatanWhereInput | HistoryJabatanWhereInput[]
+    user_nip?: StringFilter<"HistoryJabatan"> | string
+    kd_jabatan?: StringFilter<"HistoryJabatan"> | string
+    tanggal_mulai?: DateTimeFilter<"HistoryJabatan"> | Date | string
+    tanggal_akhir?: DateTimeNullableFilter<"HistoryJabatan"> | Date | string | null
+    created_at?: DateTimeFilter<"HistoryJabatan"> | Date | string
+    updated_at?: DateTimeFilter<"HistoryJabatan"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    jabatan?: XOR<JabatanScalarRelationFilter, JabatanWhereInput>
+  }, "id">
+
+  export type HistoryJabatanOrderByWithAggregationInput = {
+    id?: SortOrder
+    user_nip?: SortOrder
+    kd_jabatan?: SortOrder
+    tanggal_mulai?: SortOrder
+    tanggal_akhir?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: HistoryJabatanCountOrderByAggregateInput
+    _max?: HistoryJabatanMaxOrderByAggregateInput
+    _min?: HistoryJabatanMinOrderByAggregateInput
+  }
+
+  export type HistoryJabatanScalarWhereWithAggregatesInput = {
+    AND?: HistoryJabatanScalarWhereWithAggregatesInput | HistoryJabatanScalarWhereWithAggregatesInput[]
+    OR?: HistoryJabatanScalarWhereWithAggregatesInput[]
+    NOT?: HistoryJabatanScalarWhereWithAggregatesInput | HistoryJabatanScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"HistoryJabatan"> | string
+    user_nip?: StringWithAggregatesFilter<"HistoryJabatan"> | string
+    kd_jabatan?: StringWithAggregatesFilter<"HistoryJabatan"> | string
+    tanggal_mulai?: DateTimeWithAggregatesFilter<"HistoryJabatan"> | Date | string
+    tanggal_akhir?: DateTimeNullableWithAggregatesFilter<"HistoryJabatan"> | Date | string | null
+    created_at?: DateTimeWithAggregatesFilter<"HistoryJabatan"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"HistoryJabatan"> | Date | string
   }
 
   export type TugasWhereInput = {
@@ -8004,7 +9213,7 @@ export namespace Prisma {
     nilai?: FloatFilter<"Rating"> | number
     komentar?: StringNullableFilter<"Rating"> | string | null
     created_at?: DateTimeFilter<"Rating"> | Date | string
-    tugas?: XOR<PengumpulanTugasScalarRelationFilter, PengumpulanTugasWhereInput>
+    pengumpulanTugas?: XOR<PengumpulanTugasScalarRelationFilter, PengumpulanTugasWhereInput>
   }
 
   export type RatingOrderByWithRelationInput = {
@@ -8013,7 +9222,7 @@ export namespace Prisma {
     nilai?: SortOrder
     komentar?: SortOrderInput | SortOrder
     created_at?: SortOrder
-    tugas?: PengumpulanTugasOrderByWithRelationInput
+    pengumpulanTugas?: PengumpulanTugasOrderByWithRelationInput
     _relevance?: RatingOrderByRelevanceInput
   }
 
@@ -8026,7 +9235,7 @@ export namespace Prisma {
     nilai?: FloatFilter<"Rating"> | number
     komentar?: StringNullableFilter<"Rating"> | string | null
     created_at?: DateTimeFilter<"Rating"> | Date | string
-    tugas?: XOR<PengumpulanTugasScalarRelationFilter, PengumpulanTugasWhereInput>
+    pengumpulanTugas?: XOR<PengumpulanTugasScalarRelationFilter, PengumpulanTugasWhereInput>
   }, "kd_rating">
 
   export type RatingOrderByWithAggregationInput = {
@@ -8057,24 +9266,28 @@ export namespace Prisma {
     kd_jabatan?: string
     nama_jabatan: string
     user?: UserCreateNestedManyWithoutJabatanInput
+    history?: HistoryJabatanCreateNestedManyWithoutJabatanInput
   }
 
   export type JabatanUncheckedCreateInput = {
     kd_jabatan?: string
     nama_jabatan: string
     user?: UserUncheckedCreateNestedManyWithoutJabatanInput
+    history?: HistoryJabatanUncheckedCreateNestedManyWithoutJabatanInput
   }
 
   export type JabatanUpdateInput = {
     kd_jabatan?: StringFieldUpdateOperationsInput | string
     nama_jabatan?: StringFieldUpdateOperationsInput | string
     user?: UserUpdateManyWithoutJabatanNestedInput
+    history?: HistoryJabatanUpdateManyWithoutJabatanNestedInput
   }
 
   export type JabatanUncheckedUpdateInput = {
     kd_jabatan?: StringFieldUpdateOperationsInput | string
     nama_jabatan?: StringFieldUpdateOperationsInput | string
     user?: UserUncheckedUpdateManyWithoutJabatanNestedInput
+    history?: HistoryJabatanUncheckedUpdateManyWithoutJabatanNestedInput
   }
 
   export type JabatanCreateManyInput = {
@@ -8099,9 +9312,10 @@ export namespace Prisma {
     role?: $Enums.Role
     created_at?: Date | string
     updated_at?: Date | string
-    bawahan?: UserCreateNestedManyWithoutAtasanInput
     atasan?: UserCreateNestedOneWithoutBawahanInput
     jabatan: JabatanCreateNestedOneWithoutUserInput
+    bawahan?: UserCreateNestedManyWithoutAtasanInput
+    history?: HistoryJabatanCreateNestedManyWithoutUserInput
     tugas?: TugasCreateNestedManyWithoutUserInput
     laporan?: LaporanCreateNestedManyWithoutUserInput
     pengumpulan_tugas?: PengumpulanTugasCreateNestedManyWithoutUserInput
@@ -8117,6 +9331,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     bawahan?: UserUncheckedCreateNestedManyWithoutAtasanInput
+    history?: HistoryJabatanUncheckedCreateNestedManyWithoutUserInput
     tugas?: TugasUncheckedCreateNestedManyWithoutUserInput
     laporan?: LaporanUncheckedCreateNestedManyWithoutUserInput
     pengumpulan_tugas?: PengumpulanTugasUncheckedCreateNestedManyWithoutUserInput
@@ -8129,9 +9344,10 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    bawahan?: UserUpdateManyWithoutAtasanNestedInput
     atasan?: UserUpdateOneWithoutBawahanNestedInput
     jabatan?: JabatanUpdateOneRequiredWithoutUserNestedInput
+    bawahan?: UserUpdateManyWithoutAtasanNestedInput
+    history?: HistoryJabatanUpdateManyWithoutUserNestedInput
     tugas?: TugasUpdateManyWithoutUserNestedInput
     laporan?: LaporanUpdateManyWithoutUserNestedInput
     pengumpulan_tugas?: PengumpulanTugasUpdateManyWithoutUserNestedInput
@@ -8147,6 +9363,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     bawahan?: UserUncheckedUpdateManyWithoutAtasanNestedInput
+    history?: HistoryJabatanUncheckedUpdateManyWithoutUserNestedInput
     tugas?: TugasUncheckedUpdateManyWithoutUserNestedInput
     laporan?: LaporanUncheckedUpdateManyWithoutUserNestedInput
     pengumpulan_tugas?: PengumpulanTugasUncheckedUpdateManyWithoutUserNestedInput
@@ -8179,6 +9396,74 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     kd_jabatan?: StringFieldUpdateOperationsInput | string
     nip_atasan?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HistoryJabatanCreateInput = {
+    id?: string
+    tanggal_mulai: Date | string
+    tanggal_akhir?: Date | string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutHistoryInput
+    jabatan: JabatanCreateNestedOneWithoutHistoryInput
+  }
+
+  export type HistoryJabatanUncheckedCreateInput = {
+    id?: string
+    user_nip: string
+    kd_jabatan: string
+    tanggal_mulai: Date | string
+    tanggal_akhir?: Date | string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type HistoryJabatanUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tanggal_mulai?: DateTimeFieldUpdateOperationsInput | Date | string
+    tanggal_akhir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutHistoryNestedInput
+    jabatan?: JabatanUpdateOneRequiredWithoutHistoryNestedInput
+  }
+
+  export type HistoryJabatanUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_nip?: StringFieldUpdateOperationsInput | string
+    kd_jabatan?: StringFieldUpdateOperationsInput | string
+    tanggal_mulai?: DateTimeFieldUpdateOperationsInput | Date | string
+    tanggal_akhir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HistoryJabatanCreateManyInput = {
+    id?: string
+    user_nip: string
+    kd_jabatan: string
+    tanggal_mulai: Date | string
+    tanggal_akhir?: Date | string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type HistoryJabatanUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tanggal_mulai?: DateTimeFieldUpdateOperationsInput | Date | string
+    tanggal_akhir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HistoryJabatanUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_nip?: StringFieldUpdateOperationsInput | string
+    kd_jabatan?: StringFieldUpdateOperationsInput | string
+    tanggal_mulai?: DateTimeFieldUpdateOperationsInput | Date | string
+    tanggal_akhir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -8342,7 +9627,7 @@ export namespace Prisma {
     updated_at?: Date | string
     tugas: TugasCreateNestedOneWithoutPengumpulan_tugasInput
     user: UserCreateNestedOneWithoutPengumpulan_tugasInput
-    rating?: RatingCreateNestedManyWithoutTugasInput
+    rating?: RatingCreateNestedManyWithoutPengumpulanTugasInput
   }
 
   export type PengumpulanTugasUncheckedCreateInput = {
@@ -8355,7 +9640,7 @@ export namespace Prisma {
     status?: $Enums.StatusPengumpulanTugas
     created_at?: Date | string
     updated_at?: Date | string
-    rating?: RatingUncheckedCreateNestedManyWithoutTugasInput
+    rating?: RatingUncheckedCreateNestedManyWithoutPengumpulanTugasInput
   }
 
   export type PengumpulanTugasUpdateInput = {
@@ -8368,7 +9653,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     tugas?: TugasUpdateOneRequiredWithoutPengumpulan_tugasNestedInput
     user?: UserUpdateOneRequiredWithoutPengumpulan_tugasNestedInput
-    rating?: RatingUpdateManyWithoutTugasNestedInput
+    rating?: RatingUpdateManyWithoutPengumpulanTugasNestedInput
   }
 
   export type PengumpulanTugasUncheckedUpdateInput = {
@@ -8381,7 +9666,7 @@ export namespace Prisma {
     status?: EnumStatusPengumpulanTugasFieldUpdateOperationsInput | $Enums.StatusPengumpulanTugas
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    rating?: RatingUncheckedUpdateManyWithoutTugasNestedInput
+    rating?: RatingUncheckedUpdateManyWithoutPengumpulanTugasNestedInput
   }
 
   export type PengumpulanTugasCreateManyInput = {
@@ -8423,7 +9708,7 @@ export namespace Prisma {
     nilai: number
     komentar?: string | null
     created_at?: Date | string
-    tugas: PengumpulanTugasCreateNestedOneWithoutRatingInput
+    pengumpulanTugas: PengumpulanTugasCreateNestedOneWithoutRatingInput
   }
 
   export type RatingUncheckedCreateInput = {
@@ -8439,7 +9724,7 @@ export namespace Prisma {
     nilai?: FloatFieldUpdateOperationsInput | number
     komentar?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    tugas?: PengumpulanTugasUpdateOneRequiredWithoutRatingNestedInput
+    pengumpulanTugas?: PengumpulanTugasUpdateOneRequiredWithoutRatingNestedInput
   }
 
   export type RatingUncheckedUpdateInput = {
@@ -8494,7 +9779,17 @@ export namespace Prisma {
     none?: UserWhereInput
   }
 
+  export type HistoryJabatanListRelationFilter = {
+    every?: HistoryJabatanWhereInput
+    some?: HistoryJabatanWhereInput
+    none?: HistoryJabatanWhereInput
+  }
+
   export type UserOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type HistoryJabatanOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -8696,6 +9991,72 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type UserScalarRelationFilter = {
+    is?: UserWhereInput
+    isNot?: UserWhereInput
+  }
+
+  export type HistoryJabatanOrderByRelevanceInput = {
+    fields: HistoryJabatanOrderByRelevanceFieldEnum | HistoryJabatanOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type HistoryJabatanCountOrderByAggregateInput = {
+    id?: SortOrder
+    user_nip?: SortOrder
+    kd_jabatan?: SortOrder
+    tanggal_mulai?: SortOrder
+    tanggal_akhir?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type HistoryJabatanMaxOrderByAggregateInput = {
+    id?: SortOrder
+    user_nip?: SortOrder
+    kd_jabatan?: SortOrder
+    tanggal_mulai?: SortOrder
+    tanggal_akhir?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type HistoryJabatanMinOrderByAggregateInput = {
+    id?: SortOrder
+    user_nip?: SortOrder
+    kd_jabatan?: SortOrder
+    tanggal_mulai?: SortOrder
+    tanggal_akhir?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
   export type EnumStatusTugasFilter<$PrismaModel = never> = {
     equals?: $Enums.StatusTugas | EnumStatusTugasFieldRefInput<$PrismaModel>
     in?: $Enums.StatusTugas[]
@@ -8708,11 +10069,6 @@ export namespace Prisma {
     in?: $Enums.Prioritas[]
     notIn?: $Enums.Prioritas[]
     not?: NestedEnumPrioritasFilter<$PrismaModel> | $Enums.Prioritas
-  }
-
-  export type UserScalarRelationFilter = {
-    is?: UserWhereInput
-    isNot?: UserWhereInput
   }
 
   export type TugasOrderByRelevanceInput = {
@@ -8961,11 +10317,25 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
   }
 
+  export type HistoryJabatanCreateNestedManyWithoutJabatanInput = {
+    create?: XOR<HistoryJabatanCreateWithoutJabatanInput, HistoryJabatanUncheckedCreateWithoutJabatanInput> | HistoryJabatanCreateWithoutJabatanInput[] | HistoryJabatanUncheckedCreateWithoutJabatanInput[]
+    connectOrCreate?: HistoryJabatanCreateOrConnectWithoutJabatanInput | HistoryJabatanCreateOrConnectWithoutJabatanInput[]
+    createMany?: HistoryJabatanCreateManyJabatanInputEnvelope
+    connect?: HistoryJabatanWhereUniqueInput | HistoryJabatanWhereUniqueInput[]
+  }
+
   export type UserUncheckedCreateNestedManyWithoutJabatanInput = {
     create?: XOR<UserCreateWithoutJabatanInput, UserUncheckedCreateWithoutJabatanInput> | UserCreateWithoutJabatanInput[] | UserUncheckedCreateWithoutJabatanInput[]
     connectOrCreate?: UserCreateOrConnectWithoutJabatanInput | UserCreateOrConnectWithoutJabatanInput[]
     createMany?: UserCreateManyJabatanInputEnvelope
     connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type HistoryJabatanUncheckedCreateNestedManyWithoutJabatanInput = {
+    create?: XOR<HistoryJabatanCreateWithoutJabatanInput, HistoryJabatanUncheckedCreateWithoutJabatanInput> | HistoryJabatanCreateWithoutJabatanInput[] | HistoryJabatanUncheckedCreateWithoutJabatanInput[]
+    connectOrCreate?: HistoryJabatanCreateOrConnectWithoutJabatanInput | HistoryJabatanCreateOrConnectWithoutJabatanInput[]
+    createMany?: HistoryJabatanCreateManyJabatanInputEnvelope
+    connect?: HistoryJabatanWhereUniqueInput | HistoryJabatanWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -8986,6 +10356,20 @@ export namespace Prisma {
     deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
   }
 
+  export type HistoryJabatanUpdateManyWithoutJabatanNestedInput = {
+    create?: XOR<HistoryJabatanCreateWithoutJabatanInput, HistoryJabatanUncheckedCreateWithoutJabatanInput> | HistoryJabatanCreateWithoutJabatanInput[] | HistoryJabatanUncheckedCreateWithoutJabatanInput[]
+    connectOrCreate?: HistoryJabatanCreateOrConnectWithoutJabatanInput | HistoryJabatanCreateOrConnectWithoutJabatanInput[]
+    upsert?: HistoryJabatanUpsertWithWhereUniqueWithoutJabatanInput | HistoryJabatanUpsertWithWhereUniqueWithoutJabatanInput[]
+    createMany?: HistoryJabatanCreateManyJabatanInputEnvelope
+    set?: HistoryJabatanWhereUniqueInput | HistoryJabatanWhereUniqueInput[]
+    disconnect?: HistoryJabatanWhereUniqueInput | HistoryJabatanWhereUniqueInput[]
+    delete?: HistoryJabatanWhereUniqueInput | HistoryJabatanWhereUniqueInput[]
+    connect?: HistoryJabatanWhereUniqueInput | HistoryJabatanWhereUniqueInput[]
+    update?: HistoryJabatanUpdateWithWhereUniqueWithoutJabatanInput | HistoryJabatanUpdateWithWhereUniqueWithoutJabatanInput[]
+    updateMany?: HistoryJabatanUpdateManyWithWhereWithoutJabatanInput | HistoryJabatanUpdateManyWithWhereWithoutJabatanInput[]
+    deleteMany?: HistoryJabatanScalarWhereInput | HistoryJabatanScalarWhereInput[]
+  }
+
   export type UserUncheckedUpdateManyWithoutJabatanNestedInput = {
     create?: XOR<UserCreateWithoutJabatanInput, UserUncheckedCreateWithoutJabatanInput> | UserCreateWithoutJabatanInput[] | UserUncheckedCreateWithoutJabatanInput[]
     connectOrCreate?: UserCreateOrConnectWithoutJabatanInput | UserCreateOrConnectWithoutJabatanInput[]
@@ -9000,11 +10384,18 @@ export namespace Prisma {
     deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
   }
 
-  export type UserCreateNestedManyWithoutAtasanInput = {
-    create?: XOR<UserCreateWithoutAtasanInput, UserUncheckedCreateWithoutAtasanInput> | UserCreateWithoutAtasanInput[] | UserUncheckedCreateWithoutAtasanInput[]
-    connectOrCreate?: UserCreateOrConnectWithoutAtasanInput | UserCreateOrConnectWithoutAtasanInput[]
-    createMany?: UserCreateManyAtasanInputEnvelope
-    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  export type HistoryJabatanUncheckedUpdateManyWithoutJabatanNestedInput = {
+    create?: XOR<HistoryJabatanCreateWithoutJabatanInput, HistoryJabatanUncheckedCreateWithoutJabatanInput> | HistoryJabatanCreateWithoutJabatanInput[] | HistoryJabatanUncheckedCreateWithoutJabatanInput[]
+    connectOrCreate?: HistoryJabatanCreateOrConnectWithoutJabatanInput | HistoryJabatanCreateOrConnectWithoutJabatanInput[]
+    upsert?: HistoryJabatanUpsertWithWhereUniqueWithoutJabatanInput | HistoryJabatanUpsertWithWhereUniqueWithoutJabatanInput[]
+    createMany?: HistoryJabatanCreateManyJabatanInputEnvelope
+    set?: HistoryJabatanWhereUniqueInput | HistoryJabatanWhereUniqueInput[]
+    disconnect?: HistoryJabatanWhereUniqueInput | HistoryJabatanWhereUniqueInput[]
+    delete?: HistoryJabatanWhereUniqueInput | HistoryJabatanWhereUniqueInput[]
+    connect?: HistoryJabatanWhereUniqueInput | HistoryJabatanWhereUniqueInput[]
+    update?: HistoryJabatanUpdateWithWhereUniqueWithoutJabatanInput | HistoryJabatanUpdateWithWhereUniqueWithoutJabatanInput[]
+    updateMany?: HistoryJabatanUpdateManyWithWhereWithoutJabatanInput | HistoryJabatanUpdateManyWithWhereWithoutJabatanInput[]
+    deleteMany?: HistoryJabatanScalarWhereInput | HistoryJabatanScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutBawahanInput = {
@@ -9017,6 +10408,20 @@ export namespace Prisma {
     create?: XOR<JabatanCreateWithoutUserInput, JabatanUncheckedCreateWithoutUserInput>
     connectOrCreate?: JabatanCreateOrConnectWithoutUserInput
     connect?: JabatanWhereUniqueInput
+  }
+
+  export type UserCreateNestedManyWithoutAtasanInput = {
+    create?: XOR<UserCreateWithoutAtasanInput, UserUncheckedCreateWithoutAtasanInput> | UserCreateWithoutAtasanInput[] | UserUncheckedCreateWithoutAtasanInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutAtasanInput | UserCreateOrConnectWithoutAtasanInput[]
+    createMany?: UserCreateManyAtasanInputEnvelope
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type HistoryJabatanCreateNestedManyWithoutUserInput = {
+    create?: XOR<HistoryJabatanCreateWithoutUserInput, HistoryJabatanUncheckedCreateWithoutUserInput> | HistoryJabatanCreateWithoutUserInput[] | HistoryJabatanUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: HistoryJabatanCreateOrConnectWithoutUserInput | HistoryJabatanCreateOrConnectWithoutUserInput[]
+    createMany?: HistoryJabatanCreateManyUserInputEnvelope
+    connect?: HistoryJabatanWhereUniqueInput | HistoryJabatanWhereUniqueInput[]
   }
 
   export type TugasCreateNestedManyWithoutUserInput = {
@@ -9045,6 +10450,13 @@ export namespace Prisma {
     connectOrCreate?: UserCreateOrConnectWithoutAtasanInput | UserCreateOrConnectWithoutAtasanInput[]
     createMany?: UserCreateManyAtasanInputEnvelope
     connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type HistoryJabatanUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<HistoryJabatanCreateWithoutUserInput, HistoryJabatanUncheckedCreateWithoutUserInput> | HistoryJabatanCreateWithoutUserInput[] | HistoryJabatanUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: HistoryJabatanCreateOrConnectWithoutUserInput | HistoryJabatanCreateOrConnectWithoutUserInput[]
+    createMany?: HistoryJabatanCreateManyUserInputEnvelope
+    connect?: HistoryJabatanWhereUniqueInput | HistoryJabatanWhereUniqueInput[]
   }
 
   export type TugasUncheckedCreateNestedManyWithoutUserInput = {
@@ -9076,20 +10488,6 @@ export namespace Prisma {
     set?: Date | string
   }
 
-  export type UserUpdateManyWithoutAtasanNestedInput = {
-    create?: XOR<UserCreateWithoutAtasanInput, UserUncheckedCreateWithoutAtasanInput> | UserCreateWithoutAtasanInput[] | UserUncheckedCreateWithoutAtasanInput[]
-    connectOrCreate?: UserCreateOrConnectWithoutAtasanInput | UserCreateOrConnectWithoutAtasanInput[]
-    upsert?: UserUpsertWithWhereUniqueWithoutAtasanInput | UserUpsertWithWhereUniqueWithoutAtasanInput[]
-    createMany?: UserCreateManyAtasanInputEnvelope
-    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    update?: UserUpdateWithWhereUniqueWithoutAtasanInput | UserUpdateWithWhereUniqueWithoutAtasanInput[]
-    updateMany?: UserUpdateManyWithWhereWithoutAtasanInput | UserUpdateManyWithWhereWithoutAtasanInput[]
-    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
-  }
-
   export type UserUpdateOneWithoutBawahanNestedInput = {
     create?: XOR<UserCreateWithoutBawahanInput, UserUncheckedCreateWithoutBawahanInput>
     connectOrCreate?: UserCreateOrConnectWithoutBawahanInput
@@ -9106,6 +10504,34 @@ export namespace Prisma {
     upsert?: JabatanUpsertWithoutUserInput
     connect?: JabatanWhereUniqueInput
     update?: XOR<XOR<JabatanUpdateToOneWithWhereWithoutUserInput, JabatanUpdateWithoutUserInput>, JabatanUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UserUpdateManyWithoutAtasanNestedInput = {
+    create?: XOR<UserCreateWithoutAtasanInput, UserUncheckedCreateWithoutAtasanInput> | UserCreateWithoutAtasanInput[] | UserUncheckedCreateWithoutAtasanInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutAtasanInput | UserCreateOrConnectWithoutAtasanInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutAtasanInput | UserUpsertWithWhereUniqueWithoutAtasanInput[]
+    createMany?: UserCreateManyAtasanInputEnvelope
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutAtasanInput | UserUpdateWithWhereUniqueWithoutAtasanInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutAtasanInput | UserUpdateManyWithWhereWithoutAtasanInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
+  export type HistoryJabatanUpdateManyWithoutUserNestedInput = {
+    create?: XOR<HistoryJabatanCreateWithoutUserInput, HistoryJabatanUncheckedCreateWithoutUserInput> | HistoryJabatanCreateWithoutUserInput[] | HistoryJabatanUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: HistoryJabatanCreateOrConnectWithoutUserInput | HistoryJabatanCreateOrConnectWithoutUserInput[]
+    upsert?: HistoryJabatanUpsertWithWhereUniqueWithoutUserInput | HistoryJabatanUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: HistoryJabatanCreateManyUserInputEnvelope
+    set?: HistoryJabatanWhereUniqueInput | HistoryJabatanWhereUniqueInput[]
+    disconnect?: HistoryJabatanWhereUniqueInput | HistoryJabatanWhereUniqueInput[]
+    delete?: HistoryJabatanWhereUniqueInput | HistoryJabatanWhereUniqueInput[]
+    connect?: HistoryJabatanWhereUniqueInput | HistoryJabatanWhereUniqueInput[]
+    update?: HistoryJabatanUpdateWithWhereUniqueWithoutUserInput | HistoryJabatanUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: HistoryJabatanUpdateManyWithWhereWithoutUserInput | HistoryJabatanUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: HistoryJabatanScalarWhereInput | HistoryJabatanScalarWhereInput[]
   }
 
   export type TugasUpdateManyWithoutUserNestedInput = {
@@ -9168,6 +10594,20 @@ export namespace Prisma {
     deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
   }
 
+  export type HistoryJabatanUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<HistoryJabatanCreateWithoutUserInput, HistoryJabatanUncheckedCreateWithoutUserInput> | HistoryJabatanCreateWithoutUserInput[] | HistoryJabatanUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: HistoryJabatanCreateOrConnectWithoutUserInput | HistoryJabatanCreateOrConnectWithoutUserInput[]
+    upsert?: HistoryJabatanUpsertWithWhereUniqueWithoutUserInput | HistoryJabatanUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: HistoryJabatanCreateManyUserInputEnvelope
+    set?: HistoryJabatanWhereUniqueInput | HistoryJabatanWhereUniqueInput[]
+    disconnect?: HistoryJabatanWhereUniqueInput | HistoryJabatanWhereUniqueInput[]
+    delete?: HistoryJabatanWhereUniqueInput | HistoryJabatanWhereUniqueInput[]
+    connect?: HistoryJabatanWhereUniqueInput | HistoryJabatanWhereUniqueInput[]
+    update?: HistoryJabatanUpdateWithWhereUniqueWithoutUserInput | HistoryJabatanUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: HistoryJabatanUpdateManyWithWhereWithoutUserInput | HistoryJabatanUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: HistoryJabatanScalarWhereInput | HistoryJabatanScalarWhereInput[]
+  }
+
   export type TugasUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<TugasCreateWithoutUserInput, TugasUncheckedCreateWithoutUserInput> | TugasCreateWithoutUserInput[] | TugasUncheckedCreateWithoutUserInput[]
     connectOrCreate?: TugasCreateOrConnectWithoutUserInput | TugasCreateOrConnectWithoutUserInput[]
@@ -9208,6 +10648,38 @@ export namespace Prisma {
     update?: PengumpulanTugasUpdateWithWhereUniqueWithoutUserInput | PengumpulanTugasUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: PengumpulanTugasUpdateManyWithWhereWithoutUserInput | PengumpulanTugasUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: PengumpulanTugasScalarWhereInput | PengumpulanTugasScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutHistoryInput = {
+    create?: XOR<UserCreateWithoutHistoryInput, UserUncheckedCreateWithoutHistoryInput>
+    connectOrCreate?: UserCreateOrConnectWithoutHistoryInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type JabatanCreateNestedOneWithoutHistoryInput = {
+    create?: XOR<JabatanCreateWithoutHistoryInput, JabatanUncheckedCreateWithoutHistoryInput>
+    connectOrCreate?: JabatanCreateOrConnectWithoutHistoryInput
+    connect?: JabatanWhereUniqueInput
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
+  export type UserUpdateOneRequiredWithoutHistoryNestedInput = {
+    create?: XOR<UserCreateWithoutHistoryInput, UserUncheckedCreateWithoutHistoryInput>
+    connectOrCreate?: UserCreateOrConnectWithoutHistoryInput
+    upsert?: UserUpsertWithoutHistoryInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutHistoryInput, UserUpdateWithoutHistoryInput>, UserUncheckedUpdateWithoutHistoryInput>
+  }
+
+  export type JabatanUpdateOneRequiredWithoutHistoryNestedInput = {
+    create?: XOR<JabatanCreateWithoutHistoryInput, JabatanUncheckedCreateWithoutHistoryInput>
+    connectOrCreate?: JabatanCreateOrConnectWithoutHistoryInput
+    upsert?: JabatanUpsertWithoutHistoryInput
+    connect?: JabatanWhereUniqueInput
+    update?: XOR<XOR<JabatanUpdateToOneWithWhereWithoutHistoryInput, JabatanUpdateWithoutHistoryInput>, JabatanUncheckedUpdateWithoutHistoryInput>
   }
 
   export type UserCreateNestedOneWithoutTugasInput = {
@@ -9300,17 +10772,17 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
-  export type RatingCreateNestedManyWithoutTugasInput = {
-    create?: XOR<RatingCreateWithoutTugasInput, RatingUncheckedCreateWithoutTugasInput> | RatingCreateWithoutTugasInput[] | RatingUncheckedCreateWithoutTugasInput[]
-    connectOrCreate?: RatingCreateOrConnectWithoutTugasInput | RatingCreateOrConnectWithoutTugasInput[]
-    createMany?: RatingCreateManyTugasInputEnvelope
+  export type RatingCreateNestedManyWithoutPengumpulanTugasInput = {
+    create?: XOR<RatingCreateWithoutPengumpulanTugasInput, RatingUncheckedCreateWithoutPengumpulanTugasInput> | RatingCreateWithoutPengumpulanTugasInput[] | RatingUncheckedCreateWithoutPengumpulanTugasInput[]
+    connectOrCreate?: RatingCreateOrConnectWithoutPengumpulanTugasInput | RatingCreateOrConnectWithoutPengumpulanTugasInput[]
+    createMany?: RatingCreateManyPengumpulanTugasInputEnvelope
     connect?: RatingWhereUniqueInput | RatingWhereUniqueInput[]
   }
 
-  export type RatingUncheckedCreateNestedManyWithoutTugasInput = {
-    create?: XOR<RatingCreateWithoutTugasInput, RatingUncheckedCreateWithoutTugasInput> | RatingCreateWithoutTugasInput[] | RatingUncheckedCreateWithoutTugasInput[]
-    connectOrCreate?: RatingCreateOrConnectWithoutTugasInput | RatingCreateOrConnectWithoutTugasInput[]
-    createMany?: RatingCreateManyTugasInputEnvelope
+  export type RatingUncheckedCreateNestedManyWithoutPengumpulanTugasInput = {
+    create?: XOR<RatingCreateWithoutPengumpulanTugasInput, RatingUncheckedCreateWithoutPengumpulanTugasInput> | RatingCreateWithoutPengumpulanTugasInput[] | RatingUncheckedCreateWithoutPengumpulanTugasInput[]
+    connectOrCreate?: RatingCreateOrConnectWithoutPengumpulanTugasInput | RatingCreateOrConnectWithoutPengumpulanTugasInput[]
+    createMany?: RatingCreateManyPengumpulanTugasInputEnvelope
     connect?: RatingWhereUniqueInput | RatingWhereUniqueInput[]
   }
 
@@ -9334,31 +10806,31 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPengumpulan_tugasInput, UserUpdateWithoutPengumpulan_tugasInput>, UserUncheckedUpdateWithoutPengumpulan_tugasInput>
   }
 
-  export type RatingUpdateManyWithoutTugasNestedInput = {
-    create?: XOR<RatingCreateWithoutTugasInput, RatingUncheckedCreateWithoutTugasInput> | RatingCreateWithoutTugasInput[] | RatingUncheckedCreateWithoutTugasInput[]
-    connectOrCreate?: RatingCreateOrConnectWithoutTugasInput | RatingCreateOrConnectWithoutTugasInput[]
-    upsert?: RatingUpsertWithWhereUniqueWithoutTugasInput | RatingUpsertWithWhereUniqueWithoutTugasInput[]
-    createMany?: RatingCreateManyTugasInputEnvelope
+  export type RatingUpdateManyWithoutPengumpulanTugasNestedInput = {
+    create?: XOR<RatingCreateWithoutPengumpulanTugasInput, RatingUncheckedCreateWithoutPengumpulanTugasInput> | RatingCreateWithoutPengumpulanTugasInput[] | RatingUncheckedCreateWithoutPengumpulanTugasInput[]
+    connectOrCreate?: RatingCreateOrConnectWithoutPengumpulanTugasInput | RatingCreateOrConnectWithoutPengumpulanTugasInput[]
+    upsert?: RatingUpsertWithWhereUniqueWithoutPengumpulanTugasInput | RatingUpsertWithWhereUniqueWithoutPengumpulanTugasInput[]
+    createMany?: RatingCreateManyPengumpulanTugasInputEnvelope
     set?: RatingWhereUniqueInput | RatingWhereUniqueInput[]
     disconnect?: RatingWhereUniqueInput | RatingWhereUniqueInput[]
     delete?: RatingWhereUniqueInput | RatingWhereUniqueInput[]
     connect?: RatingWhereUniqueInput | RatingWhereUniqueInput[]
-    update?: RatingUpdateWithWhereUniqueWithoutTugasInput | RatingUpdateWithWhereUniqueWithoutTugasInput[]
-    updateMany?: RatingUpdateManyWithWhereWithoutTugasInput | RatingUpdateManyWithWhereWithoutTugasInput[]
+    update?: RatingUpdateWithWhereUniqueWithoutPengumpulanTugasInput | RatingUpdateWithWhereUniqueWithoutPengumpulanTugasInput[]
+    updateMany?: RatingUpdateManyWithWhereWithoutPengumpulanTugasInput | RatingUpdateManyWithWhereWithoutPengumpulanTugasInput[]
     deleteMany?: RatingScalarWhereInput | RatingScalarWhereInput[]
   }
 
-  export type RatingUncheckedUpdateManyWithoutTugasNestedInput = {
-    create?: XOR<RatingCreateWithoutTugasInput, RatingUncheckedCreateWithoutTugasInput> | RatingCreateWithoutTugasInput[] | RatingUncheckedCreateWithoutTugasInput[]
-    connectOrCreate?: RatingCreateOrConnectWithoutTugasInput | RatingCreateOrConnectWithoutTugasInput[]
-    upsert?: RatingUpsertWithWhereUniqueWithoutTugasInput | RatingUpsertWithWhereUniqueWithoutTugasInput[]
-    createMany?: RatingCreateManyTugasInputEnvelope
+  export type RatingUncheckedUpdateManyWithoutPengumpulanTugasNestedInput = {
+    create?: XOR<RatingCreateWithoutPengumpulanTugasInput, RatingUncheckedCreateWithoutPengumpulanTugasInput> | RatingCreateWithoutPengumpulanTugasInput[] | RatingUncheckedCreateWithoutPengumpulanTugasInput[]
+    connectOrCreate?: RatingCreateOrConnectWithoutPengumpulanTugasInput | RatingCreateOrConnectWithoutPengumpulanTugasInput[]
+    upsert?: RatingUpsertWithWhereUniqueWithoutPengumpulanTugasInput | RatingUpsertWithWhereUniqueWithoutPengumpulanTugasInput[]
+    createMany?: RatingCreateManyPengumpulanTugasInputEnvelope
     set?: RatingWhereUniqueInput | RatingWhereUniqueInput[]
     disconnect?: RatingWhereUniqueInput | RatingWhereUniqueInput[]
     delete?: RatingWhereUniqueInput | RatingWhereUniqueInput[]
     connect?: RatingWhereUniqueInput | RatingWhereUniqueInput[]
-    update?: RatingUpdateWithWhereUniqueWithoutTugasInput | RatingUpdateWithWhereUniqueWithoutTugasInput[]
-    updateMany?: RatingUpdateManyWithWhereWithoutTugasInput | RatingUpdateManyWithWhereWithoutTugasInput[]
+    update?: RatingUpdateWithWhereUniqueWithoutPengumpulanTugasInput | RatingUpdateWithWhereUniqueWithoutPengumpulanTugasInput[]
+    updateMany?: RatingUpdateManyWithWhereWithoutPengumpulanTugasInput | RatingUpdateManyWithWhereWithoutPengumpulanTugasInput[]
     deleteMany?: RatingScalarWhereInput | RatingScalarWhereInput[]
   }
 
@@ -9514,6 +10986,31 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
   export type NestedEnumStatusTugasFilter<$PrismaModel = never> = {
     equals?: $Enums.StatusTugas | EnumStatusTugasFieldRefInput<$PrismaModel>
     in?: $Enums.StatusTugas[]
@@ -9599,8 +11096,9 @@ export namespace Prisma {
     role?: $Enums.Role
     created_at?: Date | string
     updated_at?: Date | string
-    bawahan?: UserCreateNestedManyWithoutAtasanInput
     atasan?: UserCreateNestedOneWithoutBawahanInput
+    bawahan?: UserCreateNestedManyWithoutAtasanInput
+    history?: HistoryJabatanCreateNestedManyWithoutUserInput
     tugas?: TugasCreateNestedManyWithoutUserInput
     laporan?: LaporanCreateNestedManyWithoutUserInput
     pengumpulan_tugas?: PengumpulanTugasCreateNestedManyWithoutUserInput
@@ -9615,6 +11113,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     bawahan?: UserUncheckedCreateNestedManyWithoutAtasanInput
+    history?: HistoryJabatanUncheckedCreateNestedManyWithoutUserInput
     tugas?: TugasUncheckedCreateNestedManyWithoutUserInput
     laporan?: LaporanUncheckedCreateNestedManyWithoutUserInput
     pengumpulan_tugas?: PengumpulanTugasUncheckedCreateNestedManyWithoutUserInput
@@ -9627,6 +11126,34 @@ export namespace Prisma {
 
   export type UserCreateManyJabatanInputEnvelope = {
     data: UserCreateManyJabatanInput | UserCreateManyJabatanInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type HistoryJabatanCreateWithoutJabatanInput = {
+    id?: string
+    tanggal_mulai: Date | string
+    tanggal_akhir?: Date | string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutHistoryInput
+  }
+
+  export type HistoryJabatanUncheckedCreateWithoutJabatanInput = {
+    id?: string
+    user_nip: string
+    tanggal_mulai: Date | string
+    tanggal_akhir?: Date | string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type HistoryJabatanCreateOrConnectWithoutJabatanInput = {
+    where: HistoryJabatanWhereUniqueInput
+    create: XOR<HistoryJabatanCreateWithoutJabatanInput, HistoryJabatanUncheckedCreateWithoutJabatanInput>
+  }
+
+  export type HistoryJabatanCreateManyJabatanInputEnvelope = {
+    data: HistoryJabatanCreateManyJabatanInput | HistoryJabatanCreateManyJabatanInput[]
     skipDuplicates?: boolean
   }
 
@@ -9660,6 +11187,87 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"User"> | Date | string
   }
 
+  export type HistoryJabatanUpsertWithWhereUniqueWithoutJabatanInput = {
+    where: HistoryJabatanWhereUniqueInput
+    update: XOR<HistoryJabatanUpdateWithoutJabatanInput, HistoryJabatanUncheckedUpdateWithoutJabatanInput>
+    create: XOR<HistoryJabatanCreateWithoutJabatanInput, HistoryJabatanUncheckedCreateWithoutJabatanInput>
+  }
+
+  export type HistoryJabatanUpdateWithWhereUniqueWithoutJabatanInput = {
+    where: HistoryJabatanWhereUniqueInput
+    data: XOR<HistoryJabatanUpdateWithoutJabatanInput, HistoryJabatanUncheckedUpdateWithoutJabatanInput>
+  }
+
+  export type HistoryJabatanUpdateManyWithWhereWithoutJabatanInput = {
+    where: HistoryJabatanScalarWhereInput
+    data: XOR<HistoryJabatanUpdateManyMutationInput, HistoryJabatanUncheckedUpdateManyWithoutJabatanInput>
+  }
+
+  export type HistoryJabatanScalarWhereInput = {
+    AND?: HistoryJabatanScalarWhereInput | HistoryJabatanScalarWhereInput[]
+    OR?: HistoryJabatanScalarWhereInput[]
+    NOT?: HistoryJabatanScalarWhereInput | HistoryJabatanScalarWhereInput[]
+    id?: StringFilter<"HistoryJabatan"> | string
+    user_nip?: StringFilter<"HistoryJabatan"> | string
+    kd_jabatan?: StringFilter<"HistoryJabatan"> | string
+    tanggal_mulai?: DateTimeFilter<"HistoryJabatan"> | Date | string
+    tanggal_akhir?: DateTimeNullableFilter<"HistoryJabatan"> | Date | string | null
+    created_at?: DateTimeFilter<"HistoryJabatan"> | Date | string
+    updated_at?: DateTimeFilter<"HistoryJabatan"> | Date | string
+  }
+
+  export type UserCreateWithoutBawahanInput = {
+    nip: string
+    nama: string
+    password: string
+    role?: $Enums.Role
+    created_at?: Date | string
+    updated_at?: Date | string
+    atasan?: UserCreateNestedOneWithoutBawahanInput
+    jabatan: JabatanCreateNestedOneWithoutUserInput
+    history?: HistoryJabatanCreateNestedManyWithoutUserInput
+    tugas?: TugasCreateNestedManyWithoutUserInput
+    laporan?: LaporanCreateNestedManyWithoutUserInput
+    pengumpulan_tugas?: PengumpulanTugasCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutBawahanInput = {
+    nip: string
+    nama: string
+    password: string
+    role?: $Enums.Role
+    kd_jabatan: string
+    nip_atasan?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    history?: HistoryJabatanUncheckedCreateNestedManyWithoutUserInput
+    tugas?: TugasUncheckedCreateNestedManyWithoutUserInput
+    laporan?: LaporanUncheckedCreateNestedManyWithoutUserInput
+    pengumpulan_tugas?: PengumpulanTugasUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutBawahanInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutBawahanInput, UserUncheckedCreateWithoutBawahanInput>
+  }
+
+  export type JabatanCreateWithoutUserInput = {
+    kd_jabatan?: string
+    nama_jabatan: string
+    history?: HistoryJabatanCreateNestedManyWithoutJabatanInput
+  }
+
+  export type JabatanUncheckedCreateWithoutUserInput = {
+    kd_jabatan?: string
+    nama_jabatan: string
+    history?: HistoryJabatanUncheckedCreateNestedManyWithoutJabatanInput
+  }
+
+  export type JabatanCreateOrConnectWithoutUserInput = {
+    where: JabatanWhereUniqueInput
+    create: XOR<JabatanCreateWithoutUserInput, JabatanUncheckedCreateWithoutUserInput>
+  }
+
   export type UserCreateWithoutAtasanInput = {
     nip: string
     nama: string
@@ -9667,8 +11275,9 @@ export namespace Prisma {
     role?: $Enums.Role
     created_at?: Date | string
     updated_at?: Date | string
-    bawahan?: UserCreateNestedManyWithoutAtasanInput
     jabatan: JabatanCreateNestedOneWithoutUserInput
+    bawahan?: UserCreateNestedManyWithoutAtasanInput
+    history?: HistoryJabatanCreateNestedManyWithoutUserInput
     tugas?: TugasCreateNestedManyWithoutUserInput
     laporan?: LaporanCreateNestedManyWithoutUserInput
     pengumpulan_tugas?: PengumpulanTugasCreateNestedManyWithoutUserInput
@@ -9683,6 +11292,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     bawahan?: UserUncheckedCreateNestedManyWithoutAtasanInput
+    history?: HistoryJabatanUncheckedCreateNestedManyWithoutUserInput
     tugas?: TugasUncheckedCreateNestedManyWithoutUserInput
     laporan?: LaporanUncheckedCreateNestedManyWithoutUserInput
     pengumpulan_tugas?: PengumpulanTugasUncheckedCreateNestedManyWithoutUserInput
@@ -9698,52 +11308,32 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type UserCreateWithoutBawahanInput = {
-    nip: string
-    nama: string
-    password: string
-    role?: $Enums.Role
+  export type HistoryJabatanCreateWithoutUserInput = {
+    id?: string
+    tanggal_mulai: Date | string
+    tanggal_akhir?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
-    atasan?: UserCreateNestedOneWithoutBawahanInput
-    jabatan: JabatanCreateNestedOneWithoutUserInput
-    tugas?: TugasCreateNestedManyWithoutUserInput
-    laporan?: LaporanCreateNestedManyWithoutUserInput
-    pengumpulan_tugas?: PengumpulanTugasCreateNestedManyWithoutUserInput
+    jabatan: JabatanCreateNestedOneWithoutHistoryInput
   }
 
-  export type UserUncheckedCreateWithoutBawahanInput = {
-    nip: string
-    nama: string
-    password: string
-    role?: $Enums.Role
+  export type HistoryJabatanUncheckedCreateWithoutUserInput = {
+    id?: string
     kd_jabatan: string
-    nip_atasan?: string | null
+    tanggal_mulai: Date | string
+    tanggal_akhir?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
-    tugas?: TugasUncheckedCreateNestedManyWithoutUserInput
-    laporan?: LaporanUncheckedCreateNestedManyWithoutUserInput
-    pengumpulan_tugas?: PengumpulanTugasUncheckedCreateNestedManyWithoutUserInput
   }
 
-  export type UserCreateOrConnectWithoutBawahanInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutBawahanInput, UserUncheckedCreateWithoutBawahanInput>
+  export type HistoryJabatanCreateOrConnectWithoutUserInput = {
+    where: HistoryJabatanWhereUniqueInput
+    create: XOR<HistoryJabatanCreateWithoutUserInput, HistoryJabatanUncheckedCreateWithoutUserInput>
   }
 
-  export type JabatanCreateWithoutUserInput = {
-    kd_jabatan?: string
-    nama_jabatan: string
-  }
-
-  export type JabatanUncheckedCreateWithoutUserInput = {
-    kd_jabatan?: string
-    nama_jabatan: string
-  }
-
-  export type JabatanCreateOrConnectWithoutUserInput = {
-    where: JabatanWhereUniqueInput
-    create: XOR<JabatanCreateWithoutUserInput, JabatanUncheckedCreateWithoutUserInput>
+  export type HistoryJabatanCreateManyUserInputEnvelope = {
+    data: HistoryJabatanCreateManyUserInput | HistoryJabatanCreateManyUserInput[]
+    skipDuplicates?: boolean
   }
 
   export type TugasCreateWithoutUserInput = {
@@ -9815,7 +11405,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     tugas: TugasCreateNestedOneWithoutPengumpulan_tugasInput
-    rating?: RatingCreateNestedManyWithoutTugasInput
+    rating?: RatingCreateNestedManyWithoutPengumpulanTugasInput
   }
 
   export type PengumpulanTugasUncheckedCreateWithoutUserInput = {
@@ -9827,7 +11417,7 @@ export namespace Prisma {
     status?: $Enums.StatusPengumpulanTugas
     created_at?: Date | string
     updated_at?: Date | string
-    rating?: RatingUncheckedCreateNestedManyWithoutTugasInput
+    rating?: RatingUncheckedCreateNestedManyWithoutPengumpulanTugasInput
   }
 
   export type PengumpulanTugasCreateOrConnectWithoutUserInput = {
@@ -9838,22 +11428,6 @@ export namespace Prisma {
   export type PengumpulanTugasCreateManyUserInputEnvelope = {
     data: PengumpulanTugasCreateManyUserInput | PengumpulanTugasCreateManyUserInput[]
     skipDuplicates?: boolean
-  }
-
-  export type UserUpsertWithWhereUniqueWithoutAtasanInput = {
-    where: UserWhereUniqueInput
-    update: XOR<UserUpdateWithoutAtasanInput, UserUncheckedUpdateWithoutAtasanInput>
-    create: XOR<UserCreateWithoutAtasanInput, UserUncheckedCreateWithoutAtasanInput>
-  }
-
-  export type UserUpdateWithWhereUniqueWithoutAtasanInput = {
-    where: UserWhereUniqueInput
-    data: XOR<UserUpdateWithoutAtasanInput, UserUncheckedUpdateWithoutAtasanInput>
-  }
-
-  export type UserUpdateManyWithWhereWithoutAtasanInput = {
-    where: UserScalarWhereInput
-    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutAtasanInput>
   }
 
   export type UserUpsertWithoutBawahanInput = {
@@ -9876,6 +11450,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     atasan?: UserUpdateOneWithoutBawahanNestedInput
     jabatan?: JabatanUpdateOneRequiredWithoutUserNestedInput
+    history?: HistoryJabatanUpdateManyWithoutUserNestedInput
     tugas?: TugasUpdateManyWithoutUserNestedInput
     laporan?: LaporanUpdateManyWithoutUserNestedInput
     pengumpulan_tugas?: PengumpulanTugasUpdateManyWithoutUserNestedInput
@@ -9890,6 +11465,7 @@ export namespace Prisma {
     nip_atasan?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    history?: HistoryJabatanUncheckedUpdateManyWithoutUserNestedInput
     tugas?: TugasUncheckedUpdateManyWithoutUserNestedInput
     laporan?: LaporanUncheckedUpdateManyWithoutUserNestedInput
     pengumpulan_tugas?: PengumpulanTugasUncheckedUpdateManyWithoutUserNestedInput
@@ -9909,11 +11485,45 @@ export namespace Prisma {
   export type JabatanUpdateWithoutUserInput = {
     kd_jabatan?: StringFieldUpdateOperationsInput | string
     nama_jabatan?: StringFieldUpdateOperationsInput | string
+    history?: HistoryJabatanUpdateManyWithoutJabatanNestedInput
   }
 
   export type JabatanUncheckedUpdateWithoutUserInput = {
     kd_jabatan?: StringFieldUpdateOperationsInput | string
     nama_jabatan?: StringFieldUpdateOperationsInput | string
+    history?: HistoryJabatanUncheckedUpdateManyWithoutJabatanNestedInput
+  }
+
+  export type UserUpsertWithWhereUniqueWithoutAtasanInput = {
+    where: UserWhereUniqueInput
+    update: XOR<UserUpdateWithoutAtasanInput, UserUncheckedUpdateWithoutAtasanInput>
+    create: XOR<UserCreateWithoutAtasanInput, UserUncheckedCreateWithoutAtasanInput>
+  }
+
+  export type UserUpdateWithWhereUniqueWithoutAtasanInput = {
+    where: UserWhereUniqueInput
+    data: XOR<UserUpdateWithoutAtasanInput, UserUncheckedUpdateWithoutAtasanInput>
+  }
+
+  export type UserUpdateManyWithWhereWithoutAtasanInput = {
+    where: UserScalarWhereInput
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutAtasanInput>
+  }
+
+  export type HistoryJabatanUpsertWithWhereUniqueWithoutUserInput = {
+    where: HistoryJabatanWhereUniqueInput
+    update: XOR<HistoryJabatanUpdateWithoutUserInput, HistoryJabatanUncheckedUpdateWithoutUserInput>
+    create: XOR<HistoryJabatanCreateWithoutUserInput, HistoryJabatanUncheckedCreateWithoutUserInput>
+  }
+
+  export type HistoryJabatanUpdateWithWhereUniqueWithoutUserInput = {
+    where: HistoryJabatanWhereUniqueInput
+    data: XOR<HistoryJabatanUpdateWithoutUserInput, HistoryJabatanUncheckedUpdateWithoutUserInput>
+  }
+
+  export type HistoryJabatanUpdateManyWithWhereWithoutUserInput = {
+    where: HistoryJabatanScalarWhereInput
+    data: XOR<HistoryJabatanUpdateManyMutationInput, HistoryJabatanUncheckedUpdateManyWithoutUserInput>
   }
 
   export type TugasUpsertWithWhereUniqueWithoutUserInput = {
@@ -10006,6 +11616,122 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"PengumpulanTugas"> | Date | string
   }
 
+  export type UserCreateWithoutHistoryInput = {
+    nip: string
+    nama: string
+    password: string
+    role?: $Enums.Role
+    created_at?: Date | string
+    updated_at?: Date | string
+    atasan?: UserCreateNestedOneWithoutBawahanInput
+    jabatan: JabatanCreateNestedOneWithoutUserInput
+    bawahan?: UserCreateNestedManyWithoutAtasanInput
+    tugas?: TugasCreateNestedManyWithoutUserInput
+    laporan?: LaporanCreateNestedManyWithoutUserInput
+    pengumpulan_tugas?: PengumpulanTugasCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutHistoryInput = {
+    nip: string
+    nama: string
+    password: string
+    role?: $Enums.Role
+    kd_jabatan: string
+    nip_atasan?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    bawahan?: UserUncheckedCreateNestedManyWithoutAtasanInput
+    tugas?: TugasUncheckedCreateNestedManyWithoutUserInput
+    laporan?: LaporanUncheckedCreateNestedManyWithoutUserInput
+    pengumpulan_tugas?: PengumpulanTugasUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutHistoryInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutHistoryInput, UserUncheckedCreateWithoutHistoryInput>
+  }
+
+  export type JabatanCreateWithoutHistoryInput = {
+    kd_jabatan?: string
+    nama_jabatan: string
+    user?: UserCreateNestedManyWithoutJabatanInput
+  }
+
+  export type JabatanUncheckedCreateWithoutHistoryInput = {
+    kd_jabatan?: string
+    nama_jabatan: string
+    user?: UserUncheckedCreateNestedManyWithoutJabatanInput
+  }
+
+  export type JabatanCreateOrConnectWithoutHistoryInput = {
+    where: JabatanWhereUniqueInput
+    create: XOR<JabatanCreateWithoutHistoryInput, JabatanUncheckedCreateWithoutHistoryInput>
+  }
+
+  export type UserUpsertWithoutHistoryInput = {
+    update: XOR<UserUpdateWithoutHistoryInput, UserUncheckedUpdateWithoutHistoryInput>
+    create: XOR<UserCreateWithoutHistoryInput, UserUncheckedCreateWithoutHistoryInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutHistoryInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutHistoryInput, UserUncheckedUpdateWithoutHistoryInput>
+  }
+
+  export type UserUpdateWithoutHistoryInput = {
+    nip?: StringFieldUpdateOperationsInput | string
+    nama?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    atasan?: UserUpdateOneWithoutBawahanNestedInput
+    jabatan?: JabatanUpdateOneRequiredWithoutUserNestedInput
+    bawahan?: UserUpdateManyWithoutAtasanNestedInput
+    tugas?: TugasUpdateManyWithoutUserNestedInput
+    laporan?: LaporanUpdateManyWithoutUserNestedInput
+    pengumpulan_tugas?: PengumpulanTugasUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutHistoryInput = {
+    nip?: StringFieldUpdateOperationsInput | string
+    nama?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    kd_jabatan?: StringFieldUpdateOperationsInput | string
+    nip_atasan?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    bawahan?: UserUncheckedUpdateManyWithoutAtasanNestedInput
+    tugas?: TugasUncheckedUpdateManyWithoutUserNestedInput
+    laporan?: LaporanUncheckedUpdateManyWithoutUserNestedInput
+    pengumpulan_tugas?: PengumpulanTugasUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type JabatanUpsertWithoutHistoryInput = {
+    update: XOR<JabatanUpdateWithoutHistoryInput, JabatanUncheckedUpdateWithoutHistoryInput>
+    create: XOR<JabatanCreateWithoutHistoryInput, JabatanUncheckedCreateWithoutHistoryInput>
+    where?: JabatanWhereInput
+  }
+
+  export type JabatanUpdateToOneWithWhereWithoutHistoryInput = {
+    where?: JabatanWhereInput
+    data: XOR<JabatanUpdateWithoutHistoryInput, JabatanUncheckedUpdateWithoutHistoryInput>
+  }
+
+  export type JabatanUpdateWithoutHistoryInput = {
+    kd_jabatan?: StringFieldUpdateOperationsInput | string
+    nama_jabatan?: StringFieldUpdateOperationsInput | string
+    user?: UserUpdateManyWithoutJabatanNestedInput
+  }
+
+  export type JabatanUncheckedUpdateWithoutHistoryInput = {
+    kd_jabatan?: StringFieldUpdateOperationsInput | string
+    nama_jabatan?: StringFieldUpdateOperationsInput | string
+    user?: UserUncheckedUpdateManyWithoutJabatanNestedInput
+  }
+
   export type UserCreateWithoutTugasInput = {
     nip: string
     nama: string
@@ -10013,9 +11739,10 @@ export namespace Prisma {
     role?: $Enums.Role
     created_at?: Date | string
     updated_at?: Date | string
-    bawahan?: UserCreateNestedManyWithoutAtasanInput
     atasan?: UserCreateNestedOneWithoutBawahanInput
     jabatan: JabatanCreateNestedOneWithoutUserInput
+    bawahan?: UserCreateNestedManyWithoutAtasanInput
+    history?: HistoryJabatanCreateNestedManyWithoutUserInput
     laporan?: LaporanCreateNestedManyWithoutUserInput
     pengumpulan_tugas?: PengumpulanTugasCreateNestedManyWithoutUserInput
   }
@@ -10030,6 +11757,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     bawahan?: UserUncheckedCreateNestedManyWithoutAtasanInput
+    history?: HistoryJabatanUncheckedCreateNestedManyWithoutUserInput
     laporan?: LaporanUncheckedCreateNestedManyWithoutUserInput
     pengumpulan_tugas?: PengumpulanTugasUncheckedCreateNestedManyWithoutUserInput
   }
@@ -10048,7 +11776,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     user: UserCreateNestedOneWithoutPengumpulan_tugasInput
-    rating?: RatingCreateNestedManyWithoutTugasInput
+    rating?: RatingCreateNestedManyWithoutPengumpulanTugasInput
   }
 
   export type PengumpulanTugasUncheckedCreateWithoutTugasInput = {
@@ -10060,7 +11788,7 @@ export namespace Prisma {
     status?: $Enums.StatusPengumpulanTugas
     created_at?: Date | string
     updated_at?: Date | string
-    rating?: RatingUncheckedCreateNestedManyWithoutTugasInput
+    rating?: RatingUncheckedCreateNestedManyWithoutPengumpulanTugasInput
   }
 
   export type PengumpulanTugasCreateOrConnectWithoutTugasInput = {
@@ -10091,9 +11819,10 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    bawahan?: UserUpdateManyWithoutAtasanNestedInput
     atasan?: UserUpdateOneWithoutBawahanNestedInput
     jabatan?: JabatanUpdateOneRequiredWithoutUserNestedInput
+    bawahan?: UserUpdateManyWithoutAtasanNestedInput
+    history?: HistoryJabatanUpdateManyWithoutUserNestedInput
     laporan?: LaporanUpdateManyWithoutUserNestedInput
     pengumpulan_tugas?: PengumpulanTugasUpdateManyWithoutUserNestedInput
   }
@@ -10108,6 +11837,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     bawahan?: UserUncheckedUpdateManyWithoutAtasanNestedInput
+    history?: HistoryJabatanUncheckedUpdateManyWithoutUserNestedInput
     laporan?: LaporanUncheckedUpdateManyWithoutUserNestedInput
     pengumpulan_tugas?: PengumpulanTugasUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -10135,9 +11865,10 @@ export namespace Prisma {
     role?: $Enums.Role
     created_at?: Date | string
     updated_at?: Date | string
-    bawahan?: UserCreateNestedManyWithoutAtasanInput
     atasan?: UserCreateNestedOneWithoutBawahanInput
     jabatan: JabatanCreateNestedOneWithoutUserInput
+    bawahan?: UserCreateNestedManyWithoutAtasanInput
+    history?: HistoryJabatanCreateNestedManyWithoutUserInput
     tugas?: TugasCreateNestedManyWithoutUserInput
     pengumpulan_tugas?: PengumpulanTugasCreateNestedManyWithoutUserInput
   }
@@ -10152,6 +11883,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     bawahan?: UserUncheckedCreateNestedManyWithoutAtasanInput
+    history?: HistoryJabatanUncheckedCreateNestedManyWithoutUserInput
     tugas?: TugasUncheckedCreateNestedManyWithoutUserInput
     pengumpulan_tugas?: PengumpulanTugasUncheckedCreateNestedManyWithoutUserInput
   }
@@ -10179,9 +11911,10 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    bawahan?: UserUpdateManyWithoutAtasanNestedInput
     atasan?: UserUpdateOneWithoutBawahanNestedInput
     jabatan?: JabatanUpdateOneRequiredWithoutUserNestedInput
+    bawahan?: UserUpdateManyWithoutAtasanNestedInput
+    history?: HistoryJabatanUpdateManyWithoutUserNestedInput
     tugas?: TugasUpdateManyWithoutUserNestedInput
     pengumpulan_tugas?: PengumpulanTugasUpdateManyWithoutUserNestedInput
   }
@@ -10196,6 +11929,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     bawahan?: UserUncheckedUpdateManyWithoutAtasanNestedInput
+    history?: HistoryJabatanUncheckedUpdateManyWithoutUserNestedInput
     tugas?: TugasUncheckedUpdateManyWithoutUserNestedInput
     pengumpulan_tugas?: PengumpulanTugasUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -10236,9 +11970,10 @@ export namespace Prisma {
     role?: $Enums.Role
     created_at?: Date | string
     updated_at?: Date | string
-    bawahan?: UserCreateNestedManyWithoutAtasanInput
     atasan?: UserCreateNestedOneWithoutBawahanInput
     jabatan: JabatanCreateNestedOneWithoutUserInput
+    bawahan?: UserCreateNestedManyWithoutAtasanInput
+    history?: HistoryJabatanCreateNestedManyWithoutUserInput
     tugas?: TugasCreateNestedManyWithoutUserInput
     laporan?: LaporanCreateNestedManyWithoutUserInput
   }
@@ -10253,6 +11988,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     bawahan?: UserUncheckedCreateNestedManyWithoutAtasanInput
+    history?: HistoryJabatanUncheckedCreateNestedManyWithoutUserInput
     tugas?: TugasUncheckedCreateNestedManyWithoutUserInput
     laporan?: LaporanUncheckedCreateNestedManyWithoutUserInput
   }
@@ -10262,27 +11998,27 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutPengumpulan_tugasInput, UserUncheckedCreateWithoutPengumpulan_tugasInput>
   }
 
-  export type RatingCreateWithoutTugasInput = {
+  export type RatingCreateWithoutPengumpulanTugasInput = {
     kd_rating?: string
     nilai: number
     komentar?: string | null
     created_at?: Date | string
   }
 
-  export type RatingUncheckedCreateWithoutTugasInput = {
+  export type RatingUncheckedCreateWithoutPengumpulanTugasInput = {
     kd_rating?: string
     nilai: number
     komentar?: string | null
     created_at?: Date | string
   }
 
-  export type RatingCreateOrConnectWithoutTugasInput = {
+  export type RatingCreateOrConnectWithoutPengumpulanTugasInput = {
     where: RatingWhereUniqueInput
-    create: XOR<RatingCreateWithoutTugasInput, RatingUncheckedCreateWithoutTugasInput>
+    create: XOR<RatingCreateWithoutPengumpulanTugasInput, RatingUncheckedCreateWithoutPengumpulanTugasInput>
   }
 
-  export type RatingCreateManyTugasInputEnvelope = {
-    data: RatingCreateManyTugasInput | RatingCreateManyTugasInput[]
+  export type RatingCreateManyPengumpulanTugasInputEnvelope = {
+    data: RatingCreateManyPengumpulanTugasInput | RatingCreateManyPengumpulanTugasInput[]
     skipDuplicates?: boolean
   }
 
@@ -10339,9 +12075,10 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    bawahan?: UserUpdateManyWithoutAtasanNestedInput
     atasan?: UserUpdateOneWithoutBawahanNestedInput
     jabatan?: JabatanUpdateOneRequiredWithoutUserNestedInput
+    bawahan?: UserUpdateManyWithoutAtasanNestedInput
+    history?: HistoryJabatanUpdateManyWithoutUserNestedInput
     tugas?: TugasUpdateManyWithoutUserNestedInput
     laporan?: LaporanUpdateManyWithoutUserNestedInput
   }
@@ -10356,24 +12093,25 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     bawahan?: UserUncheckedUpdateManyWithoutAtasanNestedInput
+    history?: HistoryJabatanUncheckedUpdateManyWithoutUserNestedInput
     tugas?: TugasUncheckedUpdateManyWithoutUserNestedInput
     laporan?: LaporanUncheckedUpdateManyWithoutUserNestedInput
   }
 
-  export type RatingUpsertWithWhereUniqueWithoutTugasInput = {
+  export type RatingUpsertWithWhereUniqueWithoutPengumpulanTugasInput = {
     where: RatingWhereUniqueInput
-    update: XOR<RatingUpdateWithoutTugasInput, RatingUncheckedUpdateWithoutTugasInput>
-    create: XOR<RatingCreateWithoutTugasInput, RatingUncheckedCreateWithoutTugasInput>
+    update: XOR<RatingUpdateWithoutPengumpulanTugasInput, RatingUncheckedUpdateWithoutPengumpulanTugasInput>
+    create: XOR<RatingCreateWithoutPengumpulanTugasInput, RatingUncheckedCreateWithoutPengumpulanTugasInput>
   }
 
-  export type RatingUpdateWithWhereUniqueWithoutTugasInput = {
+  export type RatingUpdateWithWhereUniqueWithoutPengumpulanTugasInput = {
     where: RatingWhereUniqueInput
-    data: XOR<RatingUpdateWithoutTugasInput, RatingUncheckedUpdateWithoutTugasInput>
+    data: XOR<RatingUpdateWithoutPengumpulanTugasInput, RatingUncheckedUpdateWithoutPengumpulanTugasInput>
   }
 
-  export type RatingUpdateManyWithWhereWithoutTugasInput = {
+  export type RatingUpdateManyWithWhereWithoutPengumpulanTugasInput = {
     where: RatingScalarWhereInput
-    data: XOR<RatingUpdateManyMutationInput, RatingUncheckedUpdateManyWithoutTugasInput>
+    data: XOR<RatingUpdateManyMutationInput, RatingUncheckedUpdateManyWithoutPengumpulanTugasInput>
   }
 
   export type RatingScalarWhereInput = {
@@ -10461,6 +12199,15 @@ export namespace Prisma {
     updated_at?: Date | string
   }
 
+  export type HistoryJabatanCreateManyJabatanInput = {
+    id?: string
+    user_nip: string
+    tanggal_mulai: Date | string
+    tanggal_akhir?: Date | string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
   export type UserUpdateWithoutJabatanInput = {
     nip?: StringFieldUpdateOperationsInput | string
     nama?: StringFieldUpdateOperationsInput | string
@@ -10468,8 +12215,9 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    bawahan?: UserUpdateManyWithoutAtasanNestedInput
     atasan?: UserUpdateOneWithoutBawahanNestedInput
+    bawahan?: UserUpdateManyWithoutAtasanNestedInput
+    history?: HistoryJabatanUpdateManyWithoutUserNestedInput
     tugas?: TugasUpdateManyWithoutUserNestedInput
     laporan?: LaporanUpdateManyWithoutUserNestedInput
     pengumpulan_tugas?: PengumpulanTugasUpdateManyWithoutUserNestedInput
@@ -10484,6 +12232,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     bawahan?: UserUncheckedUpdateManyWithoutAtasanNestedInput
+    history?: HistoryJabatanUncheckedUpdateManyWithoutUserNestedInput
     tugas?: TugasUncheckedUpdateManyWithoutUserNestedInput
     laporan?: LaporanUncheckedUpdateManyWithoutUserNestedInput
     pengumpulan_tugas?: PengumpulanTugasUncheckedUpdateManyWithoutUserNestedInput
@@ -10499,12 +12248,48 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type HistoryJabatanUpdateWithoutJabatanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tanggal_mulai?: DateTimeFieldUpdateOperationsInput | Date | string
+    tanggal_akhir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutHistoryNestedInput
+  }
+
+  export type HistoryJabatanUncheckedUpdateWithoutJabatanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_nip?: StringFieldUpdateOperationsInput | string
+    tanggal_mulai?: DateTimeFieldUpdateOperationsInput | Date | string
+    tanggal_akhir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HistoryJabatanUncheckedUpdateManyWithoutJabatanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_nip?: StringFieldUpdateOperationsInput | string
+    tanggal_mulai?: DateTimeFieldUpdateOperationsInput | Date | string
+    tanggal_akhir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UserCreateManyAtasanInput = {
     nip: string
     nama: string
     password: string
     role?: $Enums.Role
     kd_jabatan: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type HistoryJabatanCreateManyUserInput = {
+    id?: string
+    kd_jabatan: string
+    tanggal_mulai: Date | string
+    tanggal_akhir?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -10546,8 +12331,9 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    bawahan?: UserUpdateManyWithoutAtasanNestedInput
     jabatan?: JabatanUpdateOneRequiredWithoutUserNestedInput
+    bawahan?: UserUpdateManyWithoutAtasanNestedInput
+    history?: HistoryJabatanUpdateManyWithoutUserNestedInput
     tugas?: TugasUpdateManyWithoutUserNestedInput
     laporan?: LaporanUpdateManyWithoutUserNestedInput
     pengumpulan_tugas?: PengumpulanTugasUpdateManyWithoutUserNestedInput
@@ -10562,6 +12348,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     bawahan?: UserUncheckedUpdateManyWithoutAtasanNestedInput
+    history?: HistoryJabatanUncheckedUpdateManyWithoutUserNestedInput
     tugas?: TugasUncheckedUpdateManyWithoutUserNestedInput
     laporan?: LaporanUncheckedUpdateManyWithoutUserNestedInput
     pengumpulan_tugas?: PengumpulanTugasUncheckedUpdateManyWithoutUserNestedInput
@@ -10573,6 +12360,33 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     kd_jabatan?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HistoryJabatanUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tanggal_mulai?: DateTimeFieldUpdateOperationsInput | Date | string
+    tanggal_akhir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    jabatan?: JabatanUpdateOneRequiredWithoutHistoryNestedInput
+  }
+
+  export type HistoryJabatanUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    kd_jabatan?: StringFieldUpdateOperationsInput | string
+    tanggal_mulai?: DateTimeFieldUpdateOperationsInput | Date | string
+    tanggal_akhir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HistoryJabatanUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    kd_jabatan?: StringFieldUpdateOperationsInput | string
+    tanggal_mulai?: DateTimeFieldUpdateOperationsInput | Date | string
+    tanggal_akhir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -10645,7 +12459,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     tugas?: TugasUpdateOneRequiredWithoutPengumpulan_tugasNestedInput
-    rating?: RatingUpdateManyWithoutTugasNestedInput
+    rating?: RatingUpdateManyWithoutPengumpulanTugasNestedInput
   }
 
   export type PengumpulanTugasUncheckedUpdateWithoutUserInput = {
@@ -10657,7 +12471,7 @@ export namespace Prisma {
     status?: EnumStatusPengumpulanTugasFieldUpdateOperationsInput | $Enums.StatusPengumpulanTugas
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    rating?: RatingUncheckedUpdateManyWithoutTugasNestedInput
+    rating?: RatingUncheckedUpdateManyWithoutPengumpulanTugasNestedInput
   }
 
   export type PengumpulanTugasUncheckedUpdateManyWithoutUserInput = {
@@ -10691,7 +12505,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutPengumpulan_tugasNestedInput
-    rating?: RatingUpdateManyWithoutTugasNestedInput
+    rating?: RatingUpdateManyWithoutPengumpulanTugasNestedInput
   }
 
   export type PengumpulanTugasUncheckedUpdateWithoutTugasInput = {
@@ -10703,7 +12517,7 @@ export namespace Prisma {
     status?: EnumStatusPengumpulanTugasFieldUpdateOperationsInput | $Enums.StatusPengumpulanTugas
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    rating?: RatingUncheckedUpdateManyWithoutTugasNestedInput
+    rating?: RatingUncheckedUpdateManyWithoutPengumpulanTugasNestedInput
   }
 
   export type PengumpulanTugasUncheckedUpdateManyWithoutTugasInput = {
@@ -10717,28 +12531,28 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type RatingCreateManyTugasInput = {
+  export type RatingCreateManyPengumpulanTugasInput = {
     kd_rating?: string
     nilai: number
     komentar?: string | null
     created_at?: Date | string
   }
 
-  export type RatingUpdateWithoutTugasInput = {
+  export type RatingUpdateWithoutPengumpulanTugasInput = {
     kd_rating?: StringFieldUpdateOperationsInput | string
     nilai?: FloatFieldUpdateOperationsInput | number
     komentar?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type RatingUncheckedUpdateWithoutTugasInput = {
+  export type RatingUncheckedUpdateWithoutPengumpulanTugasInput = {
     kd_rating?: StringFieldUpdateOperationsInput | string
     nilai?: FloatFieldUpdateOperationsInput | number
     komentar?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type RatingUncheckedUpdateManyWithoutTugasInput = {
+  export type RatingUncheckedUpdateManyWithoutPengumpulanTugasInput = {
     kd_rating?: StringFieldUpdateOperationsInput | string
     nilai?: FloatFieldUpdateOperationsInput | number
     komentar?: NullableStringFieldUpdateOperationsInput | string | null
