@@ -14,7 +14,6 @@ const {
   updateJabatanSchema,
   deleteJabatanSchema,
 } = require("../validation/jabatan.validation");
-const { updateJabatan } = require("../services/jabatan.service");
 
 const router = Router();
 

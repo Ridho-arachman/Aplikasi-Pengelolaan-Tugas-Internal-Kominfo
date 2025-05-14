@@ -1,4 +1,10 @@
-const CreateUser = () => {};
+const CreateUser = () => {
+    try {
+        
+    } catch (error) {
+        
+    }
+};
 
 const GetUser = () => {};
 

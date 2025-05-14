@@ -2,15 +2,7 @@ const { z } = require("zod");
 
 // Definisi skema dasar yang dapat digunakan kembali
 const baseFields = {
-  kd_jabatan: z
-    .string({ message: "Kode Jabatan harus berupa string" })
-    .cuid("Kode Jabatan tidak valid"),
-
-  nama_jabatan: z
-    .string({ message: "Nama Jabatan harus berupa string" })
-    .trim()
-    .min(1, "Nama Jabatan harus diisi")
-    .max(255, "Nama Jabatan terlalu panjang"),
+  
 };
 
 // Skema untuk membuat jabatan baru
