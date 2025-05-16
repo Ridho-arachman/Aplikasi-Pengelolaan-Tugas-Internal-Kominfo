@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "@prisma/client": "^6.7.0",
+    "bcrypt": "^6.0.0",
     "express": "^5.1.0",
     "module-alias": "^2.2.3",
     "passport": "^0.7.0",
