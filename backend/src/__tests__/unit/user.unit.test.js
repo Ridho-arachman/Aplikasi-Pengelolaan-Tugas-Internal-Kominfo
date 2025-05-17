@@ -71,7 +71,13 @@ describe("User Service", () => {
     prisma.user.findMany.mockResolvedValue(users);
 
     // Pass empty object to avoid undefined variable error
-    const result = await userService.getAllUser(nip, role, nama, kd_jabatan);
+    const result = await userService.getAllUser(
+      nip,
+      role,
+      nama,
+      kd_jabatan,
+      nip_atasan
+    );
 
     expect(prisma.user.findMany).toHaveBeenCalled();
     expect(result).toEqual(users);
