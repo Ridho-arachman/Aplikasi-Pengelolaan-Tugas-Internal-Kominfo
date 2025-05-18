@@ -29,7 +29,7 @@
   "scripts": {
     "dev": "nodemon index.js",
     "test": "jest",
-    "test:integration": "jest ./src/__tests__/integration",
+    "test:integration": "jest ./src/__tests__/integration --runInBand",
     "test:unit": "jest src/__tests__/unit",
     "migrate": "npx prisma migrate dev",
     "studio": "npx prisma studio",
