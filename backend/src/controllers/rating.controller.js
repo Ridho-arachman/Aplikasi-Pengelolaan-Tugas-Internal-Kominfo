@@ -18,9 +18,12 @@ const CreateRating = async (req, res) => {
   try {
     const { kd_pengumpulan_tugas, nilai, komentar } = req.body;
 
+    // Pastikan nilai adalah angka
+    const nilaiNumber = parseFloat(nilai);
+
     const rating = await createRating({
       kd_pengumpulan_tugas,
-      nilai,
+      nilai: nilaiNumber,
       komentar,
     });
 
@@ -30,6 +33,8 @@ const CreateRating = async (req, res) => {
       data: rating,
     });
   } catch (error) {
+    console.error("Error pada CreateRating:", error);
+
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       switch (error.code) {
         case "P2003":
@@ -57,7 +62,7 @@ const CreateRating = async (req, res) => {
  */
 const GetRating = async (req, res) => {
   const { kd_rating } = req.params;
-  
+
   try {
     const rating = await getRatingById(kd_rating);
 
@@ -67,16 +72,18 @@ const GetRating = async (req, res) => {
       data: rating,
     });
   } catch (error) {
+    console.error("Error pada GetRating:", error);
+
     if (error.message === "Rating tidak ditemukan") {
       return res.status(404).json({
         status: "error",
         message: "Rating tidak ditemukan",
       });
     }
-    
-    return res.status(500).json({ 
-      status: "error", 
-      message: error.message 
+
+    return res.status(500).json({
+      status: "error",
+      message: error.message,
     });
   }
 };
@@ -112,6 +119,8 @@ const GetAllRating = async (req, res) => {
       data: rating,
     });
   } catch (error) {
+    console.error("Error pada GetAllRating:", error);
+
     return res.status(500).json({
       status: "error",
       message: error.message,
@@ -222,19 +231,21 @@ const GetRatingByPengumpulanTugas = async (req, res) => {
 
     const rating = await getRatingByPengumpulanTugasId(kd_pengumpulan_tugas);
 
-    if (!rating) {
-      return res.status(404).json({
-        status: "error",
-        message: "Rating tidak ditemukan untuk pengumpulan tugas ini",
-      });
-    }
-
     return res.status(200).json({
       status: "success",
       message: "Rating berhasil ditemukan",
       data: rating,
     });
   } catch (error) {
+    console.error("Error pada GetRatingByPengumpulanTugas:", error);
+
+    if (error.message === "Rating tidak ditemukan") {
+      return res.status(404).json({
+        status: "error",
+        message: "Rating tidak ditemukan untuk pengumpulan tugas ini",
+      });
+    }
+
     return res.status(500).json({
       status: "error",
       message: error.message,

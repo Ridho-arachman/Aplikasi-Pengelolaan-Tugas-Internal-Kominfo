@@ -1,4 +1,5 @@
 const { Router } = require("express");
+const { z } = require("zod");
 const validate = require("../middlewares/validate.middleware");
 const {
   createRatingSchema,
@@ -13,12 +14,25 @@ const {
   GetAllRating,
   UpdateRating,
   DeleteRating,
+  GetRatingByPengumpulanTugas,
 } = require("../controllers/rating.controller");
 
 const router = Router();
 
 // Membuat rating baru
 router.post("/", validate({ body: createRatingSchema }), CreateRating);
+
+// Mendapatkan rating berdasarkan kode pengumpulan tugas
+// Penting: Rute spesifik harus didefinisikan sebelum rute dinamis
+router.get(
+  "/pengumpulan-tugas/:kd_pengumpulan_tugas",
+  validate({
+    params: z.object({
+      kd_pengumpulan_tugas: z.string().min(1, "Kode Pengumpulan Tugas harus diisi"),
+    }),
+  }),
+  GetRatingByPengumpulanTugas
+);
 
 // Mendapatkan rating berdasarkan kode
 router.get("/:kd_rating", validate({ params: getRatingSchema }), GetRating);

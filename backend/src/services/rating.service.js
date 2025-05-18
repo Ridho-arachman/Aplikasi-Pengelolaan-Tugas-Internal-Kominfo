@@ -10,7 +10,7 @@ const createRating = async (data) => {
     const rating = await prisma.rating.create({
       data,
       include: {
-        pengumpulan_tugas: {
+        pengumpulanTugas: {
           include: {
             tugas: true,
             user: true,
@@ -37,7 +37,7 @@ const getRatingById = async (kd_rating) => {
         kd_rating,
       },
       include: {
-        pengumpulan_tugas: {
+        pengumpulanTugas: {
           include: {
             tugas: true,
             user: true,
@@ -81,7 +81,7 @@ const getAllRating = async (filter = {}) => {
     const rating = await prisma.rating.findMany({
       where,
       include: {
-        pengumpulan_tugas: {
+        pengumpulanTugas: {
           include: {
             tugas: true,
             user: true,
@@ -124,7 +124,7 @@ const updateRating = async (kd_rating, data) => {
       },
       data,
       include: {
-        pengumpulan_tugas: {
+        pengumpulanTugas: {
           include: {
             tugas: true,
             user: true,
@@ -162,7 +162,7 @@ const deleteRating = async (kd_rating) => {
         kd_rating,
       },
       include: {
-        pengumpulan_tugas: {
+        pengumpulanTugas: {
           include: {
             tugas: true,
             user: true,
@@ -189,7 +189,7 @@ const getRatingByPengumpulanTugasId = async (kd_pengumpulan_tugas) => {
         kd_pengumpulan_tugas,
       },
       include: {
-        pengumpulan_tugas: {
+        pengumpulanTugas: {
           include: {
             tugas: true,
             user: true,
