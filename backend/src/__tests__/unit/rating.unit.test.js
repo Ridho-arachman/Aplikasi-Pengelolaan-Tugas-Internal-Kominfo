@@ -31,7 +31,7 @@ describe("Rating Service", () => {
 
     const mockIncludeData = {
       ...mockData,
-      pengumpulan_tugas: {
+      pengumpulanTugas: {
         kd_pengumpulan_tugas: "pengumpulan-1",
         tugas: { kd_tugas: "tugas-1", judul: "Tugas Test" },
         user: { nip: "123456789012345678", nama: "John Doe" },
@@ -45,7 +45,7 @@ describe("Rating Service", () => {
     expect(prisma.rating.create).toHaveBeenCalledWith({
       data: mockData,
       include: {
-        pengumpulan_tugas: {
+        pengumpulanTugas: {
           include: {
             tugas: true,
             user: true,
@@ -63,7 +63,7 @@ describe("Rating Service", () => {
       kd_pengumpulan_tugas: "pengumpulan-1",
       nilai: 90,
       komentar: "Bagus sekali",
-      pengumpulan_tugas: {
+      pengumpulanTugas: {
         kd_pengumpulan_tugas: "pengumpulan-1",
         tugas: { kd_tugas: "tugas-1", judul: "Tugas Test" },
         user: { nip: "123456789012345678", nama: "John Doe" },
@@ -77,7 +77,7 @@ describe("Rating Service", () => {
     expect(prisma.rating.findUnique).toHaveBeenCalledWith({
       where: { kd_rating: "rating-1" },
       include: {
-        pengumpulan_tugas: {
+        pengumpulanTugas: {
           include: {
             tugas: true,
             user: true,
@@ -99,7 +99,7 @@ describe("Rating Service", () => {
     expect(prisma.rating.findUnique).toHaveBeenCalledWith({
       where: { kd_rating: "rating-tidak-ada" },
       include: {
-        pengumpulan_tugas: {
+        pengumpulanTugas: {
           include: {
             tugas: true,
             user: true,
@@ -117,7 +117,7 @@ describe("Rating Service", () => {
         kd_pengumpulan_tugas: "pengumpulan-1",
         nilai: 90,
         komentar: "Bagus sekali",
-        pengumpulan_tugas: {
+        pengumpulanTugas: {
           kd_pengumpulan_tugas: "pengumpulan-1",
           tugas: { kd_tugas: "tugas-1", judul: "Tugas Test 1" },
           user: { nip: "123456789012345678", nama: "John Doe" },
@@ -128,7 +128,7 @@ describe("Rating Service", () => {
         kd_pengumpulan_tugas: "pengumpulan-2",
         nilai: 75,
         komentar: "Cukup baik",
-        pengumpulan_tugas: {
+        pengumpulanTugas: {
           kd_pengumpulan_tugas: "pengumpulan-2",
           tugas: { kd_tugas: "tugas-2", judul: "Tugas Test 2" },
           user: { nip: "876543210987654321", nama: "Jane Doe" },
@@ -143,7 +143,7 @@ describe("Rating Service", () => {
     expect(prisma.rating.findMany).toHaveBeenCalledWith({
       where: {},
       include: {
-        pengumpulan_tugas: {
+        pengumpulanTugas: {
           include: {
             tugas: true,
             user: true,
@@ -165,7 +165,7 @@ describe("Rating Service", () => {
         kd_pengumpulan_tugas: "pengumpulan-1",
         nilai: 90,
         komentar: "Bagus sekali",
-        pengumpulan_tugas: {
+        pengumpulanTugas: {
           kd_pengumpulan_tugas: "pengumpulan-1",
           tugas: { kd_tugas: "tugas-1", judul: "Tugas Test 1" },
           user: { nip: "123456789012345678", nama: "John Doe" },
@@ -188,7 +188,7 @@ describe("Rating Service", () => {
         nilai: 90,
       },
       include: {
-        pengumpulan_tugas: {
+        pengumpulanTugas: {
           include: {
             tugas: true,
             user: true,
@@ -220,7 +220,7 @@ describe("Rating Service", () => {
     const updatedRating = {
       ...existingRating,
       ...updateData,
-      pengumpulan_tugas: {
+      pengumpulanTugas: {
         kd_pengumpulan_tugas: "pengumpulan-1",
         tugas: { kd_tugas: "tugas-1", judul: "Tugas Test" },
         user: { nip: "123456789012345678", nama: "John Doe" },
@@ -239,7 +239,7 @@ describe("Rating Service", () => {
       where: { kd_rating },
       data: updateData,
       include: {
-        pengumpulan_tugas: {
+        pengumpulanTugas: {
           include: {
             tugas: true,
             user: true,
@@ -281,7 +281,7 @@ describe("Rating Service", () => {
 
     const deletedRating = {
       ...existingRating,
-      pengumpulan_tugas: {
+      pengumpulanTugas: {
         kd_pengumpulan_tugas: "pengumpulan-1",
         tugas: { kd_tugas: "tugas-1", judul: "Tugas Test" },
         user: { nip: "123456789012345678", nama: "John Doe" },
@@ -299,7 +299,7 @@ describe("Rating Service", () => {
     expect(prisma.rating.delete).toHaveBeenCalledWith({
       where: { kd_rating },
       include: {
-        pengumpulan_tugas: {
+        pengumpulanTugas: {
           include: {
             tugas: true,
             user: true,
@@ -333,7 +333,7 @@ describe("Rating Service", () => {
       kd_pengumpulan_tugas: "pengumpulan-1",
       nilai: 90,
       komentar: "Bagus sekali",
-      pengumpulan_tugas: {
+      pengumpulanTugas: {
         kd_pengumpulan_tugas: "pengumpulan-1",
         tugas: { kd_tugas: "tugas-1", judul: "Tugas Test" },
         user: { nip: "123456789012345678", nama: "John Doe" },
@@ -347,7 +347,7 @@ describe("Rating Service", () => {
     expect(prisma.rating.findFirst).toHaveBeenCalledWith({
       where: { kd_pengumpulan_tugas: "pengumpulan-1" },
       include: {
-        pengumpulan_tugas: {
+        pengumpulanTugas: {
           include: {
             tugas: true,
             user: true,
@@ -369,7 +369,7 @@ describe("Rating Service", () => {
     expect(prisma.rating.findFirst).toHaveBeenCalledWith({
       where: { kd_pengumpulan_tugas: "pengumpulan-tidak-ada" },
       include: {
-        pengumpulan_tugas: {
+        pengumpulanTugas: {
           include: {
             tugas: true,
             user: true,
