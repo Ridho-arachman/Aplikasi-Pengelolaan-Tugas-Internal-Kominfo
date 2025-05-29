@@ -45,9 +45,7 @@ const getAllUser = async (nip, nama, role, kd_jabatan, nip_atasan) => {
   }
 
   return await prisma.user.findMany({
-    where: {
-      OR: conditions, // hanya yang tersedia dari input
-    },
+    where: conditions.length > 0 ? { OR: conditions } : undefined,
   });
 };
 

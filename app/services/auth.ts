@@ -1,6 +1,13 @@
 import { api, setAuthToken } from "@/utils/api";
-import { saveToken, saveUser, getToken, getUser, removeToken, removeUser } from "@/utils/storage";
-import { useAuthStore, User } from "@/stores/auth";
+import {
+  saveToken,
+  saveUser,
+  getToken,
+  getUser,
+  removeToken,
+  removeUser,
+} from "@/utils/storage";
+import { useAuthStore } from "@/stores/auth";
 
 export const login = async (nip: string, password: string) => {
   try {
@@ -16,7 +23,10 @@ export const login = async (nip: string, password: string) => {
       return { success: false, message: res.data.message };
     }
   } catch (err: any) {
-    return { success: false, message: err?.response?.data?.message || err.message };
+    return {
+      success: false,
+      message: err?.response?.data?.message || err.message,
+    };
   }
 };
 
@@ -36,4 +46,4 @@ export const logout = async () => {
   await removeUser();
   setAuthToken();
   useAuthStore.getState().clearAuth();
-}; 
+};
