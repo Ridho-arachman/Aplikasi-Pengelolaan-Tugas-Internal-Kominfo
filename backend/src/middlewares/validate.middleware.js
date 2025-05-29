@@ -58,6 +58,7 @@ const validate = (schema) => (req, res, next) => {
       if (errors.length > 0) {
         return res.status(400).json({
           status: "error",
+          message: errors.map(e => e.message).join(", "),
           errors
         });
       }
@@ -71,6 +72,7 @@ const validate = (schema) => (req, res, next) => {
       if (!result.success) {
         return res.status(400).json({
           status: "error",
+          message: result.error.errors.map((error) => error.message).join(", "),
           errors: result.error.errors.map((error) => ({
             field: error.path.join("."),
             message: error.message,

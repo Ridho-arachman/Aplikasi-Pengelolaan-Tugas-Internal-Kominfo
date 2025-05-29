@@ -6,11 +6,16 @@ const tugasRoutes = require("./src/routes/tugas.routes");
 const laporanRoutes = require("./src/routes/laporan.routes");
 const pengumpulanTugasRoutes = require("./src/routes/pengumpulanTugas.routes");
 const ratingRoutes = require("./src/routes/rating.routes");
+const authRoutes = require("./src/routes/auth.routes"); // Import auth routes
+const passport = require("./src/configs/passport.config"); // Import passport config
 
 const app = express();
 
 app.use(express.json());
+app.use(passport.initialize()); // Initialize passport
+
 // Routes
+app.use("/api/auth", authRoutes); // Add auth routes
 app.use("/api/jabatan", jabatanRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/history-jabatan", historyJabatanRoutes);
