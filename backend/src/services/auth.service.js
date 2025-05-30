@@ -3,10 +3,10 @@ const jwt = require("jsonwebtoken");
 const { getUser } = require("./user.service");
 
 // You should store these in environment variables in a real application
-const JWT_SECRET = "your-secret-key"; // Replace with a strong secret key
-const JWT_REFRESH_SECRET = "your-refresh-secret-key"; // Replace with a strong refresh secret key
-const ACCESS_TOKEN_EXPIRATION = "15m"; // Access token expires in 15 minutes
-const REFRESH_TOKEN_EXPIRATION = "7d"; // Refresh token expires in 7 days
+const JWT_SECRET = process.env.JWT_SECRET; // Replace with a strong secret key
+const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET; // Replace with a strong refresh secret key
+const ACCESS_TOKEN_EXPIRATION = process.env.ACCESS_TOKEN_EXPIRATION; // Access token expires in 15 minutes
+const REFRESH_TOKEN_EXPIRATION = process.env.REFRESH_TOKEN_EXPIRATION; // Refresh token expires in 7 days
 
 /**
  * Verifies user credentials and generates JWT tokens.
