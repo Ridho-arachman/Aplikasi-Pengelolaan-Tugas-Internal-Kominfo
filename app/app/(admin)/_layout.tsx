@@ -4,7 +4,7 @@ import { View } from "react-native";
 import { Button, ButtonText } from "@/components/ui/button";
 import { useAuthStore } from "@/stores/auth";
 import { useToast } from "@/components/ui/toast";
-import { logout } from "@/services/auth";
+import { logout } from "@/lib/auth";
 import { Text } from "@/components/ui/text";
 
 // Helper komponen alert toast
@@ -99,7 +99,7 @@ export default function AdminLayout() {
             ),
           }}
         />
-        <Tabs.Screen
+        {/* <Tabs.Screen
           name="users"
           options={{
             title: "User",
@@ -107,7 +107,7 @@ export default function AdminLayout() {
               <Ionicons name="people" size={size} color={color} />
             ),
           }}
-        />
+        /> */}
         <Tabs.Screen
           name="jabatan"
           options={{

@@ -5,7 +5,7 @@ import { Button, ButtonText } from "@/components/ui/button";
 import { Text } from "@/components/ui/text";
 import { useToast } from "@/components/ui/toast";
 import { useAuthStore } from "@/stores/auth";
-import { login, autoLogin } from "@/services/auth";
+import { login, autoLogin } from "@/lib/auth";
 import { router } from "expo-router";
 
 // Helper komponen alert toast

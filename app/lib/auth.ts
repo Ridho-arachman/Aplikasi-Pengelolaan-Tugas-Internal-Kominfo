@@ -9,7 +9,17 @@ import {
 } from "@/utils/storage";
 import { useAuthStore } from "@/stores/auth";
 
-export const login = async (nip: string, password: string) => {
+interface AuthResponse {
+  success: boolean;
+  user?: any;
+  token?: string;
+  message?: string;
+}
+
+export const login = async (
+  nip: string,
+  password: string
+): Promise<AuthResponse> => {
   try {
     const res = await api.post("/auth/login", { nip, password });
     if (res.data.status === "success") {
@@ -18,7 +28,7 @@ export const login = async (nip: string, password: string) => {
       await saveUser(user);
       setAuthToken(accessToken);
       useAuthStore.getState().setAuth(user, accessToken);
-      return { success: true, user };
+      return { success: true, user, token: accessToken };
     } else {
       return { success: false, message: res.data.message };
     }
@@ -30,13 +40,13 @@ export const login = async (nip: string, password: string) => {
   }
 };
 
-export const autoLogin = async () => {
+export const autoLogin = async (): Promise<AuthResponse> => {
   const token = await getToken();
   const user = await getUser();
   if (token && user) {
     setAuthToken(token);
     useAuthStore.getState().setAuth(user, token);
-    return { success: true, user };
+    return { success: true, user, token };
   }
   return { success: false };
 };

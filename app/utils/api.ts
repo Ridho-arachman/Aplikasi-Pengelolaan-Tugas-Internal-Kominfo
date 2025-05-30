@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "http://192.168.108.96:5000/api", // Ganti dengan IP jika di device
+  baseURL: "http://192.168.232.96:5000/api", // Ganti dengan IP jika di device
   headers: {
     "Content-Type": "application/json",
   },
