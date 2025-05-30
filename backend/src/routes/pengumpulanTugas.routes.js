@@ -1,6 +1,10 @@
 const { Router } = require("express");
 const validate = require("../middlewares/validate.middleware");
 const {
+  authenticateJWT,
+  authorizeRoles,
+} = require("../middlewares/auth.middleware");
+const {
   createPengumpulanTugasSchema,
   getPengumpulanTugasSchema,
   getAllPengumpulanTugasSchema,
@@ -17,18 +21,36 @@ const {
 
 const router = Router();
 
+router.use(authenticateJWT);
+
 // Membuat pengumpulan tugas baru
-router.post("/", validate({ body: createPengumpulanTugasSchema }), CreatePengumpulanTugas);
+router.post(
+  "/",
+  authorizeRoles(["user"]),
+  validate({ body: createPengumpulanTugasSchema }),
+  CreatePengumpulanTugas
+);
 
 // Mendapatkan pengumpulan tugas berdasarkan kode
-router.get("/:kd_pengumpulan_tugas", validate({ params: getPengumpulanTugasSchema }), GetPengumpulanTugas);
+router.get(
+  "/:kd_pengumpulan_tugas",
+  authorizeRoles(["admin", "user"]),
+  validate({ params: getPengumpulanTugasSchema }),
+  GetPengumpulanTugas
+);
 
 // Mendapatkan semua pengumpulan tugas
-router.get("/", validate({ query: getAllPengumpulanTugasSchema }), GetAllPengumpulanTugas);
+router.get(
+  "/",
+  authorizeRoles(["admin", "user"]),
+  validate({ query: getAllPengumpulanTugasSchema }),
+  GetAllPengumpulanTugas
+);
 
 // Memperbarui pengumpulan tugas
 router.put(
   "/:kd_pengumpulan_tugas",
+  authorizeRoles(["user"]),
   validate({
     params: updatePengumpulanTugasSchema.pick({ kd_pengumpulan_tugas: true }),
     body: updatePengumpulanTugasSchema.omit({ kd_pengumpulan_tugas: true }),
@@ -39,6 +61,7 @@ router.put(
 // Menghapus pengumpulan tugas
 router.delete(
   "/:kd_pengumpulan_tugas",
+  authorizeRoles(["admin", "user"]),
   validate({ params: deletePengumpulanTugasSchema }),
   DeletePengumpulanTugas
 );

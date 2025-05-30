@@ -1,39 +1,58 @@
 const { Router } = require("express");
-const {
-  CreateJabatan,
-  GetAllJabatan,
-  GetJabatan,
-  UpdateJabatan,
-  DeleteJabatan,
-} = require("../controllers/jabatan.controller");
 const validate = require("../middlewares/validate.middleware");
 const {
+  authenticateJWT,
+  authorizeRoles,
+} = require("../middlewares/auth.middleware");
+const {
   createJabatanSchema,
-  getAllJabatanSchema,
   getJabatanSchema,
+  getAllJabatanSchema,
   updateJabatanSchema,
   deleteJabatanSchema,
 } = require("../validation/jabatan.validation");
+const {
+  CreateJabatan,
+  GetJabatan,
+  GetAllJabatan,
+  UpdateJabatan,
+  DeleteJabatan,
+} = require("../controllers/jabatan.controller");
 
 const router = Router();
 
+router.use(authenticateJWT);
+
 router.post(
   "/",
-  validate({ body: createJabatanSchema.pick({ nama_jabatan: true }) }),
+  authorizeRoles(["admin"]),
+  validate({ body: createJabatanSchema }),
   CreateJabatan
 );
-router.get("/", validate(getAllJabatanSchema), GetAllJabatan);
-router.get("/:kd_jabatan", validate({ params: getJabatanSchema }), GetJabatan);
+router.get(
+  "/:kd_jabatan",
+  authorizeRoles(["admin", "user"]),
+  validate({ params: getJabatanSchema }),
+  GetJabatan
+);
+router.get(
+  "/",
+  authorizeRoles(["admin", "user"]),
+  validate({ query: getAllJabatanSchema }),
+  GetAllJabatan
+);
 router.put(
   "/:kd_jabatan",
+  authorizeRoles(["admin"]),
   validate({
     params: updateJabatanSchema.pick({ kd_jabatan: true }),
-    body: updateJabatanSchema.pick({ nama_jabatan: true }),
+    body: updateJabatanSchema.omit({ kd_jabatan: true }),
   }),
   UpdateJabatan
 );
 router.delete(
   "/:kd_jabatan",
+  authorizeRoles(["admin"]),
   validate({ params: deleteJabatanSchema }),
   DeleteJabatan
 );

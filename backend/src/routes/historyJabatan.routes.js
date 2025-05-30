@@ -1,6 +1,10 @@
 const { Router } = require("express");
 const validate = require("../middlewares/validate.middleware");
 const {
+  authenticateJWT,
+  authorizeRoles,
+} = require("../middlewares/auth.middleware");
+const {
   createHistoryJabatanSchema,
   getHistoryJabatanSchema,
   getAllHistoryJabatanSchema,
@@ -17,22 +21,49 @@ const {
 
 const router = Router();
 
+router.use(authenticateJWT);
+
 // Membuat history jabatan baru
-router.post("/", validate({ body: createHistoryJabatanSchema }), CreateHistoryJabatan);
+router.post(
+  "/",
+  authorizeRoles(["admin"]),
+  validate({ body: createHistoryJabatanSchema }),
+  CreateHistoryJabatan
+);
 
 // Mendapatkan history jabatan berdasarkan ID
-router.get("/:id", validate({ params: getHistoryJabatanSchema }), GetHistoryJabatan);
+router.get(
+  "/:kd_history",
+  authorizeRoles(["admin", "user"]),
+  validate({ params: getHistoryJabatanSchema }),
+  GetHistoryJabatan
+);
 
 // Mendapatkan semua history jabatan
-router.get("/", validate({ query: getAllHistoryJabatanSchema }), GetAllHistoryJabatan);
+router.get(
+  "/",
+  authorizeRoles(["admin", "user"]),
+  validate({ query: getAllHistoryJabatanSchema }),
+  GetAllHistoryJabatan
+);
 
 // Memperbarui history jabatan
-router.put("/:id", validate({
-  params: updateHistoryJabatanSchema.pick({ id: true }),
-  body: updateHistoryJabatanSchema.omit({ id: true })
-}), UpdateHistoryJabatan);
+router.put(
+  "/:kd_history",
+  authorizeRoles(["admin"]),
+  validate({
+    params: updateHistoryJabatanSchema.pick({ kd_history: true }),
+    body: updateHistoryJabatanSchema.omit({ kd_history: true }),
+  }),
+  UpdateHistoryJabatan
+);
 
 // Menghapus history jabatan
-router.delete("/:id", validate({ params: deleteHistoryJabatanSchema }), DeleteHistoryJabatan);
+router.delete(
+  "/:kd_history",
+  authorizeRoles(["admin"]),
+  validate({ params: deleteHistoryJabatanSchema }),
+  DeleteHistoryJabatan
+);
 
 module.exports = router;

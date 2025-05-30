@@ -1,6 +1,10 @@
 const { Router } = require("express");
 const validate = require("../middlewares/validate.middleware");
 const {
+  authenticateJWT,
+  authorizeRoles,
+} = require("../middlewares/auth.middleware");
+const {
   createUserSchema,
   getUserSchema,
   getAllUserSchema,
@@ -17,17 +21,40 @@ const {
 
 const router = Router();
 
-router.post("/", validate({ body: createUserSchema }), CreateUser);
-router.get("/:nip", validate({ params: getUserSchema }), GetUser);
-router.get("/", validate({ query: getAllUserSchema }), GetAllUser);
+router.use(authenticateJWT);
+
+router.post(
+  "/",
+  authorizeRoles(["admin"]),
+  validate({ body: createUserSchema }),
+  CreateUser
+);
+router.get(
+  "/:nip",
+  authorizeRoles(["admin", "user"]),
+  validate({ params: getUserSchema }),
+  GetUser
+);
+router.get(
+  "/",
+  authorizeRoles(["admin", "user"]),
+  validate({ query: getAllUserSchema }),
+  GetAllUser
+);
 router.put(
   "/:nip",
+  authorizeRoles(["admin", "user"]),
   validate({
     params: updateUserSchema.pick({ nip: true }),
     body: updateUserSchema.omit({ nip: true }),
   }),
   UpdateUser
 );
-router.delete("/:nip", validate({ params: deleteUserSchema }), DeleteUser);
+router.delete(
+  "/:nip",
+  authorizeRoles(["admin"]),
+  validate({ params: deleteUserSchema }),
+  DeleteUser
+);
 
 module.exports = router;
