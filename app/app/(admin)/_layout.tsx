@@ -99,7 +99,7 @@ export default function AdminLayout() {
             ),
           }}
         />
-        {/* <Tabs.Screen
+        <Tabs.Screen
           name="users"
           options={{
             title: "User",
@@ -107,7 +107,7 @@ export default function AdminLayout() {
               <Ionicons name="people" size={size} color={color} />
             ),
           }}
-        /> */}
+        />
         <Tabs.Screen
           name="jabatan"
           options={{

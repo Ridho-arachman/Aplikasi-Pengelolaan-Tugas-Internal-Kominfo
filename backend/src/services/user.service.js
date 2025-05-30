@@ -3,6 +3,9 @@ const prisma = require("../libs/prisma");
 const createUser = async (data) => {
   const user = await prisma.user.create({
     data,
+    include: {
+      jabatan: true,
+    },
   });
   return {
     nip: user.nip,
@@ -10,12 +13,16 @@ const createUser = async (data) => {
     role: user.role,
     kd_jabatan: user.kd_jabatan,
     nip_atasan: user.nip_atasan,
+    jabatan: user.jabatan,
   };
 };
 
 const getUser = async (nip) => {
   return await prisma.user.findUnique({
     where: { nip },
+    include: {
+      jabatan: true,
+    },
   });
 };
 
@@ -46,15 +53,29 @@ const getAllUser = async (nip, nama, role, kd_jabatan, nip_atasan) => {
 
   return await prisma.user.findMany({
     where: conditions.length > 0 ? { OR: conditions } : undefined,
+    include: {
+      jabatan: true,
+    },
   });
 };
 
 const updateUser = async (nip, data) => {
-  return await prisma.user.update({ where: { nip }, data });
+  return await prisma.user.update({
+    where: { nip },
+    data,
+    include: {
+      jabatan: true,
+    },
+  });
 };
 
 const deleteUser = async (nip) => {
-  return await prisma.user.delete({ where: { nip } });
+  return await prisma.user.delete({
+    where: { nip },
+    include: {
+      jabatan: true,
+    },
+  });
 };
 
 module.exports = {
