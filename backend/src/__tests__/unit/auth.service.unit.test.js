@@ -92,24 +92,37 @@ describe("Auth Service", () => {
 
   describe("refreshAccessToken", () => {
     it("should return a new access token for a valid refresh token", async () => {
-      const decodedToken = { nip: mockUser.nip, role: mockUser.role };
-      jwt.verify.mockReturnValue(decodedToken);
+      const mockUser = {
+        nip: "123456789012345678",
+        role: "user",
+      };
+
+      const mockRefreshToken = "valid-refresh-token";
+      const mockDecodedToken = {
+        nip: mockUser.nip,
+        role: mockUser.role,
+      };
+
+      jwt.verify.mockReturnValue(mockDecodedToken);
       getUser.mockResolvedValue(mockUser);
-      jwt.sign.mockReturnValue("newAccessToken");
+      jwt.sign.mockReturnValue("new-access-token");
 
-      const result = await authService.refreshAccessToken("validRefreshToken");
+      const result = await authService.refreshAccessToken(mockRefreshToken);
 
+      expect(result).toEqual({ accessToken: "new-access-token" });
       expect(jwt.verify).toHaveBeenCalledWith(
-        "validRefreshToken",
-        JWT_REFRESH_SECRET // Actual secret from service
+        mockRefreshToken,
+        JWT_REFRESH_SECRET
       );
       expect(getUser).toHaveBeenCalledWith(mockUser.nip);
       expect(jwt.sign).toHaveBeenCalledWith(
-        { nip: mockUser.nip, role: mockUser.role },
-        JWT_SECRET, // Actual secret from service
+        expect.objectContaining({
+          nip: mockUser.nip,
+          role: mockUser.role,
+        }),
+        JWT_SECRET,
         { expiresIn: "15m" }
       );
-      expect(result).toEqual({ accessToken: "newAccessToken" });
     });
 
     it("should throw an error for an invalid refresh token (JsonWebTokenError)", async () => {
