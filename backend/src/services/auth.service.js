@@ -1,4 +1,3 @@
-const prisma = require("../libs/prisma");
 const { comparePassword } = require("./hash.service");
 const jwt = require("jsonwebtoken");
 const { getUser } = require("./user.service");
@@ -70,28 +69,31 @@ const refreshAccessToken = async (token) => {
     const user = await getUser(decoded.nip);
 
     if (!user) {
-      // return null; // User not found or token invalid // Original
-      throw new Error("User not found"); // Changed
+      throw new Error("User not found");
     }
 
+    // Add timestamp and random string to ensure unique token
     const accessToken = jwt.sign(
-      { nip: user.nip, role: user.role },
+      {
+        nip: user.nip,
+        role: user.role,
+        iat: Math.floor(Date.now() / 1000), // Add current timestamp
+        jti: Math.random().toString(36).substring(7), // Add random string
+      },
       JWT_SECRET,
       { expiresIn: ACCESS_TOKEN_EXPIRATION }
     );
 
     return { accessToken };
   } catch (error) {
-    console.error("Error in refreshAccessToken:", error.message); // Log message only
-    // Handle specific JWT errors like TokenExpiredError or JsonWebTokenError
+    console.error("Error in refreshAccessToken:", error.message);
     if (error.name === "TokenExpiredError") {
       throw new Error("Refresh token expired");
     }
     if (error.name === "JsonWebTokenError") {
       throw new Error("Invalid refresh token");
     }
-    // throw new Error("Failed to refresh access token"); // Original
-    throw error; // Re-throw other errors or a more specific one if user not found was the case
+    throw error;
   }
 };
 

@@ -14,7 +14,54 @@ describe("Auth Routes Integration Tests", () => {
   // Helper function to clean up the database
   async function cleanupDatabase() {
     try {
-      await prisma.user.deleteMany({ where: { nip: testUserNip } });
+      if (testUserNip) {
+        // Delete related data first
+        try {
+          await prisma.tugasSubmission.deleteMany({
+            where: { nip: testUserNip },
+          });
+        } catch (e) {
+          console.log("No tugas submissions to delete");
+        }
+
+        try {
+          await prisma.tugasAssignment.deleteMany({
+            where: { nip: testUserNip },
+          });
+        } catch (e) {
+          console.log("No tugas assignments to delete");
+        }
+
+        try {
+          await prisma.laporan.deleteMany({
+            where: { nip: testUserNip },
+          });
+        } catch (e) {
+          console.log("No laporan to delete");
+        }
+
+        try {
+          await prisma.rating.deleteMany({
+            where: { nip: testUserNip },
+          });
+        } catch (e) {
+          console.log("No ratings to delete");
+        }
+
+        try {
+          await prisma.historyJabatan.deleteMany({
+            where: { nip: testUserNip },
+          });
+        } catch (e) {
+          console.log("No history jabatan to delete");
+        }
+
+        // Finally delete the user
+        await prisma.user.deleteMany({
+          where: { nip: testUserNip },
+        });
+      }
+
       if (testUserKdJabatan) {
         await prisma.jabatan.deleteMany({
           where: { kd_jabatan: testUserKdJabatan },

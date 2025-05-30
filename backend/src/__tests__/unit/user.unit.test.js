@@ -27,6 +27,10 @@ const returnedData = {
   role: "user",
   kd_jabatan: "001",
   nip_atasan: "123",
+  jabatan: {
+    kd_jabatan: "001",
+    nama_jabatan: "Staff",
+  },
 };
 
 describe("User Service", () => {
@@ -49,6 +53,9 @@ describe("User Service", () => {
         kd_jabatan: userData.kd_jabatan,
         nip_atasan: userData.nip_atasan,
       },
+      include: {
+        jabatan: true,
+      },
     });
     expect(result).toEqual(returnedData);
   });
@@ -61,6 +68,9 @@ describe("User Service", () => {
 
     expect(prisma.user.findUnique).toHaveBeenCalledWith({
       where: { nip },
+      include: {
+        jabatan: true,
+      },
     });
     expect(result).toEqual(returnedData);
   });
@@ -93,6 +103,9 @@ describe("User Service", () => {
     expect(prisma.user.update).toHaveBeenCalledWith({
       where: { nip },
       data: updateData,
+      include: {
+        jabatan: true,
+      },
     });
     expect(result).toEqual({ ...returnedData, ...updateData });
   });
@@ -105,6 +118,9 @@ describe("User Service", () => {
 
     expect(prisma.user.delete).toHaveBeenCalledWith({
       where: { nip },
+      include: {
+        jabatan: true,
+      },
     });
     expect(result).toEqual(returnedData);
   });
