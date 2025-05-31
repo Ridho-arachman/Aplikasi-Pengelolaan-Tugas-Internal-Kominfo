@@ -30,7 +30,6 @@ describe("Integration test for HistoryJabatan routes", () => {
       const { accessToken: token } = await getAuthToken();
       accessToken = token;
     } catch (error) {
-      console.error("Error saat setup test:", error);
       throw error;
     }
   });
@@ -39,9 +38,7 @@ describe("Integration test for HistoryJabatan routes", () => {
     try {
       await cleanupTestData();
       await prisma.$disconnect();
-      console.log("Database dibersihkan setelah test dan disconnected");
     } catch (error) {
-      console.error("Error saat membersihkan database:", error);
       throw error;
     }
   });
@@ -56,14 +53,10 @@ describe("Integration test for HistoryJabatan routes", () => {
         tanggal_akhir: null,
       };
 
-      console.log("Data untuk membuat HistoryJabatan:", data);
-
       const res = await request(app)
         .post("/api/history-jabatan")
         .set("Authorization", `Bearer ${accessToken}`)
         .send(data);
-
-      console.log("Respon Create HistoryJabatan:", res.body);
 
       expect(res.status).toBe(201);
       expect(res.body).toHaveProperty(
@@ -77,7 +70,6 @@ describe("Integration test for HistoryJabatan routes", () => {
 
       createdHistoryJabatan = res.body.data;
     } catch (error) {
-      console.error("Error saat membuat HistoryJabatan:", error);
       throw error;
     }
   });
@@ -85,7 +77,6 @@ describe("Integration test for HistoryJabatan routes", () => {
   // Get by ID
   it("should return specific history jabatan", async () => {
     if (!createdHistoryJabatan) {
-      console.log("Skipping test: history jabatan not created");
       return;
     }
 
@@ -94,8 +85,6 @@ describe("Integration test for HistoryJabatan routes", () => {
       const res = await request(app)
         .get(`/api/history-jabatan/${id}`)
         .set("Authorization", `Bearer ${accessToken}`);
-
-      console.log("Respon Get by ID:", res.body);
 
       expect(res.status).toBe(200);
       expect(res.body).toHaveProperty("status", "success");
@@ -107,7 +96,6 @@ describe("Integration test for HistoryJabatan routes", () => {
       expect(res.body.data).toHaveProperty("user_nip", userNip);
       expect(res.body.data).toHaveProperty("kd_jabatan", jabatanKode);
     } catch (error) {
-      console.error("Error saat mendapatkan HistoryJabatan by ID:", error);
       throw error;
     }
   });
@@ -118,8 +106,6 @@ describe("Integration test for HistoryJabatan routes", () => {
       const res = await request(app)
         .get("/api/history-jabatan")
         .set("Authorization", `Bearer ${accessToken}`);
-
-      console.log("Respon Get All:", res.body);
 
       expect(res.status).toBe(200);
       expect(res.body).toHaveProperty("status", "success");
@@ -134,7 +120,6 @@ describe("Integration test for HistoryJabatan routes", () => {
         expect(res.body.data.length).toBeGreaterThan(0);
       }
     } catch (error) {
-      console.error("Error saat mendapatkan semua HistoryJabatan:", error);
       throw error;
     }
   });
@@ -142,7 +127,6 @@ describe("Integration test for HistoryJabatan routes", () => {
   // Update
   it("should update history jabatan", async () => {
     if (!createdHistoryJabatan) {
-      console.log("Skipping test: history jabatan not created");
       return;
     }
 
@@ -155,14 +139,10 @@ describe("Integration test for HistoryJabatan routes", () => {
         tanggal_akhir: tanggal_akhir.toISOString(),
       };
 
-      console.log("Data untuk update HistoryJabatan:", updateData);
-
       const res = await request(app)
         .put(`/api/history-jabatan/${id}`)
         .set("Authorization", `Bearer ${accessToken}`)
         .send(updateData);
-
-      console.log("Respon Update:", res.body);
 
       expect(res.status).toBe(200);
       expect(res.body).toHaveProperty("status", "success");
@@ -172,7 +152,6 @@ describe("Integration test for HistoryJabatan routes", () => {
       );
       expect(res.body.data).toHaveProperty("tanggal_akhir");
     } catch (error) {
-      console.error("Error saat update HistoryJabatan:", error);
       throw error;
     }
   });
@@ -180,7 +159,6 @@ describe("Integration test for HistoryJabatan routes", () => {
   // Delete
   it("should delete history jabatan", async () => {
     if (!createdHistoryJabatan) {
-      console.log("Skipping test: history jabatan not created");
       return;
     }
 
@@ -190,8 +168,6 @@ describe("Integration test for HistoryJabatan routes", () => {
         .delete(`/api/history-jabatan/${id}`)
         .set("Authorization", `Bearer ${accessToken}`);
 
-      console.log("Respon Delete:", res.body);
-
       expect(res.status).toBe(200);
       expect(res.body).toHaveProperty("status", "success");
       expect(res.body).toHaveProperty(
@@ -199,7 +175,6 @@ describe("Integration test for HistoryJabatan routes", () => {
         "History jabatan berhasil dihapus"
       );
     } catch (error) {
-      console.error("Error saat delete HistoryJabatan:", error);
       throw error;
     }
   });

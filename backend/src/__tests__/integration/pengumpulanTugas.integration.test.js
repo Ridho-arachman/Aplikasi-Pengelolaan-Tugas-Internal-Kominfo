@@ -39,10 +39,8 @@ describe("Integration test for PengumpulanTugas routes", () => {
         },
       });
 
-      console.log("Tugas dibuat dengan Prisma:", tugas);
       tugasKode = tugas.kd_tugas;
     } catch (error) {
-      console.error("Error saat setup test:", error);
       throw error;
     }
   });
@@ -51,9 +49,7 @@ describe("Integration test for PengumpulanTugas routes", () => {
     try {
       await cleanupTestData();
       await prisma.$disconnect();
-      console.log("Database dibersihkan setelah test dan disconnected");
     } catch (error) {
-      console.error("Error saat membersihkan database:", error);
       throw error;
     }
   });
@@ -70,14 +66,10 @@ describe("Integration test for PengumpulanTugas routes", () => {
         status: "menunggu",
       };
 
-      console.log("Data untuk membuat PengumpulanTugas:", data);
-
       const res = await request(app)
         .post("/api/pengumpulan-tugas")
         .set("Authorization", `Bearer ${accessToken}`)
         .send(data);
-
-      console.log("Respon Create PengumpulanTugas:", res.body);
 
       expect(res.status).toBe(201);
       expect(res.body).toHaveProperty(
@@ -92,7 +84,6 @@ describe("Integration test for PengumpulanTugas routes", () => {
 
       createdPengumpulanTugas = res.body.data;
     } catch (error) {
-      console.error("Error saat membuat PengumpulanTugas:", error);
       throw error;
     }
   });
@@ -100,7 +91,6 @@ describe("Integration test for PengumpulanTugas routes", () => {
   // Get by ID
   it("should return specific pengumpulan tugas", async () => {
     if (!createdPengumpulanTugas) {
-      console.log("Skipping test: pengumpulan tugas not created");
       return;
     }
 
@@ -109,8 +99,6 @@ describe("Integration test for PengumpulanTugas routes", () => {
       const res = await request(app)
         .get(`/api/pengumpulan-tugas/${kd_pengumpulan_tugas}`)
         .set("Authorization", `Bearer ${accessToken}`);
-
-      console.log("Respon Get by ID:", res.body);
 
       expect(res.status).toBe(200);
       expect(res.body).toHaveProperty("status", "success");
@@ -125,7 +113,6 @@ describe("Integration test for PengumpulanTugas routes", () => {
       expect(res.body.data).toHaveProperty("kd_tugas", tugasKode);
       expect(res.body.data).toHaveProperty("user_nip", userNip);
     } catch (error) {
-      console.error("Error saat mendapatkan PengumpulanTugas by ID:", error);
       throw error;
     }
   });
@@ -136,8 +123,6 @@ describe("Integration test for PengumpulanTugas routes", () => {
       const res = await request(app)
         .get("/api/pengumpulan-tugas")
         .set("Authorization", `Bearer ${accessToken}`);
-
-      console.log("Respon Get All:", res.body);
 
       if (res.status === 404) {
         expect(res.body).toHaveProperty("status", "error");
@@ -156,7 +141,6 @@ describe("Integration test for PengumpulanTugas routes", () => {
         expect(res.body.data.length).toBeGreaterThan(0);
       }
     } catch (error) {
-      console.error("Error saat mendapatkan semua PengumpulanTugas:", error);
       throw error;
     }
   });
@@ -164,7 +148,6 @@ describe("Integration test for PengumpulanTugas routes", () => {
   // Update
   it("should update pengumpulan tugas", async () => {
     if (!createdPengumpulanTugas) {
-      console.log("Skipping test: pengumpulan tugas not created");
       return;
     }
 
@@ -180,8 +163,6 @@ describe("Integration test for PengumpulanTugas routes", () => {
         .set("Authorization", `Bearer ${accessToken}`)
         .send(updateData);
 
-      console.log("Respon Update:", res.body);
-
       expect(res.status).toBe(200);
       expect(res.body).toHaveProperty("status", "success");
       expect(res.body).toHaveProperty(
@@ -194,7 +175,6 @@ describe("Integration test for PengumpulanTugas routes", () => {
         "Catatan update pengumpulan tugas test"
       );
     } catch (error) {
-      console.error("Error saat mengupdate PengumpulanTugas:", error);
       throw error;
     }
   });
@@ -202,7 +182,6 @@ describe("Integration test for PengumpulanTugas routes", () => {
   // Delete
   it("should delete pengumpulan tugas", async () => {
     if (!createdPengumpulanTugas) {
-      console.log("Skipping test: pengumpulan tugas not created");
       return;
     }
 
@@ -212,8 +191,6 @@ describe("Integration test for PengumpulanTugas routes", () => {
         .delete(`/api/pengumpulan-tugas/${kd_pengumpulan_tugas}`)
         .set("Authorization", `Bearer ${accessToken}`);
 
-      console.log("Respon Delete:", res.body);
-
       expect(res.status).toBe(200);
       expect(res.body).toHaveProperty("status", "success");
       expect(res.body).toHaveProperty(
@@ -221,7 +198,6 @@ describe("Integration test for PengumpulanTugas routes", () => {
         "Pengumpulan tugas berhasil dihapus"
       );
     } catch (error) {
-      console.error("Error saat menghapus PengumpulanTugas:", error);
       throw error;
     }
   });

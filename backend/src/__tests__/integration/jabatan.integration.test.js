@@ -18,7 +18,6 @@ describe("Integration test for Jabatan routes", () => {
       const { accessToken: token } = await getAuthToken();
       accessToken = token;
     } catch (error) {
-      console.error("Error saat setup test:", error);
       throw error;
     }
   });
@@ -28,7 +27,6 @@ describe("Integration test for Jabatan routes", () => {
       await cleanupTestData();
       await prisma.$disconnect();
     } catch (error) {
-      console.error("Error saat membersihkan database:", error);
       throw error;
     }
   });
@@ -53,7 +51,6 @@ describe("Integration test for Jabatan routes", () => {
   it("should return all jabatans", async () => {
     // Skip if previous test failed
     if (!createdJabatan) {
-      console.log("Skipping test: jabatan not created");
       return;
     }
 

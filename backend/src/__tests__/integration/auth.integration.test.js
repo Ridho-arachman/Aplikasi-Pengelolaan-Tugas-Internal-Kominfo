@@ -20,41 +20,31 @@ describe("Auth Routes Integration Tests", () => {
           await prisma.tugasSubmission.deleteMany({
             where: { nip: testUserNip },
           });
-        } catch (e) {
-          console.log("No tugas submissions to delete");
-        }
+        } catch (e) {}
 
         try {
           await prisma.tugasAssignment.deleteMany({
             where: { nip: testUserNip },
           });
-        } catch (e) {
-          console.log("No tugas assignments to delete");
-        }
+        } catch (e) {}
 
         try {
           await prisma.laporan.deleteMany({
             where: { nip: testUserNip },
           });
-        } catch (e) {
-          console.log("No laporan to delete");
-        }
+        } catch (e) {}
 
         try {
           await prisma.rating.deleteMany({
             where: { nip: testUserNip },
           });
-        } catch (e) {
-          console.log("No ratings to delete");
-        }
+        } catch (e) {}
 
         try {
           await prisma.historyJabatan.deleteMany({
             where: { nip: testUserNip },
           });
-        } catch (e) {
-          console.log("No history jabatan to delete");
-        }
+        } catch (e) {}
 
         // Finally delete the user
         await prisma.user.deleteMany({
@@ -67,9 +57,7 @@ describe("Auth Routes Integration Tests", () => {
           where: { kd_jabatan: testUserKdJabatan },
         });
       }
-      console.log("Test data cleaned up from database");
     } catch (error) {
-      console.error("Error cleaning up database:", error);
       // Don't throw error here, as it might hide the actual test failure
     }
   }
@@ -100,9 +88,7 @@ describe("Auth Routes Integration Tests", () => {
           kd_jabatan: testUserKdJabatan,
         },
       });
-      console.log(`Test user ${testUserNip} created for auth tests.`);
     } catch (error) {
-      console.error("Error setting up test user:", error);
       throw error; // Throw if setup fails, as tests depend on it
     }
   });
@@ -110,7 +96,6 @@ describe("Auth Routes Integration Tests", () => {
   afterAll(async () => {
     await cleanupDatabase(); // Clean up after all tests have run
     await prisma.$disconnect();
-    console.log("Disconnected from Prisma after auth tests.");
   });
 
   let accessToken = null;

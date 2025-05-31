@@ -26,7 +26,6 @@ describe("Integration test for Tugas routes", () => {
       const { accessToken: token } = await getAuthToken();
       accessToken = token;
     } catch (error) {
-      console.error("Error saat setup test:", error);
       throw error;
     }
   });
@@ -35,9 +34,7 @@ describe("Integration test for Tugas routes", () => {
     try {
       await cleanupTestData();
       await prisma.$disconnect();
-      console.log("Database dibersihkan setelah test dan disconnected");
     } catch (error) {
-      console.error("Error saat membersihkan database:", error);
       throw error;
     }
   });
@@ -53,14 +50,10 @@ describe("Integration test for Tugas routes", () => {
         prioritas: "tinggi",
       };
 
-      console.log("Data untuk membuat Tugas:", data);
-
       const res = await request(app)
         .post("/api/tugas")
         .set("Authorization", `Bearer ${accessToken}`)
         .send(data);
-
-      console.log("Respon Create Tugas:", res.body);
 
       expect(res.status).toBe(201);
       expect(res.body).toHaveProperty("message", "Tugas berhasil dibuat");
@@ -71,7 +64,6 @@ describe("Integration test for Tugas routes", () => {
 
       createdTugas = res.body.data;
     } catch (error) {
-      console.error("Error saat membuat Tugas:", error);
       throw error;
     }
   });
@@ -79,7 +71,6 @@ describe("Integration test for Tugas routes", () => {
   // Get by ID
   it("should return specific tugas", async () => {
     if (!createdTugas) {
-      console.log("Skipping test: tugas not created");
       return;
     }
 
@@ -89,8 +80,6 @@ describe("Integration test for Tugas routes", () => {
         .get(`/api/tugas/${kd_tugas}`)
         .set("Authorization", `Bearer ${accessToken}`);
 
-      console.log("Respon Get by ID:", res.body);
-
       expect(res.status).toBe(200);
       expect(res.body).toHaveProperty("status", "success");
       expect(res.body).toHaveProperty("message", "Tugas berhasil ditemukan");
@@ -98,7 +87,6 @@ describe("Integration test for Tugas routes", () => {
       expect(res.body.data).toHaveProperty("judul", "Membuat Laporan Bulanan");
       expect(res.body.data).toHaveProperty("user_nip", userNip);
     } catch (error) {
-      console.error("Error saat mendapatkan Tugas by ID:", error);
       throw error;
     }
   });
@@ -109,8 +97,6 @@ describe("Integration test for Tugas routes", () => {
       const res = await request(app)
         .get("/api/tugas")
         .set("Authorization", `Bearer ${accessToken}`);
-
-      console.log("Respon Get All:", res.body);
 
       expect(res.status).toBe(200);
       expect(res.body).toHaveProperty("status", "success");
@@ -127,7 +113,6 @@ describe("Integration test for Tugas routes", () => {
       );
       expect(foundTugas).toBeTruthy();
     } catch (error) {
-      console.error("Error saat mendapatkan semua Tugas:", error);
       throw error;
     }
   });
@@ -135,7 +120,6 @@ describe("Integration test for Tugas routes", () => {
   // Update
   it("should update tugas", async () => {
     if (!createdTugas) {
-      console.log("Skipping test: tugas not created");
       return;
     }
 
@@ -151,8 +135,6 @@ describe("Integration test for Tugas routes", () => {
         .set("Authorization", `Bearer ${accessToken}`)
         .send(updateData);
 
-      console.log("Respon Update:", res.body);
-
       expect(res.status).toBe(200);
       expect(res.body).toHaveProperty("status", "success");
       expect(res.body).toHaveProperty("message", "Tugas berhasil diperbarui");
@@ -162,7 +144,6 @@ describe("Integration test for Tugas routes", () => {
       );
       expect(res.body.data).toHaveProperty("status", "in_progress");
     } catch (error) {
-      console.error("Error saat update Tugas:", error);
       throw error;
     }
   });
@@ -170,7 +151,6 @@ describe("Integration test for Tugas routes", () => {
   // Delete
   it("should delete tugas", async () => {
     if (!createdTugas) {
-      console.log("Skipping test: tugas not created");
       return;
     }
 
@@ -180,13 +160,10 @@ describe("Integration test for Tugas routes", () => {
         .delete(`/api/tugas/${kd_tugas}`)
         .set("Authorization", `Bearer ${accessToken}`);
 
-      console.log("Respon Delete:", res.body);
-
       expect(res.status).toBe(200);
       expect(res.body).toHaveProperty("status", "success");
       expect(res.body).toHaveProperty("message", "Tugas berhasil dihapus");
     } catch (error) {
-      console.error("Error saat delete Tugas:", error);
       throw error;
     }
   });

@@ -40,7 +40,6 @@ describe("Integration test for Rating routes", () => {
         },
       });
 
-      console.log("Tugas dibuat dengan Prisma:", tugas);
       tugasKode = tugas.kd_tugas;
 
       // Buat pengumpulan tugas untuk test
@@ -55,10 +54,8 @@ describe("Integration test for Rating routes", () => {
         },
       });
 
-      console.log("Pengumpulan Tugas dibuat dengan Prisma:", pengumpulanTugas);
       pengumpulanTugasKode = pengumpulanTugas.kd_pengumpulan_tugas;
     } catch (error) {
-      console.error("Error saat setup test:", error);
       throw error;
     }
   });
@@ -67,9 +64,7 @@ describe("Integration test for Rating routes", () => {
     try {
       await cleanupTestData();
       await prisma.$disconnect();
-      console.log("Database dibersihkan setelah test dan disconnected");
     } catch (error) {
-      console.error("Error saat membersihkan database:", error);
       throw error;
     }
   });
@@ -83,14 +78,10 @@ describe("Integration test for Rating routes", () => {
         komentar: "Pengumpulan tugas cukup baik",
       };
 
-      console.log("Data untuk membuat Rating:", data);
-
       const res = await request(app)
         .post("/api/rating")
         .set("Authorization", `Bearer ${accessToken}`)
         .send(data);
-
-      console.log("Respon Create Rating:", res.body);
 
       expect(res.status).toBe(201);
       expect(res.body).toHaveProperty("message", "Rating berhasil dibuat");
@@ -108,7 +99,6 @@ describe("Integration test for Rating routes", () => {
 
       createdRating = res.body.data;
     } catch (error) {
-      console.error("Error saat membuat Rating:", error);
       throw error;
     }
   });
@@ -116,7 +106,6 @@ describe("Integration test for Rating routes", () => {
   // Get by ID
   it("should return specific rating", async () => {
     if (!createdRating) {
-      console.log("Skipping test: rating not created");
       return;
     }
 
@@ -125,8 +114,6 @@ describe("Integration test for Rating routes", () => {
       const res = await request(app)
         .get(`/api/rating/${kd_rating}`)
         .set("Authorization", `Bearer ${accessToken}`);
-
-      console.log("Respon Get by ID:", res.body);
 
       expect(res.status).toBe(200);
       expect(res.body).toHaveProperty("status", "success");
@@ -138,7 +125,6 @@ describe("Integration test for Rating routes", () => {
       );
       expect(res.body.data).toHaveProperty("nilai", 85);
     } catch (error) {
-      console.error("Error saat mendapatkan Rating by ID:", error);
       throw error;
     }
   });
@@ -149,8 +135,6 @@ describe("Integration test for Rating routes", () => {
       const res = await request(app)
         .get("/api/rating")
         .set("Authorization", `Bearer ${accessToken}`);
-
-      console.log("Respon Get All:", res.body);
 
       if (res.status === 404) {
         expect(res.body).toHaveProperty("status", "error");
@@ -169,7 +153,6 @@ describe("Integration test for Rating routes", () => {
         expect(res.body.data.length).toBeGreaterThan(0);
       }
     } catch (error) {
-      console.error("Error saat mendapatkan semua Rating:", error);
       throw error;
     }
   });
@@ -180,8 +163,6 @@ describe("Integration test for Rating routes", () => {
       const res = await request(app)
         .get(`/api/rating/pengumpulan-tugas/${pengumpulanTugasKode}`)
         .set("Authorization", `Bearer ${accessToken}`);
-
-      console.log("Respon Get by Pengumpulan Tugas ID:", res.body);
 
       expect(res.status).toBe(200);
       expect(res.body).toHaveProperty("status", "success");
@@ -202,7 +183,6 @@ describe("Integration test for Rating routes", () => {
   // Update
   it("should update rating", async () => {
     if (!createdRating) {
-      console.log("Skipping test: rating not created");
       return;
     }
 
@@ -218,8 +198,6 @@ describe("Integration test for Rating routes", () => {
         .set("Authorization", `Bearer ${accessToken}`)
         .send(updateData);
 
-      console.log("Respon Update:", res.body);
-
       expect(res.status).toBe(200);
       expect(res.body).toHaveProperty("status", "success");
       expect(res.body).toHaveProperty("message", "Rating berhasil diperbarui");
@@ -229,7 +207,6 @@ describe("Integration test for Rating routes", () => {
         "Pengumpulan tugas sangat baik setelah direvisi"
       );
     } catch (error) {
-      console.error("Error saat memperbarui Rating:", error);
       throw error;
     }
   });
@@ -237,7 +214,6 @@ describe("Integration test for Rating routes", () => {
   // Delete
   it("should delete rating", async () => {
     if (!createdRating) {
-      console.log("Skipping test: rating not created");
       return;
     }
 
@@ -247,13 +223,10 @@ describe("Integration test for Rating routes", () => {
         .delete(`/api/rating/${kd_rating}`)
         .set("Authorization", `Bearer ${accessToken}`);
 
-      console.log("Respon Delete:", res.body);
-
       expect(res.status).toBe(200);
       expect(res.body).toHaveProperty("status", "success");
       expect(res.body).toHaveProperty("message", "Rating berhasil dihapus");
     } catch (error) {
-      console.error("Error saat menghapus Rating:", error);
       throw error;
     }
   });

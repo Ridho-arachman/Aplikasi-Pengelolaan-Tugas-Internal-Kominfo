@@ -26,7 +26,6 @@ describe("Integration test for Laporan routes", () => {
       const { accessToken: token } = await getAuthToken();
       accessToken = token;
     } catch (error) {
-      console.error("Error saat setup test:", error);
       throw error;
     }
   });
@@ -35,9 +34,7 @@ describe("Integration test for Laporan routes", () => {
     try {
       await cleanupTestData();
       await prisma.$disconnect();
-      console.log("Database dibersihkan setelah test dan disconnected");
     } catch (error) {
-      console.error("Error saat membersihkan database:", error);
       throw error;
     }
   });
@@ -51,14 +48,10 @@ describe("Integration test for Laporan routes", () => {
         user_nip: userNip,
       };
 
-      console.log("Data untuk membuat Laporan:", data);
-
       const res = await request(app)
         .post("/api/laporan")
         .set("Authorization", `Bearer ${accessToken}`)
         .send(data);
-
-      console.log("Respon Create Laporan:", res.body);
 
       expect(res.status).toBe(201);
       expect(res.body).toHaveProperty("message", "Laporan berhasil dibuat");
@@ -72,7 +65,6 @@ describe("Integration test for Laporan routes", () => {
 
       createdLaporan = res.body.data;
     } catch (error) {
-      console.error("Error saat membuat Laporan:", error);
       throw error;
     }
   });
@@ -80,7 +72,6 @@ describe("Integration test for Laporan routes", () => {
   // Get by ID
   it("should return specific laporan", async () => {
     if (!createdLaporan) {
-      console.log("Skipping test: laporan not created");
       return;
     }
 
@@ -89,8 +80,6 @@ describe("Integration test for Laporan routes", () => {
       const res = await request(app)
         .get(`/api/laporan/${kd_laporan}`)
         .set("Authorization", `Bearer ${accessToken}`);
-
-      console.log("Respon Get by ID:", res.body);
 
       expect(res.status).toBe(200);
       expect(res.body).toHaveProperty("status", "success");
@@ -102,7 +91,6 @@ describe("Integration test for Laporan routes", () => {
       );
       expect(res.body.data).toHaveProperty("user_nip", userNip);
     } catch (error) {
-      console.error("Error saat mendapatkan Laporan by ID:", error);
       throw error;
     }
   });
@@ -113,8 +101,6 @@ describe("Integration test for Laporan routes", () => {
       const res = await request(app)
         .get("/api/laporan")
         .set("Authorization", `Bearer ${accessToken}`);
-
-      console.log("Respon Get All:", res.body);
 
       if (res.status === 404) {
         expect(res.body).toHaveProperty("status", "error");
@@ -133,7 +119,6 @@ describe("Integration test for Laporan routes", () => {
         expect(res.body.data.length).toBeGreaterThan(0);
       }
     } catch (error) {
-      console.error("Error saat mendapatkan semua Laporan:", error);
       throw error;
     }
   });
@@ -141,7 +126,6 @@ describe("Integration test for Laporan routes", () => {
   // Update
   it("should update laporan", async () => {
     if (!createdLaporan) {
-      console.log("Skipping test: laporan not created");
       return;
     }
 
@@ -157,8 +141,6 @@ describe("Integration test for Laporan routes", () => {
         .set("Authorization", `Bearer ${accessToken}`)
         .send(updateData);
 
-      console.log("Respon Update:", res.body);
-
       expect(res.status).toBe(200);
       expect(res.body).toHaveProperty("status", "success");
       expect(res.body).toHaveProperty("message", "Laporan berhasil diperbarui");
@@ -171,7 +153,6 @@ describe("Integration test for Laporan routes", () => {
         "Isi laporan yang sudah diupdate"
       );
     } catch (error) {
-      console.error("Error saat mengupdate Laporan:", error);
       throw error;
     }
   });
@@ -179,7 +160,6 @@ describe("Integration test for Laporan routes", () => {
   // Delete
   it("should delete laporan", async () => {
     if (!createdLaporan) {
-      console.log("Skipping test: laporan not created");
       return;
     }
 
@@ -189,13 +169,10 @@ describe("Integration test for Laporan routes", () => {
         .delete(`/api/laporan/${kd_laporan}`)
         .set("Authorization", `Bearer ${accessToken}`);
 
-      console.log("Respon Delete:", res.body);
-
       expect(res.status).toBe(200);
       expect(res.body).toHaveProperty("status", "success");
       expect(res.body).toHaveProperty("message", "Laporan berhasil dihapus");
     } catch (error) {
-      console.error("Error saat menghapus Laporan:", error);
       throw error;
     }
   });

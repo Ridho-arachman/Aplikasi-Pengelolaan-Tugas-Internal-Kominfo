@@ -26,7 +26,6 @@ describe("Integration test for User routes", () => {
       const { accessToken: token } = await getAuthToken();
       accessToken = token;
     } catch (error) {
-      console.error("Error saat setup test:", error);
       throw error;
     }
   });
@@ -35,9 +34,7 @@ describe("Integration test for User routes", () => {
     try {
       await cleanupTestData();
       await prisma.$disconnect();
-      console.log("Database dibersihkan setelah test dan disconnected");
     } catch (error) {
-      console.error("Error saat membersihkan database:", error);
       throw error;
     }
   });
@@ -52,8 +49,6 @@ describe("Integration test for User routes", () => {
         .post("/api/jabatan")
         .set("Authorization", `Bearer ${accessToken}`)
         .send({ nama_jabatan: uniqueJabatanName });
-
-      console.log("Jabatan response:", resJabatan.body);
 
       expect(resJabatan.status).toBe(201);
       expect(resJabatan.body.data).toHaveProperty("kd_jabatan");
@@ -71,8 +66,6 @@ describe("Integration test for User routes", () => {
           kd_jabatan: jabatanKode,
         });
 
-      console.log("Create User response:", res.body);
-
       expect(res.status).toBe(201);
       expect(res.body).toHaveProperty("message", "User berhasil dibuat");
       expect(res.body).toHaveProperty("status", "success");
@@ -83,7 +76,6 @@ describe("Integration test for User routes", () => {
 
       createdUser = res.body.data;
     } catch (error) {
-      console.error("Error in create user test:", error);
       throw error;
     }
   });
@@ -91,7 +83,6 @@ describe("Integration test for User routes", () => {
   // Get by NIP
   it("should return specific user", async () => {
     if (!createdUser) {
-      console.log("Skipping test: user not created");
       return;
     }
 
@@ -107,7 +98,6 @@ describe("Integration test for User routes", () => {
       expect(res.body.data).toHaveProperty("nip", nip);
       expect(res.body.data).toHaveProperty("nama", "John Doe");
     } catch (error) {
-      console.error("Error in get user test:", error);
       throw error;
     }
   });
@@ -118,8 +108,6 @@ describe("Integration test for User routes", () => {
       const res = await request(app)
         .get("/api/user")
         .set("Authorization", `Bearer ${accessToken}`);
-
-      console.log("Get All Users response:", res.body);
 
       if (res.status === 404) {
         expect(res.body).toHaveProperty("status", "error");
@@ -138,7 +126,6 @@ describe("Integration test for User routes", () => {
         expect(res.body.data.length).toBeGreaterThan(0);
       }
     } catch (error) {
-      console.error("Error in get all users test:", error);
       throw error;
     }
   });
@@ -146,7 +133,6 @@ describe("Integration test for User routes", () => {
   // Update User
   it("should update user data", async () => {
     if (!createdUser) {
-      console.log("Skipping test: user not created");
       return;
     }
 
@@ -164,14 +150,11 @@ describe("Integration test for User routes", () => {
         .set("Authorization", `Bearer ${accessToken}`)
         .send(updateData);
 
-      console.log("Update response:", res.body);
-
       expect(res.status).toBe(200);
       expect(res.body).toHaveProperty("status", "success");
       expect(res.body).toHaveProperty("message", "User berhasil diperbarui");
       expect(res.body.data).toHaveProperty("nama", "John Updated");
     } catch (error) {
-      console.error("Error in update user test:", error);
       throw error;
     }
   });
@@ -179,7 +162,6 @@ describe("Integration test for User routes", () => {
   // Delete User
   it("should delete user", async () => {
     if (!createdUser) {
-      console.log("Skipping test: user not created");
       return;
     }
 
@@ -189,13 +171,10 @@ describe("Integration test for User routes", () => {
         .delete(`/api/user/${nip}`)
         .set("Authorization", `Bearer ${accessToken}`);
 
-      console.log("Delete response:", res.body);
-
       expect(res.status).toBe(200);
       expect(res.body).toHaveProperty("status", "success");
       expect(res.body).toHaveProperty("message", "User berhasil dihapus");
     } catch (error) {
-      console.error("Error in delete user test:", error);
       throw error;
     }
   });
