@@ -1,5 +1,6 @@
 const { Prisma } = require("../../generated/prisma");
 const { createPassword } = require("../services/hash.service");
+const { uploadImage } = require("../configs/cloudinary");
 const {
   createUser,
   getUser,
@@ -10,8 +11,13 @@ const {
 
 const CreateUser = async (req, res) => {
   try {
-    const { nip, nama, password, role, kd_jabatan, nip_atasan, image } =
-      req.body;
+    const { nip, nama, password, role, kd_jabatan, nip_atasan } = req.body;
+    let image = null;
+
+    // Upload image jika ada
+    if (req.file) {
+      image = req.file.path;
+    }
 
     const hashedPassword = await createPassword(password);
 
@@ -103,7 +109,7 @@ const GetAllUser = async (req, res) => {
 const UpdateUser = async (req, res) => {
   try {
     const { nip } = req.params;
-    const { nama, password, role, kd_jabatan, nip_atasan, image } = req.body;
+    const { nama, password, role, kd_jabatan, nip_atasan } = req.body;
 
     // Cek apakah user ada
     const existingUser = await getUser(nip);
@@ -122,7 +128,11 @@ const UpdateUser = async (req, res) => {
     if (role) updateData.role = role;
     if (kd_jabatan) updateData.kd_jabatan = kd_jabatan;
     if (nip_atasan) updateData.nip_atasan = nip_atasan;
-    if (image) updateData.image = image;
+
+    // Upload image jika ada
+    if (req.file) {
+      updateData.image = req.file.path;
+    }
 
     // Jika password diubah, hash password baru
     if (password) {

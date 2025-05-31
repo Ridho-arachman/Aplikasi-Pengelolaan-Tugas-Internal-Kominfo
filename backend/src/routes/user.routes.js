@@ -4,6 +4,7 @@ const {
   authenticateJWT,
   authorizeRoles,
 } = require("../middlewares/auth.middleware");
+const { uploadImage } = require("../configs/cloudinary");
 const {
   createUserSchema,
   getUserSchema,
@@ -26,6 +27,7 @@ router.use(authenticateJWT);
 router.post(
   "/",
   authorizeRoles(["admin"]),
+  uploadImage.single("image"),
   validate({ body: createUserSchema }),
   CreateUser
 );
@@ -43,7 +45,8 @@ router.get(
 );
 router.put(
   "/:nip",
-  authorizeRoles(["admin", "user"]),
+  authorizeRoles(["admin"]),
+  uploadImage.single("image"),
   validate({
     params: updateUserSchema.pick({ nip: true }),
     body: updateUserSchema.omit({ nip: true }),

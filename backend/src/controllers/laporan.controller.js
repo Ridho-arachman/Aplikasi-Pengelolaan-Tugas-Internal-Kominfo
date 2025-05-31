@@ -1,4 +1,5 @@
 const { Prisma } = require("../../generated/prisma");
+const { uploadPDF } = require("../configs/cloudinary");
 const {
   createLaporan,
   getLaporanById,
@@ -16,7 +17,14 @@ const {
  */
 const CreateLaporan = async (req, res) => {
   try {
-    const { isi_laporan, judul_laporan, user_nip, file_path } = req.body;
+    const { isi_laporan, judul_laporan } = req.body;
+    const user_nip = req.user.nip;
+
+    // Upload file jika ada
+    let file_path = null;
+    if (req.file) {
+      file_path = req.file.path;
+    }
 
     const laporan = await createLaporan({
       isi_laporan,

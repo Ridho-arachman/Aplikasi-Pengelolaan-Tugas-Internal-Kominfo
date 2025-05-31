@@ -1,5 +1,6 @@
 const { Prisma } = require("../../generated/prisma");
 const pengumpulanTugasService = require("../services/pengumpulanTugas.service");
+const { uploadImage, uploadPDF } = require("../configs/cloudinary");
 
 /**
  * Controller untuk membuat pengumpulan tugas baru
@@ -9,15 +10,22 @@ const pengumpulanTugasService = require("../services/pengumpulanTugas.service");
  */
 const CreatePengumpulanTugas = async (req, res) => {
   try {
-    const {
-      kd_tugas,
-      user_nip,
-      tanggal_pengumpulan,
-      image,
-      file_path,
-      catatan,
-      status,
-    } = req.body;
+    const { kd_tugas, catatan } = req.body;
+    const user_nip = req.user.nip;
+    const tanggal_pengumpulan = new Date();
+
+    // Upload file jika ada
+    let image = null;
+    let file_path = null;
+
+    if (req.files) {
+      if (req.files.image) {
+        image = req.files.image[0].path;
+      }
+      if (req.files.file_path) {
+        file_path = req.files.file_path[0].path;
+      }
+    }
 
     const pengumpulanTugas =
       await pengumpulanTugasService.createPengumpulanTugas({
@@ -27,7 +35,7 @@ const CreatePengumpulanTugas = async (req, res) => {
         image,
         file_path,
         catatan,
-        status,
+        status: "menunggu",
       });
 
     return res.status(201).json({

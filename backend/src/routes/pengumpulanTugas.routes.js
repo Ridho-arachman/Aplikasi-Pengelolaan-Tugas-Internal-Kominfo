@@ -4,6 +4,7 @@ const {
   authenticateJWT,
   authorizeRoles,
 } = require("../middlewares/auth.middleware");
+const { uploadImage, uploadPDF } = require("../configs/cloudinary");
 const {
   createPengumpulanTugasSchema,
   getPengumpulanTugasSchema,
@@ -27,6 +28,8 @@ router.use(authenticateJWT);
 router.post(
   "/",
   authorizeRoles(["user"]),
+  uploadImage.single("image"),
+  uploadPDF.single("file_path"),
   validate({ body: createPengumpulanTugasSchema }),
   CreatePengumpulanTugas
 );
