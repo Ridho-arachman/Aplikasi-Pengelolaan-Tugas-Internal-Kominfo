@@ -3,8 +3,10 @@ const app = require("../../../app");
 const prisma = require("../../libs/prisma");
 const {
   setupTestUser,
+  setupTestAdmin,
   cleanupTestData,
   getAuthToken,
+  getAdminAuthToken,
 } = require("../helpers/test.helper");
 
 // Tambahkan timeout yang lebih panjang untuk Jest
@@ -12,19 +14,25 @@ jest.setTimeout(60000); // 60 detik
 
 describe("Integration test for User routes", () => {
   let accessToken;
+  let adminAccessToken;
   let userNip;
   let jabatanKode;
   let createdUser;
 
   beforeAll(async () => {
     try {
-      // Setup test user dan dapatkan token
+      // Setup test user dan admin
       const { testUserNip, testUserKdJabatan } = await setupTestUser();
       userNip = testUserNip;
       jabatanKode = testUserKdJabatan;
 
-      const { accessToken: token } = await getAuthToken();
-      accessToken = token;
+      await setupTestAdmin();
+
+      // Get tokens
+      const { accessToken: userToken } = await getAuthToken();
+      const { accessToken: adminToken } = await getAdminAuthToken();
+      accessToken = userToken;
+      adminAccessToken = adminToken;
     } catch (error) {
       throw error;
     }
@@ -47,7 +55,7 @@ describe("Integration test for User routes", () => {
 
       const resJabatan = await request(app)
         .post("/api/jabatan")
-        .set("Authorization", `Bearer ${accessToken}`)
+        .set("Authorization", `Bearer ${adminAccessToken}`)
         .send({ nama_jabatan: uniqueJabatanName });
 
       expect(resJabatan.status).toBe(201);
@@ -57,7 +65,7 @@ describe("Integration test for User routes", () => {
 
       const res = await request(app)
         .post("/api/user")
-        .set("Authorization", `Bearer ${accessToken}`)
+        .set("Authorization", `Bearer ${adminAccessToken}`)
         .send({
           nip: "123456789012385282",
           nama: "John Doe",
@@ -147,7 +155,7 @@ describe("Integration test for User routes", () => {
 
       const res = await request(app)
         .put(`/api/user/${nip}`)
-        .set("Authorization", `Bearer ${accessToken}`)
+        .set("Authorization", `Bearer ${adminAccessToken}`)
         .send(updateData);
 
       expect(res.status).toBe(200);
@@ -169,7 +177,7 @@ describe("Integration test for User routes", () => {
       const { nip } = createdUser;
       const res = await request(app)
         .delete(`/api/user/${nip}`)
-        .set("Authorization", `Bearer ${accessToken}`);
+        .set("Authorization", `Bearer ${adminAccessToken}`);
 
       expect(res.status).toBe(200);
       expect(res.body).toHaveProperty("status", "success");

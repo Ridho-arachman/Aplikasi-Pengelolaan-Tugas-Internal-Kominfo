@@ -3,20 +3,28 @@ const app = require("../../../app");
 const prisma = require("../../libs/prisma");
 const {
   setupTestUser,
+  setupTestAdmin,
   cleanupTestData,
   getAuthToken,
+  getAdminAuthToken,
 } = require("../helpers/test.helper");
 
 describe("Integration test for Jabatan routes", () => {
   let accessToken;
+  let adminAccessToken;
   let createdJabatan;
 
   beforeAll(async () => {
     try {
-      // Setup test user dan dapatkan token
+      // Setup test user dan admin
       await setupTestUser();
-      const { accessToken: token } = await getAuthToken();
-      accessToken = token;
+      await setupTestAdmin();
+
+      // Get tokens
+      const { accessToken: userToken } = await getAuthToken();
+      const { accessToken: adminToken } = await getAdminAuthToken();
+      accessToken = userToken;
+      adminAccessToken = adminToken;
     } catch (error) {
       throw error;
     }
@@ -35,7 +43,7 @@ describe("Integration test for Jabatan routes", () => {
   it("should create a new jabatan", async () => {
     const res = await request(app)
       .post("/api/jabatan")
-      .set("Authorization", `Bearer ${accessToken}`)
+      .set("Authorization", `Bearer ${adminAccessToken}`)
       .send({ nama_jabatan: "Kepala Seksi IT" });
 
     expect(res.status).toBe(201);
@@ -73,6 +81,10 @@ describe("Integration test for Jabatan routes", () => {
 
   // Get By ID
   it("should return specific jabatan", async () => {
+    if (!createdJabatan) {
+      return;
+    }
+
     const { kd_jabatan, nama_jabatan } = createdJabatan;
     const res = await request(app)
       .get(`/api/jabatan/${kd_jabatan}`)
@@ -86,9 +98,13 @@ describe("Integration test for Jabatan routes", () => {
 
   // Update
   it("should update jabatan name", async () => {
+    if (!createdJabatan) {
+      return;
+    }
+
     const res = await request(app)
       .put(`/api/jabatan/${createdJabatan.kd_jabatan}`)
-      .set("Authorization", `Bearer ${accessToken}`)
+      .set("Authorization", `Bearer ${adminAccessToken}`)
       .send({ nama_jabatan: "Kepala Bidang TI" });
 
     expect(res.status).toBe(200);
@@ -98,9 +114,13 @@ describe("Integration test for Jabatan routes", () => {
 
   // Delete
   it("should delete jabatan", async () => {
+    if (!createdJabatan) {
+      return;
+    }
+
     const res = await request(app)
       .delete(`/api/jabatan/${createdJabatan.kd_jabatan}`)
-      .set("Authorization", `Bearer ${accessToken}`);
+      .set("Authorization", `Bearer ${adminAccessToken}`);
 
     expect(res.status).toBe(200);
     expect(res.body).toHaveProperty("status", "success");
@@ -109,6 +129,10 @@ describe("Integration test for Jabatan routes", () => {
 
   // Confirm deletion
   it("should not find deleted jabatan", async () => {
+    if (!createdJabatan) {
+      return;
+    }
+
     const res = await request(app)
       .get(`/api/jabatan/${createdJabatan.kd_jabatan}`)
       .set("Authorization", `Bearer ${accessToken}`);

@@ -33,7 +33,7 @@ router.post(
 
 // Mendapatkan history jabatan berdasarkan ID
 router.get(
-  "/:kd_history",
+  "/:id",
   authorizeRoles(["admin", "user"]),
   validate({ params: getHistoryJabatanSchema }),
   GetHistoryJabatan
@@ -49,18 +49,18 @@ router.get(
 
 // Memperbarui history jabatan
 router.put(
-  "/:kd_history",
+  "/:id",
   authorizeRoles(["admin"]),
   validate({
-    params: updateHistoryJabatanSchema.pick({ kd_history: true }),
-    body: updateHistoryJabatanSchema.omit({ kd_history: true }),
+    params: updateHistoryJabatanSchema.pick({ id: true }),
+    body: updateHistoryJabatanSchema.omit({ id: true }),
   }),
   UpdateHistoryJabatan
 );
 
 // Menghapus history jabatan
 router.delete(
-  "/:kd_history",
+  "/:id",
   authorizeRoles(["admin"]),
   validate({ params: deleteHistoryJabatanSchema }),
   DeleteHistoryJabatan

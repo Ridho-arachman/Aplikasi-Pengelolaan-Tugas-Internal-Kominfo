@@ -16,12 +16,13 @@ const {
  */
 const CreateLaporan = async (req, res) => {
   try {
-    const { isi_laporan, judul_laporan, user_nip } = req.body;
+    const { isi_laporan, judul_laporan, user_nip, file_path } = req.body;
 
     const laporan = await createLaporan({
       isi_laporan,
       judul_laporan,
       user_nip,
+      file_path,
     });
 
     return res.status(201).json({

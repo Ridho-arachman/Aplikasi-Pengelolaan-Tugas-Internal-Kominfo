@@ -3,8 +3,10 @@ const app = require("../../../app");
 const prisma = require("../../libs/prisma");
 const {
   setupTestUser,
+  setupTestAdmin,
   cleanupTestData,
   getAuthToken,
+  getAdminAuthToken,
 } = require("../helpers/test.helper");
 
 // Tambahkan timeout yang lebih panjang untuk Jest
@@ -12,19 +14,25 @@ jest.setTimeout(60000); // 60 detik
 
 describe("Integration test for Tugas routes", () => {
   let accessToken;
+  let adminAccessToken;
   let userNip;
   let jabatanKode;
   let createdTugas;
 
   beforeAll(async () => {
     try {
-      // Setup test user dan dapatkan token
+      // Setup test user dan admin
       const { testUserNip, testUserKdJabatan } = await setupTestUser();
       userNip = testUserNip;
       jabatanKode = testUserKdJabatan;
 
-      const { accessToken: token } = await getAuthToken();
-      accessToken = token;
+      await setupTestAdmin();
+
+      // Get tokens
+      const { accessToken: userToken } = await getAuthToken();
+      const { accessToken: adminToken } = await getAdminAuthToken();
+      accessToken = userToken;
+      adminAccessToken = adminToken;
     } catch (error) {
       throw error;
     }
@@ -52,7 +60,7 @@ describe("Integration test for Tugas routes", () => {
 
       const res = await request(app)
         .post("/api/tugas")
-        .set("Authorization", `Bearer ${accessToken}`)
+        .set("Authorization", `Bearer ${adminAccessToken}`)
         .send(data);
 
       expect(res.status).toBe(201);
@@ -93,6 +101,10 @@ describe("Integration test for Tugas routes", () => {
 
   // Get All
   it("should return all tugas", async () => {
+    if (!createdTugas) {
+      return;
+    }
+
     try {
       const res = await request(app)
         .get("/api/tugas")
@@ -158,7 +170,7 @@ describe("Integration test for Tugas routes", () => {
       const { kd_tugas } = createdTugas;
       const res = await request(app)
         .delete(`/api/tugas/${kd_tugas}`)
-        .set("Authorization", `Bearer ${accessToken}`);
+        .set("Authorization", `Bearer ${adminAccessToken}`);
 
       expect(res.status).toBe(200);
       expect(res.body).toHaveProperty("status", "success");

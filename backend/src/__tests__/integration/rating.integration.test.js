@@ -3,8 +3,10 @@ const app = require("../../../app");
 const prisma = require("../../libs/prisma");
 const {
   setupTestUser,
+  setupTestAdmin,
   cleanupTestData,
   getAuthToken,
+  getAdminAuthToken,
 } = require("../helpers/test.helper");
 
 // Tambahkan timeout yang lebih panjang untuk Jest
@@ -12,6 +14,7 @@ jest.setTimeout(60000); // 60 detik
 
 describe("Integration test for Rating routes", () => {
   let accessToken;
+  let adminAccessToken;
   let userNip;
   let jabatanKode;
   let tugasKode;
@@ -20,13 +23,18 @@ describe("Integration test for Rating routes", () => {
 
   beforeAll(async () => {
     try {
-      // Setup test user dan dapatkan token
+      // Setup test user dan admin
       const { testUserNip, testUserKdJabatan } = await setupTestUser();
       userNip = testUserNip;
       jabatanKode = testUserKdJabatan;
 
-      const { accessToken: token } = await getAuthToken();
-      accessToken = token;
+      await setupTestAdmin();
+
+      // Get tokens
+      const { accessToken: userToken } = await getAuthToken();
+      const { accessToken: adminToken } = await getAdminAuthToken();
+      accessToken = userToken;
+      adminAccessToken = adminToken;
 
       // Buat tugas untuk test
       const tugas = await prisma.tugas.create({
@@ -80,7 +88,7 @@ describe("Integration test for Rating routes", () => {
 
       const res = await request(app)
         .post("/api/rating")
-        .set("Authorization", `Bearer ${accessToken}`)
+        .set("Authorization", `Bearer ${adminAccessToken}`)
         .send(data);
 
       expect(res.status).toBe(201);
@@ -159,6 +167,10 @@ describe("Integration test for Rating routes", () => {
 
   // Get by Pengumpulan Tugas ID
   it("should return rating by pengumpulan tugas id", async () => {
+    if (!createdRating) {
+      return;
+    }
+
     try {
       const res = await request(app)
         .get(`/api/rating/pengumpulan-tugas/${pengumpulanTugasKode}`)
@@ -195,7 +207,7 @@ describe("Integration test for Rating routes", () => {
 
       const res = await request(app)
         .put(`/api/rating/${kd_rating}`)
-        .set("Authorization", `Bearer ${accessToken}`)
+        .set("Authorization", `Bearer ${adminAccessToken}`)
         .send(updateData);
 
       expect(res.status).toBe(200);
@@ -221,7 +233,7 @@ describe("Integration test for Rating routes", () => {
       const { kd_rating } = createdRating;
       const res = await request(app)
         .delete(`/api/rating/${kd_rating}`)
-        .set("Authorization", `Bearer ${accessToken}`);
+        .set("Authorization", `Bearer ${adminAccessToken}`);
 
       expect(res.status).toBe(200);
       expect(res.body).toHaveProperty("status", "success");

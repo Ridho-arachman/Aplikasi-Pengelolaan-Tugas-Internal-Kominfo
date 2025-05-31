@@ -46,6 +46,7 @@ describe("Integration test for Laporan routes", () => {
         isi_laporan: "Ini adalah isi laporan test",
         judul_laporan: "Laporan Bulanan Test",
         user_nip: userNip,
+        file_path: "/uploads/test-laporan.pdf",
       };
 
       const res = await request(app)

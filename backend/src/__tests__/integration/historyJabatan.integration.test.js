@@ -3,8 +3,10 @@ const app = require("../../../app");
 const prisma = require("../../libs/prisma");
 const {
   setupTestUser,
+  setupTestAdmin,
   cleanupTestData,
   getAuthToken,
+  getAdminAuthToken,
 } = require("../helpers/test.helper");
 
 // Tambahkan timeout yang lebih panjang untuk Jest
@@ -16,62 +18,55 @@ jest.setTimeout(60000); // 60 detik
  */
 describe("Integration test for HistoryJabatan routes", () => {
   let accessToken;
+  let adminAccessToken;
   let userNip;
   let jabatanKode;
   let createdHistoryJabatan;
 
   beforeAll(async () => {
-    try {
-      // Setup test user dan dapatkan token
-      const { testUserNip, testUserKdJabatan } = await setupTestUser();
-      userNip = testUserNip;
-      jabatanKode = testUserKdJabatan;
+    // Setup test user and admin
+    const { testUserNip, testUserKdJabatan } = await setupTestUser();
+    userNip = testUserNip;
+    jabatanKode = testUserKdJabatan;
 
-      const { accessToken: token } = await getAuthToken();
-      accessToken = token;
-    } catch (error) {
-      throw error;
-    }
+    await setupTestAdmin();
+
+    // Get tokens
+    const { accessToken: userToken } = await getAuthToken();
+    const { accessToken: adminToken } = await getAdminAuthToken();
+    accessToken = userToken;
+    adminAccessToken = adminToken;
   });
 
   afterAll(async () => {
-    try {
-      await cleanupTestData();
-      await prisma.$disconnect();
-    } catch (error) {
-      throw error;
-    }
+    await cleanupTestData();
+    await prisma.$disconnect();
   });
 
   // Create
   it("should create a new HistoryJabatan", async () => {
-    try {
-      const data = {
-        user_nip: userNip,
-        kd_jabatan: jabatanKode,
-        tanggal_mulai: new Date().toISOString(),
-        tanggal_akhir: null,
-      };
+    const data = {
+      user_nip: userNip,
+      kd_jabatan: jabatanKode,
+      tanggal_mulai: new Date().toISOString(),
+    };
 
-      const res = await request(app)
-        .post("/api/history-jabatan")
-        .set("Authorization", `Bearer ${accessToken}`)
-        .send(data);
+    const res = await request(app)
+      .post("/api/history-jabatan")
+      .set("Authorization", `Bearer ${adminAccessToken}`)
+      .send(data);
 
-      expect(res.status).toBe(201);
-      expect(res.body).toHaveProperty(
-        "message",
-        "History jabatan berhasil dibuat"
-      );
-      expect(res.body).toHaveProperty("status", "success");
-      expect(res.body.data).toHaveProperty("id");
-      expect(res.body.data).toHaveProperty("user_nip", userNip);
-      expect(res.body.data).toHaveProperty("kd_jabatan", jabatanKode);
+    expect(res.status).toBe(201);
+    expect(res.body).toHaveProperty(
+      "message",
+      "History jabatan berhasil dibuat"
+    );
+    expect(res.body).toHaveProperty("status", "success");
+    expect(res.body.data).toHaveProperty("id");
+    expect(res.body.data).toHaveProperty("user_nip", userNip);
+    expect(res.body.data).toHaveProperty("kd_jabatan", jabatanKode);
 
-      createdHistoryJabatan = res.body.data;
-    } catch (error) {
-      throw error;
-    }
+    createdHistoryJabatan = res.body.data;
   });
 
   // Get by ID
@@ -80,47 +75,39 @@ describe("Integration test for HistoryJabatan routes", () => {
       return;
     }
 
-    try {
-      const { id } = createdHistoryJabatan;
-      const res = await request(app)
-        .get(`/api/history-jabatan/${id}`)
-        .set("Authorization", `Bearer ${accessToken}`);
+    const { id } = createdHistoryJabatan;
+    const res = await request(app)
+      .get(`/api/history-jabatan/${id}`)
+      .set("Authorization", `Bearer ${accessToken}`);
 
-      expect(res.status).toBe(200);
-      expect(res.body).toHaveProperty("status", "success");
-      expect(res.body).toHaveProperty(
-        "message",
-        "History jabatan berhasil ditemukan"
-      );
-      expect(res.body.data).toHaveProperty("id", id);
-      expect(res.body.data).toHaveProperty("user_nip", userNip);
-      expect(res.body.data).toHaveProperty("kd_jabatan", jabatanKode);
-    } catch (error) {
-      throw error;
-    }
+    expect(res.status).toBe(200);
+    expect(res.body).toHaveProperty("status", "success");
+    expect(res.body).toHaveProperty(
+      "message",
+      "History jabatan berhasil ditemukan"
+    );
+    expect(res.body.data).toHaveProperty("id", id);
+    expect(res.body.data).toHaveProperty("user_nip", userNip);
+    expect(res.body.data).toHaveProperty("kd_jabatan", jabatanKode);
   });
 
   // Get All
   it("should return all history jabatan", async () => {
-    try {
-      const res = await request(app)
-        .get("/api/history-jabatan")
-        .set("Authorization", `Bearer ${accessToken}`);
+    const res = await request(app)
+      .get("/api/history-jabatan")
+      .set("Authorization", `Bearer ${accessToken}`);
 
-      expect(res.status).toBe(200);
-      expect(res.body).toHaveProperty("status", "success");
-      expect(res.body).toHaveProperty(
-        "message",
-        "Daftar history jabatan berhasil ditemukan"
-      );
-      expect(Array.isArray(res.body.data)).toBe(true);
+    expect(res.status).toBe(200);
+    expect(res.body).toHaveProperty("status", "success");
+    expect(res.body).toHaveProperty(
+      "message",
+      "Daftar history jabatan berhasil ditemukan"
+    );
+    expect(Array.isArray(res.body.data)).toBe(true);
 
-      // Jika ada history jabatan yang berhasil dibuat sebelumnya
-      if (createdHistoryJabatan) {
-        expect(res.body.data.length).toBeGreaterThan(0);
-      }
-    } catch (error) {
-      throw error;
+    // Jika ada history jabatan yang berhasil dibuat sebelumnya
+    if (createdHistoryJabatan) {
+      expect(res.body.data.length).toBeGreaterThan(0);
     }
   });
 
@@ -130,30 +117,26 @@ describe("Integration test for HistoryJabatan routes", () => {
       return;
     }
 
-    try {
-      const { id } = createdHistoryJabatan;
-      const tanggal_akhir = new Date();
-      tanggal_akhir.setDate(tanggal_akhir.getDate() + 30); // 30 hari dari sekarang
+    const { id } = createdHistoryJabatan;
+    const tanggal_akhir = new Date();
+    tanggal_akhir.setDate(tanggal_akhir.getDate() + 30); // 30 hari dari sekarang
 
-      const updateData = {
-        tanggal_akhir: tanggal_akhir.toISOString(),
-      };
+    const updateData = {
+      tanggal_akhir: tanggal_akhir.toISOString(),
+    };
 
-      const res = await request(app)
-        .put(`/api/history-jabatan/${id}`)
-        .set("Authorization", `Bearer ${accessToken}`)
-        .send(updateData);
+    const res = await request(app)
+      .put(`/api/history-jabatan/${id}`)
+      .set("Authorization", `Bearer ${adminAccessToken}`)
+      .send(updateData);
 
-      expect(res.status).toBe(200);
-      expect(res.body).toHaveProperty("status", "success");
-      expect(res.body).toHaveProperty(
-        "message",
-        "History jabatan berhasil diperbarui"
-      );
-      expect(res.body.data).toHaveProperty("tanggal_akhir");
-    } catch (error) {
-      throw error;
-    }
+    expect(res.status).toBe(200);
+    expect(res.body).toHaveProperty("status", "success");
+    expect(res.body).toHaveProperty(
+      "message",
+      "History jabatan berhasil diperbarui"
+    );
+    expect(res.body.data).toHaveProperty("tanggal_akhir");
   });
 
   // Delete
@@ -162,20 +145,16 @@ describe("Integration test for HistoryJabatan routes", () => {
       return;
     }
 
-    try {
-      const { id } = createdHistoryJabatan;
-      const res = await request(app)
-        .delete(`/api/history-jabatan/${id}`)
-        .set("Authorization", `Bearer ${accessToken}`);
+    const { id } = createdHistoryJabatan;
+    const res = await request(app)
+      .delete(`/api/history-jabatan/${id}`)
+      .set("Authorization", `Bearer ${adminAccessToken}`);
 
-      expect(res.status).toBe(200);
-      expect(res.body).toHaveProperty("status", "success");
-      expect(res.body).toHaveProperty(
-        "message",
-        "History jabatan berhasil dihapus"
-      );
-    } catch (error) {
-      throw error;
-    }
+    expect(res.status).toBe(200);
+    expect(res.body).toHaveProperty("status", "success");
+    expect(res.body).toHaveProperty(
+      "message",
+      "History jabatan berhasil dihapus"
+    );
   });
 });
