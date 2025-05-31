@@ -5,6 +5,13 @@ const createUser = async (data) => {
     data,
     include: {
       jabatan: true,
+      atasan: {
+        select: {
+          nip: true,
+          nama: true,
+          jabatan: true,
+        },
+      },
     },
   });
   return {
@@ -13,7 +20,9 @@ const createUser = async (data) => {
     role: user.role,
     kd_jabatan: user.kd_jabatan,
     nip_atasan: user.nip_atasan,
+    image: user.image,
     jabatan: user.jabatan,
+    atasan: user.atasan,
   };
 };
 
@@ -22,6 +31,20 @@ const getUser = async (nip) => {
     where: { nip },
     include: {
       jabatan: true,
+      atasan: {
+        select: {
+          nip: true,
+          nama: true,
+          jabatan: true,
+        },
+      },
+      bawahan: {
+        select: {
+          nip: true,
+          nama: true,
+          jabatan: true,
+        },
+      },
     },
   });
 };
@@ -55,6 +78,20 @@ const getAllUser = async (nip, nama, role, kd_jabatan, nip_atasan) => {
     where: conditions.length > 0 ? { OR: conditions } : undefined,
     include: {
       jabatan: true,
+      atasan: {
+        select: {
+          nip: true,
+          nama: true,
+          jabatan: true,
+        },
+      },
+      bawahan: {
+        select: {
+          nip: true,
+          nama: true,
+          jabatan: true,
+        },
+      },
     },
   });
 };
@@ -65,6 +102,20 @@ const updateUser = async (nip, data) => {
     data,
     include: {
       jabatan: true,
+      atasan: {
+        select: {
+          nip: true,
+          nama: true,
+          jabatan: true,
+        },
+      },
+      bawahan: {
+        select: {
+          nip: true,
+          nama: true,
+          jabatan: true,
+        },
+      },
     },
   });
 };
@@ -74,6 +125,20 @@ const deleteUser = async (nip) => {
     where: { nip },
     include: {
       jabatan: true,
+      atasan: {
+        select: {
+          nip: true,
+          nama: true,
+          jabatan: true,
+        },
+      },
+      bawahan: {
+        select: {
+          nip: true,
+          nama: true,
+          jabatan: true,
+        },
+      },
     },
   });
 };

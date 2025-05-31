@@ -10,7 +10,8 @@ const {
 
 const CreateUser = async (req, res) => {
   try {
-    const { nip, nama, password, role, kd_jabatan, nip_atasan } = req.body;
+    const { nip, nama, password, role, kd_jabatan, nip_atasan, image } =
+      req.body;
 
     const hashedPassword = await createPassword(password);
 
@@ -21,6 +22,7 @@ const CreateUser = async (req, res) => {
       role,
       kd_jabatan,
       nip_atasan,
+      image,
     });
 
     return res.status(201).json({
@@ -101,7 +103,7 @@ const GetAllUser = async (req, res) => {
 const UpdateUser = async (req, res) => {
   try {
     const { nip } = req.params;
-    const { nama, password, role, kd_jabatan, nip_atasan } = req.body;
+    const { nama, password, role, kd_jabatan, nip_atasan, image } = req.body;
 
     // Cek apakah user ada
     const existingUser = await getUser(nip);
@@ -113,16 +115,14 @@ const UpdateUser = async (req, res) => {
     }
 
     // Persiapkan data untuk update
-    const updateData = {
-      nama,
-      role,
-      kd_jabatan,
-    };
+    const updateData = {};
 
-    // Tambahkan nip_atasan jika ada
-    if (nip_atasan) {
-      updateData.nip_atasan = nip_atasan;
-    }
+    // Tambahkan field yang diupdate jika ada
+    if (nama) updateData.nama = nama;
+    if (role) updateData.role = role;
+    if (kd_jabatan) updateData.kd_jabatan = kd_jabatan;
+    if (nip_atasan) updateData.nip_atasan = nip_atasan;
+    if (image) updateData.image = image;
 
     // Jika password diubah, hash password baru
     if (password) {
@@ -134,13 +134,7 @@ const UpdateUser = async (req, res) => {
     return res.status(200).json({
       status: "success",
       message: "User berhasil diperbarui",
-      data: {
-        nip: updatedUser.nip,
-        nama: updatedUser.nama,
-        role: updatedUser.role,
-        kd_jabatan: updatedUser.kd_jabatan,
-        nip_atasan: updatedUser.nip_atasan,
-      },
+      data: updatedUser,
     });
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
@@ -182,13 +176,7 @@ const DeleteUser = async (req, res) => {
     return res.status(200).json({
       status: "success",
       message: "User berhasil dihapus",
-      data: {
-        nip: deletedUser.nip,
-        nama: deletedUser.nama,
-        role: deletedUser.role,
-        kd_jabatan: deletedUser.kd_jabatan,
-        nip_atasan: deletedUser.nip_atasan,
-      },
+      data: deletedUser,
     });
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
@@ -197,11 +185,6 @@ const DeleteUser = async (req, res) => {
           return res.status(404).json({
             status: "error",
             message: "User tidak ditemukan",
-          });
-        case "P2003":
-          return res.status(400).json({
-            status: "error",
-            message: "Terdapat relasi yang terkait dengan user ini",
           });
       }
     }

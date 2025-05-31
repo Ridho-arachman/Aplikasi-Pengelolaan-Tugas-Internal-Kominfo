@@ -157,7 +157,13 @@ const getLaporanByUserNip = async (user_nip) => {
         user_nip,
       },
       include: {
-        user: true,
+        user: {
+          select: {
+            nip: true,
+            nama: true,
+            jabatan: true,
+          },
+        },
       },
       orderBy: {
         created_at: "desc",

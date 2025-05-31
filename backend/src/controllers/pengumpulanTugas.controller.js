@@ -9,16 +9,26 @@ const pengumpulanTugasService = require("../services/pengumpulanTugas.service");
  */
 const CreatePengumpulanTugas = async (req, res) => {
   try {
-    const { kd_tugas, user_nip, tanggal_pengumpulan, file_path, catatan, status } = req.body;
-
-    const pengumpulanTugas = await pengumpulanTugasService.createPengumpulanTugas({
+    const {
       kd_tugas,
       user_nip,
-      tanggal_pengumpulan: new Date(tanggal_pengumpulan),
+      tanggal_pengumpulan,
+      image,
       file_path,
       catatan,
       status,
-    });
+    } = req.body;
+
+    const pengumpulanTugas =
+      await pengumpulanTugasService.createPengumpulanTugas({
+        kd_tugas,
+        user_nip,
+        tanggal_pengumpulan,
+        image,
+        file_path,
+        catatan,
+        status,
+      });
 
     return res.status(201).json({
       status: "success",
@@ -53,9 +63,12 @@ const CreatePengumpulanTugas = async (req, res) => {
  */
 const GetPengumpulanTugas = async (req, res) => {
   const { kd_pengumpulan_tugas } = req.params;
-  
+
   try {
-    const pengumpulanTugas = await pengumpulanTugasService.getPengumpulanTugasById(kd_pengumpulan_tugas);
+    const pengumpulanTugas =
+      await pengumpulanTugasService.getPengumpulanTugasById(
+        kd_pengumpulan_tugas
+      );
 
     return res.status(200).json({
       status: "success",
@@ -69,10 +82,10 @@ const GetPengumpulanTugas = async (req, res) => {
         message: "Pengumpulan tugas tidak ditemukan",
       });
     }
-    
-    return res.status(500).json({ 
-      status: "error", 
-      message: error.message 
+
+    return res.status(500).json({
+      status: "error",
+      message: error.message,
     });
   }
 };
@@ -94,7 +107,8 @@ const GetAllPengumpulanTugas = async (req, res) => {
       status,
     };
 
-    const pengumpulanTugas = await pengumpulanTugasService.getAllPengumpulanTugas(filter);
+    const pengumpulanTugas =
+      await pengumpulanTugasService.getAllPengumpulanTugas(filter);
 
     if (pengumpulanTugas.length === 0) {
       return res.status(404).json({
@@ -125,19 +139,33 @@ const GetAllPengumpulanTugas = async (req, res) => {
 const UpdatePengumpulanTugas = async (req, res) => {
   try {
     const { kd_pengumpulan_tugas } = req.params;
-    const { kd_tugas, user_nip, tanggal_pengumpulan, file_path, catatan, status } = req.body;
+    const {
+      kd_tugas,
+      user_nip,
+      tanggal_pengumpulan,
+      image,
+      file_path,
+      catatan,
+      status,
+    } = req.body;
 
     // Persiapkan data untuk update
     const updateData = {};
 
     if (kd_tugas) updateData.kd_tugas = kd_tugas;
     if (user_nip) updateData.user_nip = user_nip;
-    if (tanggal_pengumpulan) updateData.tanggal_pengumpulan = new Date(tanggal_pengumpulan);
+    if (tanggal_pengumpulan)
+      updateData.tanggal_pengumpulan = tanggal_pengumpulan;
+    if (image) updateData.image = image;
     if (file_path) updateData.file_path = file_path;
     if (catatan) updateData.catatan = catatan;
     if (status) updateData.status = status;
 
-    const updatedPengumpulanTugas = await pengumpulanTugasService.updatePengumpulanTugas(kd_pengumpulan_tugas, updateData);
+    const updatedPengumpulanTugas =
+      await pengumpulanTugasService.updatePengumpulanTugas(
+        kd_pengumpulan_tugas,
+        updateData
+      );
 
     return res.status(200).json({
       status: "success",
@@ -184,7 +212,10 @@ const DeletePengumpulanTugas = async (req, res) => {
   try {
     const { kd_pengumpulan_tugas } = req.params;
 
-    const deletedPengumpulanTugas = await pengumpulanTugasService.deletePengumpulanTugas(kd_pengumpulan_tugas);
+    const deletedPengumpulanTugas =
+      await pengumpulanTugasService.deletePengumpulanTugas(
+        kd_pengumpulan_tugas
+      );
 
     return res.status(200).json({
       status: "success",

@@ -20,12 +20,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.7.0
- * Query Engine version: 3cff47a7f5d65c3ea74883f1d736e41d68ce91ed
+ * Prisma Client JS version: 6.8.2
+ * Query Engine version: 2060c79ba17c6bb9f5823312b6f6b7f4a845738e
  */
 Prisma.prismaVersion = {
-  client: "6.7.0",
-  engine: "3cff47a7f5d65c3ea74883f1d736e41d68ce91ed"
+  client: "6.8.2",
+  engine: "2060c79ba17c6bb9f5823312b6f6b7f4a845738e"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -131,6 +131,7 @@ exports.Prisma.UserScalarFieldEnum = {
   password: 'password',
   role: 'role',
   kd_jabatan: 'kd_jabatan',
+  image: 'image',
   nip_atasan: 'nip_atasan',
   created_at: 'created_at',
   updated_at: 'updated_at'
@@ -163,6 +164,7 @@ exports.Prisma.LaporanScalarFieldEnum = {
   isi_laporan: 'isi_laporan',
   judul_laporan: 'judul_laporan',
   user_nip: 'user_nip',
+  file_path: 'file_path',
   created_at: 'created_at',
   updated_at: 'updated_at'
 };
@@ -172,6 +174,7 @@ exports.Prisma.PengumpulanTugasScalarFieldEnum = {
   kd_tugas: 'kd_tugas',
   user_nip: 'user_nip',
   tanggal_pengumpulan: 'tanggal_pengumpulan',
+  image: 'image',
   file_path: 'file_path',
   catatan: 'catatan',
   status: 'status',
@@ -207,6 +210,7 @@ exports.Prisma.UserOrderByRelevanceFieldEnum = {
   nama: 'nama',
   password: 'password',
   kd_jabatan: 'kd_jabatan',
+  image: 'image',
   nip_atasan: 'nip_atasan'
 };
 
@@ -227,13 +231,15 @@ exports.Prisma.LaporanOrderByRelevanceFieldEnum = {
   kd_laporan: 'kd_laporan',
   isi_laporan: 'isi_laporan',
   judul_laporan: 'judul_laporan',
-  user_nip: 'user_nip'
+  user_nip: 'user_nip',
+  file_path: 'file_path'
 };
 
 exports.Prisma.PengumpulanTugasOrderByRelevanceFieldEnum = {
   kd_pengumpulan_tugas: 'kd_pengumpulan_tugas',
   kd_tugas: 'kd_tugas',
   user_nip: 'user_nip',
+  image: 'image',
   file_path: 'file_path',
   catatan: 'catatan'
 };

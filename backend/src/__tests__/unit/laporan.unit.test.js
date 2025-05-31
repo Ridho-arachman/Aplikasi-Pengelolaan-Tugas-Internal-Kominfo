@@ -13,264 +13,290 @@ jest.mock("../../libs/prisma", () => ({
 }));
 
 describe("Laporan Service", () => {
-  afterEach(() => {
+  beforeEach(() => {
     jest.clearAllMocks();
   });
 
-  // Test untuk createLaporan
-  test("createLaporan harus membuat laporan baru", async () => {
-    const mockData = {
-      kd_laporan: "laporan-1",
-      isi_laporan: "Isi laporan test",
-      judul_laporan: "Judul Laporan Test",
-      user_nip: "123456789012345678",
-      created_at: new Date(),
-      updated_at: new Date(),
-    };
+  describe("createLaporan", () => {
+    it("harus membuat laporan baru", async () => {
+      const mockData = {
+        judul: "Laporan Test",
+        deskripsi: "Deskripsi laporan test",
+        user_nip: "123456789012345678",
+        image: "image.jpg",
+        file_path: "path/to/file",
+      };
 
-    prisma.laporan.create.mockResolvedValue(mockData);
-
-    const result = await laporanService.createLaporan(mockData);
-
-    expect(prisma.laporan.create).toHaveBeenCalledWith({
-      data: mockData,
-    });
-    expect(result).toEqual(mockData);
-  });
-
-  // Test untuk getLaporanById
-  test("getLaporanById harus mengembalikan laporan berdasarkan kode", async () => {
-    const mockLaporan = {
-      kd_laporan: "laporan-1",
-      isi_laporan: "Isi laporan test",
-      judul_laporan: "Judul Laporan Test",
-      user_nip: "123456789012345678",
-      user: { nip: "123456789012345678", nama: "John Doe" },
-    };
-
-    prisma.laporan.findUnique.mockResolvedValue(mockLaporan);
-
-    const result = await laporanService.getLaporanById("laporan-1");
-
-    expect(prisma.laporan.findUnique).toHaveBeenCalledWith({
-      where: { kd_laporan: "laporan-1" },
-      include: {
-        user: true,
-      },
-    });
-    expect(result).toEqual(mockLaporan);
-  });
-
-  // Test untuk getLaporanById ketika laporan tidak ditemukan
-  test("getLaporanById harus melempar error ketika laporan tidak ditemukan", async () => {
-    prisma.laporan.findUnique.mockResolvedValue(null);
-
-    await expect(laporanService.getLaporanById("laporan-tidak-ada")).rejects.toThrow("Laporan tidak ditemukan");
-
-    expect(prisma.laporan.findUnique).toHaveBeenCalledWith({
-      where: { kd_laporan: "laporan-tidak-ada" },
-      include: {
-        user: true,
-      },
-    });
-  });
-
-  // Test untuk getAllLaporan tanpa filter
-  test("getAllLaporan harus mengembalikan semua laporan", async () => {
-    const mockList = [
-      {
+      const mockCreatedLaporan = {
         kd_laporan: "laporan-1",
-        isi_laporan: "Isi laporan test 1",
-        judul_laporan: "Judul Laporan Test 1",
-        user_nip: "123456789012345678",
-        user: { nip: "123456789012345678", nama: "John Doe" },
-      },
-      {
-        kd_laporan: "laporan-2",
-        isi_laporan: "Isi laporan test 2",
-        judul_laporan: "Judul Laporan Test 2",
-        user_nip: "876543210987654321",
-        user: { nip: "876543210987654321", nama: "Jane Doe" },
-      },
-    ];
+        ...mockData,
+        created_at: new Date(),
+        updated_at: new Date(),
+      };
 
-    prisma.laporan.findMany.mockResolvedValue(mockList);
+      prisma.laporan.create.mockResolvedValue(mockCreatedLaporan);
 
-    const result = await laporanService.getAllLaporan();
+      const result = await laporanService.createLaporan(mockData);
 
-    expect(prisma.laporan.findMany).toHaveBeenCalledWith({
-      where: {},
-      include: {
-        user: true,
-      },
-      orderBy: {
-        created_at: "desc",
-      },
+      expect(prisma.laporan.create).toHaveBeenCalledWith({
+        data: mockData,
+      });
+      expect(result).toEqual(mockCreatedLaporan);
     });
-    expect(result).toEqual(mockList);
   });
 
-  // Test untuk getAllLaporan dengan filter
-  test("getAllLaporan harus memfilter berdasarkan parameter", async () => {
-    const mockFiltered = [
-      {
+  describe("getLaporanById", () => {
+    it("harus mengembalikan laporan berdasarkan kode", async () => {
+      const mockLaporan = {
         kd_laporan: "laporan-1",
-        isi_laporan: "Isi laporan test 1",
-        judul_laporan: "Judul Laporan Test 1",
+        judul: "Laporan Test",
+        deskripsi: "Deskripsi laporan test",
         user_nip: "123456789012345678",
-        user: { nip: "123456789012345678", nama: "John Doe" },
-      },
-    ];
-
-    prisma.laporan.findMany.mockResolvedValue(mockFiltered);
-
-    const filter = {
-      user_nip: "123456789012345678",
-      judul_laporan: "Test 1",
-    };
-
-    const result = await laporanService.getAllLaporan(filter);
-
-    expect(prisma.laporan.findMany).toHaveBeenCalledWith({
-      where: {
-        user_nip: "123456789012345678",
-        judul_laporan: {
-          contains: "Test 1",
+        image: "image.jpg",
+        file_path: "path/to/file",
+        created_at: new Date(),
+        updated_at: new Date(),
+        user: {
+          nip: "123456789012345678",
+          nama: "Test User",
+          role: "user",
+          image: "user.jpg",
         },
-      },
-      include: {
-        user: true,
-      },
-      orderBy: {
-        created_at: "desc",
-      },
+      };
+
+      prisma.laporan.findUnique.mockResolvedValue(mockLaporan);
+
+      const result = await laporanService.getLaporanById("laporan-1");
+
+      expect(prisma.laporan.findUnique).toHaveBeenCalledWith({
+        where: { kd_laporan: "laporan-1" },
+        include: {
+          user: true,
+        },
+      });
+      expect(result).toEqual(mockLaporan);
     });
-    expect(result).toEqual(mockFiltered);
+
+    it("harus melempar error ketika laporan tidak ditemukan", async () => {
+      prisma.laporan.findUnique.mockResolvedValue(null);
+
+      await expect(
+        laporanService.getLaporanById("laporan-tidak-ada")
+      ).rejects.toThrow("Laporan tidak ditemukan");
+
+      expect(prisma.laporan.findUnique).toHaveBeenCalledWith({
+        where: { kd_laporan: "laporan-tidak-ada" },
+        include: {
+          user: true,
+        },
+      });
+    });
   });
 
-  // Test untuk updateLaporan
-  test("updateLaporan harus memperbarui laporan", async () => {
-    const kd_laporan = "laporan-1";
-    const updateData = {
-      judul_laporan: "Judul Laporan Diperbarui",
-      isi_laporan: "Isi laporan diperbarui",
-    };
+  describe("getAllLaporan", () => {
+    it("harus mengembalikan semua laporan", async () => {
+      const mockLaporan = [
+        {
+          kd_laporan: "laporan-1",
+          judul: "Laporan Test",
+          deskripsi: "Deskripsi laporan test",
+          user_nip: "123456789012345678",
+          image: "image.jpg",
+          file_path: "path/to/file",
+          created_at: new Date(),
+          updated_at: new Date(),
+          user: {
+            nip: "123456789012345678",
+            nama: "Test User",
+            role: "user",
+            image: "user.jpg",
+          },
+        },
+      ];
 
-    const existingLaporan = {
-      kd_laporan: "laporan-1",
-      isi_laporan: "Isi laporan test",
-      judul_laporan: "Judul Laporan Test",
-      user_nip: "123456789012345678",
-    };
+      prisma.laporan.findMany.mockResolvedValue(mockLaporan);
 
-    const updatedLaporan = {
-      ...existingLaporan,
-      ...updateData,
-    };
+      const result = await laporanService.getAllLaporan({});
 
-    prisma.laporan.findUnique.mockResolvedValue(existingLaporan);
-    prisma.laporan.update.mockResolvedValue(updatedLaporan);
-
-    const result = await laporanService.updateLaporan(kd_laporan, updateData);
-
-    expect(prisma.laporan.findUnique).toHaveBeenCalledWith({
-      where: { kd_laporan },
+      expect(prisma.laporan.findMany).toHaveBeenCalledWith({
+        where: {},
+        include: {
+          user: true,
+        },
+        orderBy: {
+          created_at: "desc",
+        },
+      });
+      expect(result).toEqual(mockLaporan);
     });
-    expect(prisma.laporan.update).toHaveBeenCalledWith({
-      where: { kd_laporan },
-      data: updateData,
-    });
-    expect(result).toEqual(updatedLaporan);
-  });
 
-  // Test untuk updateLaporan ketika laporan tidak ditemukan
-  test("updateLaporan harus melempar error ketika laporan tidak ditemukan", async () => {
-    const kd_laporan = "laporan-tidak-ada";
-    const updateData = {
-      judul_laporan: "Judul Laporan Diperbarui",
-    };
+    it("harus memfilter laporan berdasarkan parameter", async () => {
+      const mockLaporan = [
+        {
+          kd_laporan: "laporan-1",
+          judul: "Laporan Test",
+          deskripsi: "Deskripsi laporan test",
+          user_nip: "123456789012345678",
+          image: "image.jpg",
+          file_path: "path/to/file",
+          created_at: new Date(),
+          updated_at: new Date(),
+          user: {
+            nip: "123456789012345678",
+            nama: "Test User",
+            role: "user",
+            image: "user.jpg",
+          },
+        },
+      ];
 
-    prisma.laporan.findUnique.mockResolvedValue(null);
+      prisma.laporan.findMany.mockResolvedValue(mockLaporan);
 
-    await expect(laporanService.updateLaporan(kd_laporan, updateData)).rejects.toThrow("Laporan tidak ditemukan");
-
-    expect(prisma.laporan.findUnique).toHaveBeenCalledWith({
-      where: { kd_laporan },
-    });
-    expect(prisma.laporan.update).not.toHaveBeenCalled();
-  });
-
-  // Test untuk deleteLaporan
-  test("deleteLaporan harus menghapus laporan", async () => {
-    const kd_laporan = "laporan-1";
-    const existingLaporan = {
-      kd_laporan: "laporan-1",
-      isi_laporan: "Isi laporan test",
-      judul_laporan: "Judul Laporan Test",
-      user_nip: "123456789012345678",
-    };
-
-    prisma.laporan.findUnique.mockResolvedValue(existingLaporan);
-    prisma.laporan.delete.mockResolvedValue(existingLaporan);
-
-    const result = await laporanService.deleteLaporan(kd_laporan);
-
-    expect(prisma.laporan.findUnique).toHaveBeenCalledWith({
-      where: { kd_laporan },
-    });
-    expect(prisma.laporan.delete).toHaveBeenCalledWith({
-      where: { kd_laporan },
-    });
-    expect(result).toEqual(existingLaporan);
-  });
-
-  // Test untuk deleteLaporan ketika laporan tidak ditemukan
-  test("deleteLaporan harus melempar error ketika laporan tidak ditemukan", async () => {
-    const kd_laporan = "laporan-tidak-ada";
-
-    prisma.laporan.findUnique.mockResolvedValue(null);
-
-    await expect(laporanService.deleteLaporan(kd_laporan)).rejects.toThrow("Laporan tidak ditemukan");
-
-    expect(prisma.laporan.findUnique).toHaveBeenCalledWith({
-      where: { kd_laporan },
-    });
-    expect(prisma.laporan.delete).not.toHaveBeenCalled();
-  });
-
-  // Test untuk getLaporanByUserNip
-  test("getLaporanByUserNip harus mengembalikan laporan berdasarkan NIP user", async () => {
-    const user_nip = "123456789012345678";
-    const mockLaporanList = [
-      {
+      const result = await laporanService.getAllLaporan({
         kd_laporan: "laporan-1",
-        isi_laporan: "Isi laporan test 1",
-        judul_laporan: "Judul Laporan Test 1",
+        judul_laporan: "Laporan Test",
         user_nip: "123456789012345678",
-        user: { nip: "123456789012345678", nama: "John Doe" },
-      },
-      {
-        kd_laporan: "laporan-3",
-        isi_laporan: "Isi laporan test 3",
-        judul_laporan: "Judul Laporan Test 3",
-        user_nip: "123456789012345678",
-        user: { nip: "123456789012345678", nama: "John Doe" },
-      },
-    ];
+      });
 
-    prisma.laporan.findMany.mockResolvedValue(mockLaporanList);
-
-    const result = await laporanService.getLaporanByUserNip(user_nip);
-
-    expect(prisma.laporan.findMany).toHaveBeenCalledWith({
-      where: { user_nip },
-      include: {
-        user: true,
-      },
-      orderBy: {
-        created_at: "desc",
-      },
+      expect(prisma.laporan.findMany).toHaveBeenCalledWith({
+        where: {
+          kd_laporan: "laporan-1",
+          judul_laporan: {
+            contains: "Laporan Test",
+          },
+          user_nip: "123456789012345678",
+        },
+        include: {
+          user: true,
+        },
+        orderBy: {
+          created_at: "desc",
+        },
+      });
+      expect(result).toEqual(mockLaporan);
     });
-    expect(result).toEqual(mockLaporanList);
+  });
+
+  describe("updateLaporan", () => {
+    it("harus memperbarui laporan", async () => {
+      const updateData = {
+        judul: "Laporan Test Updated",
+        deskripsi: "Deskripsi laporan test updated",
+      };
+
+      const mockUpdatedLaporan = {
+        kd_laporan: "laporan-1",
+        ...updateData,
+        user_nip: "123456789012345678",
+        image: "image.jpg",
+        file_path: "path/to/file",
+        created_at: new Date(),
+        updated_at: new Date(),
+      };
+
+      prisma.laporan.findUnique.mockResolvedValue({ kd_laporan: "laporan-1" });
+      prisma.laporan.update.mockResolvedValue(mockUpdatedLaporan);
+
+      const result = await laporanService.updateLaporan(
+        "laporan-1",
+        updateData
+      );
+
+      expect(prisma.laporan.update).toHaveBeenCalledWith({
+        where: { kd_laporan: "laporan-1" },
+        data: updateData,
+      });
+      expect(result).toEqual(mockUpdatedLaporan);
+    });
+
+    it("harus melempar error ketika laporan tidak ditemukan", async () => {
+      prisma.laporan.findUnique.mockResolvedValue(null);
+
+      await expect(
+        laporanService.updateLaporan("laporan-tidak-ada", {
+          judul: "Laporan Test Updated",
+        })
+      ).rejects.toThrow("Laporan tidak ditemukan");
+    });
+  });
+
+  describe("deleteLaporan", () => {
+    it("harus menghapus laporan", async () => {
+      const mockDeletedLaporan = {
+        kd_laporan: "laporan-1",
+        judul: "Laporan Test",
+        deskripsi: "Deskripsi laporan test",
+        user_nip: "123456789012345678",
+        image: "image.jpg",
+        file_path: "path/to/file",
+        created_at: new Date(),
+        updated_at: new Date(),
+      };
+
+      prisma.laporan.findUnique.mockResolvedValue({ kd_laporan: "laporan-1" });
+      prisma.laporan.delete.mockResolvedValue(mockDeletedLaporan);
+
+      const result = await laporanService.deleteLaporan("laporan-1");
+
+      expect(prisma.laporan.delete).toHaveBeenCalledWith({
+        where: { kd_laporan: "laporan-1" },
+      });
+      expect(result).toEqual(mockDeletedLaporan);
+    });
+
+    it("harus melempar error ketika laporan tidak ditemukan", async () => {
+      prisma.laporan.findUnique.mockResolvedValue(null);
+
+      await expect(
+        laporanService.deleteLaporan("laporan-tidak-ada")
+      ).rejects.toThrow("Laporan tidak ditemukan");
+    });
+  });
+
+  describe("getLaporanByUserNip", () => {
+    it("harus mengembalikan laporan berdasarkan NIP user", async () => {
+      const mockLaporan = [
+        {
+          kd_laporan: "laporan-1",
+          judul: "Laporan Test",
+          deskripsi: "Deskripsi laporan test",
+          user_nip: "123456789012345678",
+          image: "image.jpg",
+          file_path: "path/to/file",
+          created_at: new Date(),
+          updated_at: new Date(),
+          user: {
+            nip: "123456789012345678",
+            nama: "Test User",
+            jabatan: {
+              kd_jabatan: "J001",
+              nama_jabatan: "Staff",
+            },
+          },
+        },
+      ];
+
+      prisma.laporan.findMany.mockResolvedValue(mockLaporan);
+
+      const result =
+        await laporanService.getLaporanByUserNip("123456789012345678");
+
+      expect(prisma.laporan.findMany).toHaveBeenCalledWith({
+        where: { user_nip: "123456789012345678" },
+        include: {
+          user: {
+            select: {
+              nip: true,
+              nama: true,
+              jabatan: true,
+            },
+          },
+        },
+        orderBy: {
+          created_at: "desc",
+        },
+      });
+      expect(result).toEqual(mockLaporan);
+    });
   });
 });

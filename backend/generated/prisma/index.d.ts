@@ -359,8 +359,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.7.0
-   * Query Engine version: 3cff47a7f5d65c3ea74883f1d736e41d68ce91ed
+   * Prisma Client JS version: 6.8.2
+   * Query Engine version: 2060c79ba17c6bb9f5823312b6f6b7f4a845738e
    */
   export type PrismaVersion = {
     client: string
@@ -2551,6 +2551,7 @@ export namespace Prisma {
     password: string | null
     role: $Enums.Role | null
     kd_jabatan: string | null
+    image: string | null
     nip_atasan: string | null
     created_at: Date | null
     updated_at: Date | null
@@ -2562,6 +2563,7 @@ export namespace Prisma {
     password: string | null
     role: $Enums.Role | null
     kd_jabatan: string | null
+    image: string | null
     nip_atasan: string | null
     created_at: Date | null
     updated_at: Date | null
@@ -2573,6 +2575,7 @@ export namespace Prisma {
     password: number
     role: number
     kd_jabatan: number
+    image: number
     nip_atasan: number
     created_at: number
     updated_at: number
@@ -2586,6 +2589,7 @@ export namespace Prisma {
     password?: true
     role?: true
     kd_jabatan?: true
+    image?: true
     nip_atasan?: true
     created_at?: true
     updated_at?: true
@@ -2597,6 +2601,7 @@ export namespace Prisma {
     password?: true
     role?: true
     kd_jabatan?: true
+    image?: true
     nip_atasan?: true
     created_at?: true
     updated_at?: true
@@ -2608,6 +2613,7 @@ export namespace Prisma {
     password?: true
     role?: true
     kd_jabatan?: true
+    image?: true
     nip_atasan?: true
     created_at?: true
     updated_at?: true
@@ -2692,6 +2698,7 @@ export namespace Prisma {
     password: string
     role: $Enums.Role
     kd_jabatan: string
+    image: string | null
     nip_atasan: string | null
     created_at: Date
     updated_at: Date
@@ -2720,6 +2727,7 @@ export namespace Prisma {
     password?: boolean
     role?: boolean
     kd_jabatan?: boolean
+    image?: boolean
     nip_atasan?: boolean
     created_at?: boolean
     updated_at?: boolean
@@ -2741,12 +2749,13 @@ export namespace Prisma {
     password?: boolean
     role?: boolean
     kd_jabatan?: boolean
+    image?: boolean
     nip_atasan?: boolean
     created_at?: boolean
     updated_at?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"nip" | "nama" | "password" | "role" | "kd_jabatan" | "nip_atasan" | "created_at" | "updated_at", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"nip" | "nama" | "password" | "role" | "kd_jabatan" | "image" | "nip_atasan" | "created_at" | "updated_at", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     atasan?: boolean | User$atasanArgs<ExtArgs>
     jabatan?: boolean | JabatanDefaultArgs<ExtArgs>
@@ -2775,6 +2784,7 @@ export namespace Prisma {
       password: string
       role: $Enums.Role
       kd_jabatan: string
+      image: string | null
       nip_atasan: string | null
       created_at: Date
       updated_at: Date
@@ -3159,6 +3169,7 @@ export namespace Prisma {
     readonly password: FieldRef<"User", 'String'>
     readonly role: FieldRef<"User", 'Role'>
     readonly kd_jabatan: FieldRef<"User", 'String'>
+    readonly image: FieldRef<"User", 'String'>
     readonly nip_atasan: FieldRef<"User", 'String'>
     readonly created_at: FieldRef<"User", 'DateTime'>
     readonly updated_at: FieldRef<"User", 'DateTime'>
@@ -5635,6 +5646,7 @@ export namespace Prisma {
     isi_laporan: string | null
     judul_laporan: string | null
     user_nip: string | null
+    file_path: string | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -5644,6 +5656,7 @@ export namespace Prisma {
     isi_laporan: string | null
     judul_laporan: string | null
     user_nip: string | null
+    file_path: string | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -5653,6 +5666,7 @@ export namespace Prisma {
     isi_laporan: number
     judul_laporan: number
     user_nip: number
+    file_path: number
     created_at: number
     updated_at: number
     _all: number
@@ -5664,6 +5678,7 @@ export namespace Prisma {
     isi_laporan?: true
     judul_laporan?: true
     user_nip?: true
+    file_path?: true
     created_at?: true
     updated_at?: true
   }
@@ -5673,6 +5688,7 @@ export namespace Prisma {
     isi_laporan?: true
     judul_laporan?: true
     user_nip?: true
+    file_path?: true
     created_at?: true
     updated_at?: true
   }
@@ -5682,6 +5698,7 @@ export namespace Prisma {
     isi_laporan?: true
     judul_laporan?: true
     user_nip?: true
+    file_path?: true
     created_at?: true
     updated_at?: true
     _all?: true
@@ -5764,6 +5781,7 @@ export namespace Prisma {
     isi_laporan: string
     judul_laporan: string
     user_nip: string
+    file_path: string
     created_at: Date
     updated_at: Date
     _count: LaporanCountAggregateOutputType | null
@@ -5790,6 +5808,7 @@ export namespace Prisma {
     isi_laporan?: boolean
     judul_laporan?: boolean
     user_nip?: boolean
+    file_path?: boolean
     created_at?: boolean
     updated_at?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -5802,11 +5821,12 @@ export namespace Prisma {
     isi_laporan?: boolean
     judul_laporan?: boolean
     user_nip?: boolean
+    file_path?: boolean
     created_at?: boolean
     updated_at?: boolean
   }
 
-  export type LaporanOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"kd_laporan" | "isi_laporan" | "judul_laporan" | "user_nip" | "created_at" | "updated_at", ExtArgs["result"]["laporan"]>
+  export type LaporanOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"kd_laporan" | "isi_laporan" | "judul_laporan" | "user_nip" | "file_path" | "created_at" | "updated_at", ExtArgs["result"]["laporan"]>
   export type LaporanInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -5821,6 +5841,7 @@ export namespace Prisma {
       isi_laporan: string
       judul_laporan: string
       user_nip: string
+      file_path: string
       created_at: Date
       updated_at: Date
     }, ExtArgs["result"]["laporan"]>
@@ -6197,6 +6218,7 @@ export namespace Prisma {
     readonly isi_laporan: FieldRef<"Laporan", 'String'>
     readonly judul_laporan: FieldRef<"Laporan", 'String'>
     readonly user_nip: FieldRef<"Laporan", 'String'>
+    readonly file_path: FieldRef<"Laporan", 'String'>
     readonly created_at: FieldRef<"Laporan", 'DateTime'>
     readonly updated_at: FieldRef<"Laporan", 'DateTime'>
   }
@@ -6575,6 +6597,7 @@ export namespace Prisma {
     kd_tugas: string | null
     user_nip: string | null
     tanggal_pengumpulan: Date | null
+    image: string | null
     file_path: string | null
     catatan: string | null
     status: $Enums.StatusPengumpulanTugas | null
@@ -6587,6 +6610,7 @@ export namespace Prisma {
     kd_tugas: string | null
     user_nip: string | null
     tanggal_pengumpulan: Date | null
+    image: string | null
     file_path: string | null
     catatan: string | null
     status: $Enums.StatusPengumpulanTugas | null
@@ -6599,6 +6623,7 @@ export namespace Prisma {
     kd_tugas: number
     user_nip: number
     tanggal_pengumpulan: number
+    image: number
     file_path: number
     catatan: number
     status: number
@@ -6613,6 +6638,7 @@ export namespace Prisma {
     kd_tugas?: true
     user_nip?: true
     tanggal_pengumpulan?: true
+    image?: true
     file_path?: true
     catatan?: true
     status?: true
@@ -6625,6 +6651,7 @@ export namespace Prisma {
     kd_tugas?: true
     user_nip?: true
     tanggal_pengumpulan?: true
+    image?: true
     file_path?: true
     catatan?: true
     status?: true
@@ -6637,6 +6664,7 @@ export namespace Prisma {
     kd_tugas?: true
     user_nip?: true
     tanggal_pengumpulan?: true
+    image?: true
     file_path?: true
     catatan?: true
     status?: true
@@ -6722,7 +6750,8 @@ export namespace Prisma {
     kd_tugas: string
     user_nip: string
     tanggal_pengumpulan: Date
-    file_path: string
+    image: string | null
+    file_path: string | null
     catatan: string
     status: $Enums.StatusPengumpulanTugas
     created_at: Date
@@ -6751,6 +6780,7 @@ export namespace Prisma {
     kd_tugas?: boolean
     user_nip?: boolean
     tanggal_pengumpulan?: boolean
+    image?: boolean
     file_path?: boolean
     catatan?: boolean
     status?: boolean
@@ -6769,6 +6799,7 @@ export namespace Prisma {
     kd_tugas?: boolean
     user_nip?: boolean
     tanggal_pengumpulan?: boolean
+    image?: boolean
     file_path?: boolean
     catatan?: boolean
     status?: boolean
@@ -6776,7 +6807,7 @@ export namespace Prisma {
     updated_at?: boolean
   }
 
-  export type PengumpulanTugasOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"kd_pengumpulan_tugas" | "kd_tugas" | "user_nip" | "tanggal_pengumpulan" | "file_path" | "catatan" | "status" | "created_at" | "updated_at", ExtArgs["result"]["pengumpulanTugas"]>
+  export type PengumpulanTugasOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"kd_pengumpulan_tugas" | "kd_tugas" | "user_nip" | "tanggal_pengumpulan" | "image" | "file_path" | "catatan" | "status" | "created_at" | "updated_at", ExtArgs["result"]["pengumpulanTugas"]>
   export type PengumpulanTugasInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tugas?: boolean | TugasDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -6796,7 +6827,8 @@ export namespace Prisma {
       kd_tugas: string
       user_nip: string
       tanggal_pengumpulan: Date
-      file_path: string
+      image: string | null
+      file_path: string | null
       catatan: string
       status: $Enums.StatusPengumpulanTugas
       created_at: Date
@@ -7177,6 +7209,7 @@ export namespace Prisma {
     readonly kd_tugas: FieldRef<"PengumpulanTugas", 'String'>
     readonly user_nip: FieldRef<"PengumpulanTugas", 'String'>
     readonly tanggal_pengumpulan: FieldRef<"PengumpulanTugas", 'DateTime'>
+    readonly image: FieldRef<"PengumpulanTugas", 'String'>
     readonly file_path: FieldRef<"PengumpulanTugas", 'String'>
     readonly catatan: FieldRef<"PengumpulanTugas", 'String'>
     readonly status: FieldRef<"PengumpulanTugas", 'StatusPengumpulanTugas'>
@@ -8558,6 +8591,7 @@ export namespace Prisma {
     password: 'password',
     role: 'role',
     kd_jabatan: 'kd_jabatan',
+    image: 'image',
     nip_atasan: 'nip_atasan',
     created_at: 'created_at',
     updated_at: 'updated_at'
@@ -8599,6 +8633,7 @@ export namespace Prisma {
     isi_laporan: 'isi_laporan',
     judul_laporan: 'judul_laporan',
     user_nip: 'user_nip',
+    file_path: 'file_path',
     created_at: 'created_at',
     updated_at: 'updated_at'
   };
@@ -8611,6 +8646,7 @@ export namespace Prisma {
     kd_tugas: 'kd_tugas',
     user_nip: 'user_nip',
     tanggal_pengumpulan: 'tanggal_pengumpulan',
+    image: 'image',
     file_path: 'file_path',
     catatan: 'catatan',
     status: 'status',
@@ -8661,6 +8697,7 @@ export namespace Prisma {
     nama: 'nama',
     password: 'password',
     kd_jabatan: 'kd_jabatan',
+    image: 'image',
     nip_atasan: 'nip_atasan'
   };
 
@@ -8690,7 +8727,8 @@ export namespace Prisma {
     kd_laporan: 'kd_laporan',
     isi_laporan: 'isi_laporan',
     judul_laporan: 'judul_laporan',
-    user_nip: 'user_nip'
+    user_nip: 'user_nip',
+    file_path: 'file_path'
   };
 
   export type LaporanOrderByRelevanceFieldEnum = (typeof LaporanOrderByRelevanceFieldEnum)[keyof typeof LaporanOrderByRelevanceFieldEnum]
@@ -8700,6 +8738,7 @@ export namespace Prisma {
     kd_pengumpulan_tugas: 'kd_pengumpulan_tugas',
     kd_tugas: 'kd_tugas',
     user_nip: 'user_nip',
+    image: 'image',
     file_path: 'file_path',
     catatan: 'catatan'
   };
@@ -8833,6 +8872,7 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     role?: EnumRoleFilter<"User"> | $Enums.Role
     kd_jabatan?: StringFilter<"User"> | string
+    image?: StringNullableFilter<"User"> | string | null
     nip_atasan?: StringNullableFilter<"User"> | string | null
     created_at?: DateTimeFilter<"User"> | Date | string
     updated_at?: DateTimeFilter<"User"> | Date | string
@@ -8851,6 +8891,7 @@ export namespace Prisma {
     password?: SortOrder
     role?: SortOrder
     kd_jabatan?: SortOrder
+    image?: SortOrderInput | SortOrder
     nip_atasan?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -8873,6 +8914,7 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     role?: EnumRoleFilter<"User"> | $Enums.Role
     kd_jabatan?: StringFilter<"User"> | string
+    image?: StringNullableFilter<"User"> | string | null
     nip_atasan?: StringNullableFilter<"User"> | string | null
     created_at?: DateTimeFilter<"User"> | Date | string
     updated_at?: DateTimeFilter<"User"> | Date | string
@@ -8891,6 +8933,7 @@ export namespace Prisma {
     password?: SortOrder
     role?: SortOrder
     kd_jabatan?: SortOrder
+    image?: SortOrderInput | SortOrder
     nip_atasan?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -8908,6 +8951,7 @@ export namespace Prisma {
     password?: StringWithAggregatesFilter<"User"> | string
     role?: EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
     kd_jabatan?: StringWithAggregatesFilter<"User"> | string
+    image?: StringNullableWithAggregatesFilter<"User"> | string | null
     nip_atasan?: StringNullableWithAggregatesFilter<"User"> | string | null
     created_at?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"User"> | Date | string
@@ -9069,6 +9113,7 @@ export namespace Prisma {
     isi_laporan?: StringFilter<"Laporan"> | string
     judul_laporan?: StringFilter<"Laporan"> | string
     user_nip?: StringFilter<"Laporan"> | string
+    file_path?: StringFilter<"Laporan"> | string
     created_at?: DateTimeFilter<"Laporan"> | Date | string
     updated_at?: DateTimeFilter<"Laporan"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -9079,6 +9124,7 @@ export namespace Prisma {
     isi_laporan?: SortOrder
     judul_laporan?: SortOrder
     user_nip?: SortOrder
+    file_path?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     user?: UserOrderByWithRelationInput
@@ -9093,6 +9139,7 @@ export namespace Prisma {
     isi_laporan?: StringFilter<"Laporan"> | string
     judul_laporan?: StringFilter<"Laporan"> | string
     user_nip?: StringFilter<"Laporan"> | string
+    file_path?: StringFilter<"Laporan"> | string
     created_at?: DateTimeFilter<"Laporan"> | Date | string
     updated_at?: DateTimeFilter<"Laporan"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -9103,6 +9150,7 @@ export namespace Prisma {
     isi_laporan?: SortOrder
     judul_laporan?: SortOrder
     user_nip?: SortOrder
+    file_path?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     _count?: LaporanCountOrderByAggregateInput
@@ -9118,6 +9166,7 @@ export namespace Prisma {
     isi_laporan?: StringWithAggregatesFilter<"Laporan"> | string
     judul_laporan?: StringWithAggregatesFilter<"Laporan"> | string
     user_nip?: StringWithAggregatesFilter<"Laporan"> | string
+    file_path?: StringWithAggregatesFilter<"Laporan"> | string
     created_at?: DateTimeWithAggregatesFilter<"Laporan"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"Laporan"> | Date | string
   }
@@ -9130,7 +9179,8 @@ export namespace Prisma {
     kd_tugas?: StringFilter<"PengumpulanTugas"> | string
     user_nip?: StringFilter<"PengumpulanTugas"> | string
     tanggal_pengumpulan?: DateTimeFilter<"PengumpulanTugas"> | Date | string
-    file_path?: StringFilter<"PengumpulanTugas"> | string
+    image?: StringNullableFilter<"PengumpulanTugas"> | string | null
+    file_path?: StringNullableFilter<"PengumpulanTugas"> | string | null
     catatan?: StringFilter<"PengumpulanTugas"> | string
     status?: EnumStatusPengumpulanTugasFilter<"PengumpulanTugas"> | $Enums.StatusPengumpulanTugas
     created_at?: DateTimeFilter<"PengumpulanTugas"> | Date | string
@@ -9145,7 +9195,8 @@ export namespace Prisma {
     kd_tugas?: SortOrder
     user_nip?: SortOrder
     tanggal_pengumpulan?: SortOrder
-    file_path?: SortOrder
+    image?: SortOrderInput | SortOrder
+    file_path?: SortOrderInput | SortOrder
     catatan?: SortOrder
     status?: SortOrder
     created_at?: SortOrder
@@ -9164,7 +9215,8 @@ export namespace Prisma {
     kd_tugas?: StringFilter<"PengumpulanTugas"> | string
     user_nip?: StringFilter<"PengumpulanTugas"> | string
     tanggal_pengumpulan?: DateTimeFilter<"PengumpulanTugas"> | Date | string
-    file_path?: StringFilter<"PengumpulanTugas"> | string
+    image?: StringNullableFilter<"PengumpulanTugas"> | string | null
+    file_path?: StringNullableFilter<"PengumpulanTugas"> | string | null
     catatan?: StringFilter<"PengumpulanTugas"> | string
     status?: EnumStatusPengumpulanTugasFilter<"PengumpulanTugas"> | $Enums.StatusPengumpulanTugas
     created_at?: DateTimeFilter<"PengumpulanTugas"> | Date | string
@@ -9179,7 +9231,8 @@ export namespace Prisma {
     kd_tugas?: SortOrder
     user_nip?: SortOrder
     tanggal_pengumpulan?: SortOrder
-    file_path?: SortOrder
+    image?: SortOrderInput | SortOrder
+    file_path?: SortOrderInput | SortOrder
     catatan?: SortOrder
     status?: SortOrder
     created_at?: SortOrder
@@ -9197,7 +9250,8 @@ export namespace Prisma {
     kd_tugas?: StringWithAggregatesFilter<"PengumpulanTugas"> | string
     user_nip?: StringWithAggregatesFilter<"PengumpulanTugas"> | string
     tanggal_pengumpulan?: DateTimeWithAggregatesFilter<"PengumpulanTugas"> | Date | string
-    file_path?: StringWithAggregatesFilter<"PengumpulanTugas"> | string
+    image?: StringNullableWithAggregatesFilter<"PengumpulanTugas"> | string | null
+    file_path?: StringNullableWithAggregatesFilter<"PengumpulanTugas"> | string | null
     catatan?: StringWithAggregatesFilter<"PengumpulanTugas"> | string
     status?: EnumStatusPengumpulanTugasWithAggregatesFilter<"PengumpulanTugas"> | $Enums.StatusPengumpulanTugas
     created_at?: DateTimeWithAggregatesFilter<"PengumpulanTugas"> | Date | string
@@ -9310,6 +9364,7 @@ export namespace Prisma {
     nama: string
     password: string
     role?: $Enums.Role
+    image?: string | null
     created_at?: Date | string
     updated_at?: Date | string
     atasan?: UserCreateNestedOneWithoutBawahanInput
@@ -9327,6 +9382,7 @@ export namespace Prisma {
     password: string
     role?: $Enums.Role
     kd_jabatan: string
+    image?: string | null
     nip_atasan?: string | null
     created_at?: Date | string
     updated_at?: Date | string
@@ -9342,6 +9398,7 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     atasan?: UserUpdateOneWithoutBawahanNestedInput
@@ -9359,6 +9416,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     kd_jabatan?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     nip_atasan?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9375,6 +9433,7 @@ export namespace Prisma {
     password: string
     role?: $Enums.Role
     kd_jabatan: string
+    image?: string | null
     nip_atasan?: string | null
     created_at?: Date | string
     updated_at?: Date | string
@@ -9385,6 +9444,7 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9395,6 +9455,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     kd_jabatan?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     nip_atasan?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9559,6 +9620,7 @@ export namespace Prisma {
     kd_laporan?: string
     isi_laporan: string
     judul_laporan: string
+    file_path: string
     created_at?: Date | string
     updated_at?: Date | string
     user: UserCreateNestedOneWithoutLaporanInput
@@ -9569,6 +9631,7 @@ export namespace Prisma {
     isi_laporan: string
     judul_laporan: string
     user_nip: string
+    file_path: string
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -9577,6 +9640,7 @@ export namespace Prisma {
     kd_laporan?: StringFieldUpdateOperationsInput | string
     isi_laporan?: StringFieldUpdateOperationsInput | string
     judul_laporan?: StringFieldUpdateOperationsInput | string
+    file_path?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutLaporanNestedInput
@@ -9587,6 +9651,7 @@ export namespace Prisma {
     isi_laporan?: StringFieldUpdateOperationsInput | string
     judul_laporan?: StringFieldUpdateOperationsInput | string
     user_nip?: StringFieldUpdateOperationsInput | string
+    file_path?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9596,6 +9661,7 @@ export namespace Prisma {
     isi_laporan: string
     judul_laporan: string
     user_nip: string
+    file_path: string
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -9604,6 +9670,7 @@ export namespace Prisma {
     kd_laporan?: StringFieldUpdateOperationsInput | string
     isi_laporan?: StringFieldUpdateOperationsInput | string
     judul_laporan?: StringFieldUpdateOperationsInput | string
+    file_path?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9613,6 +9680,7 @@ export namespace Prisma {
     isi_laporan?: StringFieldUpdateOperationsInput | string
     judul_laporan?: StringFieldUpdateOperationsInput | string
     user_nip?: StringFieldUpdateOperationsInput | string
+    file_path?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9620,7 +9688,8 @@ export namespace Prisma {
   export type PengumpulanTugasCreateInput = {
     kd_pengumpulan_tugas?: string
     tanggal_pengumpulan: Date | string
-    file_path: string
+    image?: string | null
+    file_path?: string | null
     catatan: string
     status?: $Enums.StatusPengumpulanTugas
     created_at?: Date | string
@@ -9635,7 +9704,8 @@ export namespace Prisma {
     kd_tugas: string
     user_nip: string
     tanggal_pengumpulan: Date | string
-    file_path: string
+    image?: string | null
+    file_path?: string | null
     catatan: string
     status?: $Enums.StatusPengumpulanTugas
     created_at?: Date | string
@@ -9646,7 +9716,8 @@ export namespace Prisma {
   export type PengumpulanTugasUpdateInput = {
     kd_pengumpulan_tugas?: StringFieldUpdateOperationsInput | string
     tanggal_pengumpulan?: DateTimeFieldUpdateOperationsInput | Date | string
-    file_path?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    file_path?: NullableStringFieldUpdateOperationsInput | string | null
     catatan?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusPengumpulanTugasFieldUpdateOperationsInput | $Enums.StatusPengumpulanTugas
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9661,7 +9732,8 @@ export namespace Prisma {
     kd_tugas?: StringFieldUpdateOperationsInput | string
     user_nip?: StringFieldUpdateOperationsInput | string
     tanggal_pengumpulan?: DateTimeFieldUpdateOperationsInput | Date | string
-    file_path?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    file_path?: NullableStringFieldUpdateOperationsInput | string | null
     catatan?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusPengumpulanTugasFieldUpdateOperationsInput | $Enums.StatusPengumpulanTugas
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9674,7 +9746,8 @@ export namespace Prisma {
     kd_tugas: string
     user_nip: string
     tanggal_pengumpulan: Date | string
-    file_path: string
+    image?: string | null
+    file_path?: string | null
     catatan: string
     status?: $Enums.StatusPengumpulanTugas
     created_at?: Date | string
@@ -9684,7 +9757,8 @@ export namespace Prisma {
   export type PengumpulanTugasUpdateManyMutationInput = {
     kd_pengumpulan_tugas?: StringFieldUpdateOperationsInput | string
     tanggal_pengumpulan?: DateTimeFieldUpdateOperationsInput | Date | string
-    file_path?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    file_path?: NullableStringFieldUpdateOperationsInput | string | null
     catatan?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusPengumpulanTugasFieldUpdateOperationsInput | $Enums.StatusPengumpulanTugas
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9696,7 +9770,8 @@ export namespace Prisma {
     kd_tugas?: StringFieldUpdateOperationsInput | string
     user_nip?: StringFieldUpdateOperationsInput | string
     tanggal_pengumpulan?: DateTimeFieldUpdateOperationsInput | Date | string
-    file_path?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    file_path?: NullableStringFieldUpdateOperationsInput | string | null
     catatan?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusPengumpulanTugasFieldUpdateOperationsInput | $Enums.StatusPengumpulanTugas
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9922,6 +9997,7 @@ export namespace Prisma {
     password?: SortOrder
     role?: SortOrder
     kd_jabatan?: SortOrder
+    image?: SortOrder
     nip_atasan?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -9933,6 +10009,7 @@ export namespace Prisma {
     password?: SortOrder
     role?: SortOrder
     kd_jabatan?: SortOrder
+    image?: SortOrder
     nip_atasan?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -9944,6 +10021,7 @@ export namespace Prisma {
     password?: SortOrder
     role?: SortOrder
     kd_jabatan?: SortOrder
+    image?: SortOrder
     nip_atasan?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -10144,6 +10222,7 @@ export namespace Prisma {
     isi_laporan?: SortOrder
     judul_laporan?: SortOrder
     user_nip?: SortOrder
+    file_path?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -10153,6 +10232,7 @@ export namespace Prisma {
     isi_laporan?: SortOrder
     judul_laporan?: SortOrder
     user_nip?: SortOrder
+    file_path?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -10162,6 +10242,7 @@ export namespace Prisma {
     isi_laporan?: SortOrder
     judul_laporan?: SortOrder
     user_nip?: SortOrder
+    file_path?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -10199,6 +10280,7 @@ export namespace Prisma {
     kd_tugas?: SortOrder
     user_nip?: SortOrder
     tanggal_pengumpulan?: SortOrder
+    image?: SortOrder
     file_path?: SortOrder
     catatan?: SortOrder
     status?: SortOrder
@@ -10211,6 +10293,7 @@ export namespace Prisma {
     kd_tugas?: SortOrder
     user_nip?: SortOrder
     tanggal_pengumpulan?: SortOrder
+    image?: SortOrder
     file_path?: SortOrder
     catatan?: SortOrder
     status?: SortOrder
@@ -10223,6 +10306,7 @@ export namespace Prisma {
     kd_tugas?: SortOrder
     user_nip?: SortOrder
     tanggal_pengumpulan?: SortOrder
+    image?: SortOrder
     file_path?: SortOrder
     catatan?: SortOrder
     status?: SortOrder
@@ -10484,6 +10568,10 @@ export namespace Prisma {
     set?: $Enums.Role
   }
 
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
   }
@@ -10574,10 +10662,6 @@ export namespace Prisma {
     update?: PengumpulanTugasUpdateWithWhereUniqueWithoutUserInput | PengumpulanTugasUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: PengumpulanTugasUpdateManyWithWhereWithoutUserInput | PengumpulanTugasUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: PengumpulanTugasScalarWhereInput | PengumpulanTugasScalarWhereInput[]
-  }
-
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
   }
 
   export type UserUncheckedUpdateManyWithoutAtasanNestedInput = {
@@ -11094,6 +11178,7 @@ export namespace Prisma {
     nama: string
     password: string
     role?: $Enums.Role
+    image?: string | null
     created_at?: Date | string
     updated_at?: Date | string
     atasan?: UserCreateNestedOneWithoutBawahanInput
@@ -11109,6 +11194,7 @@ export namespace Prisma {
     nama: string
     password: string
     role?: $Enums.Role
+    image?: string | null
     nip_atasan?: string | null
     created_at?: Date | string
     updated_at?: Date | string
@@ -11182,6 +11268,7 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     role?: EnumRoleFilter<"User"> | $Enums.Role
     kd_jabatan?: StringFilter<"User"> | string
+    image?: StringNullableFilter<"User"> | string | null
     nip_atasan?: StringNullableFilter<"User"> | string | null
     created_at?: DateTimeFilter<"User"> | Date | string
     updated_at?: DateTimeFilter<"User"> | Date | string
@@ -11221,6 +11308,7 @@ export namespace Prisma {
     nama: string
     password: string
     role?: $Enums.Role
+    image?: string | null
     created_at?: Date | string
     updated_at?: Date | string
     atasan?: UserCreateNestedOneWithoutBawahanInput
@@ -11237,6 +11325,7 @@ export namespace Prisma {
     password: string
     role?: $Enums.Role
     kd_jabatan: string
+    image?: string | null
     nip_atasan?: string | null
     created_at?: Date | string
     updated_at?: Date | string
@@ -11273,6 +11362,7 @@ export namespace Prisma {
     nama: string
     password: string
     role?: $Enums.Role
+    image?: string | null
     created_at?: Date | string
     updated_at?: Date | string
     jabatan: JabatanCreateNestedOneWithoutUserInput
@@ -11289,6 +11379,7 @@ export namespace Prisma {
     password: string
     role?: $Enums.Role
     kd_jabatan: string
+    image?: string | null
     created_at?: Date | string
     updated_at?: Date | string
     bawahan?: UserUncheckedCreateNestedManyWithoutAtasanInput
@@ -11374,6 +11465,7 @@ export namespace Prisma {
     kd_laporan?: string
     isi_laporan: string
     judul_laporan: string
+    file_path: string
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -11382,6 +11474,7 @@ export namespace Prisma {
     kd_laporan?: string
     isi_laporan: string
     judul_laporan: string
+    file_path: string
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -11399,7 +11492,8 @@ export namespace Prisma {
   export type PengumpulanTugasCreateWithoutUserInput = {
     kd_pengumpulan_tugas?: string
     tanggal_pengumpulan: Date | string
-    file_path: string
+    image?: string | null
+    file_path?: string | null
     catatan: string
     status?: $Enums.StatusPengumpulanTugas
     created_at?: Date | string
@@ -11412,7 +11506,8 @@ export namespace Prisma {
     kd_pengumpulan_tugas?: string
     kd_tugas: string
     tanggal_pengumpulan: Date | string
-    file_path: string
+    image?: string | null
+    file_path?: string | null
     catatan: string
     status?: $Enums.StatusPengumpulanTugas
     created_at?: Date | string
@@ -11446,6 +11541,7 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     atasan?: UserUpdateOneWithoutBawahanNestedInput
@@ -11462,6 +11558,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     kd_jabatan?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     nip_atasan?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11581,6 +11678,7 @@ export namespace Prisma {
     isi_laporan?: StringFilter<"Laporan"> | string
     judul_laporan?: StringFilter<"Laporan"> | string
     user_nip?: StringFilter<"Laporan"> | string
+    file_path?: StringFilter<"Laporan"> | string
     created_at?: DateTimeFilter<"Laporan"> | Date | string
     updated_at?: DateTimeFilter<"Laporan"> | Date | string
   }
@@ -11609,7 +11707,8 @@ export namespace Prisma {
     kd_tugas?: StringFilter<"PengumpulanTugas"> | string
     user_nip?: StringFilter<"PengumpulanTugas"> | string
     tanggal_pengumpulan?: DateTimeFilter<"PengumpulanTugas"> | Date | string
-    file_path?: StringFilter<"PengumpulanTugas"> | string
+    image?: StringNullableFilter<"PengumpulanTugas"> | string | null
+    file_path?: StringNullableFilter<"PengumpulanTugas"> | string | null
     catatan?: StringFilter<"PengumpulanTugas"> | string
     status?: EnumStatusPengumpulanTugasFilter<"PengumpulanTugas"> | $Enums.StatusPengumpulanTugas
     created_at?: DateTimeFilter<"PengumpulanTugas"> | Date | string
@@ -11621,6 +11720,7 @@ export namespace Prisma {
     nama: string
     password: string
     role?: $Enums.Role
+    image?: string | null
     created_at?: Date | string
     updated_at?: Date | string
     atasan?: UserCreateNestedOneWithoutBawahanInput
@@ -11637,6 +11737,7 @@ export namespace Prisma {
     password: string
     role?: $Enums.Role
     kd_jabatan: string
+    image?: string | null
     nip_atasan?: string | null
     created_at?: Date | string
     updated_at?: Date | string
@@ -11684,6 +11785,7 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     atasan?: UserUpdateOneWithoutBawahanNestedInput
@@ -11700,6 +11802,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     kd_jabatan?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     nip_atasan?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11737,6 +11840,7 @@ export namespace Prisma {
     nama: string
     password: string
     role?: $Enums.Role
+    image?: string | null
     created_at?: Date | string
     updated_at?: Date | string
     atasan?: UserCreateNestedOneWithoutBawahanInput
@@ -11753,6 +11857,7 @@ export namespace Prisma {
     password: string
     role?: $Enums.Role
     kd_jabatan: string
+    image?: string | null
     nip_atasan?: string | null
     created_at?: Date | string
     updated_at?: Date | string
@@ -11770,7 +11875,8 @@ export namespace Prisma {
   export type PengumpulanTugasCreateWithoutTugasInput = {
     kd_pengumpulan_tugas?: string
     tanggal_pengumpulan: Date | string
-    file_path: string
+    image?: string | null
+    file_path?: string | null
     catatan: string
     status?: $Enums.StatusPengumpulanTugas
     created_at?: Date | string
@@ -11783,7 +11889,8 @@ export namespace Prisma {
     kd_pengumpulan_tugas?: string
     user_nip: string
     tanggal_pengumpulan: Date | string
-    file_path: string
+    image?: string | null
+    file_path?: string | null
     catatan: string
     status?: $Enums.StatusPengumpulanTugas
     created_at?: Date | string
@@ -11817,6 +11924,7 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     atasan?: UserUpdateOneWithoutBawahanNestedInput
@@ -11833,6 +11941,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     kd_jabatan?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     nip_atasan?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11863,6 +11972,7 @@ export namespace Prisma {
     nama: string
     password: string
     role?: $Enums.Role
+    image?: string | null
     created_at?: Date | string
     updated_at?: Date | string
     atasan?: UserCreateNestedOneWithoutBawahanInput
@@ -11879,6 +11989,7 @@ export namespace Prisma {
     password: string
     role?: $Enums.Role
     kd_jabatan: string
+    image?: string | null
     nip_atasan?: string | null
     created_at?: Date | string
     updated_at?: Date | string
@@ -11909,6 +12020,7 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     atasan?: UserUpdateOneWithoutBawahanNestedInput
@@ -11925,6 +12037,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     kd_jabatan?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     nip_atasan?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11968,6 +12081,7 @@ export namespace Prisma {
     nama: string
     password: string
     role?: $Enums.Role
+    image?: string | null
     created_at?: Date | string
     updated_at?: Date | string
     atasan?: UserCreateNestedOneWithoutBawahanInput
@@ -11984,6 +12098,7 @@ export namespace Prisma {
     password: string
     role?: $Enums.Role
     kd_jabatan: string
+    image?: string | null
     nip_atasan?: string | null
     created_at?: Date | string
     updated_at?: Date | string
@@ -12073,6 +12188,7 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     atasan?: UserUpdateOneWithoutBawahanNestedInput
@@ -12089,6 +12205,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     kd_jabatan?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     nip_atasan?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12128,7 +12245,8 @@ export namespace Prisma {
   export type PengumpulanTugasCreateWithoutRatingInput = {
     kd_pengumpulan_tugas?: string
     tanggal_pengumpulan: Date | string
-    file_path: string
+    image?: string | null
+    file_path?: string | null
     catatan: string
     status?: $Enums.StatusPengumpulanTugas
     created_at?: Date | string
@@ -12142,7 +12260,8 @@ export namespace Prisma {
     kd_tugas: string
     user_nip: string
     tanggal_pengumpulan: Date | string
-    file_path: string
+    image?: string | null
+    file_path?: string | null
     catatan: string
     status?: $Enums.StatusPengumpulanTugas
     created_at?: Date | string
@@ -12168,7 +12287,8 @@ export namespace Prisma {
   export type PengumpulanTugasUpdateWithoutRatingInput = {
     kd_pengumpulan_tugas?: StringFieldUpdateOperationsInput | string
     tanggal_pengumpulan?: DateTimeFieldUpdateOperationsInput | Date | string
-    file_path?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    file_path?: NullableStringFieldUpdateOperationsInput | string | null
     catatan?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusPengumpulanTugasFieldUpdateOperationsInput | $Enums.StatusPengumpulanTugas
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12182,7 +12302,8 @@ export namespace Prisma {
     kd_tugas?: StringFieldUpdateOperationsInput | string
     user_nip?: StringFieldUpdateOperationsInput | string
     tanggal_pengumpulan?: DateTimeFieldUpdateOperationsInput | Date | string
-    file_path?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    file_path?: NullableStringFieldUpdateOperationsInput | string | null
     catatan?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusPengumpulanTugasFieldUpdateOperationsInput | $Enums.StatusPengumpulanTugas
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12194,6 +12315,7 @@ export namespace Prisma {
     nama: string
     password: string
     role?: $Enums.Role
+    image?: string | null
     nip_atasan?: string | null
     created_at?: Date | string
     updated_at?: Date | string
@@ -12213,6 +12335,7 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     atasan?: UserUpdateOneWithoutBawahanNestedInput
@@ -12228,6 +12351,7 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     nip_atasan?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12243,6 +12367,7 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     nip_atasan?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12281,6 +12406,7 @@ export namespace Prisma {
     password: string
     role?: $Enums.Role
     kd_jabatan: string
+    image?: string | null
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -12309,6 +12435,7 @@ export namespace Prisma {
     kd_laporan?: string
     isi_laporan: string
     judul_laporan: string
+    file_path: string
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -12317,7 +12444,8 @@ export namespace Prisma {
     kd_pengumpulan_tugas?: string
     kd_tugas: string
     tanggal_pengumpulan: Date | string
-    file_path: string
+    image?: string | null
+    file_path?: string | null
     catatan: string
     status?: $Enums.StatusPengumpulanTugas
     created_at?: Date | string
@@ -12329,6 +12457,7 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     jabatan?: JabatanUpdateOneRequiredWithoutUserNestedInput
@@ -12345,6 +12474,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     kd_jabatan?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     bawahan?: UserUncheckedUpdateManyWithoutAtasanNestedInput
@@ -12360,6 +12490,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     kd_jabatan?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12430,6 +12561,7 @@ export namespace Prisma {
     kd_laporan?: StringFieldUpdateOperationsInput | string
     isi_laporan?: StringFieldUpdateOperationsInput | string
     judul_laporan?: StringFieldUpdateOperationsInput | string
+    file_path?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12438,6 +12570,7 @@ export namespace Prisma {
     kd_laporan?: StringFieldUpdateOperationsInput | string
     isi_laporan?: StringFieldUpdateOperationsInput | string
     judul_laporan?: StringFieldUpdateOperationsInput | string
+    file_path?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12446,6 +12579,7 @@ export namespace Prisma {
     kd_laporan?: StringFieldUpdateOperationsInput | string
     isi_laporan?: StringFieldUpdateOperationsInput | string
     judul_laporan?: StringFieldUpdateOperationsInput | string
+    file_path?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12453,7 +12587,8 @@ export namespace Prisma {
   export type PengumpulanTugasUpdateWithoutUserInput = {
     kd_pengumpulan_tugas?: StringFieldUpdateOperationsInput | string
     tanggal_pengumpulan?: DateTimeFieldUpdateOperationsInput | Date | string
-    file_path?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    file_path?: NullableStringFieldUpdateOperationsInput | string | null
     catatan?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusPengumpulanTugasFieldUpdateOperationsInput | $Enums.StatusPengumpulanTugas
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12466,7 +12601,8 @@ export namespace Prisma {
     kd_pengumpulan_tugas?: StringFieldUpdateOperationsInput | string
     kd_tugas?: StringFieldUpdateOperationsInput | string
     tanggal_pengumpulan?: DateTimeFieldUpdateOperationsInput | Date | string
-    file_path?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    file_path?: NullableStringFieldUpdateOperationsInput | string | null
     catatan?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusPengumpulanTugasFieldUpdateOperationsInput | $Enums.StatusPengumpulanTugas
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12478,7 +12614,8 @@ export namespace Prisma {
     kd_pengumpulan_tugas?: StringFieldUpdateOperationsInput | string
     kd_tugas?: StringFieldUpdateOperationsInput | string
     tanggal_pengumpulan?: DateTimeFieldUpdateOperationsInput | Date | string
-    file_path?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    file_path?: NullableStringFieldUpdateOperationsInput | string | null
     catatan?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusPengumpulanTugasFieldUpdateOperationsInput | $Enums.StatusPengumpulanTugas
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12489,7 +12626,8 @@ export namespace Prisma {
     kd_pengumpulan_tugas?: string
     user_nip: string
     tanggal_pengumpulan: Date | string
-    file_path: string
+    image?: string | null
+    file_path?: string | null
     catatan: string
     status?: $Enums.StatusPengumpulanTugas
     created_at?: Date | string
@@ -12499,7 +12637,8 @@ export namespace Prisma {
   export type PengumpulanTugasUpdateWithoutTugasInput = {
     kd_pengumpulan_tugas?: StringFieldUpdateOperationsInput | string
     tanggal_pengumpulan?: DateTimeFieldUpdateOperationsInput | Date | string
-    file_path?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    file_path?: NullableStringFieldUpdateOperationsInput | string | null
     catatan?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusPengumpulanTugasFieldUpdateOperationsInput | $Enums.StatusPengumpulanTugas
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12512,7 +12651,8 @@ export namespace Prisma {
     kd_pengumpulan_tugas?: StringFieldUpdateOperationsInput | string
     user_nip?: StringFieldUpdateOperationsInput | string
     tanggal_pengumpulan?: DateTimeFieldUpdateOperationsInput | Date | string
-    file_path?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    file_path?: NullableStringFieldUpdateOperationsInput | string | null
     catatan?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusPengumpulanTugasFieldUpdateOperationsInput | $Enums.StatusPengumpulanTugas
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12524,7 +12664,8 @@ export namespace Prisma {
     kd_pengumpulan_tugas?: StringFieldUpdateOperationsInput | string
     user_nip?: StringFieldUpdateOperationsInput | string
     tanggal_pengumpulan?: DateTimeFieldUpdateOperationsInput | Date | string
-    file_path?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    file_path?: NullableStringFieldUpdateOperationsInput | string | null
     catatan?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusPengumpulanTugasFieldUpdateOperationsInput | $Enums.StatusPengumpulanTugas
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string

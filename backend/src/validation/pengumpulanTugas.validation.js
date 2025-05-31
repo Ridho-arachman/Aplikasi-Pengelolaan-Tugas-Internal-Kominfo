@@ -19,9 +19,15 @@ const baseFields = {
     .datetime({ message: "Format tanggal pengumpulan tidak valid" })
     .or(z.date()),
 
+  image: z
+    .string({ message: "Image harus berupa string" })
+    .min(1, "Image harus diisi")
+    .optional(),
+
   file_path: z
     .string({ message: "Path file harus berupa string" })
-    .min(1, "Path file harus diisi"),
+    .min(1, "Path file harus diisi")
+    .optional(),
 
   catatan: z
     .string({ message: "Catatan harus berupa string" })
@@ -37,6 +43,7 @@ const createPengumpulanTugasSchema = z.object({
   kd_tugas: baseFields.kd_tugas,
   user_nip: baseFields.user_nip,
   tanggal_pengumpulan: baseFields.tanggal_pengumpulan,
+  image: baseFields.image,
   file_path: baseFields.file_path,
   catatan: baseFields.catatan,
   status: baseFields.status.optional(),
@@ -61,6 +68,7 @@ const updatePengumpulanTugasSchema = z.object({
   kd_tugas: baseFields.kd_tugas.optional(),
   user_nip: baseFields.user_nip.optional(),
   tanggal_pengumpulan: baseFields.tanggal_pengumpulan.optional(),
+  image: baseFields.image.optional(),
   file_path: baseFields.file_path.optional(),
   catatan: baseFields.catatan.optional(),
   status: baseFields.status.optional(),

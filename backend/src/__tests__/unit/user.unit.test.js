@@ -1,5 +1,5 @@
-const prisma = require("../../libs/prisma");
 const userService = require("../../services/user.service");
+const prisma = require("../../libs/prisma");
 
 jest.mock("../../libs/prisma", () => ({
   user: {
@@ -11,117 +11,321 @@ jest.mock("../../libs/prisma", () => ({
   },
 }));
 
-const userData = {
-  nip: "82981811",
-  nama: "Ridho",
-  password: "mposmpoampo",
-  role: "user",
-  kd_jabatan: "001",
-  nip_atasan: "123",
-};
-
-// Expected return data (without password)
-const returnedData = {
-  nip: "82981811",
-  nama: "Ridho",
-  role: "user",
-  kd_jabatan: "001",
-  nip_atasan: "123",
-  jabatan: {
-    kd_jabatan: "001",
-    nama_jabatan: "Staff",
-  },
-};
-
 describe("User Service", () => {
-  afterEach(() => {
+  beforeEach(() => {
     jest.clearAllMocks();
   });
 
-  it("createUser should create a new user", async () => {
-    // Mock the service to return data without password
-    prisma.user.create.mockResolvedValue(returnedData);
+  describe("createUser", () => {
+    it("harus membuat user baru", async () => {
+      const mockUser = {
+        nip: "123456789012345678",
+        nama: "Test User",
+        password: "hashedPassword",
+        role: "user",
+        kd_jabatan: "J001",
+        nip_atasan: "876543210987654321",
+        image: "test.jpg",
+      };
 
-    const result = await userService.createUser(userData);
+      const mockCreatedUser = {
+        ...mockUser,
+        atasan: {
+          nip: "876543210987654321",
+          nama: "Atasan Test",
+          jabatan: {
+            kd_jabatan: "J002",
+            nama_jabatan: "Kepala Seksi",
+          },
+        },
+        jabatan: {
+          kd_jabatan: "J001",
+          nama_jabatan: "Staff",
+        },
+      };
 
-    expect(prisma.user.create).toHaveBeenCalledWith({
-      data: {
-        nip: userData.nip,
-        nama: userData.nama,
-        password: userData.password,
-        role: userData.role,
-        kd_jabatan: userData.kd_jabatan,
-        nip_atasan: userData.nip_atasan,
-      },
-      include: {
-        jabatan: true,
-      },
+      prisma.user.create.mockResolvedValue(mockCreatedUser);
+
+      const result = await userService.createUser(mockUser);
+
+      expect(prisma.user.create).toHaveBeenCalledWith({
+        data: mockUser,
+        include: {
+          jabatan: true,
+          atasan: {
+            select: {
+              nip: true,
+              nama: true,
+              jabatan: true,
+            },
+          },
+        },
+      });
+      expect(result).toEqual({
+        nip: mockCreatedUser.nip,
+        nama: mockCreatedUser.nama,
+        role: mockCreatedUser.role,
+        kd_jabatan: mockCreatedUser.kd_jabatan,
+        nip_atasan: mockCreatedUser.nip_atasan,
+        image: mockCreatedUser.image,
+        jabatan: mockCreatedUser.jabatan,
+        atasan: mockCreatedUser.atasan,
+      });
     });
-    expect(result).toEqual(returnedData);
   });
 
-  it("getUser should return user by nip", async () => {
-    const { nip } = userData;
-    prisma.user.findUnique.mockResolvedValue(returnedData);
+  describe("getUser", () => {
+    it("harus mengembalikan user berdasarkan NIP", async () => {
+      const mockUser = {
+        nip: "123456789012345678",
+        nama: "Test User",
+        role: "user",
+        kd_jabatan: "J001",
+        nip_atasan: "876543210987654321",
+        image: "test.jpg",
+        atasan: {
+          nip: "876543210987654321",
+          nama: "Atasan Test",
+          jabatan: {
+            kd_jabatan: "J002",
+            nama_jabatan: "Kepala Seksi",
+          },
+        },
+        bawahan: [],
+        jabatan: {
+          kd_jabatan: "J001",
+          nama_jabatan: "Staff",
+        },
+      };
 
-    const result = await userService.getUser(nip);
+      prisma.user.findUnique.mockResolvedValue(mockUser);
 
-    expect(prisma.user.findUnique).toHaveBeenCalledWith({
-      where: { nip },
-      include: {
-        jabatan: true,
-      },
+      const result = await userService.getUser("123456789012345678");
+
+      expect(prisma.user.findUnique).toHaveBeenCalledWith({
+        where: { nip: "123456789012345678" },
+        include: {
+          jabatan: true,
+          atasan: {
+            select: {
+              nip: true,
+              nama: true,
+              jabatan: true,
+            },
+          },
+          bawahan: {
+            select: {
+              nip: true,
+              nama: true,
+              jabatan: true,
+            },
+          },
+        },
+      });
+      expect(result).toEqual(mockUser);
     });
-    expect(result).toEqual(returnedData);
+
+    it("harus mengembalikan null jika user tidak ditemukan", async () => {
+      prisma.user.findUnique.mockResolvedValue(null);
+
+      const result = await userService.getUser("123456789012345678");
+
+      expect(prisma.user.findUnique).toHaveBeenCalledWith({
+        where: { nip: "123456789012345678" },
+        include: {
+          jabatan: true,
+          atasan: {
+            select: {
+              nip: true,
+              nama: true,
+              jabatan: true,
+            },
+          },
+          bawahan: {
+            select: {
+              nip: true,
+              nama: true,
+              jabatan: true,
+            },
+          },
+        },
+      });
+      expect(result).toBeNull();
+    });
   });
 
-  it("getAllUser should return all users", async () => {
-    const users = [returnedData];
-    const { nip, role, nama, kd_jabatan, nip_atasan } = userData;
-    prisma.user.findMany.mockResolvedValue(users);
+  describe("getAllUser", () => {
+    it("harus memfilter user berdasarkan parameter", async () => {
+      const mockUsers = [
+        {
+          nip: "123456789012345678",
+          nama: "Test User",
+          role: "user",
+          kd_jabatan: "J001",
+          nip_atasan: "876543210987654321",
+          image: "test.jpg",
+          atasan: {
+            nip: "876543210987654321",
+            nama: "Atasan Test",
+            jabatan: {
+              kd_jabatan: "J002",
+              nama_jabatan: "Kepala Seksi",
+            },
+          },
+          bawahan: [],
+          jabatan: {
+            kd_jabatan: "J001",
+            nama_jabatan: "Staff",
+          },
+        },
+      ];
 
-    // Pass empty object to avoid undefined variable error
-    const result = await userService.getAllUser(
-      nip,
-      role,
-      nama,
-      kd_jabatan,
-      nip_atasan
-    );
+      prisma.user.findMany.mockResolvedValue(mockUsers);
 
-    expect(prisma.user.findMany).toHaveBeenCalled();
-    expect(result).toEqual(users);
+      const result = await userService.getAllUser(
+        "123456789012345678",
+        "Test User",
+        "user",
+        "J001",
+        "876543210987654321"
+      );
+
+      expect(prisma.user.findMany).toHaveBeenCalledWith({
+        where: {
+          OR: [
+            { nip: { contains: "123456789012345678" } },
+            { nama: { contains: "Test User" } },
+            { kd_jabatan: { contains: "J001" } },
+            { role: "user" },
+            { nip_atasan: "876543210987654321" },
+          ],
+        },
+        include: {
+          jabatan: true,
+          atasan: {
+            select: {
+              nip: true,
+              nama: true,
+              jabatan: true,
+            },
+          },
+          bawahan: {
+            select: {
+              nip: true,
+              nama: true,
+              jabatan: true,
+            },
+          },
+        },
+      });
+      expect(result).toEqual(mockUsers);
+    });
   });
 
-  it("updateUser should update user by nip", async () => {
-    const { nip } = userData;
-    const updateData = { nama: "Updated Name" };
-    prisma.user.update.mockResolvedValue({ ...returnedData, ...updateData });
+  describe("updateUser", () => {
+    it("harus memperbarui user", async () => {
+      const mockUser = {
+        nip: "123456789012345678",
+        nama: "Test User Updated",
+        role: "user",
+        kd_jabatan: "J001",
+        nip_atasan: "876543210987654321",
+        image: "test.jpg",
+        atasan: {
+          nip: "876543210987654321",
+          nama: "Atasan Test",
+          jabatan: {
+            kd_jabatan: "J002",
+            nama_jabatan: "Kepala Seksi",
+          },
+        },
+        bawahan: [],
+        jabatan: {
+          kd_jabatan: "J001",
+          nama_jabatan: "Staff",
+        },
+      };
 
-    const result = await userService.updateUser(nip, updateData);
+      prisma.user.update.mockResolvedValue(mockUser);
 
-    expect(prisma.user.update).toHaveBeenCalledWith({
-      where: { nip },
-      data: updateData,
-      include: {
-        jabatan: true,
-      },
+      const result = await userService.updateUser("123456789012345678", {
+        nama: "Test User Updated",
+      });
+
+      expect(prisma.user.update).toHaveBeenCalledWith({
+        where: { nip: "123456789012345678" },
+        data: { nama: "Test User Updated" },
+        include: {
+          jabatan: true,
+          atasan: {
+            select: {
+              nip: true,
+              nama: true,
+              jabatan: true,
+            },
+          },
+          bawahan: {
+            select: {
+              nip: true,
+              nama: true,
+              jabatan: true,
+            },
+          },
+        },
+      });
+      expect(result).toEqual(mockUser);
     });
-    expect(result).toEqual({ ...returnedData, ...updateData });
   });
 
-  it("deleteUser should delete a user by nip", async () => {
-    const { nip } = userData;
-    prisma.user.delete.mockResolvedValue(returnedData);
+  describe("deleteUser", () => {
+    it("harus menghapus user", async () => {
+      const mockUser = {
+        nip: "123456789012345678",
+        nama: "Test User",
+        role: "user",
+        kd_jabatan: "J001",
+        nip_atasan: "876543210987654321",
+        image: "test.jpg",
+        atasan: {
+          nip: "876543210987654321",
+          nama: "Atasan Test",
+          jabatan: {
+            kd_jabatan: "J002",
+            nama_jabatan: "Kepala Seksi",
+          },
+        },
+        bawahan: [],
+        jabatan: {
+          kd_jabatan: "J001",
+          nama_jabatan: "Staff",
+        },
+      };
 
-    const result = await userService.deleteUser(nip);
+      prisma.user.delete.mockResolvedValue(mockUser);
 
-    expect(prisma.user.delete).toHaveBeenCalledWith({
-      where: { nip },
-      include: {
-        jabatan: true,
-      },
+      const result = await userService.deleteUser("123456789012345678");
+
+      expect(prisma.user.delete).toHaveBeenCalledWith({
+        where: { nip: "123456789012345678" },
+        include: {
+          jabatan: true,
+          atasan: {
+            select: {
+              nip: true,
+              nama: true,
+              jabatan: true,
+            },
+          },
+          bawahan: {
+            select: {
+              nip: true,
+              nama: true,
+              jabatan: true,
+            },
+          },
+        },
+      });
+      expect(result).toEqual(mockUser);
     });
-    expect(result).toEqual(returnedData);
   });
 });

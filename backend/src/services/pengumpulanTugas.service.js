@@ -8,10 +8,19 @@ const prisma = require("../libs/prisma");
 const createPengumpulanTugas = async (data) => {
   try {
     const pengumpulanTugas = await prisma.pengumpulanTugas.create({
-      data,
+      data: {
+        ...data,
+        tanggal_pengumpulan: new Date(data.tanggal_pengumpulan),
+      },
       include: {
         tugas: true,
-        user: true,
+        user: {
+          select: {
+            nip: true,
+            nama: true,
+            jabatan: true,
+          },
+        },
       },
     });
 
@@ -34,7 +43,13 @@ const getPengumpulanTugasById = async (kd_pengumpulan_tugas) => {
       },
       include: {
         tugas: true,
-        user: true,
+        user: {
+          select: {
+            nip: true,
+            nama: true,
+            jabatan: true,
+          },
+        },
       },
     });
 
@@ -78,7 +93,13 @@ const getAllPengumpulanTugas = async (filter = {}) => {
       where,
       include: {
         tugas: true,
-        user: true,
+        user: {
+          select: {
+            nip: true,
+            nama: true,
+            jabatan: true,
+          },
+        },
       },
       orderBy: {
         tanggal_pengumpulan: "desc",
@@ -110,6 +131,11 @@ const updatePengumpulanTugas = async (kd_pengumpulan_tugas, data) => {
       throw new Error("Pengumpulan tugas tidak ditemukan");
     }
 
+    // Jika ada tanggal_pengumpulan, konversi ke Date
+    if (data.tanggal_pengumpulan) {
+      data.tanggal_pengumpulan = new Date(data.tanggal_pengumpulan);
+    }
+
     const updatedPengumpulanTugas = await prisma.pengumpulanTugas.update({
       where: {
         kd_pengumpulan_tugas,
@@ -117,7 +143,13 @@ const updatePengumpulanTugas = async (kd_pengumpulan_tugas, data) => {
       data,
       include: {
         tugas: true,
-        user: true,
+        user: {
+          select: {
+            nip: true,
+            nama: true,
+            jabatan: true,
+          },
+        },
       },
     });
 
@@ -151,7 +183,13 @@ const deletePengumpulanTugas = async (kd_pengumpulan_tugas) => {
       },
       include: {
         tugas: true,
-        user: true,
+        user: {
+          select: {
+            nip: true,
+            nama: true,
+            jabatan: true,
+          },
+        },
       },
     });
 
@@ -174,7 +212,13 @@ const getPengumpulanTugasByTugasId = async (kd_tugas) => {
       },
       include: {
         tugas: true,
-        user: true,
+        user: {
+          select: {
+            nip: true,
+            nama: true,
+            jabatan: true,
+          },
+        },
       },
       orderBy: {
         tanggal_pengumpulan: "desc",
@@ -200,7 +244,13 @@ const getPengumpulanTugasByUserNip = async (user_nip) => {
       },
       include: {
         tugas: true,
-        user: true,
+        user: {
+          select: {
+            nip: true,
+            nama: true,
+            jabatan: true,
+          },
+        },
       },
       orderBy: {
         tanggal_pengumpulan: "desc",

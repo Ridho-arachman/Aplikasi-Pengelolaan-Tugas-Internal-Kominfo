@@ -23,6 +23,7 @@ model User {
   password String @db.VarChar(255) 
   role Role @default(user)
   kd_jabatan String 
+  image String?
   nip_atasan String? @db.VarChar(18) 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt 
@@ -69,8 +70,8 @@ model Tugas{
   updated_at DateTime @updatedAt
 
    @@index([user_nip])
-  // @@index([status])
-  // @@index([deadline])
+  @@index([status])
+  @@index([deadline])
 
   user User @relation(fields: [user_nip], references: [nip],onDelete: Cascade,onUpdate: Cascade)
   pengumpulan_tugas PengumpulanTugas[]
@@ -81,6 +82,7 @@ model Laporan {
   isi_laporan String @db.Text
   judul_laporan String @db.VarChar(255)
   user_nip String @db.VarChar(18)
+  file_path String
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
     @@index([user_nip])
@@ -94,14 +96,15 @@ model PengumpulanTugas {
   kd_tugas String
   user_nip String @db.VarChar(18)
   tanggal_pengumpulan DateTime
-  file_path String
+  image String?
+  file_path String?
   catatan String @db.Text
   status StatusPengumpulanTugas @default(menunggu)
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
   @@index([kd_tugas])
-@@index([user_nip])
+  @@index([user_nip])
 
   tugas Tugas @relation(fields: [kd_tugas],references: [kd_tugas])
   user User @relation(fields: [user_nip],references: [nip])

@@ -57,7 +57,7 @@ const CreateLaporan = async (req, res) => {
  */
 const GetLaporan = async (req, res) => {
   const { kd_laporan } = req.params;
-  
+
   try {
     const laporan = await getLaporanById(kd_laporan);
 
@@ -73,10 +73,10 @@ const GetLaporan = async (req, res) => {
         message: "Laporan tidak ditemukan",
       });
     }
-    
-    return res.status(500).json({ 
-      status: "error", 
-      message: error.message 
+
+    return res.status(500).json({
+      status: "error",
+      message: error.message,
     });
   }
 };
@@ -216,10 +216,43 @@ const DeleteLaporan = async (req, res) => {
   }
 };
 
+/**
+ * Controller untuk mendapatkan laporan berdasarkan NIP pengguna
+ * @param {Object} req - Request object
+ * @param {Object} res - Response object
+ * @returns {Object} Response JSON
+ */
+const GetLaporanByUserNip = async (req, res) => {
+  try {
+    const { user_nip } = req.params;
+
+    const laporan = await getLaporanByUserNip(user_nip);
+
+    if (laporan.length === 0) {
+      return res.status(404).json({
+        status: "error",
+        message: "Tidak ada laporan yang ditemukan",
+      });
+    }
+
+    return res.status(200).json({
+      status: "success",
+      message: "Daftar laporan berhasil ditemukan",
+      data: laporan,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      status: "error",
+      message: error.message,
+    });
+  }
+};
+
 module.exports = {
   CreateLaporan,
   GetLaporan,
   GetAllLaporan,
   UpdateLaporan,
   DeleteLaporan,
+  GetLaporanByUserNip,
 };
