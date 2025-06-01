@@ -80,13 +80,25 @@ model Laporan {
   isi_laporan   String   @db.Text
   judul_laporan String   @db.VarChar(255)
   user_nip      String   @db.VarChar(18)
-  file_path     String
   created_at    DateTime @default(now())
   updated_at    DateTime @updatedAt
 
-  user User @relation(fields: [user_nip], references: [nip], onDelete: Cascade, onUpdate: Cascade)
+  user  User          @relation(fields: [user_nip], references: [nip], onDelete: Cascade, onUpdate: Cascade)
+  files LaporanFile[]
 
   @@index([user_nip])
+}
+
+model LaporanFile {
+  kd_file    String   @id @default(cuid())
+  kd_laporan String
+  file_path  String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  laporan Laporan @relation(fields: [kd_laporan], references: [kd_laporan], onDelete: Cascade)
+
+  @@index([kd_laporan])
 }
 
 model PengumpulanTugas {
@@ -94,19 +106,43 @@ model PengumpulanTugas {
   kd_tugas             String
   user_nip             String                 @db.VarChar(18)
   tanggal_pengumpulan  DateTime
-  image                String?
-  file_path            String?
   catatan              String                 @db.Text
   status               StatusPengumpulanTugas @default(menunggu)
   created_at           DateTime               @default(now())
   updated_at           DateTime               @updatedAt
 
-  tugas  Tugas    @relation(fields: [kd_tugas], references: [kd_tugas])
-  user   User     @relation(fields: [user_nip], references: [nip])
+  tugas  Tugas                   @relation(fields: [kd_tugas], references: [kd_tugas])
+  user   User                    @relation(fields: [user_nip], references: [nip])
   rating Rating[]
+  files  PengumpulanTugasFile[]
+  images PengumpulanTugasImage[]
 
   @@index([kd_tugas])
   @@index([user_nip])
+}
+
+model PengumpulanTugasFile {
+  kd_file              String   @id @default(cuid())
+  kd_pengumpulan_tugas String
+  file_path            String
+  created_at           DateTime @default(now())
+  updated_at           DateTime @updatedAt
+
+  pengumpulan_tugas PengumpulanTugas @relation(fields: [kd_pengumpulan_tugas], references: [kd_pengumpulan_tugas], onDelete: Cascade)
+
+  @@index([kd_pengumpulan_tugas])
+}
+
+model PengumpulanTugasImage {
+  kd_image             String   @id @default(cuid())
+  kd_pengumpulan_tugas String
+  image_path           String
+  created_at           DateTime @default(now())
+  updated_at           DateTime @updatedAt
+
+  pengumpulan_tugas PengumpulanTugas @relation(fields: [kd_pengumpulan_tugas], references: [kd_pengumpulan_tugas], onDelete: Cascade)
+
+  @@index([kd_pengumpulan_tugas])
 }
 
 model Rating {

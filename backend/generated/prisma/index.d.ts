@@ -39,10 +39,25 @@ export type Tugas = $Result.DefaultSelection<Prisma.$TugasPayload>
  */
 export type Laporan = $Result.DefaultSelection<Prisma.$LaporanPayload>
 /**
+ * Model LaporanFile
+ * 
+ */
+export type LaporanFile = $Result.DefaultSelection<Prisma.$LaporanFilePayload>
+/**
  * Model PengumpulanTugas
  * 
  */
 export type PengumpulanTugas = $Result.DefaultSelection<Prisma.$PengumpulanTugasPayload>
+/**
+ * Model PengumpulanTugasFile
+ * 
+ */
+export type PengumpulanTugasFile = $Result.DefaultSelection<Prisma.$PengumpulanTugasFilePayload>
+/**
+ * Model PengumpulanTugasImage
+ * 
+ */
+export type PengumpulanTugasImage = $Result.DefaultSelection<Prisma.$PengumpulanTugasImagePayload>
 /**
  * Model Rating
  * 
@@ -283,6 +298,16 @@ export class PrismaClient<
   get laporan(): Prisma.LaporanDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.laporanFile`: Exposes CRUD operations for the **LaporanFile** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more LaporanFiles
+    * const laporanFiles = await prisma.laporanFile.findMany()
+    * ```
+    */
+  get laporanFile(): Prisma.LaporanFileDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.pengumpulanTugas`: Exposes CRUD operations for the **PengumpulanTugas** model.
     * Example usage:
     * ```ts
@@ -291,6 +316,26 @@ export class PrismaClient<
     * ```
     */
   get pengumpulanTugas(): Prisma.PengumpulanTugasDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.pengumpulanTugasFile`: Exposes CRUD operations for the **PengumpulanTugasFile** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PengumpulanTugasFiles
+    * const pengumpulanTugasFiles = await prisma.pengumpulanTugasFile.findMany()
+    * ```
+    */
+  get pengumpulanTugasFile(): Prisma.PengumpulanTugasFileDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.pengumpulanTugasImage`: Exposes CRUD operations for the **PengumpulanTugasImage** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PengumpulanTugasImages
+    * const pengumpulanTugasImages = await prisma.pengumpulanTugasImage.findMany()
+    * ```
+    */
+  get pengumpulanTugasImage(): Prisma.PengumpulanTugasImageDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.rating`: Exposes CRUD operations for the **Rating** model.
@@ -746,7 +791,10 @@ export namespace Prisma {
     HistoryJabatan: 'HistoryJabatan',
     Tugas: 'Tugas',
     Laporan: 'Laporan',
+    LaporanFile: 'LaporanFile',
     PengumpulanTugas: 'PengumpulanTugas',
+    PengumpulanTugasFile: 'PengumpulanTugasFile',
+    PengumpulanTugasImage: 'PengumpulanTugasImage',
     Rating: 'Rating'
   };
 
@@ -766,7 +814,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "jabatan" | "user" | "historyJabatan" | "tugas" | "laporan" | "pengumpulanTugas" | "rating"
+      modelProps: "jabatan" | "user" | "historyJabatan" | "tugas" | "laporan" | "laporanFile" | "pengumpulanTugas" | "pengumpulanTugasFile" | "pengumpulanTugasImage" | "rating"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1100,6 +1148,72 @@ export namespace Prisma {
           }
         }
       }
+      LaporanFile: {
+        payload: Prisma.$LaporanFilePayload<ExtArgs>
+        fields: Prisma.LaporanFileFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.LaporanFileFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaporanFilePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.LaporanFileFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaporanFilePayload>
+          }
+          findFirst: {
+            args: Prisma.LaporanFileFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaporanFilePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.LaporanFileFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaporanFilePayload>
+          }
+          findMany: {
+            args: Prisma.LaporanFileFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaporanFilePayload>[]
+          }
+          create: {
+            args: Prisma.LaporanFileCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaporanFilePayload>
+          }
+          createMany: {
+            args: Prisma.LaporanFileCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.LaporanFileDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaporanFilePayload>
+          }
+          update: {
+            args: Prisma.LaporanFileUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaporanFilePayload>
+          }
+          deleteMany: {
+            args: Prisma.LaporanFileDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.LaporanFileUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.LaporanFileUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaporanFilePayload>
+          }
+          aggregate: {
+            args: Prisma.LaporanFileAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateLaporanFile>
+          }
+          groupBy: {
+            args: Prisma.LaporanFileGroupByArgs<ExtArgs>
+            result: $Utils.Optional<LaporanFileGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.LaporanFileCountArgs<ExtArgs>
+            result: $Utils.Optional<LaporanFileCountAggregateOutputType> | number
+          }
+        }
+      }
       PengumpulanTugas: {
         payload: Prisma.$PengumpulanTugasPayload<ExtArgs>
         fields: Prisma.PengumpulanTugasFieldRefs
@@ -1163,6 +1277,138 @@ export namespace Prisma {
           count: {
             args: Prisma.PengumpulanTugasCountArgs<ExtArgs>
             result: $Utils.Optional<PengumpulanTugasCountAggregateOutputType> | number
+          }
+        }
+      }
+      PengumpulanTugasFile: {
+        payload: Prisma.$PengumpulanTugasFilePayload<ExtArgs>
+        fields: Prisma.PengumpulanTugasFileFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PengumpulanTugasFileFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PengumpulanTugasFilePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PengumpulanTugasFileFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PengumpulanTugasFilePayload>
+          }
+          findFirst: {
+            args: Prisma.PengumpulanTugasFileFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PengumpulanTugasFilePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PengumpulanTugasFileFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PengumpulanTugasFilePayload>
+          }
+          findMany: {
+            args: Prisma.PengumpulanTugasFileFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PengumpulanTugasFilePayload>[]
+          }
+          create: {
+            args: Prisma.PengumpulanTugasFileCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PengumpulanTugasFilePayload>
+          }
+          createMany: {
+            args: Prisma.PengumpulanTugasFileCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.PengumpulanTugasFileDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PengumpulanTugasFilePayload>
+          }
+          update: {
+            args: Prisma.PengumpulanTugasFileUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PengumpulanTugasFilePayload>
+          }
+          deleteMany: {
+            args: Prisma.PengumpulanTugasFileDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PengumpulanTugasFileUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.PengumpulanTugasFileUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PengumpulanTugasFilePayload>
+          }
+          aggregate: {
+            args: Prisma.PengumpulanTugasFileAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePengumpulanTugasFile>
+          }
+          groupBy: {
+            args: Prisma.PengumpulanTugasFileGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PengumpulanTugasFileGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PengumpulanTugasFileCountArgs<ExtArgs>
+            result: $Utils.Optional<PengumpulanTugasFileCountAggregateOutputType> | number
+          }
+        }
+      }
+      PengumpulanTugasImage: {
+        payload: Prisma.$PengumpulanTugasImagePayload<ExtArgs>
+        fields: Prisma.PengumpulanTugasImageFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PengumpulanTugasImageFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PengumpulanTugasImagePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PengumpulanTugasImageFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PengumpulanTugasImagePayload>
+          }
+          findFirst: {
+            args: Prisma.PengumpulanTugasImageFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PengumpulanTugasImagePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PengumpulanTugasImageFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PengumpulanTugasImagePayload>
+          }
+          findMany: {
+            args: Prisma.PengumpulanTugasImageFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PengumpulanTugasImagePayload>[]
+          }
+          create: {
+            args: Prisma.PengumpulanTugasImageCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PengumpulanTugasImagePayload>
+          }
+          createMany: {
+            args: Prisma.PengumpulanTugasImageCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.PengumpulanTugasImageDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PengumpulanTugasImagePayload>
+          }
+          update: {
+            args: Prisma.PengumpulanTugasImageUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PengumpulanTugasImagePayload>
+          }
+          deleteMany: {
+            args: Prisma.PengumpulanTugasImageDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PengumpulanTugasImageUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.PengumpulanTugasImageUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PengumpulanTugasImagePayload>
+          }
+          aggregate: {
+            args: Prisma.PengumpulanTugasImageAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePengumpulanTugasImage>
+          }
+          groupBy: {
+            args: Prisma.PengumpulanTugasImageGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PengumpulanTugasImageGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PengumpulanTugasImageCountArgs<ExtArgs>
+            result: $Utils.Optional<PengumpulanTugasImageCountAggregateOutputType> | number
           }
         }
       }
@@ -1321,7 +1567,10 @@ export namespace Prisma {
     historyJabatan?: HistoryJabatanOmit
     tugas?: TugasOmit
     laporan?: LaporanOmit
+    laporanFile?: LaporanFileOmit
     pengumpulanTugas?: PengumpulanTugasOmit
+    pengumpulanTugasFile?: PengumpulanTugasFileOmit
+    pengumpulanTugasImage?: PengumpulanTugasImageOmit
     rating?: RatingOmit
   }
 
@@ -1551,15 +1800,50 @@ export namespace Prisma {
 
 
   /**
+   * Count Type LaporanCountOutputType
+   */
+
+  export type LaporanCountOutputType = {
+    files: number
+  }
+
+  export type LaporanCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    files?: boolean | LaporanCountOutputTypeCountFilesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * LaporanCountOutputType without action
+   */
+  export type LaporanCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaporanCountOutputType
+     */
+    select?: LaporanCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * LaporanCountOutputType without action
+   */
+  export type LaporanCountOutputTypeCountFilesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LaporanFileWhereInput
+  }
+
+
+  /**
    * Count Type PengumpulanTugasCountOutputType
    */
 
   export type PengumpulanTugasCountOutputType = {
     rating: number
+    files: number
+    images: number
   }
 
   export type PengumpulanTugasCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     rating?: boolean | PengumpulanTugasCountOutputTypeCountRatingArgs
+    files?: boolean | PengumpulanTugasCountOutputTypeCountFilesArgs
+    images?: boolean | PengumpulanTugasCountOutputTypeCountImagesArgs
   }
 
   // Custom InputTypes
@@ -1578,6 +1862,20 @@ export namespace Prisma {
    */
   export type PengumpulanTugasCountOutputTypeCountRatingArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: RatingWhereInput
+  }
+
+  /**
+   * PengumpulanTugasCountOutputType without action
+   */
+  export type PengumpulanTugasCountOutputTypeCountFilesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PengumpulanTugasFileWhereInput
+  }
+
+  /**
+   * PengumpulanTugasCountOutputType without action
+   */
+  export type PengumpulanTugasCountOutputTypeCountImagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PengumpulanTugasImageWhereInput
   }
 
 
@@ -5646,7 +5944,6 @@ export namespace Prisma {
     isi_laporan: string | null
     judul_laporan: string | null
     user_nip: string | null
-    file_path: string | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -5656,7 +5953,6 @@ export namespace Prisma {
     isi_laporan: string | null
     judul_laporan: string | null
     user_nip: string | null
-    file_path: string | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -5666,7 +5962,6 @@ export namespace Prisma {
     isi_laporan: number
     judul_laporan: number
     user_nip: number
-    file_path: number
     created_at: number
     updated_at: number
     _all: number
@@ -5678,7 +5973,6 @@ export namespace Prisma {
     isi_laporan?: true
     judul_laporan?: true
     user_nip?: true
-    file_path?: true
     created_at?: true
     updated_at?: true
   }
@@ -5688,7 +5982,6 @@ export namespace Prisma {
     isi_laporan?: true
     judul_laporan?: true
     user_nip?: true
-    file_path?: true
     created_at?: true
     updated_at?: true
   }
@@ -5698,7 +5991,6 @@ export namespace Prisma {
     isi_laporan?: true
     judul_laporan?: true
     user_nip?: true
-    file_path?: true
     created_at?: true
     updated_at?: true
     _all?: true
@@ -5781,7 +6073,6 @@ export namespace Prisma {
     isi_laporan: string
     judul_laporan: string
     user_nip: string
-    file_path: string
     created_at: Date
     updated_at: Date
     _count: LaporanCountAggregateOutputType | null
@@ -5808,10 +6099,11 @@ export namespace Prisma {
     isi_laporan?: boolean
     judul_laporan?: boolean
     user_nip?: boolean
-    file_path?: boolean
     created_at?: boolean
     updated_at?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    files?: boolean | Laporan$filesArgs<ExtArgs>
+    _count?: boolean | LaporanCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["laporan"]>
 
 
@@ -5821,27 +6113,28 @@ export namespace Prisma {
     isi_laporan?: boolean
     judul_laporan?: boolean
     user_nip?: boolean
-    file_path?: boolean
     created_at?: boolean
     updated_at?: boolean
   }
 
-  export type LaporanOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"kd_laporan" | "isi_laporan" | "judul_laporan" | "user_nip" | "file_path" | "created_at" | "updated_at", ExtArgs["result"]["laporan"]>
+  export type LaporanOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"kd_laporan" | "isi_laporan" | "judul_laporan" | "user_nip" | "created_at" | "updated_at", ExtArgs["result"]["laporan"]>
   export type LaporanInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    files?: boolean | Laporan$filesArgs<ExtArgs>
+    _count?: boolean | LaporanCountOutputTypeDefaultArgs<ExtArgs>
   }
 
   export type $LaporanPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Laporan"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
+      files: Prisma.$LaporanFilePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       kd_laporan: string
       isi_laporan: string
       judul_laporan: string
       user_nip: string
-      file_path: string
       created_at: Date
       updated_at: Date
     }, ExtArgs["result"]["laporan"]>
@@ -6185,6 +6478,7 @@ export namespace Prisma {
   export interface Prisma__LaporanClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    files<T extends Laporan$filesArgs<ExtArgs> = {}>(args?: Subset<T, Laporan$filesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LaporanFilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6218,7 +6512,6 @@ export namespace Prisma {
     readonly isi_laporan: FieldRef<"Laporan", 'String'>
     readonly judul_laporan: FieldRef<"Laporan", 'String'>
     readonly user_nip: FieldRef<"Laporan", 'String'>
-    readonly file_path: FieldRef<"Laporan", 'String'>
     readonly created_at: FieldRef<"Laporan", 'DateTime'>
     readonly updated_at: FieldRef<"Laporan", 'DateTime'>
   }
@@ -6564,6 +6857,30 @@ export namespace Prisma {
   }
 
   /**
+   * Laporan.files
+   */
+  export type Laporan$filesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaporanFile
+     */
+    select?: LaporanFileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaporanFile
+     */
+    omit?: LaporanFileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaporanFileInclude<ExtArgs> | null
+    where?: LaporanFileWhereInput
+    orderBy?: LaporanFileOrderByWithRelationInput | LaporanFileOrderByWithRelationInput[]
+    cursor?: LaporanFileWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LaporanFileScalarFieldEnum | LaporanFileScalarFieldEnum[]
+  }
+
+  /**
    * Laporan without action
    */
   export type LaporanDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6583,6 +6900,935 @@ export namespace Prisma {
 
 
   /**
+   * Model LaporanFile
+   */
+
+  export type AggregateLaporanFile = {
+    _count: LaporanFileCountAggregateOutputType | null
+    _min: LaporanFileMinAggregateOutputType | null
+    _max: LaporanFileMaxAggregateOutputType | null
+  }
+
+  export type LaporanFileMinAggregateOutputType = {
+    kd_file: string | null
+    kd_laporan: string | null
+    file_path: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type LaporanFileMaxAggregateOutputType = {
+    kd_file: string | null
+    kd_laporan: string | null
+    file_path: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type LaporanFileCountAggregateOutputType = {
+    kd_file: number
+    kd_laporan: number
+    file_path: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type LaporanFileMinAggregateInputType = {
+    kd_file?: true
+    kd_laporan?: true
+    file_path?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type LaporanFileMaxAggregateInputType = {
+    kd_file?: true
+    kd_laporan?: true
+    file_path?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type LaporanFileCountAggregateInputType = {
+    kd_file?: true
+    kd_laporan?: true
+    file_path?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type LaporanFileAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LaporanFile to aggregate.
+     */
+    where?: LaporanFileWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LaporanFiles to fetch.
+     */
+    orderBy?: LaporanFileOrderByWithRelationInput | LaporanFileOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: LaporanFileWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LaporanFiles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LaporanFiles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned LaporanFiles
+    **/
+    _count?: true | LaporanFileCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: LaporanFileMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: LaporanFileMaxAggregateInputType
+  }
+
+  export type GetLaporanFileAggregateType<T extends LaporanFileAggregateArgs> = {
+        [P in keyof T & keyof AggregateLaporanFile]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateLaporanFile[P]>
+      : GetScalarType<T[P], AggregateLaporanFile[P]>
+  }
+
+
+
+
+  export type LaporanFileGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LaporanFileWhereInput
+    orderBy?: LaporanFileOrderByWithAggregationInput | LaporanFileOrderByWithAggregationInput[]
+    by: LaporanFileScalarFieldEnum[] | LaporanFileScalarFieldEnum
+    having?: LaporanFileScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: LaporanFileCountAggregateInputType | true
+    _min?: LaporanFileMinAggregateInputType
+    _max?: LaporanFileMaxAggregateInputType
+  }
+
+  export type LaporanFileGroupByOutputType = {
+    kd_file: string
+    kd_laporan: string
+    file_path: string
+    created_at: Date
+    updated_at: Date
+    _count: LaporanFileCountAggregateOutputType | null
+    _min: LaporanFileMinAggregateOutputType | null
+    _max: LaporanFileMaxAggregateOutputType | null
+  }
+
+  type GetLaporanFileGroupByPayload<T extends LaporanFileGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<LaporanFileGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof LaporanFileGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], LaporanFileGroupByOutputType[P]>
+            : GetScalarType<T[P], LaporanFileGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type LaporanFileSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    kd_file?: boolean
+    kd_laporan?: boolean
+    file_path?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    laporan?: boolean | LaporanDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["laporanFile"]>
+
+
+
+  export type LaporanFileSelectScalar = {
+    kd_file?: boolean
+    kd_laporan?: boolean
+    file_path?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type LaporanFileOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"kd_file" | "kd_laporan" | "file_path" | "created_at" | "updated_at", ExtArgs["result"]["laporanFile"]>
+  export type LaporanFileInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    laporan?: boolean | LaporanDefaultArgs<ExtArgs>
+  }
+
+  export type $LaporanFilePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "LaporanFile"
+    objects: {
+      laporan: Prisma.$LaporanPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      kd_file: string
+      kd_laporan: string
+      file_path: string
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["laporanFile"]>
+    composites: {}
+  }
+
+  type LaporanFileGetPayload<S extends boolean | null | undefined | LaporanFileDefaultArgs> = $Result.GetResult<Prisma.$LaporanFilePayload, S>
+
+  type LaporanFileCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<LaporanFileFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: LaporanFileCountAggregateInputType | true
+    }
+
+  export interface LaporanFileDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['LaporanFile'], meta: { name: 'LaporanFile' } }
+    /**
+     * Find zero or one LaporanFile that matches the filter.
+     * @param {LaporanFileFindUniqueArgs} args - Arguments to find a LaporanFile
+     * @example
+     * // Get one LaporanFile
+     * const laporanFile = await prisma.laporanFile.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends LaporanFileFindUniqueArgs>(args: SelectSubset<T, LaporanFileFindUniqueArgs<ExtArgs>>): Prisma__LaporanFileClient<$Result.GetResult<Prisma.$LaporanFilePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one LaporanFile that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {LaporanFileFindUniqueOrThrowArgs} args - Arguments to find a LaporanFile
+     * @example
+     * // Get one LaporanFile
+     * const laporanFile = await prisma.laporanFile.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends LaporanFileFindUniqueOrThrowArgs>(args: SelectSubset<T, LaporanFileFindUniqueOrThrowArgs<ExtArgs>>): Prisma__LaporanFileClient<$Result.GetResult<Prisma.$LaporanFilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first LaporanFile that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaporanFileFindFirstArgs} args - Arguments to find a LaporanFile
+     * @example
+     * // Get one LaporanFile
+     * const laporanFile = await prisma.laporanFile.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends LaporanFileFindFirstArgs>(args?: SelectSubset<T, LaporanFileFindFirstArgs<ExtArgs>>): Prisma__LaporanFileClient<$Result.GetResult<Prisma.$LaporanFilePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first LaporanFile that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaporanFileFindFirstOrThrowArgs} args - Arguments to find a LaporanFile
+     * @example
+     * // Get one LaporanFile
+     * const laporanFile = await prisma.laporanFile.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends LaporanFileFindFirstOrThrowArgs>(args?: SelectSubset<T, LaporanFileFindFirstOrThrowArgs<ExtArgs>>): Prisma__LaporanFileClient<$Result.GetResult<Prisma.$LaporanFilePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more LaporanFiles that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaporanFileFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all LaporanFiles
+     * const laporanFiles = await prisma.laporanFile.findMany()
+     * 
+     * // Get first 10 LaporanFiles
+     * const laporanFiles = await prisma.laporanFile.findMany({ take: 10 })
+     * 
+     * // Only select the `kd_file`
+     * const laporanFileWithKd_fileOnly = await prisma.laporanFile.findMany({ select: { kd_file: true } })
+     * 
+     */
+    findMany<T extends LaporanFileFindManyArgs>(args?: SelectSubset<T, LaporanFileFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LaporanFilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a LaporanFile.
+     * @param {LaporanFileCreateArgs} args - Arguments to create a LaporanFile.
+     * @example
+     * // Create one LaporanFile
+     * const LaporanFile = await prisma.laporanFile.create({
+     *   data: {
+     *     // ... data to create a LaporanFile
+     *   }
+     * })
+     * 
+     */
+    create<T extends LaporanFileCreateArgs>(args: SelectSubset<T, LaporanFileCreateArgs<ExtArgs>>): Prisma__LaporanFileClient<$Result.GetResult<Prisma.$LaporanFilePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many LaporanFiles.
+     * @param {LaporanFileCreateManyArgs} args - Arguments to create many LaporanFiles.
+     * @example
+     * // Create many LaporanFiles
+     * const laporanFile = await prisma.laporanFile.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends LaporanFileCreateManyArgs>(args?: SelectSubset<T, LaporanFileCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a LaporanFile.
+     * @param {LaporanFileDeleteArgs} args - Arguments to delete one LaporanFile.
+     * @example
+     * // Delete one LaporanFile
+     * const LaporanFile = await prisma.laporanFile.delete({
+     *   where: {
+     *     // ... filter to delete one LaporanFile
+     *   }
+     * })
+     * 
+     */
+    delete<T extends LaporanFileDeleteArgs>(args: SelectSubset<T, LaporanFileDeleteArgs<ExtArgs>>): Prisma__LaporanFileClient<$Result.GetResult<Prisma.$LaporanFilePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one LaporanFile.
+     * @param {LaporanFileUpdateArgs} args - Arguments to update one LaporanFile.
+     * @example
+     * // Update one LaporanFile
+     * const laporanFile = await prisma.laporanFile.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends LaporanFileUpdateArgs>(args: SelectSubset<T, LaporanFileUpdateArgs<ExtArgs>>): Prisma__LaporanFileClient<$Result.GetResult<Prisma.$LaporanFilePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more LaporanFiles.
+     * @param {LaporanFileDeleteManyArgs} args - Arguments to filter LaporanFiles to delete.
+     * @example
+     * // Delete a few LaporanFiles
+     * const { count } = await prisma.laporanFile.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends LaporanFileDeleteManyArgs>(args?: SelectSubset<T, LaporanFileDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more LaporanFiles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaporanFileUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many LaporanFiles
+     * const laporanFile = await prisma.laporanFile.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends LaporanFileUpdateManyArgs>(args: SelectSubset<T, LaporanFileUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one LaporanFile.
+     * @param {LaporanFileUpsertArgs} args - Arguments to update or create a LaporanFile.
+     * @example
+     * // Update or create a LaporanFile
+     * const laporanFile = await prisma.laporanFile.upsert({
+     *   create: {
+     *     // ... data to create a LaporanFile
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the LaporanFile we want to update
+     *   }
+     * })
+     */
+    upsert<T extends LaporanFileUpsertArgs>(args: SelectSubset<T, LaporanFileUpsertArgs<ExtArgs>>): Prisma__LaporanFileClient<$Result.GetResult<Prisma.$LaporanFilePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of LaporanFiles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaporanFileCountArgs} args - Arguments to filter LaporanFiles to count.
+     * @example
+     * // Count the number of LaporanFiles
+     * const count = await prisma.laporanFile.count({
+     *   where: {
+     *     // ... the filter for the LaporanFiles we want to count
+     *   }
+     * })
+    **/
+    count<T extends LaporanFileCountArgs>(
+      args?: Subset<T, LaporanFileCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], LaporanFileCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a LaporanFile.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaporanFileAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends LaporanFileAggregateArgs>(args: Subset<T, LaporanFileAggregateArgs>): Prisma.PrismaPromise<GetLaporanFileAggregateType<T>>
+
+    /**
+     * Group by LaporanFile.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaporanFileGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends LaporanFileGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: LaporanFileGroupByArgs['orderBy'] }
+        : { orderBy?: LaporanFileGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, LaporanFileGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetLaporanFileGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the LaporanFile model
+   */
+  readonly fields: LaporanFileFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for LaporanFile.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__LaporanFileClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    laporan<T extends LaporanDefaultArgs<ExtArgs> = {}>(args?: Subset<T, LaporanDefaultArgs<ExtArgs>>): Prisma__LaporanClient<$Result.GetResult<Prisma.$LaporanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the LaporanFile model
+   */
+  interface LaporanFileFieldRefs {
+    readonly kd_file: FieldRef<"LaporanFile", 'String'>
+    readonly kd_laporan: FieldRef<"LaporanFile", 'String'>
+    readonly file_path: FieldRef<"LaporanFile", 'String'>
+    readonly created_at: FieldRef<"LaporanFile", 'DateTime'>
+    readonly updated_at: FieldRef<"LaporanFile", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * LaporanFile findUnique
+   */
+  export type LaporanFileFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaporanFile
+     */
+    select?: LaporanFileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaporanFile
+     */
+    omit?: LaporanFileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaporanFileInclude<ExtArgs> | null
+    /**
+     * Filter, which LaporanFile to fetch.
+     */
+    where: LaporanFileWhereUniqueInput
+  }
+
+  /**
+   * LaporanFile findUniqueOrThrow
+   */
+  export type LaporanFileFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaporanFile
+     */
+    select?: LaporanFileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaporanFile
+     */
+    omit?: LaporanFileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaporanFileInclude<ExtArgs> | null
+    /**
+     * Filter, which LaporanFile to fetch.
+     */
+    where: LaporanFileWhereUniqueInput
+  }
+
+  /**
+   * LaporanFile findFirst
+   */
+  export type LaporanFileFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaporanFile
+     */
+    select?: LaporanFileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaporanFile
+     */
+    omit?: LaporanFileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaporanFileInclude<ExtArgs> | null
+    /**
+     * Filter, which LaporanFile to fetch.
+     */
+    where?: LaporanFileWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LaporanFiles to fetch.
+     */
+    orderBy?: LaporanFileOrderByWithRelationInput | LaporanFileOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LaporanFiles.
+     */
+    cursor?: LaporanFileWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LaporanFiles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LaporanFiles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LaporanFiles.
+     */
+    distinct?: LaporanFileScalarFieldEnum | LaporanFileScalarFieldEnum[]
+  }
+
+  /**
+   * LaporanFile findFirstOrThrow
+   */
+  export type LaporanFileFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaporanFile
+     */
+    select?: LaporanFileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaporanFile
+     */
+    omit?: LaporanFileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaporanFileInclude<ExtArgs> | null
+    /**
+     * Filter, which LaporanFile to fetch.
+     */
+    where?: LaporanFileWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LaporanFiles to fetch.
+     */
+    orderBy?: LaporanFileOrderByWithRelationInput | LaporanFileOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LaporanFiles.
+     */
+    cursor?: LaporanFileWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LaporanFiles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LaporanFiles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LaporanFiles.
+     */
+    distinct?: LaporanFileScalarFieldEnum | LaporanFileScalarFieldEnum[]
+  }
+
+  /**
+   * LaporanFile findMany
+   */
+  export type LaporanFileFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaporanFile
+     */
+    select?: LaporanFileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaporanFile
+     */
+    omit?: LaporanFileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaporanFileInclude<ExtArgs> | null
+    /**
+     * Filter, which LaporanFiles to fetch.
+     */
+    where?: LaporanFileWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LaporanFiles to fetch.
+     */
+    orderBy?: LaporanFileOrderByWithRelationInput | LaporanFileOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing LaporanFiles.
+     */
+    cursor?: LaporanFileWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LaporanFiles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LaporanFiles.
+     */
+    skip?: number
+    distinct?: LaporanFileScalarFieldEnum | LaporanFileScalarFieldEnum[]
+  }
+
+  /**
+   * LaporanFile create
+   */
+  export type LaporanFileCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaporanFile
+     */
+    select?: LaporanFileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaporanFile
+     */
+    omit?: LaporanFileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaporanFileInclude<ExtArgs> | null
+    /**
+     * The data needed to create a LaporanFile.
+     */
+    data: XOR<LaporanFileCreateInput, LaporanFileUncheckedCreateInput>
+  }
+
+  /**
+   * LaporanFile createMany
+   */
+  export type LaporanFileCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many LaporanFiles.
+     */
+    data: LaporanFileCreateManyInput | LaporanFileCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * LaporanFile update
+   */
+  export type LaporanFileUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaporanFile
+     */
+    select?: LaporanFileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaporanFile
+     */
+    omit?: LaporanFileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaporanFileInclude<ExtArgs> | null
+    /**
+     * The data needed to update a LaporanFile.
+     */
+    data: XOR<LaporanFileUpdateInput, LaporanFileUncheckedUpdateInput>
+    /**
+     * Choose, which LaporanFile to update.
+     */
+    where: LaporanFileWhereUniqueInput
+  }
+
+  /**
+   * LaporanFile updateMany
+   */
+  export type LaporanFileUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update LaporanFiles.
+     */
+    data: XOR<LaporanFileUpdateManyMutationInput, LaporanFileUncheckedUpdateManyInput>
+    /**
+     * Filter which LaporanFiles to update
+     */
+    where?: LaporanFileWhereInput
+    /**
+     * Limit how many LaporanFiles to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * LaporanFile upsert
+   */
+  export type LaporanFileUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaporanFile
+     */
+    select?: LaporanFileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaporanFile
+     */
+    omit?: LaporanFileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaporanFileInclude<ExtArgs> | null
+    /**
+     * The filter to search for the LaporanFile to update in case it exists.
+     */
+    where: LaporanFileWhereUniqueInput
+    /**
+     * In case the LaporanFile found by the `where` argument doesn't exist, create a new LaporanFile with this data.
+     */
+    create: XOR<LaporanFileCreateInput, LaporanFileUncheckedCreateInput>
+    /**
+     * In case the LaporanFile was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<LaporanFileUpdateInput, LaporanFileUncheckedUpdateInput>
+  }
+
+  /**
+   * LaporanFile delete
+   */
+  export type LaporanFileDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaporanFile
+     */
+    select?: LaporanFileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaporanFile
+     */
+    omit?: LaporanFileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaporanFileInclude<ExtArgs> | null
+    /**
+     * Filter which LaporanFile to delete.
+     */
+    where: LaporanFileWhereUniqueInput
+  }
+
+  /**
+   * LaporanFile deleteMany
+   */
+  export type LaporanFileDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LaporanFiles to delete
+     */
+    where?: LaporanFileWhereInput
+    /**
+     * Limit how many LaporanFiles to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * LaporanFile without action
+   */
+  export type LaporanFileDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaporanFile
+     */
+    select?: LaporanFileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaporanFile
+     */
+    omit?: LaporanFileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaporanFileInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model PengumpulanTugas
    */
 
@@ -6597,8 +7843,6 @@ export namespace Prisma {
     kd_tugas: string | null
     user_nip: string | null
     tanggal_pengumpulan: Date | null
-    image: string | null
-    file_path: string | null
     catatan: string | null
     status: $Enums.StatusPengumpulanTugas | null
     created_at: Date | null
@@ -6610,8 +7854,6 @@ export namespace Prisma {
     kd_tugas: string | null
     user_nip: string | null
     tanggal_pengumpulan: Date | null
-    image: string | null
-    file_path: string | null
     catatan: string | null
     status: $Enums.StatusPengumpulanTugas | null
     created_at: Date | null
@@ -6623,8 +7865,6 @@ export namespace Prisma {
     kd_tugas: number
     user_nip: number
     tanggal_pengumpulan: number
-    image: number
-    file_path: number
     catatan: number
     status: number
     created_at: number
@@ -6638,8 +7878,6 @@ export namespace Prisma {
     kd_tugas?: true
     user_nip?: true
     tanggal_pengumpulan?: true
-    image?: true
-    file_path?: true
     catatan?: true
     status?: true
     created_at?: true
@@ -6651,8 +7889,6 @@ export namespace Prisma {
     kd_tugas?: true
     user_nip?: true
     tanggal_pengumpulan?: true
-    image?: true
-    file_path?: true
     catatan?: true
     status?: true
     created_at?: true
@@ -6664,8 +7900,6 @@ export namespace Prisma {
     kd_tugas?: true
     user_nip?: true
     tanggal_pengumpulan?: true
-    image?: true
-    file_path?: true
     catatan?: true
     status?: true
     created_at?: true
@@ -6750,8 +7984,6 @@ export namespace Prisma {
     kd_tugas: string
     user_nip: string
     tanggal_pengumpulan: Date
-    image: string | null
-    file_path: string | null
     catatan: string
     status: $Enums.StatusPengumpulanTugas
     created_at: Date
@@ -6780,8 +8012,6 @@ export namespace Prisma {
     kd_tugas?: boolean
     user_nip?: boolean
     tanggal_pengumpulan?: boolean
-    image?: boolean
-    file_path?: boolean
     catatan?: boolean
     status?: boolean
     created_at?: boolean
@@ -6789,6 +8019,8 @@ export namespace Prisma {
     tugas?: boolean | TugasDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
     rating?: boolean | PengumpulanTugas$ratingArgs<ExtArgs>
+    files?: boolean | PengumpulanTugas$filesArgs<ExtArgs>
+    images?: boolean | PengumpulanTugas$imagesArgs<ExtArgs>
     _count?: boolean | PengumpulanTugasCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["pengumpulanTugas"]>
 
@@ -6799,19 +8031,19 @@ export namespace Prisma {
     kd_tugas?: boolean
     user_nip?: boolean
     tanggal_pengumpulan?: boolean
-    image?: boolean
-    file_path?: boolean
     catatan?: boolean
     status?: boolean
     created_at?: boolean
     updated_at?: boolean
   }
 
-  export type PengumpulanTugasOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"kd_pengumpulan_tugas" | "kd_tugas" | "user_nip" | "tanggal_pengumpulan" | "image" | "file_path" | "catatan" | "status" | "created_at" | "updated_at", ExtArgs["result"]["pengumpulanTugas"]>
+  export type PengumpulanTugasOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"kd_pengumpulan_tugas" | "kd_tugas" | "user_nip" | "tanggal_pengumpulan" | "catatan" | "status" | "created_at" | "updated_at", ExtArgs["result"]["pengumpulanTugas"]>
   export type PengumpulanTugasInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tugas?: boolean | TugasDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
     rating?: boolean | PengumpulanTugas$ratingArgs<ExtArgs>
+    files?: boolean | PengumpulanTugas$filesArgs<ExtArgs>
+    images?: boolean | PengumpulanTugas$imagesArgs<ExtArgs>
     _count?: boolean | PengumpulanTugasCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -6821,14 +8053,14 @@ export namespace Prisma {
       tugas: Prisma.$TugasPayload<ExtArgs>
       user: Prisma.$UserPayload<ExtArgs>
       rating: Prisma.$RatingPayload<ExtArgs>[]
+      files: Prisma.$PengumpulanTugasFilePayload<ExtArgs>[]
+      images: Prisma.$PengumpulanTugasImagePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       kd_pengumpulan_tugas: string
       kd_tugas: string
       user_nip: string
       tanggal_pengumpulan: Date
-      image: string | null
-      file_path: string | null
       catatan: string
       status: $Enums.StatusPengumpulanTugas
       created_at: Date
@@ -7176,6 +8408,8 @@ export namespace Prisma {
     tugas<T extends TugasDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TugasDefaultArgs<ExtArgs>>): Prisma__TugasClient<$Result.GetResult<Prisma.$TugasPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     rating<T extends PengumpulanTugas$ratingArgs<ExtArgs> = {}>(args?: Subset<T, PengumpulanTugas$ratingArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RatingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    files<T extends PengumpulanTugas$filesArgs<ExtArgs> = {}>(args?: Subset<T, PengumpulanTugas$filesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PengumpulanTugasFilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    images<T extends PengumpulanTugas$imagesArgs<ExtArgs> = {}>(args?: Subset<T, PengumpulanTugas$imagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PengumpulanTugasImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7209,8 +8443,6 @@ export namespace Prisma {
     readonly kd_tugas: FieldRef<"PengumpulanTugas", 'String'>
     readonly user_nip: FieldRef<"PengumpulanTugas", 'String'>
     readonly tanggal_pengumpulan: FieldRef<"PengumpulanTugas", 'DateTime'>
-    readonly image: FieldRef<"PengumpulanTugas", 'String'>
-    readonly file_path: FieldRef<"PengumpulanTugas", 'String'>
     readonly catatan: FieldRef<"PengumpulanTugas", 'String'>
     readonly status: FieldRef<"PengumpulanTugas", 'StatusPengumpulanTugas'>
     readonly created_at: FieldRef<"PengumpulanTugas", 'DateTime'>
@@ -7582,6 +8814,54 @@ export namespace Prisma {
   }
 
   /**
+   * PengumpulanTugas.files
+   */
+  export type PengumpulanTugas$filesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PengumpulanTugasFile
+     */
+    select?: PengumpulanTugasFileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PengumpulanTugasFile
+     */
+    omit?: PengumpulanTugasFileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PengumpulanTugasFileInclude<ExtArgs> | null
+    where?: PengumpulanTugasFileWhereInput
+    orderBy?: PengumpulanTugasFileOrderByWithRelationInput | PengumpulanTugasFileOrderByWithRelationInput[]
+    cursor?: PengumpulanTugasFileWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PengumpulanTugasFileScalarFieldEnum | PengumpulanTugasFileScalarFieldEnum[]
+  }
+
+  /**
+   * PengumpulanTugas.images
+   */
+  export type PengumpulanTugas$imagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PengumpulanTugasImage
+     */
+    select?: PengumpulanTugasImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PengumpulanTugasImage
+     */
+    omit?: PengumpulanTugasImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PengumpulanTugasImageInclude<ExtArgs> | null
+    where?: PengumpulanTugasImageWhereInput
+    orderBy?: PengumpulanTugasImageOrderByWithRelationInput | PengumpulanTugasImageOrderByWithRelationInput[]
+    cursor?: PengumpulanTugasImageWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PengumpulanTugasImageScalarFieldEnum | PengumpulanTugasImageScalarFieldEnum[]
+  }
+
+  /**
    * PengumpulanTugas without action
    */
   export type PengumpulanTugasDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7597,6 +8877,1864 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: PengumpulanTugasInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PengumpulanTugasFile
+   */
+
+  export type AggregatePengumpulanTugasFile = {
+    _count: PengumpulanTugasFileCountAggregateOutputType | null
+    _min: PengumpulanTugasFileMinAggregateOutputType | null
+    _max: PengumpulanTugasFileMaxAggregateOutputType | null
+  }
+
+  export type PengumpulanTugasFileMinAggregateOutputType = {
+    kd_file: string | null
+    kd_pengumpulan_tugas: string | null
+    file_path: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type PengumpulanTugasFileMaxAggregateOutputType = {
+    kd_file: string | null
+    kd_pengumpulan_tugas: string | null
+    file_path: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type PengumpulanTugasFileCountAggregateOutputType = {
+    kd_file: number
+    kd_pengumpulan_tugas: number
+    file_path: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type PengumpulanTugasFileMinAggregateInputType = {
+    kd_file?: true
+    kd_pengumpulan_tugas?: true
+    file_path?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type PengumpulanTugasFileMaxAggregateInputType = {
+    kd_file?: true
+    kd_pengumpulan_tugas?: true
+    file_path?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type PengumpulanTugasFileCountAggregateInputType = {
+    kd_file?: true
+    kd_pengumpulan_tugas?: true
+    file_path?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type PengumpulanTugasFileAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PengumpulanTugasFile to aggregate.
+     */
+    where?: PengumpulanTugasFileWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PengumpulanTugasFiles to fetch.
+     */
+    orderBy?: PengumpulanTugasFileOrderByWithRelationInput | PengumpulanTugasFileOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PengumpulanTugasFileWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PengumpulanTugasFiles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PengumpulanTugasFiles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PengumpulanTugasFiles
+    **/
+    _count?: true | PengumpulanTugasFileCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PengumpulanTugasFileMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PengumpulanTugasFileMaxAggregateInputType
+  }
+
+  export type GetPengumpulanTugasFileAggregateType<T extends PengumpulanTugasFileAggregateArgs> = {
+        [P in keyof T & keyof AggregatePengumpulanTugasFile]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePengumpulanTugasFile[P]>
+      : GetScalarType<T[P], AggregatePengumpulanTugasFile[P]>
+  }
+
+
+
+
+  export type PengumpulanTugasFileGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PengumpulanTugasFileWhereInput
+    orderBy?: PengumpulanTugasFileOrderByWithAggregationInput | PengumpulanTugasFileOrderByWithAggregationInput[]
+    by: PengumpulanTugasFileScalarFieldEnum[] | PengumpulanTugasFileScalarFieldEnum
+    having?: PengumpulanTugasFileScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PengumpulanTugasFileCountAggregateInputType | true
+    _min?: PengumpulanTugasFileMinAggregateInputType
+    _max?: PengumpulanTugasFileMaxAggregateInputType
+  }
+
+  export type PengumpulanTugasFileGroupByOutputType = {
+    kd_file: string
+    kd_pengumpulan_tugas: string
+    file_path: string
+    created_at: Date
+    updated_at: Date
+    _count: PengumpulanTugasFileCountAggregateOutputType | null
+    _min: PengumpulanTugasFileMinAggregateOutputType | null
+    _max: PengumpulanTugasFileMaxAggregateOutputType | null
+  }
+
+  type GetPengumpulanTugasFileGroupByPayload<T extends PengumpulanTugasFileGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PengumpulanTugasFileGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PengumpulanTugasFileGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PengumpulanTugasFileGroupByOutputType[P]>
+            : GetScalarType<T[P], PengumpulanTugasFileGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PengumpulanTugasFileSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    kd_file?: boolean
+    kd_pengumpulan_tugas?: boolean
+    file_path?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    pengumpulan_tugas?: boolean | PengumpulanTugasDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["pengumpulanTugasFile"]>
+
+
+
+  export type PengumpulanTugasFileSelectScalar = {
+    kd_file?: boolean
+    kd_pengumpulan_tugas?: boolean
+    file_path?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type PengumpulanTugasFileOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"kd_file" | "kd_pengumpulan_tugas" | "file_path" | "created_at" | "updated_at", ExtArgs["result"]["pengumpulanTugasFile"]>
+  export type PengumpulanTugasFileInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    pengumpulan_tugas?: boolean | PengumpulanTugasDefaultArgs<ExtArgs>
+  }
+
+  export type $PengumpulanTugasFilePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PengumpulanTugasFile"
+    objects: {
+      pengumpulan_tugas: Prisma.$PengumpulanTugasPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      kd_file: string
+      kd_pengumpulan_tugas: string
+      file_path: string
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["pengumpulanTugasFile"]>
+    composites: {}
+  }
+
+  type PengumpulanTugasFileGetPayload<S extends boolean | null | undefined | PengumpulanTugasFileDefaultArgs> = $Result.GetResult<Prisma.$PengumpulanTugasFilePayload, S>
+
+  type PengumpulanTugasFileCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PengumpulanTugasFileFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PengumpulanTugasFileCountAggregateInputType | true
+    }
+
+  export interface PengumpulanTugasFileDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PengumpulanTugasFile'], meta: { name: 'PengumpulanTugasFile' } }
+    /**
+     * Find zero or one PengumpulanTugasFile that matches the filter.
+     * @param {PengumpulanTugasFileFindUniqueArgs} args - Arguments to find a PengumpulanTugasFile
+     * @example
+     * // Get one PengumpulanTugasFile
+     * const pengumpulanTugasFile = await prisma.pengumpulanTugasFile.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PengumpulanTugasFileFindUniqueArgs>(args: SelectSubset<T, PengumpulanTugasFileFindUniqueArgs<ExtArgs>>): Prisma__PengumpulanTugasFileClient<$Result.GetResult<Prisma.$PengumpulanTugasFilePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PengumpulanTugasFile that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PengumpulanTugasFileFindUniqueOrThrowArgs} args - Arguments to find a PengumpulanTugasFile
+     * @example
+     * // Get one PengumpulanTugasFile
+     * const pengumpulanTugasFile = await prisma.pengumpulanTugasFile.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PengumpulanTugasFileFindUniqueOrThrowArgs>(args: SelectSubset<T, PengumpulanTugasFileFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PengumpulanTugasFileClient<$Result.GetResult<Prisma.$PengumpulanTugasFilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PengumpulanTugasFile that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PengumpulanTugasFileFindFirstArgs} args - Arguments to find a PengumpulanTugasFile
+     * @example
+     * // Get one PengumpulanTugasFile
+     * const pengumpulanTugasFile = await prisma.pengumpulanTugasFile.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PengumpulanTugasFileFindFirstArgs>(args?: SelectSubset<T, PengumpulanTugasFileFindFirstArgs<ExtArgs>>): Prisma__PengumpulanTugasFileClient<$Result.GetResult<Prisma.$PengumpulanTugasFilePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PengumpulanTugasFile that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PengumpulanTugasFileFindFirstOrThrowArgs} args - Arguments to find a PengumpulanTugasFile
+     * @example
+     * // Get one PengumpulanTugasFile
+     * const pengumpulanTugasFile = await prisma.pengumpulanTugasFile.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PengumpulanTugasFileFindFirstOrThrowArgs>(args?: SelectSubset<T, PengumpulanTugasFileFindFirstOrThrowArgs<ExtArgs>>): Prisma__PengumpulanTugasFileClient<$Result.GetResult<Prisma.$PengumpulanTugasFilePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PengumpulanTugasFiles that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PengumpulanTugasFileFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PengumpulanTugasFiles
+     * const pengumpulanTugasFiles = await prisma.pengumpulanTugasFile.findMany()
+     * 
+     * // Get first 10 PengumpulanTugasFiles
+     * const pengumpulanTugasFiles = await prisma.pengumpulanTugasFile.findMany({ take: 10 })
+     * 
+     * // Only select the `kd_file`
+     * const pengumpulanTugasFileWithKd_fileOnly = await prisma.pengumpulanTugasFile.findMany({ select: { kd_file: true } })
+     * 
+     */
+    findMany<T extends PengumpulanTugasFileFindManyArgs>(args?: SelectSubset<T, PengumpulanTugasFileFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PengumpulanTugasFilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PengumpulanTugasFile.
+     * @param {PengumpulanTugasFileCreateArgs} args - Arguments to create a PengumpulanTugasFile.
+     * @example
+     * // Create one PengumpulanTugasFile
+     * const PengumpulanTugasFile = await prisma.pengumpulanTugasFile.create({
+     *   data: {
+     *     // ... data to create a PengumpulanTugasFile
+     *   }
+     * })
+     * 
+     */
+    create<T extends PengumpulanTugasFileCreateArgs>(args: SelectSubset<T, PengumpulanTugasFileCreateArgs<ExtArgs>>): Prisma__PengumpulanTugasFileClient<$Result.GetResult<Prisma.$PengumpulanTugasFilePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PengumpulanTugasFiles.
+     * @param {PengumpulanTugasFileCreateManyArgs} args - Arguments to create many PengumpulanTugasFiles.
+     * @example
+     * // Create many PengumpulanTugasFiles
+     * const pengumpulanTugasFile = await prisma.pengumpulanTugasFile.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PengumpulanTugasFileCreateManyArgs>(args?: SelectSubset<T, PengumpulanTugasFileCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a PengumpulanTugasFile.
+     * @param {PengumpulanTugasFileDeleteArgs} args - Arguments to delete one PengumpulanTugasFile.
+     * @example
+     * // Delete one PengumpulanTugasFile
+     * const PengumpulanTugasFile = await prisma.pengumpulanTugasFile.delete({
+     *   where: {
+     *     // ... filter to delete one PengumpulanTugasFile
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PengumpulanTugasFileDeleteArgs>(args: SelectSubset<T, PengumpulanTugasFileDeleteArgs<ExtArgs>>): Prisma__PengumpulanTugasFileClient<$Result.GetResult<Prisma.$PengumpulanTugasFilePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PengumpulanTugasFile.
+     * @param {PengumpulanTugasFileUpdateArgs} args - Arguments to update one PengumpulanTugasFile.
+     * @example
+     * // Update one PengumpulanTugasFile
+     * const pengumpulanTugasFile = await prisma.pengumpulanTugasFile.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PengumpulanTugasFileUpdateArgs>(args: SelectSubset<T, PengumpulanTugasFileUpdateArgs<ExtArgs>>): Prisma__PengumpulanTugasFileClient<$Result.GetResult<Prisma.$PengumpulanTugasFilePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PengumpulanTugasFiles.
+     * @param {PengumpulanTugasFileDeleteManyArgs} args - Arguments to filter PengumpulanTugasFiles to delete.
+     * @example
+     * // Delete a few PengumpulanTugasFiles
+     * const { count } = await prisma.pengumpulanTugasFile.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PengumpulanTugasFileDeleteManyArgs>(args?: SelectSubset<T, PengumpulanTugasFileDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PengumpulanTugasFiles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PengumpulanTugasFileUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PengumpulanTugasFiles
+     * const pengumpulanTugasFile = await prisma.pengumpulanTugasFile.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PengumpulanTugasFileUpdateManyArgs>(args: SelectSubset<T, PengumpulanTugasFileUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one PengumpulanTugasFile.
+     * @param {PengumpulanTugasFileUpsertArgs} args - Arguments to update or create a PengumpulanTugasFile.
+     * @example
+     * // Update or create a PengumpulanTugasFile
+     * const pengumpulanTugasFile = await prisma.pengumpulanTugasFile.upsert({
+     *   create: {
+     *     // ... data to create a PengumpulanTugasFile
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PengumpulanTugasFile we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PengumpulanTugasFileUpsertArgs>(args: SelectSubset<T, PengumpulanTugasFileUpsertArgs<ExtArgs>>): Prisma__PengumpulanTugasFileClient<$Result.GetResult<Prisma.$PengumpulanTugasFilePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PengumpulanTugasFiles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PengumpulanTugasFileCountArgs} args - Arguments to filter PengumpulanTugasFiles to count.
+     * @example
+     * // Count the number of PengumpulanTugasFiles
+     * const count = await prisma.pengumpulanTugasFile.count({
+     *   where: {
+     *     // ... the filter for the PengumpulanTugasFiles we want to count
+     *   }
+     * })
+    **/
+    count<T extends PengumpulanTugasFileCountArgs>(
+      args?: Subset<T, PengumpulanTugasFileCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PengumpulanTugasFileCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PengumpulanTugasFile.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PengumpulanTugasFileAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PengumpulanTugasFileAggregateArgs>(args: Subset<T, PengumpulanTugasFileAggregateArgs>): Prisma.PrismaPromise<GetPengumpulanTugasFileAggregateType<T>>
+
+    /**
+     * Group by PengumpulanTugasFile.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PengumpulanTugasFileGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PengumpulanTugasFileGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PengumpulanTugasFileGroupByArgs['orderBy'] }
+        : { orderBy?: PengumpulanTugasFileGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PengumpulanTugasFileGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPengumpulanTugasFileGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PengumpulanTugasFile model
+   */
+  readonly fields: PengumpulanTugasFileFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PengumpulanTugasFile.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PengumpulanTugasFileClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    pengumpulan_tugas<T extends PengumpulanTugasDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PengumpulanTugasDefaultArgs<ExtArgs>>): Prisma__PengumpulanTugasClient<$Result.GetResult<Prisma.$PengumpulanTugasPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PengumpulanTugasFile model
+   */
+  interface PengumpulanTugasFileFieldRefs {
+    readonly kd_file: FieldRef<"PengumpulanTugasFile", 'String'>
+    readonly kd_pengumpulan_tugas: FieldRef<"PengumpulanTugasFile", 'String'>
+    readonly file_path: FieldRef<"PengumpulanTugasFile", 'String'>
+    readonly created_at: FieldRef<"PengumpulanTugasFile", 'DateTime'>
+    readonly updated_at: FieldRef<"PengumpulanTugasFile", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PengumpulanTugasFile findUnique
+   */
+  export type PengumpulanTugasFileFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PengumpulanTugasFile
+     */
+    select?: PengumpulanTugasFileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PengumpulanTugasFile
+     */
+    omit?: PengumpulanTugasFileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PengumpulanTugasFileInclude<ExtArgs> | null
+    /**
+     * Filter, which PengumpulanTugasFile to fetch.
+     */
+    where: PengumpulanTugasFileWhereUniqueInput
+  }
+
+  /**
+   * PengumpulanTugasFile findUniqueOrThrow
+   */
+  export type PengumpulanTugasFileFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PengumpulanTugasFile
+     */
+    select?: PengumpulanTugasFileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PengumpulanTugasFile
+     */
+    omit?: PengumpulanTugasFileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PengumpulanTugasFileInclude<ExtArgs> | null
+    /**
+     * Filter, which PengumpulanTugasFile to fetch.
+     */
+    where: PengumpulanTugasFileWhereUniqueInput
+  }
+
+  /**
+   * PengumpulanTugasFile findFirst
+   */
+  export type PengumpulanTugasFileFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PengumpulanTugasFile
+     */
+    select?: PengumpulanTugasFileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PengumpulanTugasFile
+     */
+    omit?: PengumpulanTugasFileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PengumpulanTugasFileInclude<ExtArgs> | null
+    /**
+     * Filter, which PengumpulanTugasFile to fetch.
+     */
+    where?: PengumpulanTugasFileWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PengumpulanTugasFiles to fetch.
+     */
+    orderBy?: PengumpulanTugasFileOrderByWithRelationInput | PengumpulanTugasFileOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PengumpulanTugasFiles.
+     */
+    cursor?: PengumpulanTugasFileWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PengumpulanTugasFiles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PengumpulanTugasFiles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PengumpulanTugasFiles.
+     */
+    distinct?: PengumpulanTugasFileScalarFieldEnum | PengumpulanTugasFileScalarFieldEnum[]
+  }
+
+  /**
+   * PengumpulanTugasFile findFirstOrThrow
+   */
+  export type PengumpulanTugasFileFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PengumpulanTugasFile
+     */
+    select?: PengumpulanTugasFileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PengumpulanTugasFile
+     */
+    omit?: PengumpulanTugasFileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PengumpulanTugasFileInclude<ExtArgs> | null
+    /**
+     * Filter, which PengumpulanTugasFile to fetch.
+     */
+    where?: PengumpulanTugasFileWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PengumpulanTugasFiles to fetch.
+     */
+    orderBy?: PengumpulanTugasFileOrderByWithRelationInput | PengumpulanTugasFileOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PengumpulanTugasFiles.
+     */
+    cursor?: PengumpulanTugasFileWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PengumpulanTugasFiles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PengumpulanTugasFiles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PengumpulanTugasFiles.
+     */
+    distinct?: PengumpulanTugasFileScalarFieldEnum | PengumpulanTugasFileScalarFieldEnum[]
+  }
+
+  /**
+   * PengumpulanTugasFile findMany
+   */
+  export type PengumpulanTugasFileFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PengumpulanTugasFile
+     */
+    select?: PengumpulanTugasFileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PengumpulanTugasFile
+     */
+    omit?: PengumpulanTugasFileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PengumpulanTugasFileInclude<ExtArgs> | null
+    /**
+     * Filter, which PengumpulanTugasFiles to fetch.
+     */
+    where?: PengumpulanTugasFileWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PengumpulanTugasFiles to fetch.
+     */
+    orderBy?: PengumpulanTugasFileOrderByWithRelationInput | PengumpulanTugasFileOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PengumpulanTugasFiles.
+     */
+    cursor?: PengumpulanTugasFileWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PengumpulanTugasFiles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PengumpulanTugasFiles.
+     */
+    skip?: number
+    distinct?: PengumpulanTugasFileScalarFieldEnum | PengumpulanTugasFileScalarFieldEnum[]
+  }
+
+  /**
+   * PengumpulanTugasFile create
+   */
+  export type PengumpulanTugasFileCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PengumpulanTugasFile
+     */
+    select?: PengumpulanTugasFileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PengumpulanTugasFile
+     */
+    omit?: PengumpulanTugasFileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PengumpulanTugasFileInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PengumpulanTugasFile.
+     */
+    data: XOR<PengumpulanTugasFileCreateInput, PengumpulanTugasFileUncheckedCreateInput>
+  }
+
+  /**
+   * PengumpulanTugasFile createMany
+   */
+  export type PengumpulanTugasFileCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PengumpulanTugasFiles.
+     */
+    data: PengumpulanTugasFileCreateManyInput | PengumpulanTugasFileCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PengumpulanTugasFile update
+   */
+  export type PengumpulanTugasFileUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PengumpulanTugasFile
+     */
+    select?: PengumpulanTugasFileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PengumpulanTugasFile
+     */
+    omit?: PengumpulanTugasFileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PengumpulanTugasFileInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PengumpulanTugasFile.
+     */
+    data: XOR<PengumpulanTugasFileUpdateInput, PengumpulanTugasFileUncheckedUpdateInput>
+    /**
+     * Choose, which PengumpulanTugasFile to update.
+     */
+    where: PengumpulanTugasFileWhereUniqueInput
+  }
+
+  /**
+   * PengumpulanTugasFile updateMany
+   */
+  export type PengumpulanTugasFileUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PengumpulanTugasFiles.
+     */
+    data: XOR<PengumpulanTugasFileUpdateManyMutationInput, PengumpulanTugasFileUncheckedUpdateManyInput>
+    /**
+     * Filter which PengumpulanTugasFiles to update
+     */
+    where?: PengumpulanTugasFileWhereInput
+    /**
+     * Limit how many PengumpulanTugasFiles to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PengumpulanTugasFile upsert
+   */
+  export type PengumpulanTugasFileUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PengumpulanTugasFile
+     */
+    select?: PengumpulanTugasFileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PengumpulanTugasFile
+     */
+    omit?: PengumpulanTugasFileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PengumpulanTugasFileInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PengumpulanTugasFile to update in case it exists.
+     */
+    where: PengumpulanTugasFileWhereUniqueInput
+    /**
+     * In case the PengumpulanTugasFile found by the `where` argument doesn't exist, create a new PengumpulanTugasFile with this data.
+     */
+    create: XOR<PengumpulanTugasFileCreateInput, PengumpulanTugasFileUncheckedCreateInput>
+    /**
+     * In case the PengumpulanTugasFile was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PengumpulanTugasFileUpdateInput, PengumpulanTugasFileUncheckedUpdateInput>
+  }
+
+  /**
+   * PengumpulanTugasFile delete
+   */
+  export type PengumpulanTugasFileDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PengumpulanTugasFile
+     */
+    select?: PengumpulanTugasFileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PengumpulanTugasFile
+     */
+    omit?: PengumpulanTugasFileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PengumpulanTugasFileInclude<ExtArgs> | null
+    /**
+     * Filter which PengumpulanTugasFile to delete.
+     */
+    where: PengumpulanTugasFileWhereUniqueInput
+  }
+
+  /**
+   * PengumpulanTugasFile deleteMany
+   */
+  export type PengumpulanTugasFileDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PengumpulanTugasFiles to delete
+     */
+    where?: PengumpulanTugasFileWhereInput
+    /**
+     * Limit how many PengumpulanTugasFiles to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PengumpulanTugasFile without action
+   */
+  export type PengumpulanTugasFileDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PengumpulanTugasFile
+     */
+    select?: PengumpulanTugasFileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PengumpulanTugasFile
+     */
+    omit?: PengumpulanTugasFileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PengumpulanTugasFileInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PengumpulanTugasImage
+   */
+
+  export type AggregatePengumpulanTugasImage = {
+    _count: PengumpulanTugasImageCountAggregateOutputType | null
+    _min: PengumpulanTugasImageMinAggregateOutputType | null
+    _max: PengumpulanTugasImageMaxAggregateOutputType | null
+  }
+
+  export type PengumpulanTugasImageMinAggregateOutputType = {
+    kd_image: string | null
+    kd_pengumpulan_tugas: string | null
+    image_path: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type PengumpulanTugasImageMaxAggregateOutputType = {
+    kd_image: string | null
+    kd_pengumpulan_tugas: string | null
+    image_path: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type PengumpulanTugasImageCountAggregateOutputType = {
+    kd_image: number
+    kd_pengumpulan_tugas: number
+    image_path: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type PengumpulanTugasImageMinAggregateInputType = {
+    kd_image?: true
+    kd_pengumpulan_tugas?: true
+    image_path?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type PengumpulanTugasImageMaxAggregateInputType = {
+    kd_image?: true
+    kd_pengumpulan_tugas?: true
+    image_path?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type PengumpulanTugasImageCountAggregateInputType = {
+    kd_image?: true
+    kd_pengumpulan_tugas?: true
+    image_path?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type PengumpulanTugasImageAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PengumpulanTugasImage to aggregate.
+     */
+    where?: PengumpulanTugasImageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PengumpulanTugasImages to fetch.
+     */
+    orderBy?: PengumpulanTugasImageOrderByWithRelationInput | PengumpulanTugasImageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PengumpulanTugasImageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PengumpulanTugasImages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PengumpulanTugasImages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PengumpulanTugasImages
+    **/
+    _count?: true | PengumpulanTugasImageCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PengumpulanTugasImageMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PengumpulanTugasImageMaxAggregateInputType
+  }
+
+  export type GetPengumpulanTugasImageAggregateType<T extends PengumpulanTugasImageAggregateArgs> = {
+        [P in keyof T & keyof AggregatePengumpulanTugasImage]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePengumpulanTugasImage[P]>
+      : GetScalarType<T[P], AggregatePengumpulanTugasImage[P]>
+  }
+
+
+
+
+  export type PengumpulanTugasImageGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PengumpulanTugasImageWhereInput
+    orderBy?: PengumpulanTugasImageOrderByWithAggregationInput | PengumpulanTugasImageOrderByWithAggregationInput[]
+    by: PengumpulanTugasImageScalarFieldEnum[] | PengumpulanTugasImageScalarFieldEnum
+    having?: PengumpulanTugasImageScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PengumpulanTugasImageCountAggregateInputType | true
+    _min?: PengumpulanTugasImageMinAggregateInputType
+    _max?: PengumpulanTugasImageMaxAggregateInputType
+  }
+
+  export type PengumpulanTugasImageGroupByOutputType = {
+    kd_image: string
+    kd_pengumpulan_tugas: string
+    image_path: string
+    created_at: Date
+    updated_at: Date
+    _count: PengumpulanTugasImageCountAggregateOutputType | null
+    _min: PengumpulanTugasImageMinAggregateOutputType | null
+    _max: PengumpulanTugasImageMaxAggregateOutputType | null
+  }
+
+  type GetPengumpulanTugasImageGroupByPayload<T extends PengumpulanTugasImageGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PengumpulanTugasImageGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PengumpulanTugasImageGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PengumpulanTugasImageGroupByOutputType[P]>
+            : GetScalarType<T[P], PengumpulanTugasImageGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PengumpulanTugasImageSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    kd_image?: boolean
+    kd_pengumpulan_tugas?: boolean
+    image_path?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    pengumpulan_tugas?: boolean | PengumpulanTugasDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["pengumpulanTugasImage"]>
+
+
+
+  export type PengumpulanTugasImageSelectScalar = {
+    kd_image?: boolean
+    kd_pengumpulan_tugas?: boolean
+    image_path?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type PengumpulanTugasImageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"kd_image" | "kd_pengumpulan_tugas" | "image_path" | "created_at" | "updated_at", ExtArgs["result"]["pengumpulanTugasImage"]>
+  export type PengumpulanTugasImageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    pengumpulan_tugas?: boolean | PengumpulanTugasDefaultArgs<ExtArgs>
+  }
+
+  export type $PengumpulanTugasImagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PengumpulanTugasImage"
+    objects: {
+      pengumpulan_tugas: Prisma.$PengumpulanTugasPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      kd_image: string
+      kd_pengumpulan_tugas: string
+      image_path: string
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["pengumpulanTugasImage"]>
+    composites: {}
+  }
+
+  type PengumpulanTugasImageGetPayload<S extends boolean | null | undefined | PengumpulanTugasImageDefaultArgs> = $Result.GetResult<Prisma.$PengumpulanTugasImagePayload, S>
+
+  type PengumpulanTugasImageCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PengumpulanTugasImageFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PengumpulanTugasImageCountAggregateInputType | true
+    }
+
+  export interface PengumpulanTugasImageDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PengumpulanTugasImage'], meta: { name: 'PengumpulanTugasImage' } }
+    /**
+     * Find zero or one PengumpulanTugasImage that matches the filter.
+     * @param {PengumpulanTugasImageFindUniqueArgs} args - Arguments to find a PengumpulanTugasImage
+     * @example
+     * // Get one PengumpulanTugasImage
+     * const pengumpulanTugasImage = await prisma.pengumpulanTugasImage.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PengumpulanTugasImageFindUniqueArgs>(args: SelectSubset<T, PengumpulanTugasImageFindUniqueArgs<ExtArgs>>): Prisma__PengumpulanTugasImageClient<$Result.GetResult<Prisma.$PengumpulanTugasImagePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PengumpulanTugasImage that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PengumpulanTugasImageFindUniqueOrThrowArgs} args - Arguments to find a PengumpulanTugasImage
+     * @example
+     * // Get one PengumpulanTugasImage
+     * const pengumpulanTugasImage = await prisma.pengumpulanTugasImage.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PengumpulanTugasImageFindUniqueOrThrowArgs>(args: SelectSubset<T, PengumpulanTugasImageFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PengumpulanTugasImageClient<$Result.GetResult<Prisma.$PengumpulanTugasImagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PengumpulanTugasImage that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PengumpulanTugasImageFindFirstArgs} args - Arguments to find a PengumpulanTugasImage
+     * @example
+     * // Get one PengumpulanTugasImage
+     * const pengumpulanTugasImage = await prisma.pengumpulanTugasImage.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PengumpulanTugasImageFindFirstArgs>(args?: SelectSubset<T, PengumpulanTugasImageFindFirstArgs<ExtArgs>>): Prisma__PengumpulanTugasImageClient<$Result.GetResult<Prisma.$PengumpulanTugasImagePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PengumpulanTugasImage that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PengumpulanTugasImageFindFirstOrThrowArgs} args - Arguments to find a PengumpulanTugasImage
+     * @example
+     * // Get one PengumpulanTugasImage
+     * const pengumpulanTugasImage = await prisma.pengumpulanTugasImage.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PengumpulanTugasImageFindFirstOrThrowArgs>(args?: SelectSubset<T, PengumpulanTugasImageFindFirstOrThrowArgs<ExtArgs>>): Prisma__PengumpulanTugasImageClient<$Result.GetResult<Prisma.$PengumpulanTugasImagePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PengumpulanTugasImages that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PengumpulanTugasImageFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PengumpulanTugasImages
+     * const pengumpulanTugasImages = await prisma.pengumpulanTugasImage.findMany()
+     * 
+     * // Get first 10 PengumpulanTugasImages
+     * const pengumpulanTugasImages = await prisma.pengumpulanTugasImage.findMany({ take: 10 })
+     * 
+     * // Only select the `kd_image`
+     * const pengumpulanTugasImageWithKd_imageOnly = await prisma.pengumpulanTugasImage.findMany({ select: { kd_image: true } })
+     * 
+     */
+    findMany<T extends PengumpulanTugasImageFindManyArgs>(args?: SelectSubset<T, PengumpulanTugasImageFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PengumpulanTugasImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PengumpulanTugasImage.
+     * @param {PengumpulanTugasImageCreateArgs} args - Arguments to create a PengumpulanTugasImage.
+     * @example
+     * // Create one PengumpulanTugasImage
+     * const PengumpulanTugasImage = await prisma.pengumpulanTugasImage.create({
+     *   data: {
+     *     // ... data to create a PengumpulanTugasImage
+     *   }
+     * })
+     * 
+     */
+    create<T extends PengumpulanTugasImageCreateArgs>(args: SelectSubset<T, PengumpulanTugasImageCreateArgs<ExtArgs>>): Prisma__PengumpulanTugasImageClient<$Result.GetResult<Prisma.$PengumpulanTugasImagePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PengumpulanTugasImages.
+     * @param {PengumpulanTugasImageCreateManyArgs} args - Arguments to create many PengumpulanTugasImages.
+     * @example
+     * // Create many PengumpulanTugasImages
+     * const pengumpulanTugasImage = await prisma.pengumpulanTugasImage.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PengumpulanTugasImageCreateManyArgs>(args?: SelectSubset<T, PengumpulanTugasImageCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a PengumpulanTugasImage.
+     * @param {PengumpulanTugasImageDeleteArgs} args - Arguments to delete one PengumpulanTugasImage.
+     * @example
+     * // Delete one PengumpulanTugasImage
+     * const PengumpulanTugasImage = await prisma.pengumpulanTugasImage.delete({
+     *   where: {
+     *     // ... filter to delete one PengumpulanTugasImage
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PengumpulanTugasImageDeleteArgs>(args: SelectSubset<T, PengumpulanTugasImageDeleteArgs<ExtArgs>>): Prisma__PengumpulanTugasImageClient<$Result.GetResult<Prisma.$PengumpulanTugasImagePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PengumpulanTugasImage.
+     * @param {PengumpulanTugasImageUpdateArgs} args - Arguments to update one PengumpulanTugasImage.
+     * @example
+     * // Update one PengumpulanTugasImage
+     * const pengumpulanTugasImage = await prisma.pengumpulanTugasImage.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PengumpulanTugasImageUpdateArgs>(args: SelectSubset<T, PengumpulanTugasImageUpdateArgs<ExtArgs>>): Prisma__PengumpulanTugasImageClient<$Result.GetResult<Prisma.$PengumpulanTugasImagePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PengumpulanTugasImages.
+     * @param {PengumpulanTugasImageDeleteManyArgs} args - Arguments to filter PengumpulanTugasImages to delete.
+     * @example
+     * // Delete a few PengumpulanTugasImages
+     * const { count } = await prisma.pengumpulanTugasImage.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PengumpulanTugasImageDeleteManyArgs>(args?: SelectSubset<T, PengumpulanTugasImageDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PengumpulanTugasImages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PengumpulanTugasImageUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PengumpulanTugasImages
+     * const pengumpulanTugasImage = await prisma.pengumpulanTugasImage.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PengumpulanTugasImageUpdateManyArgs>(args: SelectSubset<T, PengumpulanTugasImageUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one PengumpulanTugasImage.
+     * @param {PengumpulanTugasImageUpsertArgs} args - Arguments to update or create a PengumpulanTugasImage.
+     * @example
+     * // Update or create a PengumpulanTugasImage
+     * const pengumpulanTugasImage = await prisma.pengumpulanTugasImage.upsert({
+     *   create: {
+     *     // ... data to create a PengumpulanTugasImage
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PengumpulanTugasImage we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PengumpulanTugasImageUpsertArgs>(args: SelectSubset<T, PengumpulanTugasImageUpsertArgs<ExtArgs>>): Prisma__PengumpulanTugasImageClient<$Result.GetResult<Prisma.$PengumpulanTugasImagePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PengumpulanTugasImages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PengumpulanTugasImageCountArgs} args - Arguments to filter PengumpulanTugasImages to count.
+     * @example
+     * // Count the number of PengumpulanTugasImages
+     * const count = await prisma.pengumpulanTugasImage.count({
+     *   where: {
+     *     // ... the filter for the PengumpulanTugasImages we want to count
+     *   }
+     * })
+    **/
+    count<T extends PengumpulanTugasImageCountArgs>(
+      args?: Subset<T, PengumpulanTugasImageCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PengumpulanTugasImageCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PengumpulanTugasImage.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PengumpulanTugasImageAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PengumpulanTugasImageAggregateArgs>(args: Subset<T, PengumpulanTugasImageAggregateArgs>): Prisma.PrismaPromise<GetPengumpulanTugasImageAggregateType<T>>
+
+    /**
+     * Group by PengumpulanTugasImage.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PengumpulanTugasImageGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PengumpulanTugasImageGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PengumpulanTugasImageGroupByArgs['orderBy'] }
+        : { orderBy?: PengumpulanTugasImageGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PengumpulanTugasImageGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPengumpulanTugasImageGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PengumpulanTugasImage model
+   */
+  readonly fields: PengumpulanTugasImageFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PengumpulanTugasImage.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PengumpulanTugasImageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    pengumpulan_tugas<T extends PengumpulanTugasDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PengumpulanTugasDefaultArgs<ExtArgs>>): Prisma__PengumpulanTugasClient<$Result.GetResult<Prisma.$PengumpulanTugasPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PengumpulanTugasImage model
+   */
+  interface PengumpulanTugasImageFieldRefs {
+    readonly kd_image: FieldRef<"PengumpulanTugasImage", 'String'>
+    readonly kd_pengumpulan_tugas: FieldRef<"PengumpulanTugasImage", 'String'>
+    readonly image_path: FieldRef<"PengumpulanTugasImage", 'String'>
+    readonly created_at: FieldRef<"PengumpulanTugasImage", 'DateTime'>
+    readonly updated_at: FieldRef<"PengumpulanTugasImage", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PengumpulanTugasImage findUnique
+   */
+  export type PengumpulanTugasImageFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PengumpulanTugasImage
+     */
+    select?: PengumpulanTugasImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PengumpulanTugasImage
+     */
+    omit?: PengumpulanTugasImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PengumpulanTugasImageInclude<ExtArgs> | null
+    /**
+     * Filter, which PengumpulanTugasImage to fetch.
+     */
+    where: PengumpulanTugasImageWhereUniqueInput
+  }
+
+  /**
+   * PengumpulanTugasImage findUniqueOrThrow
+   */
+  export type PengumpulanTugasImageFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PengumpulanTugasImage
+     */
+    select?: PengumpulanTugasImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PengumpulanTugasImage
+     */
+    omit?: PengumpulanTugasImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PengumpulanTugasImageInclude<ExtArgs> | null
+    /**
+     * Filter, which PengumpulanTugasImage to fetch.
+     */
+    where: PengumpulanTugasImageWhereUniqueInput
+  }
+
+  /**
+   * PengumpulanTugasImage findFirst
+   */
+  export type PengumpulanTugasImageFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PengumpulanTugasImage
+     */
+    select?: PengumpulanTugasImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PengumpulanTugasImage
+     */
+    omit?: PengumpulanTugasImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PengumpulanTugasImageInclude<ExtArgs> | null
+    /**
+     * Filter, which PengumpulanTugasImage to fetch.
+     */
+    where?: PengumpulanTugasImageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PengumpulanTugasImages to fetch.
+     */
+    orderBy?: PengumpulanTugasImageOrderByWithRelationInput | PengumpulanTugasImageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PengumpulanTugasImages.
+     */
+    cursor?: PengumpulanTugasImageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PengumpulanTugasImages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PengumpulanTugasImages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PengumpulanTugasImages.
+     */
+    distinct?: PengumpulanTugasImageScalarFieldEnum | PengumpulanTugasImageScalarFieldEnum[]
+  }
+
+  /**
+   * PengumpulanTugasImage findFirstOrThrow
+   */
+  export type PengumpulanTugasImageFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PengumpulanTugasImage
+     */
+    select?: PengumpulanTugasImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PengumpulanTugasImage
+     */
+    omit?: PengumpulanTugasImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PengumpulanTugasImageInclude<ExtArgs> | null
+    /**
+     * Filter, which PengumpulanTugasImage to fetch.
+     */
+    where?: PengumpulanTugasImageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PengumpulanTugasImages to fetch.
+     */
+    orderBy?: PengumpulanTugasImageOrderByWithRelationInput | PengumpulanTugasImageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PengumpulanTugasImages.
+     */
+    cursor?: PengumpulanTugasImageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PengumpulanTugasImages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PengumpulanTugasImages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PengumpulanTugasImages.
+     */
+    distinct?: PengumpulanTugasImageScalarFieldEnum | PengumpulanTugasImageScalarFieldEnum[]
+  }
+
+  /**
+   * PengumpulanTugasImage findMany
+   */
+  export type PengumpulanTugasImageFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PengumpulanTugasImage
+     */
+    select?: PengumpulanTugasImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PengumpulanTugasImage
+     */
+    omit?: PengumpulanTugasImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PengumpulanTugasImageInclude<ExtArgs> | null
+    /**
+     * Filter, which PengumpulanTugasImages to fetch.
+     */
+    where?: PengumpulanTugasImageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PengumpulanTugasImages to fetch.
+     */
+    orderBy?: PengumpulanTugasImageOrderByWithRelationInput | PengumpulanTugasImageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PengumpulanTugasImages.
+     */
+    cursor?: PengumpulanTugasImageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PengumpulanTugasImages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PengumpulanTugasImages.
+     */
+    skip?: number
+    distinct?: PengumpulanTugasImageScalarFieldEnum | PengumpulanTugasImageScalarFieldEnum[]
+  }
+
+  /**
+   * PengumpulanTugasImage create
+   */
+  export type PengumpulanTugasImageCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PengumpulanTugasImage
+     */
+    select?: PengumpulanTugasImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PengumpulanTugasImage
+     */
+    omit?: PengumpulanTugasImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PengumpulanTugasImageInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PengumpulanTugasImage.
+     */
+    data: XOR<PengumpulanTugasImageCreateInput, PengumpulanTugasImageUncheckedCreateInput>
+  }
+
+  /**
+   * PengumpulanTugasImage createMany
+   */
+  export type PengumpulanTugasImageCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PengumpulanTugasImages.
+     */
+    data: PengumpulanTugasImageCreateManyInput | PengumpulanTugasImageCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PengumpulanTugasImage update
+   */
+  export type PengumpulanTugasImageUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PengumpulanTugasImage
+     */
+    select?: PengumpulanTugasImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PengumpulanTugasImage
+     */
+    omit?: PengumpulanTugasImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PengumpulanTugasImageInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PengumpulanTugasImage.
+     */
+    data: XOR<PengumpulanTugasImageUpdateInput, PengumpulanTugasImageUncheckedUpdateInput>
+    /**
+     * Choose, which PengumpulanTugasImage to update.
+     */
+    where: PengumpulanTugasImageWhereUniqueInput
+  }
+
+  /**
+   * PengumpulanTugasImage updateMany
+   */
+  export type PengumpulanTugasImageUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PengumpulanTugasImages.
+     */
+    data: XOR<PengumpulanTugasImageUpdateManyMutationInput, PengumpulanTugasImageUncheckedUpdateManyInput>
+    /**
+     * Filter which PengumpulanTugasImages to update
+     */
+    where?: PengumpulanTugasImageWhereInput
+    /**
+     * Limit how many PengumpulanTugasImages to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PengumpulanTugasImage upsert
+   */
+  export type PengumpulanTugasImageUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PengumpulanTugasImage
+     */
+    select?: PengumpulanTugasImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PengumpulanTugasImage
+     */
+    omit?: PengumpulanTugasImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PengumpulanTugasImageInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PengumpulanTugasImage to update in case it exists.
+     */
+    where: PengumpulanTugasImageWhereUniqueInput
+    /**
+     * In case the PengumpulanTugasImage found by the `where` argument doesn't exist, create a new PengumpulanTugasImage with this data.
+     */
+    create: XOR<PengumpulanTugasImageCreateInput, PengumpulanTugasImageUncheckedCreateInput>
+    /**
+     * In case the PengumpulanTugasImage was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PengumpulanTugasImageUpdateInput, PengumpulanTugasImageUncheckedUpdateInput>
+  }
+
+  /**
+   * PengumpulanTugasImage delete
+   */
+  export type PengumpulanTugasImageDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PengumpulanTugasImage
+     */
+    select?: PengumpulanTugasImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PengumpulanTugasImage
+     */
+    omit?: PengumpulanTugasImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PengumpulanTugasImageInclude<ExtArgs> | null
+    /**
+     * Filter which PengumpulanTugasImage to delete.
+     */
+    where: PengumpulanTugasImageWhereUniqueInput
+  }
+
+  /**
+   * PengumpulanTugasImage deleteMany
+   */
+  export type PengumpulanTugasImageDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PengumpulanTugasImages to delete
+     */
+    where?: PengumpulanTugasImageWhereInput
+    /**
+     * Limit how many PengumpulanTugasImages to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PengumpulanTugasImage without action
+   */
+  export type PengumpulanTugasImageDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PengumpulanTugasImage
+     */
+    select?: PengumpulanTugasImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PengumpulanTugasImage
+     */
+    omit?: PengumpulanTugasImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PengumpulanTugasImageInclude<ExtArgs> | null
   }
 
 
@@ -8633,7 +11771,6 @@ export namespace Prisma {
     isi_laporan: 'isi_laporan',
     judul_laporan: 'judul_laporan',
     user_nip: 'user_nip',
-    file_path: 'file_path',
     created_at: 'created_at',
     updated_at: 'updated_at'
   };
@@ -8641,13 +11778,22 @@ export namespace Prisma {
   export type LaporanScalarFieldEnum = (typeof LaporanScalarFieldEnum)[keyof typeof LaporanScalarFieldEnum]
 
 
+  export const LaporanFileScalarFieldEnum: {
+    kd_file: 'kd_file',
+    kd_laporan: 'kd_laporan',
+    file_path: 'file_path',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type LaporanFileScalarFieldEnum = (typeof LaporanFileScalarFieldEnum)[keyof typeof LaporanFileScalarFieldEnum]
+
+
   export const PengumpulanTugasScalarFieldEnum: {
     kd_pengumpulan_tugas: 'kd_pengumpulan_tugas',
     kd_tugas: 'kd_tugas',
     user_nip: 'user_nip',
     tanggal_pengumpulan: 'tanggal_pengumpulan',
-    image: 'image',
-    file_path: 'file_path',
     catatan: 'catatan',
     status: 'status',
     created_at: 'created_at',
@@ -8655,6 +11801,28 @@ export namespace Prisma {
   };
 
   export type PengumpulanTugasScalarFieldEnum = (typeof PengumpulanTugasScalarFieldEnum)[keyof typeof PengumpulanTugasScalarFieldEnum]
+
+
+  export const PengumpulanTugasFileScalarFieldEnum: {
+    kd_file: 'kd_file',
+    kd_pengumpulan_tugas: 'kd_pengumpulan_tugas',
+    file_path: 'file_path',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type PengumpulanTugasFileScalarFieldEnum = (typeof PengumpulanTugasFileScalarFieldEnum)[keyof typeof PengumpulanTugasFileScalarFieldEnum]
+
+
+  export const PengumpulanTugasImageScalarFieldEnum: {
+    kd_image: 'kd_image',
+    kd_pengumpulan_tugas: 'kd_pengumpulan_tugas',
+    image_path: 'image_path',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type PengumpulanTugasImageScalarFieldEnum = (typeof PengumpulanTugasImageScalarFieldEnum)[keyof typeof PengumpulanTugasImageScalarFieldEnum]
 
 
   export const RatingScalarFieldEnum: {
@@ -8727,23 +11895,47 @@ export namespace Prisma {
     kd_laporan: 'kd_laporan',
     isi_laporan: 'isi_laporan',
     judul_laporan: 'judul_laporan',
-    user_nip: 'user_nip',
-    file_path: 'file_path'
+    user_nip: 'user_nip'
   };
 
   export type LaporanOrderByRelevanceFieldEnum = (typeof LaporanOrderByRelevanceFieldEnum)[keyof typeof LaporanOrderByRelevanceFieldEnum]
+
+
+  export const LaporanFileOrderByRelevanceFieldEnum: {
+    kd_file: 'kd_file',
+    kd_laporan: 'kd_laporan',
+    file_path: 'file_path'
+  };
+
+  export type LaporanFileOrderByRelevanceFieldEnum = (typeof LaporanFileOrderByRelevanceFieldEnum)[keyof typeof LaporanFileOrderByRelevanceFieldEnum]
 
 
   export const PengumpulanTugasOrderByRelevanceFieldEnum: {
     kd_pengumpulan_tugas: 'kd_pengumpulan_tugas',
     kd_tugas: 'kd_tugas',
     user_nip: 'user_nip',
-    image: 'image',
-    file_path: 'file_path',
     catatan: 'catatan'
   };
 
   export type PengumpulanTugasOrderByRelevanceFieldEnum = (typeof PengumpulanTugasOrderByRelevanceFieldEnum)[keyof typeof PengumpulanTugasOrderByRelevanceFieldEnum]
+
+
+  export const PengumpulanTugasFileOrderByRelevanceFieldEnum: {
+    kd_file: 'kd_file',
+    kd_pengumpulan_tugas: 'kd_pengumpulan_tugas',
+    file_path: 'file_path'
+  };
+
+  export type PengumpulanTugasFileOrderByRelevanceFieldEnum = (typeof PengumpulanTugasFileOrderByRelevanceFieldEnum)[keyof typeof PengumpulanTugasFileOrderByRelevanceFieldEnum]
+
+
+  export const PengumpulanTugasImageOrderByRelevanceFieldEnum: {
+    kd_image: 'kd_image',
+    kd_pengumpulan_tugas: 'kd_pengumpulan_tugas',
+    image_path: 'image_path'
+  };
+
+  export type PengumpulanTugasImageOrderByRelevanceFieldEnum = (typeof PengumpulanTugasImageOrderByRelevanceFieldEnum)[keyof typeof PengumpulanTugasImageOrderByRelevanceFieldEnum]
 
 
   export const RatingOrderByRelevanceFieldEnum: {
@@ -9113,10 +12305,10 @@ export namespace Prisma {
     isi_laporan?: StringFilter<"Laporan"> | string
     judul_laporan?: StringFilter<"Laporan"> | string
     user_nip?: StringFilter<"Laporan"> | string
-    file_path?: StringFilter<"Laporan"> | string
     created_at?: DateTimeFilter<"Laporan"> | Date | string
     updated_at?: DateTimeFilter<"Laporan"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    files?: LaporanFileListRelationFilter
   }
 
   export type LaporanOrderByWithRelationInput = {
@@ -9124,10 +12316,10 @@ export namespace Prisma {
     isi_laporan?: SortOrder
     judul_laporan?: SortOrder
     user_nip?: SortOrder
-    file_path?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     user?: UserOrderByWithRelationInput
+    files?: LaporanFileOrderByRelationAggregateInput
     _relevance?: LaporanOrderByRelevanceInput
   }
 
@@ -9139,10 +12331,10 @@ export namespace Prisma {
     isi_laporan?: StringFilter<"Laporan"> | string
     judul_laporan?: StringFilter<"Laporan"> | string
     user_nip?: StringFilter<"Laporan"> | string
-    file_path?: StringFilter<"Laporan"> | string
     created_at?: DateTimeFilter<"Laporan"> | Date | string
     updated_at?: DateTimeFilter<"Laporan"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    files?: LaporanFileListRelationFilter
   }, "kd_laporan">
 
   export type LaporanOrderByWithAggregationInput = {
@@ -9150,7 +12342,6 @@ export namespace Prisma {
     isi_laporan?: SortOrder
     judul_laporan?: SortOrder
     user_nip?: SortOrder
-    file_path?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     _count?: LaporanCountOrderByAggregateInput
@@ -9166,9 +12357,64 @@ export namespace Prisma {
     isi_laporan?: StringWithAggregatesFilter<"Laporan"> | string
     judul_laporan?: StringWithAggregatesFilter<"Laporan"> | string
     user_nip?: StringWithAggregatesFilter<"Laporan"> | string
-    file_path?: StringWithAggregatesFilter<"Laporan"> | string
     created_at?: DateTimeWithAggregatesFilter<"Laporan"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"Laporan"> | Date | string
+  }
+
+  export type LaporanFileWhereInput = {
+    AND?: LaporanFileWhereInput | LaporanFileWhereInput[]
+    OR?: LaporanFileWhereInput[]
+    NOT?: LaporanFileWhereInput | LaporanFileWhereInput[]
+    kd_file?: StringFilter<"LaporanFile"> | string
+    kd_laporan?: StringFilter<"LaporanFile"> | string
+    file_path?: StringFilter<"LaporanFile"> | string
+    created_at?: DateTimeFilter<"LaporanFile"> | Date | string
+    updated_at?: DateTimeFilter<"LaporanFile"> | Date | string
+    laporan?: XOR<LaporanScalarRelationFilter, LaporanWhereInput>
+  }
+
+  export type LaporanFileOrderByWithRelationInput = {
+    kd_file?: SortOrder
+    kd_laporan?: SortOrder
+    file_path?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    laporan?: LaporanOrderByWithRelationInput
+    _relevance?: LaporanFileOrderByRelevanceInput
+  }
+
+  export type LaporanFileWhereUniqueInput = Prisma.AtLeast<{
+    kd_file?: string
+    AND?: LaporanFileWhereInput | LaporanFileWhereInput[]
+    OR?: LaporanFileWhereInput[]
+    NOT?: LaporanFileWhereInput | LaporanFileWhereInput[]
+    kd_laporan?: StringFilter<"LaporanFile"> | string
+    file_path?: StringFilter<"LaporanFile"> | string
+    created_at?: DateTimeFilter<"LaporanFile"> | Date | string
+    updated_at?: DateTimeFilter<"LaporanFile"> | Date | string
+    laporan?: XOR<LaporanScalarRelationFilter, LaporanWhereInput>
+  }, "kd_file">
+
+  export type LaporanFileOrderByWithAggregationInput = {
+    kd_file?: SortOrder
+    kd_laporan?: SortOrder
+    file_path?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: LaporanFileCountOrderByAggregateInput
+    _max?: LaporanFileMaxOrderByAggregateInput
+    _min?: LaporanFileMinOrderByAggregateInput
+  }
+
+  export type LaporanFileScalarWhereWithAggregatesInput = {
+    AND?: LaporanFileScalarWhereWithAggregatesInput | LaporanFileScalarWhereWithAggregatesInput[]
+    OR?: LaporanFileScalarWhereWithAggregatesInput[]
+    NOT?: LaporanFileScalarWhereWithAggregatesInput | LaporanFileScalarWhereWithAggregatesInput[]
+    kd_file?: StringWithAggregatesFilter<"LaporanFile"> | string
+    kd_laporan?: StringWithAggregatesFilter<"LaporanFile"> | string
+    file_path?: StringWithAggregatesFilter<"LaporanFile"> | string
+    created_at?: DateTimeWithAggregatesFilter<"LaporanFile"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"LaporanFile"> | Date | string
   }
 
   export type PengumpulanTugasWhereInput = {
@@ -9179,8 +12425,6 @@ export namespace Prisma {
     kd_tugas?: StringFilter<"PengumpulanTugas"> | string
     user_nip?: StringFilter<"PengumpulanTugas"> | string
     tanggal_pengumpulan?: DateTimeFilter<"PengumpulanTugas"> | Date | string
-    image?: StringNullableFilter<"PengumpulanTugas"> | string | null
-    file_path?: StringNullableFilter<"PengumpulanTugas"> | string | null
     catatan?: StringFilter<"PengumpulanTugas"> | string
     status?: EnumStatusPengumpulanTugasFilter<"PengumpulanTugas"> | $Enums.StatusPengumpulanTugas
     created_at?: DateTimeFilter<"PengumpulanTugas"> | Date | string
@@ -9188,6 +12432,8 @@ export namespace Prisma {
     tugas?: XOR<TugasScalarRelationFilter, TugasWhereInput>
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     rating?: RatingListRelationFilter
+    files?: PengumpulanTugasFileListRelationFilter
+    images?: PengumpulanTugasImageListRelationFilter
   }
 
   export type PengumpulanTugasOrderByWithRelationInput = {
@@ -9195,8 +12441,6 @@ export namespace Prisma {
     kd_tugas?: SortOrder
     user_nip?: SortOrder
     tanggal_pengumpulan?: SortOrder
-    image?: SortOrderInput | SortOrder
-    file_path?: SortOrderInput | SortOrder
     catatan?: SortOrder
     status?: SortOrder
     created_at?: SortOrder
@@ -9204,6 +12448,8 @@ export namespace Prisma {
     tugas?: TugasOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
     rating?: RatingOrderByRelationAggregateInput
+    files?: PengumpulanTugasFileOrderByRelationAggregateInput
+    images?: PengumpulanTugasImageOrderByRelationAggregateInput
     _relevance?: PengumpulanTugasOrderByRelevanceInput
   }
 
@@ -9215,8 +12461,6 @@ export namespace Prisma {
     kd_tugas?: StringFilter<"PengumpulanTugas"> | string
     user_nip?: StringFilter<"PengumpulanTugas"> | string
     tanggal_pengumpulan?: DateTimeFilter<"PengumpulanTugas"> | Date | string
-    image?: StringNullableFilter<"PengumpulanTugas"> | string | null
-    file_path?: StringNullableFilter<"PengumpulanTugas"> | string | null
     catatan?: StringFilter<"PengumpulanTugas"> | string
     status?: EnumStatusPengumpulanTugasFilter<"PengumpulanTugas"> | $Enums.StatusPengumpulanTugas
     created_at?: DateTimeFilter<"PengumpulanTugas"> | Date | string
@@ -9224,6 +12468,8 @@ export namespace Prisma {
     tugas?: XOR<TugasScalarRelationFilter, TugasWhereInput>
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     rating?: RatingListRelationFilter
+    files?: PengumpulanTugasFileListRelationFilter
+    images?: PengumpulanTugasImageListRelationFilter
   }, "kd_pengumpulan_tugas">
 
   export type PengumpulanTugasOrderByWithAggregationInput = {
@@ -9231,8 +12477,6 @@ export namespace Prisma {
     kd_tugas?: SortOrder
     user_nip?: SortOrder
     tanggal_pengumpulan?: SortOrder
-    image?: SortOrderInput | SortOrder
-    file_path?: SortOrderInput | SortOrder
     catatan?: SortOrder
     status?: SortOrder
     created_at?: SortOrder
@@ -9250,12 +12494,122 @@ export namespace Prisma {
     kd_tugas?: StringWithAggregatesFilter<"PengumpulanTugas"> | string
     user_nip?: StringWithAggregatesFilter<"PengumpulanTugas"> | string
     tanggal_pengumpulan?: DateTimeWithAggregatesFilter<"PengumpulanTugas"> | Date | string
-    image?: StringNullableWithAggregatesFilter<"PengumpulanTugas"> | string | null
-    file_path?: StringNullableWithAggregatesFilter<"PengumpulanTugas"> | string | null
     catatan?: StringWithAggregatesFilter<"PengumpulanTugas"> | string
     status?: EnumStatusPengumpulanTugasWithAggregatesFilter<"PengumpulanTugas"> | $Enums.StatusPengumpulanTugas
     created_at?: DateTimeWithAggregatesFilter<"PengumpulanTugas"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"PengumpulanTugas"> | Date | string
+  }
+
+  export type PengumpulanTugasFileWhereInput = {
+    AND?: PengumpulanTugasFileWhereInput | PengumpulanTugasFileWhereInput[]
+    OR?: PengumpulanTugasFileWhereInput[]
+    NOT?: PengumpulanTugasFileWhereInput | PengumpulanTugasFileWhereInput[]
+    kd_file?: StringFilter<"PengumpulanTugasFile"> | string
+    kd_pengumpulan_tugas?: StringFilter<"PengumpulanTugasFile"> | string
+    file_path?: StringFilter<"PengumpulanTugasFile"> | string
+    created_at?: DateTimeFilter<"PengumpulanTugasFile"> | Date | string
+    updated_at?: DateTimeFilter<"PengumpulanTugasFile"> | Date | string
+    pengumpulan_tugas?: XOR<PengumpulanTugasScalarRelationFilter, PengumpulanTugasWhereInput>
+  }
+
+  export type PengumpulanTugasFileOrderByWithRelationInput = {
+    kd_file?: SortOrder
+    kd_pengumpulan_tugas?: SortOrder
+    file_path?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    pengumpulan_tugas?: PengumpulanTugasOrderByWithRelationInput
+    _relevance?: PengumpulanTugasFileOrderByRelevanceInput
+  }
+
+  export type PengumpulanTugasFileWhereUniqueInput = Prisma.AtLeast<{
+    kd_file?: string
+    AND?: PengumpulanTugasFileWhereInput | PengumpulanTugasFileWhereInput[]
+    OR?: PengumpulanTugasFileWhereInput[]
+    NOT?: PengumpulanTugasFileWhereInput | PengumpulanTugasFileWhereInput[]
+    kd_pengumpulan_tugas?: StringFilter<"PengumpulanTugasFile"> | string
+    file_path?: StringFilter<"PengumpulanTugasFile"> | string
+    created_at?: DateTimeFilter<"PengumpulanTugasFile"> | Date | string
+    updated_at?: DateTimeFilter<"PengumpulanTugasFile"> | Date | string
+    pengumpulan_tugas?: XOR<PengumpulanTugasScalarRelationFilter, PengumpulanTugasWhereInput>
+  }, "kd_file">
+
+  export type PengumpulanTugasFileOrderByWithAggregationInput = {
+    kd_file?: SortOrder
+    kd_pengumpulan_tugas?: SortOrder
+    file_path?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: PengumpulanTugasFileCountOrderByAggregateInput
+    _max?: PengumpulanTugasFileMaxOrderByAggregateInput
+    _min?: PengumpulanTugasFileMinOrderByAggregateInput
+  }
+
+  export type PengumpulanTugasFileScalarWhereWithAggregatesInput = {
+    AND?: PengumpulanTugasFileScalarWhereWithAggregatesInput | PengumpulanTugasFileScalarWhereWithAggregatesInput[]
+    OR?: PengumpulanTugasFileScalarWhereWithAggregatesInput[]
+    NOT?: PengumpulanTugasFileScalarWhereWithAggregatesInput | PengumpulanTugasFileScalarWhereWithAggregatesInput[]
+    kd_file?: StringWithAggregatesFilter<"PengumpulanTugasFile"> | string
+    kd_pengumpulan_tugas?: StringWithAggregatesFilter<"PengumpulanTugasFile"> | string
+    file_path?: StringWithAggregatesFilter<"PengumpulanTugasFile"> | string
+    created_at?: DateTimeWithAggregatesFilter<"PengumpulanTugasFile"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"PengumpulanTugasFile"> | Date | string
+  }
+
+  export type PengumpulanTugasImageWhereInput = {
+    AND?: PengumpulanTugasImageWhereInput | PengumpulanTugasImageWhereInput[]
+    OR?: PengumpulanTugasImageWhereInput[]
+    NOT?: PengumpulanTugasImageWhereInput | PengumpulanTugasImageWhereInput[]
+    kd_image?: StringFilter<"PengumpulanTugasImage"> | string
+    kd_pengumpulan_tugas?: StringFilter<"PengumpulanTugasImage"> | string
+    image_path?: StringFilter<"PengumpulanTugasImage"> | string
+    created_at?: DateTimeFilter<"PengumpulanTugasImage"> | Date | string
+    updated_at?: DateTimeFilter<"PengumpulanTugasImage"> | Date | string
+    pengumpulan_tugas?: XOR<PengumpulanTugasScalarRelationFilter, PengumpulanTugasWhereInput>
+  }
+
+  export type PengumpulanTugasImageOrderByWithRelationInput = {
+    kd_image?: SortOrder
+    kd_pengumpulan_tugas?: SortOrder
+    image_path?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    pengumpulan_tugas?: PengumpulanTugasOrderByWithRelationInput
+    _relevance?: PengumpulanTugasImageOrderByRelevanceInput
+  }
+
+  export type PengumpulanTugasImageWhereUniqueInput = Prisma.AtLeast<{
+    kd_image?: string
+    AND?: PengumpulanTugasImageWhereInput | PengumpulanTugasImageWhereInput[]
+    OR?: PengumpulanTugasImageWhereInput[]
+    NOT?: PengumpulanTugasImageWhereInput | PengumpulanTugasImageWhereInput[]
+    kd_pengumpulan_tugas?: StringFilter<"PengumpulanTugasImage"> | string
+    image_path?: StringFilter<"PengumpulanTugasImage"> | string
+    created_at?: DateTimeFilter<"PengumpulanTugasImage"> | Date | string
+    updated_at?: DateTimeFilter<"PengumpulanTugasImage"> | Date | string
+    pengumpulan_tugas?: XOR<PengumpulanTugasScalarRelationFilter, PengumpulanTugasWhereInput>
+  }, "kd_image">
+
+  export type PengumpulanTugasImageOrderByWithAggregationInput = {
+    kd_image?: SortOrder
+    kd_pengumpulan_tugas?: SortOrder
+    image_path?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: PengumpulanTugasImageCountOrderByAggregateInput
+    _max?: PengumpulanTugasImageMaxOrderByAggregateInput
+    _min?: PengumpulanTugasImageMinOrderByAggregateInput
+  }
+
+  export type PengumpulanTugasImageScalarWhereWithAggregatesInput = {
+    AND?: PengumpulanTugasImageScalarWhereWithAggregatesInput | PengumpulanTugasImageScalarWhereWithAggregatesInput[]
+    OR?: PengumpulanTugasImageScalarWhereWithAggregatesInput[]
+    NOT?: PengumpulanTugasImageScalarWhereWithAggregatesInput | PengumpulanTugasImageScalarWhereWithAggregatesInput[]
+    kd_image?: StringWithAggregatesFilter<"PengumpulanTugasImage"> | string
+    kd_pengumpulan_tugas?: StringWithAggregatesFilter<"PengumpulanTugasImage"> | string
+    image_path?: StringWithAggregatesFilter<"PengumpulanTugasImage"> | string
+    created_at?: DateTimeWithAggregatesFilter<"PengumpulanTugasImage"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"PengumpulanTugasImage"> | Date | string
   }
 
   export type RatingWhereInput = {
@@ -9620,10 +12974,10 @@ export namespace Prisma {
     kd_laporan?: string
     isi_laporan: string
     judul_laporan: string
-    file_path: string
     created_at?: Date | string
     updated_at?: Date | string
     user: UserCreateNestedOneWithoutLaporanInput
+    files?: LaporanFileCreateNestedManyWithoutLaporanInput
   }
 
   export type LaporanUncheckedCreateInput = {
@@ -9631,19 +12985,19 @@ export namespace Prisma {
     isi_laporan: string
     judul_laporan: string
     user_nip: string
-    file_path: string
     created_at?: Date | string
     updated_at?: Date | string
+    files?: LaporanFileUncheckedCreateNestedManyWithoutLaporanInput
   }
 
   export type LaporanUpdateInput = {
     kd_laporan?: StringFieldUpdateOperationsInput | string
     isi_laporan?: StringFieldUpdateOperationsInput | string
     judul_laporan?: StringFieldUpdateOperationsInput | string
-    file_path?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutLaporanNestedInput
+    files?: LaporanFileUpdateManyWithoutLaporanNestedInput
   }
 
   export type LaporanUncheckedUpdateInput = {
@@ -9651,9 +13005,9 @@ export namespace Prisma {
     isi_laporan?: StringFieldUpdateOperationsInput | string
     judul_laporan?: StringFieldUpdateOperationsInput | string
     user_nip?: StringFieldUpdateOperationsInput | string
-    file_path?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    files?: LaporanFileUncheckedUpdateManyWithoutLaporanNestedInput
   }
 
   export type LaporanCreateManyInput = {
@@ -9661,7 +13015,6 @@ export namespace Prisma {
     isi_laporan: string
     judul_laporan: string
     user_nip: string
-    file_path: string
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -9670,7 +13023,6 @@ export namespace Prisma {
     kd_laporan?: StringFieldUpdateOperationsInput | string
     isi_laporan?: StringFieldUpdateOperationsInput | string
     judul_laporan?: StringFieldUpdateOperationsInput | string
-    file_path?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9680,6 +13032,60 @@ export namespace Prisma {
     isi_laporan?: StringFieldUpdateOperationsInput | string
     judul_laporan?: StringFieldUpdateOperationsInput | string
     user_nip?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LaporanFileCreateInput = {
+    kd_file?: string
+    file_path: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    laporan: LaporanCreateNestedOneWithoutFilesInput
+  }
+
+  export type LaporanFileUncheckedCreateInput = {
+    kd_file?: string
+    kd_laporan: string
+    file_path: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type LaporanFileUpdateInput = {
+    kd_file?: StringFieldUpdateOperationsInput | string
+    file_path?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    laporan?: LaporanUpdateOneRequiredWithoutFilesNestedInput
+  }
+
+  export type LaporanFileUncheckedUpdateInput = {
+    kd_file?: StringFieldUpdateOperationsInput | string
+    kd_laporan?: StringFieldUpdateOperationsInput | string
+    file_path?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LaporanFileCreateManyInput = {
+    kd_file?: string
+    kd_laporan: string
+    file_path: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type LaporanFileUpdateManyMutationInput = {
+    kd_file?: StringFieldUpdateOperationsInput | string
+    file_path?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LaporanFileUncheckedUpdateManyInput = {
+    kd_file?: StringFieldUpdateOperationsInput | string
+    kd_laporan?: StringFieldUpdateOperationsInput | string
     file_path?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9688,8 +13094,6 @@ export namespace Prisma {
   export type PengumpulanTugasCreateInput = {
     kd_pengumpulan_tugas?: string
     tanggal_pengumpulan: Date | string
-    image?: string | null
-    file_path?: string | null
     catatan: string
     status?: $Enums.StatusPengumpulanTugas
     created_at?: Date | string
@@ -9697,6 +13101,8 @@ export namespace Prisma {
     tugas: TugasCreateNestedOneWithoutPengumpulan_tugasInput
     user: UserCreateNestedOneWithoutPengumpulan_tugasInput
     rating?: RatingCreateNestedManyWithoutPengumpulanTugasInput
+    files?: PengumpulanTugasFileCreateNestedManyWithoutPengumpulan_tugasInput
+    images?: PengumpulanTugasImageCreateNestedManyWithoutPengumpulan_tugasInput
   }
 
   export type PengumpulanTugasUncheckedCreateInput = {
@@ -9704,20 +13110,18 @@ export namespace Prisma {
     kd_tugas: string
     user_nip: string
     tanggal_pengumpulan: Date | string
-    image?: string | null
-    file_path?: string | null
     catatan: string
     status?: $Enums.StatusPengumpulanTugas
     created_at?: Date | string
     updated_at?: Date | string
     rating?: RatingUncheckedCreateNestedManyWithoutPengumpulanTugasInput
+    files?: PengumpulanTugasFileUncheckedCreateNestedManyWithoutPengumpulan_tugasInput
+    images?: PengumpulanTugasImageUncheckedCreateNestedManyWithoutPengumpulan_tugasInput
   }
 
   export type PengumpulanTugasUpdateInput = {
     kd_pengumpulan_tugas?: StringFieldUpdateOperationsInput | string
     tanggal_pengumpulan?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    file_path?: NullableStringFieldUpdateOperationsInput | string | null
     catatan?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusPengumpulanTugasFieldUpdateOperationsInput | $Enums.StatusPengumpulanTugas
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9725,6 +13129,8 @@ export namespace Prisma {
     tugas?: TugasUpdateOneRequiredWithoutPengumpulan_tugasNestedInput
     user?: UserUpdateOneRequiredWithoutPengumpulan_tugasNestedInput
     rating?: RatingUpdateManyWithoutPengumpulanTugasNestedInput
+    files?: PengumpulanTugasFileUpdateManyWithoutPengumpulan_tugasNestedInput
+    images?: PengumpulanTugasImageUpdateManyWithoutPengumpulan_tugasNestedInput
   }
 
   export type PengumpulanTugasUncheckedUpdateInput = {
@@ -9732,13 +13138,13 @@ export namespace Prisma {
     kd_tugas?: StringFieldUpdateOperationsInput | string
     user_nip?: StringFieldUpdateOperationsInput | string
     tanggal_pengumpulan?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    file_path?: NullableStringFieldUpdateOperationsInput | string | null
     catatan?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusPengumpulanTugasFieldUpdateOperationsInput | $Enums.StatusPengumpulanTugas
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     rating?: RatingUncheckedUpdateManyWithoutPengumpulanTugasNestedInput
+    files?: PengumpulanTugasFileUncheckedUpdateManyWithoutPengumpulan_tugasNestedInput
+    images?: PengumpulanTugasImageUncheckedUpdateManyWithoutPengumpulan_tugasNestedInput
   }
 
   export type PengumpulanTugasCreateManyInput = {
@@ -9746,8 +13152,6 @@ export namespace Prisma {
     kd_tugas: string
     user_nip: string
     tanggal_pengumpulan: Date | string
-    image?: string | null
-    file_path?: string | null
     catatan: string
     status?: $Enums.StatusPengumpulanTugas
     created_at?: Date | string
@@ -9757,8 +13161,6 @@ export namespace Prisma {
   export type PengumpulanTugasUpdateManyMutationInput = {
     kd_pengumpulan_tugas?: StringFieldUpdateOperationsInput | string
     tanggal_pengumpulan?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    file_path?: NullableStringFieldUpdateOperationsInput | string | null
     catatan?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusPengumpulanTugasFieldUpdateOperationsInput | $Enums.StatusPengumpulanTugas
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9770,10 +13172,118 @@ export namespace Prisma {
     kd_tugas?: StringFieldUpdateOperationsInput | string
     user_nip?: StringFieldUpdateOperationsInput | string
     tanggal_pengumpulan?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    file_path?: NullableStringFieldUpdateOperationsInput | string | null
     catatan?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusPengumpulanTugasFieldUpdateOperationsInput | $Enums.StatusPengumpulanTugas
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PengumpulanTugasFileCreateInput = {
+    kd_file?: string
+    file_path: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    pengumpulan_tugas: PengumpulanTugasCreateNestedOneWithoutFilesInput
+  }
+
+  export type PengumpulanTugasFileUncheckedCreateInput = {
+    kd_file?: string
+    kd_pengumpulan_tugas: string
+    file_path: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type PengumpulanTugasFileUpdateInput = {
+    kd_file?: StringFieldUpdateOperationsInput | string
+    file_path?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    pengumpulan_tugas?: PengumpulanTugasUpdateOneRequiredWithoutFilesNestedInput
+  }
+
+  export type PengumpulanTugasFileUncheckedUpdateInput = {
+    kd_file?: StringFieldUpdateOperationsInput | string
+    kd_pengumpulan_tugas?: StringFieldUpdateOperationsInput | string
+    file_path?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PengumpulanTugasFileCreateManyInput = {
+    kd_file?: string
+    kd_pengumpulan_tugas: string
+    file_path: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type PengumpulanTugasFileUpdateManyMutationInput = {
+    kd_file?: StringFieldUpdateOperationsInput | string
+    file_path?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PengumpulanTugasFileUncheckedUpdateManyInput = {
+    kd_file?: StringFieldUpdateOperationsInput | string
+    kd_pengumpulan_tugas?: StringFieldUpdateOperationsInput | string
+    file_path?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PengumpulanTugasImageCreateInput = {
+    kd_image?: string
+    image_path: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    pengumpulan_tugas: PengumpulanTugasCreateNestedOneWithoutImagesInput
+  }
+
+  export type PengumpulanTugasImageUncheckedCreateInput = {
+    kd_image?: string
+    kd_pengumpulan_tugas: string
+    image_path: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type PengumpulanTugasImageUpdateInput = {
+    kd_image?: StringFieldUpdateOperationsInput | string
+    image_path?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    pengumpulan_tugas?: PengumpulanTugasUpdateOneRequiredWithoutImagesNestedInput
+  }
+
+  export type PengumpulanTugasImageUncheckedUpdateInput = {
+    kd_image?: StringFieldUpdateOperationsInput | string
+    kd_pengumpulan_tugas?: StringFieldUpdateOperationsInput | string
+    image_path?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PengumpulanTugasImageCreateManyInput = {
+    kd_image?: string
+    kd_pengumpulan_tugas: string
+    image_path: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type PengumpulanTugasImageUpdateManyMutationInput = {
+    kd_image?: StringFieldUpdateOperationsInput | string
+    image_path?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PengumpulanTugasImageUncheckedUpdateManyInput = {
+    kd_image?: StringFieldUpdateOperationsInput | string
+    kd_pengumpulan_tugas?: StringFieldUpdateOperationsInput | string
+    image_path?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -10211,6 +13721,16 @@ export namespace Prisma {
     _max?: NestedEnumPrioritasFilter<$PrismaModel>
   }
 
+  export type LaporanFileListRelationFilter = {
+    every?: LaporanFileWhereInput
+    some?: LaporanFileWhereInput
+    none?: LaporanFileWhereInput
+  }
+
+  export type LaporanFileOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type LaporanOrderByRelevanceInput = {
     fields: LaporanOrderByRelevanceFieldEnum | LaporanOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -10222,7 +13742,6 @@ export namespace Prisma {
     isi_laporan?: SortOrder
     judul_laporan?: SortOrder
     user_nip?: SortOrder
-    file_path?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -10232,7 +13751,6 @@ export namespace Prisma {
     isi_laporan?: SortOrder
     judul_laporan?: SortOrder
     user_nip?: SortOrder
-    file_path?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -10242,6 +13760,40 @@ export namespace Prisma {
     isi_laporan?: SortOrder
     judul_laporan?: SortOrder
     user_nip?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type LaporanScalarRelationFilter = {
+    is?: LaporanWhereInput
+    isNot?: LaporanWhereInput
+  }
+
+  export type LaporanFileOrderByRelevanceInput = {
+    fields: LaporanFileOrderByRelevanceFieldEnum | LaporanFileOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type LaporanFileCountOrderByAggregateInput = {
+    kd_file?: SortOrder
+    kd_laporan?: SortOrder
+    file_path?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type LaporanFileMaxOrderByAggregateInput = {
+    kd_file?: SortOrder
+    kd_laporan?: SortOrder
+    file_path?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type LaporanFileMinOrderByAggregateInput = {
+    kd_file?: SortOrder
+    kd_laporan?: SortOrder
     file_path?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -10265,7 +13817,27 @@ export namespace Prisma {
     none?: RatingWhereInput
   }
 
+  export type PengumpulanTugasFileListRelationFilter = {
+    every?: PengumpulanTugasFileWhereInput
+    some?: PengumpulanTugasFileWhereInput
+    none?: PengumpulanTugasFileWhereInput
+  }
+
+  export type PengumpulanTugasImageListRelationFilter = {
+    every?: PengumpulanTugasImageWhereInput
+    some?: PengumpulanTugasImageWhereInput
+    none?: PengumpulanTugasImageWhereInput
+  }
+
   export type RatingOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PengumpulanTugasFileOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PengumpulanTugasImageOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -10280,8 +13852,6 @@ export namespace Prisma {
     kd_tugas?: SortOrder
     user_nip?: SortOrder
     tanggal_pengumpulan?: SortOrder
-    image?: SortOrder
-    file_path?: SortOrder
     catatan?: SortOrder
     status?: SortOrder
     created_at?: SortOrder
@@ -10293,8 +13863,6 @@ export namespace Prisma {
     kd_tugas?: SortOrder
     user_nip?: SortOrder
     tanggal_pengumpulan?: SortOrder
-    image?: SortOrder
-    file_path?: SortOrder
     catatan?: SortOrder
     status?: SortOrder
     created_at?: SortOrder
@@ -10306,8 +13874,6 @@ export namespace Prisma {
     kd_tugas?: SortOrder
     user_nip?: SortOrder
     tanggal_pengumpulan?: SortOrder
-    image?: SortOrder
-    file_path?: SortOrder
     catatan?: SortOrder
     status?: SortOrder
     created_at?: SortOrder
@@ -10324,6 +13890,71 @@ export namespace Prisma {
     _max?: NestedEnumStatusPengumpulanTugasFilter<$PrismaModel>
   }
 
+  export type PengumpulanTugasScalarRelationFilter = {
+    is?: PengumpulanTugasWhereInput
+    isNot?: PengumpulanTugasWhereInput
+  }
+
+  export type PengumpulanTugasFileOrderByRelevanceInput = {
+    fields: PengumpulanTugasFileOrderByRelevanceFieldEnum | PengumpulanTugasFileOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type PengumpulanTugasFileCountOrderByAggregateInput = {
+    kd_file?: SortOrder
+    kd_pengumpulan_tugas?: SortOrder
+    file_path?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type PengumpulanTugasFileMaxOrderByAggregateInput = {
+    kd_file?: SortOrder
+    kd_pengumpulan_tugas?: SortOrder
+    file_path?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type PengumpulanTugasFileMinOrderByAggregateInput = {
+    kd_file?: SortOrder
+    kd_pengumpulan_tugas?: SortOrder
+    file_path?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type PengumpulanTugasImageOrderByRelevanceInput = {
+    fields: PengumpulanTugasImageOrderByRelevanceFieldEnum | PengumpulanTugasImageOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type PengumpulanTugasImageCountOrderByAggregateInput = {
+    kd_image?: SortOrder
+    kd_pengumpulan_tugas?: SortOrder
+    image_path?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type PengumpulanTugasImageMaxOrderByAggregateInput = {
+    kd_image?: SortOrder
+    kd_pengumpulan_tugas?: SortOrder
+    image_path?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type PengumpulanTugasImageMinOrderByAggregateInput = {
+    kd_image?: SortOrder
+    kd_pengumpulan_tugas?: SortOrder
+    image_path?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
   export type FloatFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
     in?: number[]
@@ -10333,11 +13964,6 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
-  }
-
-  export type PengumpulanTugasScalarRelationFilter = {
-    is?: PengumpulanTugasWhereInput
-    isNot?: PengumpulanTugasWhereInput
   }
 
   export type RatingOrderByRelevanceInput = {
@@ -10836,12 +14462,68 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type LaporanFileCreateNestedManyWithoutLaporanInput = {
+    create?: XOR<LaporanFileCreateWithoutLaporanInput, LaporanFileUncheckedCreateWithoutLaporanInput> | LaporanFileCreateWithoutLaporanInput[] | LaporanFileUncheckedCreateWithoutLaporanInput[]
+    connectOrCreate?: LaporanFileCreateOrConnectWithoutLaporanInput | LaporanFileCreateOrConnectWithoutLaporanInput[]
+    createMany?: LaporanFileCreateManyLaporanInputEnvelope
+    connect?: LaporanFileWhereUniqueInput | LaporanFileWhereUniqueInput[]
+  }
+
+  export type LaporanFileUncheckedCreateNestedManyWithoutLaporanInput = {
+    create?: XOR<LaporanFileCreateWithoutLaporanInput, LaporanFileUncheckedCreateWithoutLaporanInput> | LaporanFileCreateWithoutLaporanInput[] | LaporanFileUncheckedCreateWithoutLaporanInput[]
+    connectOrCreate?: LaporanFileCreateOrConnectWithoutLaporanInput | LaporanFileCreateOrConnectWithoutLaporanInput[]
+    createMany?: LaporanFileCreateManyLaporanInputEnvelope
+    connect?: LaporanFileWhereUniqueInput | LaporanFileWhereUniqueInput[]
+  }
+
   export type UserUpdateOneRequiredWithoutLaporanNestedInput = {
     create?: XOR<UserCreateWithoutLaporanInput, UserUncheckedCreateWithoutLaporanInput>
     connectOrCreate?: UserCreateOrConnectWithoutLaporanInput
     upsert?: UserUpsertWithoutLaporanInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutLaporanInput, UserUpdateWithoutLaporanInput>, UserUncheckedUpdateWithoutLaporanInput>
+  }
+
+  export type LaporanFileUpdateManyWithoutLaporanNestedInput = {
+    create?: XOR<LaporanFileCreateWithoutLaporanInput, LaporanFileUncheckedCreateWithoutLaporanInput> | LaporanFileCreateWithoutLaporanInput[] | LaporanFileUncheckedCreateWithoutLaporanInput[]
+    connectOrCreate?: LaporanFileCreateOrConnectWithoutLaporanInput | LaporanFileCreateOrConnectWithoutLaporanInput[]
+    upsert?: LaporanFileUpsertWithWhereUniqueWithoutLaporanInput | LaporanFileUpsertWithWhereUniqueWithoutLaporanInput[]
+    createMany?: LaporanFileCreateManyLaporanInputEnvelope
+    set?: LaporanFileWhereUniqueInput | LaporanFileWhereUniqueInput[]
+    disconnect?: LaporanFileWhereUniqueInput | LaporanFileWhereUniqueInput[]
+    delete?: LaporanFileWhereUniqueInput | LaporanFileWhereUniqueInput[]
+    connect?: LaporanFileWhereUniqueInput | LaporanFileWhereUniqueInput[]
+    update?: LaporanFileUpdateWithWhereUniqueWithoutLaporanInput | LaporanFileUpdateWithWhereUniqueWithoutLaporanInput[]
+    updateMany?: LaporanFileUpdateManyWithWhereWithoutLaporanInput | LaporanFileUpdateManyWithWhereWithoutLaporanInput[]
+    deleteMany?: LaporanFileScalarWhereInput | LaporanFileScalarWhereInput[]
+  }
+
+  export type LaporanFileUncheckedUpdateManyWithoutLaporanNestedInput = {
+    create?: XOR<LaporanFileCreateWithoutLaporanInput, LaporanFileUncheckedCreateWithoutLaporanInput> | LaporanFileCreateWithoutLaporanInput[] | LaporanFileUncheckedCreateWithoutLaporanInput[]
+    connectOrCreate?: LaporanFileCreateOrConnectWithoutLaporanInput | LaporanFileCreateOrConnectWithoutLaporanInput[]
+    upsert?: LaporanFileUpsertWithWhereUniqueWithoutLaporanInput | LaporanFileUpsertWithWhereUniqueWithoutLaporanInput[]
+    createMany?: LaporanFileCreateManyLaporanInputEnvelope
+    set?: LaporanFileWhereUniqueInput | LaporanFileWhereUniqueInput[]
+    disconnect?: LaporanFileWhereUniqueInput | LaporanFileWhereUniqueInput[]
+    delete?: LaporanFileWhereUniqueInput | LaporanFileWhereUniqueInput[]
+    connect?: LaporanFileWhereUniqueInput | LaporanFileWhereUniqueInput[]
+    update?: LaporanFileUpdateWithWhereUniqueWithoutLaporanInput | LaporanFileUpdateWithWhereUniqueWithoutLaporanInput[]
+    updateMany?: LaporanFileUpdateManyWithWhereWithoutLaporanInput | LaporanFileUpdateManyWithWhereWithoutLaporanInput[]
+    deleteMany?: LaporanFileScalarWhereInput | LaporanFileScalarWhereInput[]
+  }
+
+  export type LaporanCreateNestedOneWithoutFilesInput = {
+    create?: XOR<LaporanCreateWithoutFilesInput, LaporanUncheckedCreateWithoutFilesInput>
+    connectOrCreate?: LaporanCreateOrConnectWithoutFilesInput
+    connect?: LaporanWhereUniqueInput
+  }
+
+  export type LaporanUpdateOneRequiredWithoutFilesNestedInput = {
+    create?: XOR<LaporanCreateWithoutFilesInput, LaporanUncheckedCreateWithoutFilesInput>
+    connectOrCreate?: LaporanCreateOrConnectWithoutFilesInput
+    upsert?: LaporanUpsertWithoutFilesInput
+    connect?: LaporanWhereUniqueInput
+    update?: XOR<XOR<LaporanUpdateToOneWithWhereWithoutFilesInput, LaporanUpdateWithoutFilesInput>, LaporanUncheckedUpdateWithoutFilesInput>
   }
 
   export type TugasCreateNestedOneWithoutPengumpulan_tugasInput = {
@@ -10863,11 +14545,39 @@ export namespace Prisma {
     connect?: RatingWhereUniqueInput | RatingWhereUniqueInput[]
   }
 
+  export type PengumpulanTugasFileCreateNestedManyWithoutPengumpulan_tugasInput = {
+    create?: XOR<PengumpulanTugasFileCreateWithoutPengumpulan_tugasInput, PengumpulanTugasFileUncheckedCreateWithoutPengumpulan_tugasInput> | PengumpulanTugasFileCreateWithoutPengumpulan_tugasInput[] | PengumpulanTugasFileUncheckedCreateWithoutPengumpulan_tugasInput[]
+    connectOrCreate?: PengumpulanTugasFileCreateOrConnectWithoutPengumpulan_tugasInput | PengumpulanTugasFileCreateOrConnectWithoutPengumpulan_tugasInput[]
+    createMany?: PengumpulanTugasFileCreateManyPengumpulan_tugasInputEnvelope
+    connect?: PengumpulanTugasFileWhereUniqueInput | PengumpulanTugasFileWhereUniqueInput[]
+  }
+
+  export type PengumpulanTugasImageCreateNestedManyWithoutPengumpulan_tugasInput = {
+    create?: XOR<PengumpulanTugasImageCreateWithoutPengumpulan_tugasInput, PengumpulanTugasImageUncheckedCreateWithoutPengumpulan_tugasInput> | PengumpulanTugasImageCreateWithoutPengumpulan_tugasInput[] | PengumpulanTugasImageUncheckedCreateWithoutPengumpulan_tugasInput[]
+    connectOrCreate?: PengumpulanTugasImageCreateOrConnectWithoutPengumpulan_tugasInput | PengumpulanTugasImageCreateOrConnectWithoutPengumpulan_tugasInput[]
+    createMany?: PengumpulanTugasImageCreateManyPengumpulan_tugasInputEnvelope
+    connect?: PengumpulanTugasImageWhereUniqueInput | PengumpulanTugasImageWhereUniqueInput[]
+  }
+
   export type RatingUncheckedCreateNestedManyWithoutPengumpulanTugasInput = {
     create?: XOR<RatingCreateWithoutPengumpulanTugasInput, RatingUncheckedCreateWithoutPengumpulanTugasInput> | RatingCreateWithoutPengumpulanTugasInput[] | RatingUncheckedCreateWithoutPengumpulanTugasInput[]
     connectOrCreate?: RatingCreateOrConnectWithoutPengumpulanTugasInput | RatingCreateOrConnectWithoutPengumpulanTugasInput[]
     createMany?: RatingCreateManyPengumpulanTugasInputEnvelope
     connect?: RatingWhereUniqueInput | RatingWhereUniqueInput[]
+  }
+
+  export type PengumpulanTugasFileUncheckedCreateNestedManyWithoutPengumpulan_tugasInput = {
+    create?: XOR<PengumpulanTugasFileCreateWithoutPengumpulan_tugasInput, PengumpulanTugasFileUncheckedCreateWithoutPengumpulan_tugasInput> | PengumpulanTugasFileCreateWithoutPengumpulan_tugasInput[] | PengumpulanTugasFileUncheckedCreateWithoutPengumpulan_tugasInput[]
+    connectOrCreate?: PengumpulanTugasFileCreateOrConnectWithoutPengumpulan_tugasInput | PengumpulanTugasFileCreateOrConnectWithoutPengumpulan_tugasInput[]
+    createMany?: PengumpulanTugasFileCreateManyPengumpulan_tugasInputEnvelope
+    connect?: PengumpulanTugasFileWhereUniqueInput | PengumpulanTugasFileWhereUniqueInput[]
+  }
+
+  export type PengumpulanTugasImageUncheckedCreateNestedManyWithoutPengumpulan_tugasInput = {
+    create?: XOR<PengumpulanTugasImageCreateWithoutPengumpulan_tugasInput, PengumpulanTugasImageUncheckedCreateWithoutPengumpulan_tugasInput> | PengumpulanTugasImageCreateWithoutPengumpulan_tugasInput[] | PengumpulanTugasImageUncheckedCreateWithoutPengumpulan_tugasInput[]
+    connectOrCreate?: PengumpulanTugasImageCreateOrConnectWithoutPengumpulan_tugasInput | PengumpulanTugasImageCreateOrConnectWithoutPengumpulan_tugasInput[]
+    createMany?: PengumpulanTugasImageCreateManyPengumpulan_tugasInputEnvelope
+    connect?: PengumpulanTugasImageWhereUniqueInput | PengumpulanTugasImageWhereUniqueInput[]
   }
 
   export type EnumStatusPengumpulanTugasFieldUpdateOperationsInput = {
@@ -10904,6 +14614,34 @@ export namespace Prisma {
     deleteMany?: RatingScalarWhereInput | RatingScalarWhereInput[]
   }
 
+  export type PengumpulanTugasFileUpdateManyWithoutPengumpulan_tugasNestedInput = {
+    create?: XOR<PengumpulanTugasFileCreateWithoutPengumpulan_tugasInput, PengumpulanTugasFileUncheckedCreateWithoutPengumpulan_tugasInput> | PengumpulanTugasFileCreateWithoutPengumpulan_tugasInput[] | PengumpulanTugasFileUncheckedCreateWithoutPengumpulan_tugasInput[]
+    connectOrCreate?: PengumpulanTugasFileCreateOrConnectWithoutPengumpulan_tugasInput | PengumpulanTugasFileCreateOrConnectWithoutPengumpulan_tugasInput[]
+    upsert?: PengumpulanTugasFileUpsertWithWhereUniqueWithoutPengumpulan_tugasInput | PengumpulanTugasFileUpsertWithWhereUniqueWithoutPengumpulan_tugasInput[]
+    createMany?: PengumpulanTugasFileCreateManyPengumpulan_tugasInputEnvelope
+    set?: PengumpulanTugasFileWhereUniqueInput | PengumpulanTugasFileWhereUniqueInput[]
+    disconnect?: PengumpulanTugasFileWhereUniqueInput | PengumpulanTugasFileWhereUniqueInput[]
+    delete?: PengumpulanTugasFileWhereUniqueInput | PengumpulanTugasFileWhereUniqueInput[]
+    connect?: PengumpulanTugasFileWhereUniqueInput | PengumpulanTugasFileWhereUniqueInput[]
+    update?: PengumpulanTugasFileUpdateWithWhereUniqueWithoutPengumpulan_tugasInput | PengumpulanTugasFileUpdateWithWhereUniqueWithoutPengumpulan_tugasInput[]
+    updateMany?: PengumpulanTugasFileUpdateManyWithWhereWithoutPengumpulan_tugasInput | PengumpulanTugasFileUpdateManyWithWhereWithoutPengumpulan_tugasInput[]
+    deleteMany?: PengumpulanTugasFileScalarWhereInput | PengumpulanTugasFileScalarWhereInput[]
+  }
+
+  export type PengumpulanTugasImageUpdateManyWithoutPengumpulan_tugasNestedInput = {
+    create?: XOR<PengumpulanTugasImageCreateWithoutPengumpulan_tugasInput, PengumpulanTugasImageUncheckedCreateWithoutPengumpulan_tugasInput> | PengumpulanTugasImageCreateWithoutPengumpulan_tugasInput[] | PengumpulanTugasImageUncheckedCreateWithoutPengumpulan_tugasInput[]
+    connectOrCreate?: PengumpulanTugasImageCreateOrConnectWithoutPengumpulan_tugasInput | PengumpulanTugasImageCreateOrConnectWithoutPengumpulan_tugasInput[]
+    upsert?: PengumpulanTugasImageUpsertWithWhereUniqueWithoutPengumpulan_tugasInput | PengumpulanTugasImageUpsertWithWhereUniqueWithoutPengumpulan_tugasInput[]
+    createMany?: PengumpulanTugasImageCreateManyPengumpulan_tugasInputEnvelope
+    set?: PengumpulanTugasImageWhereUniqueInput | PengumpulanTugasImageWhereUniqueInput[]
+    disconnect?: PengumpulanTugasImageWhereUniqueInput | PengumpulanTugasImageWhereUniqueInput[]
+    delete?: PengumpulanTugasImageWhereUniqueInput | PengumpulanTugasImageWhereUniqueInput[]
+    connect?: PengumpulanTugasImageWhereUniqueInput | PengumpulanTugasImageWhereUniqueInput[]
+    update?: PengumpulanTugasImageUpdateWithWhereUniqueWithoutPengumpulan_tugasInput | PengumpulanTugasImageUpdateWithWhereUniqueWithoutPengumpulan_tugasInput[]
+    updateMany?: PengumpulanTugasImageUpdateManyWithWhereWithoutPengumpulan_tugasInput | PengumpulanTugasImageUpdateManyWithWhereWithoutPengumpulan_tugasInput[]
+    deleteMany?: PengumpulanTugasImageScalarWhereInput | PengumpulanTugasImageScalarWhereInput[]
+  }
+
   export type RatingUncheckedUpdateManyWithoutPengumpulanTugasNestedInput = {
     create?: XOR<RatingCreateWithoutPengumpulanTugasInput, RatingUncheckedCreateWithoutPengumpulanTugasInput> | RatingCreateWithoutPengumpulanTugasInput[] | RatingUncheckedCreateWithoutPengumpulanTugasInput[]
     connectOrCreate?: RatingCreateOrConnectWithoutPengumpulanTugasInput | RatingCreateOrConnectWithoutPengumpulanTugasInput[]
@@ -10916,6 +14654,62 @@ export namespace Prisma {
     update?: RatingUpdateWithWhereUniqueWithoutPengumpulanTugasInput | RatingUpdateWithWhereUniqueWithoutPengumpulanTugasInput[]
     updateMany?: RatingUpdateManyWithWhereWithoutPengumpulanTugasInput | RatingUpdateManyWithWhereWithoutPengumpulanTugasInput[]
     deleteMany?: RatingScalarWhereInput | RatingScalarWhereInput[]
+  }
+
+  export type PengumpulanTugasFileUncheckedUpdateManyWithoutPengumpulan_tugasNestedInput = {
+    create?: XOR<PengumpulanTugasFileCreateWithoutPengumpulan_tugasInput, PengumpulanTugasFileUncheckedCreateWithoutPengumpulan_tugasInput> | PengumpulanTugasFileCreateWithoutPengumpulan_tugasInput[] | PengumpulanTugasFileUncheckedCreateWithoutPengumpulan_tugasInput[]
+    connectOrCreate?: PengumpulanTugasFileCreateOrConnectWithoutPengumpulan_tugasInput | PengumpulanTugasFileCreateOrConnectWithoutPengumpulan_tugasInput[]
+    upsert?: PengumpulanTugasFileUpsertWithWhereUniqueWithoutPengumpulan_tugasInput | PengumpulanTugasFileUpsertWithWhereUniqueWithoutPengumpulan_tugasInput[]
+    createMany?: PengumpulanTugasFileCreateManyPengumpulan_tugasInputEnvelope
+    set?: PengumpulanTugasFileWhereUniqueInput | PengumpulanTugasFileWhereUniqueInput[]
+    disconnect?: PengumpulanTugasFileWhereUniqueInput | PengumpulanTugasFileWhereUniqueInput[]
+    delete?: PengumpulanTugasFileWhereUniqueInput | PengumpulanTugasFileWhereUniqueInput[]
+    connect?: PengumpulanTugasFileWhereUniqueInput | PengumpulanTugasFileWhereUniqueInput[]
+    update?: PengumpulanTugasFileUpdateWithWhereUniqueWithoutPengumpulan_tugasInput | PengumpulanTugasFileUpdateWithWhereUniqueWithoutPengumpulan_tugasInput[]
+    updateMany?: PengumpulanTugasFileUpdateManyWithWhereWithoutPengumpulan_tugasInput | PengumpulanTugasFileUpdateManyWithWhereWithoutPengumpulan_tugasInput[]
+    deleteMany?: PengumpulanTugasFileScalarWhereInput | PengumpulanTugasFileScalarWhereInput[]
+  }
+
+  export type PengumpulanTugasImageUncheckedUpdateManyWithoutPengumpulan_tugasNestedInput = {
+    create?: XOR<PengumpulanTugasImageCreateWithoutPengumpulan_tugasInput, PengumpulanTugasImageUncheckedCreateWithoutPengumpulan_tugasInput> | PengumpulanTugasImageCreateWithoutPengumpulan_tugasInput[] | PengumpulanTugasImageUncheckedCreateWithoutPengumpulan_tugasInput[]
+    connectOrCreate?: PengumpulanTugasImageCreateOrConnectWithoutPengumpulan_tugasInput | PengumpulanTugasImageCreateOrConnectWithoutPengumpulan_tugasInput[]
+    upsert?: PengumpulanTugasImageUpsertWithWhereUniqueWithoutPengumpulan_tugasInput | PengumpulanTugasImageUpsertWithWhereUniqueWithoutPengumpulan_tugasInput[]
+    createMany?: PengumpulanTugasImageCreateManyPengumpulan_tugasInputEnvelope
+    set?: PengumpulanTugasImageWhereUniqueInput | PengumpulanTugasImageWhereUniqueInput[]
+    disconnect?: PengumpulanTugasImageWhereUniqueInput | PengumpulanTugasImageWhereUniqueInput[]
+    delete?: PengumpulanTugasImageWhereUniqueInput | PengumpulanTugasImageWhereUniqueInput[]
+    connect?: PengumpulanTugasImageWhereUniqueInput | PengumpulanTugasImageWhereUniqueInput[]
+    update?: PengumpulanTugasImageUpdateWithWhereUniqueWithoutPengumpulan_tugasInput | PengumpulanTugasImageUpdateWithWhereUniqueWithoutPengumpulan_tugasInput[]
+    updateMany?: PengumpulanTugasImageUpdateManyWithWhereWithoutPengumpulan_tugasInput | PengumpulanTugasImageUpdateManyWithWhereWithoutPengumpulan_tugasInput[]
+    deleteMany?: PengumpulanTugasImageScalarWhereInput | PengumpulanTugasImageScalarWhereInput[]
+  }
+
+  export type PengumpulanTugasCreateNestedOneWithoutFilesInput = {
+    create?: XOR<PengumpulanTugasCreateWithoutFilesInput, PengumpulanTugasUncheckedCreateWithoutFilesInput>
+    connectOrCreate?: PengumpulanTugasCreateOrConnectWithoutFilesInput
+    connect?: PengumpulanTugasWhereUniqueInput
+  }
+
+  export type PengumpulanTugasUpdateOneRequiredWithoutFilesNestedInput = {
+    create?: XOR<PengumpulanTugasCreateWithoutFilesInput, PengumpulanTugasUncheckedCreateWithoutFilesInput>
+    connectOrCreate?: PengumpulanTugasCreateOrConnectWithoutFilesInput
+    upsert?: PengumpulanTugasUpsertWithoutFilesInput
+    connect?: PengumpulanTugasWhereUniqueInput
+    update?: XOR<XOR<PengumpulanTugasUpdateToOneWithWhereWithoutFilesInput, PengumpulanTugasUpdateWithoutFilesInput>, PengumpulanTugasUncheckedUpdateWithoutFilesInput>
+  }
+
+  export type PengumpulanTugasCreateNestedOneWithoutImagesInput = {
+    create?: XOR<PengumpulanTugasCreateWithoutImagesInput, PengumpulanTugasUncheckedCreateWithoutImagesInput>
+    connectOrCreate?: PengumpulanTugasCreateOrConnectWithoutImagesInput
+    connect?: PengumpulanTugasWhereUniqueInput
+  }
+
+  export type PengumpulanTugasUpdateOneRequiredWithoutImagesNestedInput = {
+    create?: XOR<PengumpulanTugasCreateWithoutImagesInput, PengumpulanTugasUncheckedCreateWithoutImagesInput>
+    connectOrCreate?: PengumpulanTugasCreateOrConnectWithoutImagesInput
+    upsert?: PengumpulanTugasUpsertWithoutImagesInput
+    connect?: PengumpulanTugasWhereUniqueInput
+    update?: XOR<XOR<PengumpulanTugasUpdateToOneWithWhereWithoutImagesInput, PengumpulanTugasUpdateWithoutImagesInput>, PengumpulanTugasUncheckedUpdateWithoutImagesInput>
   }
 
   export type PengumpulanTugasCreateNestedOneWithoutRatingInput = {
@@ -11465,18 +15259,18 @@ export namespace Prisma {
     kd_laporan?: string
     isi_laporan: string
     judul_laporan: string
-    file_path: string
     created_at?: Date | string
     updated_at?: Date | string
+    files?: LaporanFileCreateNestedManyWithoutLaporanInput
   }
 
   export type LaporanUncheckedCreateWithoutUserInput = {
     kd_laporan?: string
     isi_laporan: string
     judul_laporan: string
-    file_path: string
     created_at?: Date | string
     updated_at?: Date | string
+    files?: LaporanFileUncheckedCreateNestedManyWithoutLaporanInput
   }
 
   export type LaporanCreateOrConnectWithoutUserInput = {
@@ -11492,27 +15286,27 @@ export namespace Prisma {
   export type PengumpulanTugasCreateWithoutUserInput = {
     kd_pengumpulan_tugas?: string
     tanggal_pengumpulan: Date | string
-    image?: string | null
-    file_path?: string | null
     catatan: string
     status?: $Enums.StatusPengumpulanTugas
     created_at?: Date | string
     updated_at?: Date | string
     tugas: TugasCreateNestedOneWithoutPengumpulan_tugasInput
     rating?: RatingCreateNestedManyWithoutPengumpulanTugasInput
+    files?: PengumpulanTugasFileCreateNestedManyWithoutPengumpulan_tugasInput
+    images?: PengumpulanTugasImageCreateNestedManyWithoutPengumpulan_tugasInput
   }
 
   export type PengumpulanTugasUncheckedCreateWithoutUserInput = {
     kd_pengumpulan_tugas?: string
     kd_tugas: string
     tanggal_pengumpulan: Date | string
-    image?: string | null
-    file_path?: string | null
     catatan: string
     status?: $Enums.StatusPengumpulanTugas
     created_at?: Date | string
     updated_at?: Date | string
     rating?: RatingUncheckedCreateNestedManyWithoutPengumpulanTugasInput
+    files?: PengumpulanTugasFileUncheckedCreateNestedManyWithoutPengumpulan_tugasInput
+    images?: PengumpulanTugasImageUncheckedCreateNestedManyWithoutPengumpulan_tugasInput
   }
 
   export type PengumpulanTugasCreateOrConnectWithoutUserInput = {
@@ -11678,7 +15472,6 @@ export namespace Prisma {
     isi_laporan?: StringFilter<"Laporan"> | string
     judul_laporan?: StringFilter<"Laporan"> | string
     user_nip?: StringFilter<"Laporan"> | string
-    file_path?: StringFilter<"Laporan"> | string
     created_at?: DateTimeFilter<"Laporan"> | Date | string
     updated_at?: DateTimeFilter<"Laporan"> | Date | string
   }
@@ -11707,8 +15500,6 @@ export namespace Prisma {
     kd_tugas?: StringFilter<"PengumpulanTugas"> | string
     user_nip?: StringFilter<"PengumpulanTugas"> | string
     tanggal_pengumpulan?: DateTimeFilter<"PengumpulanTugas"> | Date | string
-    image?: StringNullableFilter<"PengumpulanTugas"> | string | null
-    file_path?: StringNullableFilter<"PengumpulanTugas"> | string | null
     catatan?: StringFilter<"PengumpulanTugas"> | string
     status?: EnumStatusPengumpulanTugasFilter<"PengumpulanTugas"> | $Enums.StatusPengumpulanTugas
     created_at?: DateTimeFilter<"PengumpulanTugas"> | Date | string
@@ -11875,27 +15666,27 @@ export namespace Prisma {
   export type PengumpulanTugasCreateWithoutTugasInput = {
     kd_pengumpulan_tugas?: string
     tanggal_pengumpulan: Date | string
-    image?: string | null
-    file_path?: string | null
     catatan: string
     status?: $Enums.StatusPengumpulanTugas
     created_at?: Date | string
     updated_at?: Date | string
     user: UserCreateNestedOneWithoutPengumpulan_tugasInput
     rating?: RatingCreateNestedManyWithoutPengumpulanTugasInput
+    files?: PengumpulanTugasFileCreateNestedManyWithoutPengumpulan_tugasInput
+    images?: PengumpulanTugasImageCreateNestedManyWithoutPengumpulan_tugasInput
   }
 
   export type PengumpulanTugasUncheckedCreateWithoutTugasInput = {
     kd_pengumpulan_tugas?: string
     user_nip: string
     tanggal_pengumpulan: Date | string
-    image?: string | null
-    file_path?: string | null
     catatan: string
     status?: $Enums.StatusPengumpulanTugas
     created_at?: Date | string
     updated_at?: Date | string
     rating?: RatingUncheckedCreateNestedManyWithoutPengumpulanTugasInput
+    files?: PengumpulanTugasFileUncheckedCreateNestedManyWithoutPengumpulan_tugasInput
+    images?: PengumpulanTugasImageUncheckedCreateNestedManyWithoutPengumpulan_tugasInput
   }
 
   export type PengumpulanTugasCreateOrConnectWithoutTugasInput = {
@@ -12004,6 +15795,30 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutLaporanInput, UserUncheckedCreateWithoutLaporanInput>
   }
 
+  export type LaporanFileCreateWithoutLaporanInput = {
+    kd_file?: string
+    file_path: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type LaporanFileUncheckedCreateWithoutLaporanInput = {
+    kd_file?: string
+    file_path: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type LaporanFileCreateOrConnectWithoutLaporanInput = {
+    where: LaporanFileWhereUniqueInput
+    create: XOR<LaporanFileCreateWithoutLaporanInput, LaporanFileUncheckedCreateWithoutLaporanInput>
+  }
+
+  export type LaporanFileCreateManyLaporanInputEnvelope = {
+    data: LaporanFileCreateManyLaporanInput | LaporanFileCreateManyLaporanInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithoutLaporanInput = {
     update: XOR<UserUpdateWithoutLaporanInput, UserUncheckedUpdateWithoutLaporanInput>
     create: XOR<UserCreateWithoutLaporanInput, UserUncheckedCreateWithoutLaporanInput>
@@ -12045,6 +15860,85 @@ export namespace Prisma {
     history?: HistoryJabatanUncheckedUpdateManyWithoutUserNestedInput
     tugas?: TugasUncheckedUpdateManyWithoutUserNestedInput
     pengumpulan_tugas?: PengumpulanTugasUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type LaporanFileUpsertWithWhereUniqueWithoutLaporanInput = {
+    where: LaporanFileWhereUniqueInput
+    update: XOR<LaporanFileUpdateWithoutLaporanInput, LaporanFileUncheckedUpdateWithoutLaporanInput>
+    create: XOR<LaporanFileCreateWithoutLaporanInput, LaporanFileUncheckedCreateWithoutLaporanInput>
+  }
+
+  export type LaporanFileUpdateWithWhereUniqueWithoutLaporanInput = {
+    where: LaporanFileWhereUniqueInput
+    data: XOR<LaporanFileUpdateWithoutLaporanInput, LaporanFileUncheckedUpdateWithoutLaporanInput>
+  }
+
+  export type LaporanFileUpdateManyWithWhereWithoutLaporanInput = {
+    where: LaporanFileScalarWhereInput
+    data: XOR<LaporanFileUpdateManyMutationInput, LaporanFileUncheckedUpdateManyWithoutLaporanInput>
+  }
+
+  export type LaporanFileScalarWhereInput = {
+    AND?: LaporanFileScalarWhereInput | LaporanFileScalarWhereInput[]
+    OR?: LaporanFileScalarWhereInput[]
+    NOT?: LaporanFileScalarWhereInput | LaporanFileScalarWhereInput[]
+    kd_file?: StringFilter<"LaporanFile"> | string
+    kd_laporan?: StringFilter<"LaporanFile"> | string
+    file_path?: StringFilter<"LaporanFile"> | string
+    created_at?: DateTimeFilter<"LaporanFile"> | Date | string
+    updated_at?: DateTimeFilter<"LaporanFile"> | Date | string
+  }
+
+  export type LaporanCreateWithoutFilesInput = {
+    kd_laporan?: string
+    isi_laporan: string
+    judul_laporan: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutLaporanInput
+  }
+
+  export type LaporanUncheckedCreateWithoutFilesInput = {
+    kd_laporan?: string
+    isi_laporan: string
+    judul_laporan: string
+    user_nip: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type LaporanCreateOrConnectWithoutFilesInput = {
+    where: LaporanWhereUniqueInput
+    create: XOR<LaporanCreateWithoutFilesInput, LaporanUncheckedCreateWithoutFilesInput>
+  }
+
+  export type LaporanUpsertWithoutFilesInput = {
+    update: XOR<LaporanUpdateWithoutFilesInput, LaporanUncheckedUpdateWithoutFilesInput>
+    create: XOR<LaporanCreateWithoutFilesInput, LaporanUncheckedCreateWithoutFilesInput>
+    where?: LaporanWhereInput
+  }
+
+  export type LaporanUpdateToOneWithWhereWithoutFilesInput = {
+    where?: LaporanWhereInput
+    data: XOR<LaporanUpdateWithoutFilesInput, LaporanUncheckedUpdateWithoutFilesInput>
+  }
+
+  export type LaporanUpdateWithoutFilesInput = {
+    kd_laporan?: StringFieldUpdateOperationsInput | string
+    isi_laporan?: StringFieldUpdateOperationsInput | string
+    judul_laporan?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutLaporanNestedInput
+  }
+
+  export type LaporanUncheckedUpdateWithoutFilesInput = {
+    kd_laporan?: StringFieldUpdateOperationsInput | string
+    isi_laporan?: StringFieldUpdateOperationsInput | string
+    judul_laporan?: StringFieldUpdateOperationsInput | string
+    user_nip?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TugasCreateWithoutPengumpulan_tugasInput = {
@@ -12134,6 +16028,54 @@ export namespace Prisma {
 
   export type RatingCreateManyPengumpulanTugasInputEnvelope = {
     data: RatingCreateManyPengumpulanTugasInput | RatingCreateManyPengumpulanTugasInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PengumpulanTugasFileCreateWithoutPengumpulan_tugasInput = {
+    kd_file?: string
+    file_path: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type PengumpulanTugasFileUncheckedCreateWithoutPengumpulan_tugasInput = {
+    kd_file?: string
+    file_path: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type PengumpulanTugasFileCreateOrConnectWithoutPengumpulan_tugasInput = {
+    where: PengumpulanTugasFileWhereUniqueInput
+    create: XOR<PengumpulanTugasFileCreateWithoutPengumpulan_tugasInput, PengumpulanTugasFileUncheckedCreateWithoutPengumpulan_tugasInput>
+  }
+
+  export type PengumpulanTugasFileCreateManyPengumpulan_tugasInputEnvelope = {
+    data: PengumpulanTugasFileCreateManyPengumpulan_tugasInput | PengumpulanTugasFileCreateManyPengumpulan_tugasInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PengumpulanTugasImageCreateWithoutPengumpulan_tugasInput = {
+    kd_image?: string
+    image_path: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type PengumpulanTugasImageUncheckedCreateWithoutPengumpulan_tugasInput = {
+    kd_image?: string
+    image_path: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type PengumpulanTugasImageCreateOrConnectWithoutPengumpulan_tugasInput = {
+    where: PengumpulanTugasImageWhereUniqueInput
+    create: XOR<PengumpulanTugasImageCreateWithoutPengumpulan_tugasInput, PengumpulanTugasImageUncheckedCreateWithoutPengumpulan_tugasInput>
+  }
+
+  export type PengumpulanTugasImageCreateManyPengumpulan_tugasInputEnvelope = {
+    data: PengumpulanTugasImageCreateManyPengumpulan_tugasInput | PengumpulanTugasImageCreateManyPengumpulan_tugasInput[]
     skipDuplicates?: boolean
   }
 
@@ -12242,17 +16184,207 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"Rating"> | Date | string
   }
 
-  export type PengumpulanTugasCreateWithoutRatingInput = {
+  export type PengumpulanTugasFileUpsertWithWhereUniqueWithoutPengumpulan_tugasInput = {
+    where: PengumpulanTugasFileWhereUniqueInput
+    update: XOR<PengumpulanTugasFileUpdateWithoutPengumpulan_tugasInput, PengumpulanTugasFileUncheckedUpdateWithoutPengumpulan_tugasInput>
+    create: XOR<PengumpulanTugasFileCreateWithoutPengumpulan_tugasInput, PengumpulanTugasFileUncheckedCreateWithoutPengumpulan_tugasInput>
+  }
+
+  export type PengumpulanTugasFileUpdateWithWhereUniqueWithoutPengumpulan_tugasInput = {
+    where: PengumpulanTugasFileWhereUniqueInput
+    data: XOR<PengumpulanTugasFileUpdateWithoutPengumpulan_tugasInput, PengumpulanTugasFileUncheckedUpdateWithoutPengumpulan_tugasInput>
+  }
+
+  export type PengumpulanTugasFileUpdateManyWithWhereWithoutPengumpulan_tugasInput = {
+    where: PengumpulanTugasFileScalarWhereInput
+    data: XOR<PengumpulanTugasFileUpdateManyMutationInput, PengumpulanTugasFileUncheckedUpdateManyWithoutPengumpulan_tugasInput>
+  }
+
+  export type PengumpulanTugasFileScalarWhereInput = {
+    AND?: PengumpulanTugasFileScalarWhereInput | PengumpulanTugasFileScalarWhereInput[]
+    OR?: PengumpulanTugasFileScalarWhereInput[]
+    NOT?: PengumpulanTugasFileScalarWhereInput | PengumpulanTugasFileScalarWhereInput[]
+    kd_file?: StringFilter<"PengumpulanTugasFile"> | string
+    kd_pengumpulan_tugas?: StringFilter<"PengumpulanTugasFile"> | string
+    file_path?: StringFilter<"PengumpulanTugasFile"> | string
+    created_at?: DateTimeFilter<"PengumpulanTugasFile"> | Date | string
+    updated_at?: DateTimeFilter<"PengumpulanTugasFile"> | Date | string
+  }
+
+  export type PengumpulanTugasImageUpsertWithWhereUniqueWithoutPengumpulan_tugasInput = {
+    where: PengumpulanTugasImageWhereUniqueInput
+    update: XOR<PengumpulanTugasImageUpdateWithoutPengumpulan_tugasInput, PengumpulanTugasImageUncheckedUpdateWithoutPengumpulan_tugasInput>
+    create: XOR<PengumpulanTugasImageCreateWithoutPengumpulan_tugasInput, PengumpulanTugasImageUncheckedCreateWithoutPengumpulan_tugasInput>
+  }
+
+  export type PengumpulanTugasImageUpdateWithWhereUniqueWithoutPengumpulan_tugasInput = {
+    where: PengumpulanTugasImageWhereUniqueInput
+    data: XOR<PengumpulanTugasImageUpdateWithoutPengumpulan_tugasInput, PengumpulanTugasImageUncheckedUpdateWithoutPengumpulan_tugasInput>
+  }
+
+  export type PengumpulanTugasImageUpdateManyWithWhereWithoutPengumpulan_tugasInput = {
+    where: PengumpulanTugasImageScalarWhereInput
+    data: XOR<PengumpulanTugasImageUpdateManyMutationInput, PengumpulanTugasImageUncheckedUpdateManyWithoutPengumpulan_tugasInput>
+  }
+
+  export type PengumpulanTugasImageScalarWhereInput = {
+    AND?: PengumpulanTugasImageScalarWhereInput | PengumpulanTugasImageScalarWhereInput[]
+    OR?: PengumpulanTugasImageScalarWhereInput[]
+    NOT?: PengumpulanTugasImageScalarWhereInput | PengumpulanTugasImageScalarWhereInput[]
+    kd_image?: StringFilter<"PengumpulanTugasImage"> | string
+    kd_pengumpulan_tugas?: StringFilter<"PengumpulanTugasImage"> | string
+    image_path?: StringFilter<"PengumpulanTugasImage"> | string
+    created_at?: DateTimeFilter<"PengumpulanTugasImage"> | Date | string
+    updated_at?: DateTimeFilter<"PengumpulanTugasImage"> | Date | string
+  }
+
+  export type PengumpulanTugasCreateWithoutFilesInput = {
     kd_pengumpulan_tugas?: string
     tanggal_pengumpulan: Date | string
-    image?: string | null
-    file_path?: string | null
     catatan: string
     status?: $Enums.StatusPengumpulanTugas
     created_at?: Date | string
     updated_at?: Date | string
     tugas: TugasCreateNestedOneWithoutPengumpulan_tugasInput
     user: UserCreateNestedOneWithoutPengumpulan_tugasInput
+    rating?: RatingCreateNestedManyWithoutPengumpulanTugasInput
+    images?: PengumpulanTugasImageCreateNestedManyWithoutPengumpulan_tugasInput
+  }
+
+  export type PengumpulanTugasUncheckedCreateWithoutFilesInput = {
+    kd_pengumpulan_tugas?: string
+    kd_tugas: string
+    user_nip: string
+    tanggal_pengumpulan: Date | string
+    catatan: string
+    status?: $Enums.StatusPengumpulanTugas
+    created_at?: Date | string
+    updated_at?: Date | string
+    rating?: RatingUncheckedCreateNestedManyWithoutPengumpulanTugasInput
+    images?: PengumpulanTugasImageUncheckedCreateNestedManyWithoutPengumpulan_tugasInput
+  }
+
+  export type PengumpulanTugasCreateOrConnectWithoutFilesInput = {
+    where: PengumpulanTugasWhereUniqueInput
+    create: XOR<PengumpulanTugasCreateWithoutFilesInput, PengumpulanTugasUncheckedCreateWithoutFilesInput>
+  }
+
+  export type PengumpulanTugasUpsertWithoutFilesInput = {
+    update: XOR<PengumpulanTugasUpdateWithoutFilesInput, PengumpulanTugasUncheckedUpdateWithoutFilesInput>
+    create: XOR<PengumpulanTugasCreateWithoutFilesInput, PengumpulanTugasUncheckedCreateWithoutFilesInput>
+    where?: PengumpulanTugasWhereInput
+  }
+
+  export type PengumpulanTugasUpdateToOneWithWhereWithoutFilesInput = {
+    where?: PengumpulanTugasWhereInput
+    data: XOR<PengumpulanTugasUpdateWithoutFilesInput, PengumpulanTugasUncheckedUpdateWithoutFilesInput>
+  }
+
+  export type PengumpulanTugasUpdateWithoutFilesInput = {
+    kd_pengumpulan_tugas?: StringFieldUpdateOperationsInput | string
+    tanggal_pengumpulan?: DateTimeFieldUpdateOperationsInput | Date | string
+    catatan?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusPengumpulanTugasFieldUpdateOperationsInput | $Enums.StatusPengumpulanTugas
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    tugas?: TugasUpdateOneRequiredWithoutPengumpulan_tugasNestedInput
+    user?: UserUpdateOneRequiredWithoutPengumpulan_tugasNestedInput
+    rating?: RatingUpdateManyWithoutPengumpulanTugasNestedInput
+    images?: PengumpulanTugasImageUpdateManyWithoutPengumpulan_tugasNestedInput
+  }
+
+  export type PengumpulanTugasUncheckedUpdateWithoutFilesInput = {
+    kd_pengumpulan_tugas?: StringFieldUpdateOperationsInput | string
+    kd_tugas?: StringFieldUpdateOperationsInput | string
+    user_nip?: StringFieldUpdateOperationsInput | string
+    tanggal_pengumpulan?: DateTimeFieldUpdateOperationsInput | Date | string
+    catatan?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusPengumpulanTugasFieldUpdateOperationsInput | $Enums.StatusPengumpulanTugas
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    rating?: RatingUncheckedUpdateManyWithoutPengumpulanTugasNestedInput
+    images?: PengumpulanTugasImageUncheckedUpdateManyWithoutPengumpulan_tugasNestedInput
+  }
+
+  export type PengumpulanTugasCreateWithoutImagesInput = {
+    kd_pengumpulan_tugas?: string
+    tanggal_pengumpulan: Date | string
+    catatan: string
+    status?: $Enums.StatusPengumpulanTugas
+    created_at?: Date | string
+    updated_at?: Date | string
+    tugas: TugasCreateNestedOneWithoutPengumpulan_tugasInput
+    user: UserCreateNestedOneWithoutPengumpulan_tugasInput
+    rating?: RatingCreateNestedManyWithoutPengumpulanTugasInput
+    files?: PengumpulanTugasFileCreateNestedManyWithoutPengumpulan_tugasInput
+  }
+
+  export type PengumpulanTugasUncheckedCreateWithoutImagesInput = {
+    kd_pengumpulan_tugas?: string
+    kd_tugas: string
+    user_nip: string
+    tanggal_pengumpulan: Date | string
+    catatan: string
+    status?: $Enums.StatusPengumpulanTugas
+    created_at?: Date | string
+    updated_at?: Date | string
+    rating?: RatingUncheckedCreateNestedManyWithoutPengumpulanTugasInput
+    files?: PengumpulanTugasFileUncheckedCreateNestedManyWithoutPengumpulan_tugasInput
+  }
+
+  export type PengumpulanTugasCreateOrConnectWithoutImagesInput = {
+    where: PengumpulanTugasWhereUniqueInput
+    create: XOR<PengumpulanTugasCreateWithoutImagesInput, PengumpulanTugasUncheckedCreateWithoutImagesInput>
+  }
+
+  export type PengumpulanTugasUpsertWithoutImagesInput = {
+    update: XOR<PengumpulanTugasUpdateWithoutImagesInput, PengumpulanTugasUncheckedUpdateWithoutImagesInput>
+    create: XOR<PengumpulanTugasCreateWithoutImagesInput, PengumpulanTugasUncheckedCreateWithoutImagesInput>
+    where?: PengumpulanTugasWhereInput
+  }
+
+  export type PengumpulanTugasUpdateToOneWithWhereWithoutImagesInput = {
+    where?: PengumpulanTugasWhereInput
+    data: XOR<PengumpulanTugasUpdateWithoutImagesInput, PengumpulanTugasUncheckedUpdateWithoutImagesInput>
+  }
+
+  export type PengumpulanTugasUpdateWithoutImagesInput = {
+    kd_pengumpulan_tugas?: StringFieldUpdateOperationsInput | string
+    tanggal_pengumpulan?: DateTimeFieldUpdateOperationsInput | Date | string
+    catatan?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusPengumpulanTugasFieldUpdateOperationsInput | $Enums.StatusPengumpulanTugas
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    tugas?: TugasUpdateOneRequiredWithoutPengumpulan_tugasNestedInput
+    user?: UserUpdateOneRequiredWithoutPengumpulan_tugasNestedInput
+    rating?: RatingUpdateManyWithoutPengumpulanTugasNestedInput
+    files?: PengumpulanTugasFileUpdateManyWithoutPengumpulan_tugasNestedInput
+  }
+
+  export type PengumpulanTugasUncheckedUpdateWithoutImagesInput = {
+    kd_pengumpulan_tugas?: StringFieldUpdateOperationsInput | string
+    kd_tugas?: StringFieldUpdateOperationsInput | string
+    user_nip?: StringFieldUpdateOperationsInput | string
+    tanggal_pengumpulan?: DateTimeFieldUpdateOperationsInput | Date | string
+    catatan?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusPengumpulanTugasFieldUpdateOperationsInput | $Enums.StatusPengumpulanTugas
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    rating?: RatingUncheckedUpdateManyWithoutPengumpulanTugasNestedInput
+    files?: PengumpulanTugasFileUncheckedUpdateManyWithoutPengumpulan_tugasNestedInput
+  }
+
+  export type PengumpulanTugasCreateWithoutRatingInput = {
+    kd_pengumpulan_tugas?: string
+    tanggal_pengumpulan: Date | string
+    catatan: string
+    status?: $Enums.StatusPengumpulanTugas
+    created_at?: Date | string
+    updated_at?: Date | string
+    tugas: TugasCreateNestedOneWithoutPengumpulan_tugasInput
+    user: UserCreateNestedOneWithoutPengumpulan_tugasInput
+    files?: PengumpulanTugasFileCreateNestedManyWithoutPengumpulan_tugasInput
+    images?: PengumpulanTugasImageCreateNestedManyWithoutPengumpulan_tugasInput
   }
 
   export type PengumpulanTugasUncheckedCreateWithoutRatingInput = {
@@ -12260,12 +16392,12 @@ export namespace Prisma {
     kd_tugas: string
     user_nip: string
     tanggal_pengumpulan: Date | string
-    image?: string | null
-    file_path?: string | null
     catatan: string
     status?: $Enums.StatusPengumpulanTugas
     created_at?: Date | string
     updated_at?: Date | string
+    files?: PengumpulanTugasFileUncheckedCreateNestedManyWithoutPengumpulan_tugasInput
+    images?: PengumpulanTugasImageUncheckedCreateNestedManyWithoutPengumpulan_tugasInput
   }
 
   export type PengumpulanTugasCreateOrConnectWithoutRatingInput = {
@@ -12287,14 +16419,14 @@ export namespace Prisma {
   export type PengumpulanTugasUpdateWithoutRatingInput = {
     kd_pengumpulan_tugas?: StringFieldUpdateOperationsInput | string
     tanggal_pengumpulan?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    file_path?: NullableStringFieldUpdateOperationsInput | string | null
     catatan?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusPengumpulanTugasFieldUpdateOperationsInput | $Enums.StatusPengumpulanTugas
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     tugas?: TugasUpdateOneRequiredWithoutPengumpulan_tugasNestedInput
     user?: UserUpdateOneRequiredWithoutPengumpulan_tugasNestedInput
+    files?: PengumpulanTugasFileUpdateManyWithoutPengumpulan_tugasNestedInput
+    images?: PengumpulanTugasImageUpdateManyWithoutPengumpulan_tugasNestedInput
   }
 
   export type PengumpulanTugasUncheckedUpdateWithoutRatingInput = {
@@ -12302,12 +16434,12 @@ export namespace Prisma {
     kd_tugas?: StringFieldUpdateOperationsInput | string
     user_nip?: StringFieldUpdateOperationsInput | string
     tanggal_pengumpulan?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    file_path?: NullableStringFieldUpdateOperationsInput | string | null
     catatan?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusPengumpulanTugasFieldUpdateOperationsInput | $Enums.StatusPengumpulanTugas
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    files?: PengumpulanTugasFileUncheckedUpdateManyWithoutPengumpulan_tugasNestedInput
+    images?: PengumpulanTugasImageUncheckedUpdateManyWithoutPengumpulan_tugasNestedInput
   }
 
   export type UserCreateManyJabatanInput = {
@@ -12435,7 +16567,6 @@ export namespace Prisma {
     kd_laporan?: string
     isi_laporan: string
     judul_laporan: string
-    file_path: string
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -12444,8 +16575,6 @@ export namespace Prisma {
     kd_pengumpulan_tugas?: string
     kd_tugas: string
     tanggal_pengumpulan: Date | string
-    image?: string | null
-    file_path?: string | null
     catatan: string
     status?: $Enums.StatusPengumpulanTugas
     created_at?: Date | string
@@ -12561,25 +16690,24 @@ export namespace Prisma {
     kd_laporan?: StringFieldUpdateOperationsInput | string
     isi_laporan?: StringFieldUpdateOperationsInput | string
     judul_laporan?: StringFieldUpdateOperationsInput | string
-    file_path?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    files?: LaporanFileUpdateManyWithoutLaporanNestedInput
   }
 
   export type LaporanUncheckedUpdateWithoutUserInput = {
     kd_laporan?: StringFieldUpdateOperationsInput | string
     isi_laporan?: StringFieldUpdateOperationsInput | string
     judul_laporan?: StringFieldUpdateOperationsInput | string
-    file_path?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    files?: LaporanFileUncheckedUpdateManyWithoutLaporanNestedInput
   }
 
   export type LaporanUncheckedUpdateManyWithoutUserInput = {
     kd_laporan?: StringFieldUpdateOperationsInput | string
     isi_laporan?: StringFieldUpdateOperationsInput | string
     judul_laporan?: StringFieldUpdateOperationsInput | string
-    file_path?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12587,35 +16715,33 @@ export namespace Prisma {
   export type PengumpulanTugasUpdateWithoutUserInput = {
     kd_pengumpulan_tugas?: StringFieldUpdateOperationsInput | string
     tanggal_pengumpulan?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    file_path?: NullableStringFieldUpdateOperationsInput | string | null
     catatan?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusPengumpulanTugasFieldUpdateOperationsInput | $Enums.StatusPengumpulanTugas
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     tugas?: TugasUpdateOneRequiredWithoutPengumpulan_tugasNestedInput
     rating?: RatingUpdateManyWithoutPengumpulanTugasNestedInput
+    files?: PengumpulanTugasFileUpdateManyWithoutPengumpulan_tugasNestedInput
+    images?: PengumpulanTugasImageUpdateManyWithoutPengumpulan_tugasNestedInput
   }
 
   export type PengumpulanTugasUncheckedUpdateWithoutUserInput = {
     kd_pengumpulan_tugas?: StringFieldUpdateOperationsInput | string
     kd_tugas?: StringFieldUpdateOperationsInput | string
     tanggal_pengumpulan?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    file_path?: NullableStringFieldUpdateOperationsInput | string | null
     catatan?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusPengumpulanTugasFieldUpdateOperationsInput | $Enums.StatusPengumpulanTugas
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     rating?: RatingUncheckedUpdateManyWithoutPengumpulanTugasNestedInput
+    files?: PengumpulanTugasFileUncheckedUpdateManyWithoutPengumpulan_tugasNestedInput
+    images?: PengumpulanTugasImageUncheckedUpdateManyWithoutPengumpulan_tugasNestedInput
   }
 
   export type PengumpulanTugasUncheckedUpdateManyWithoutUserInput = {
     kd_pengumpulan_tugas?: StringFieldUpdateOperationsInput | string
     kd_tugas?: StringFieldUpdateOperationsInput | string
     tanggal_pengumpulan?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    file_path?: NullableStringFieldUpdateOperationsInput | string | null
     catatan?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusPengumpulanTugasFieldUpdateOperationsInput | $Enums.StatusPengumpulanTugas
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12626,8 +16752,6 @@ export namespace Prisma {
     kd_pengumpulan_tugas?: string
     user_nip: string
     tanggal_pengumpulan: Date | string
-    image?: string | null
-    file_path?: string | null
     catatan: string
     status?: $Enums.StatusPengumpulanTugas
     created_at?: Date | string
@@ -12637,37 +16761,63 @@ export namespace Prisma {
   export type PengumpulanTugasUpdateWithoutTugasInput = {
     kd_pengumpulan_tugas?: StringFieldUpdateOperationsInput | string
     tanggal_pengumpulan?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    file_path?: NullableStringFieldUpdateOperationsInput | string | null
     catatan?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusPengumpulanTugasFieldUpdateOperationsInput | $Enums.StatusPengumpulanTugas
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutPengumpulan_tugasNestedInput
     rating?: RatingUpdateManyWithoutPengumpulanTugasNestedInput
+    files?: PengumpulanTugasFileUpdateManyWithoutPengumpulan_tugasNestedInput
+    images?: PengumpulanTugasImageUpdateManyWithoutPengumpulan_tugasNestedInput
   }
 
   export type PengumpulanTugasUncheckedUpdateWithoutTugasInput = {
     kd_pengumpulan_tugas?: StringFieldUpdateOperationsInput | string
     user_nip?: StringFieldUpdateOperationsInput | string
     tanggal_pengumpulan?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    file_path?: NullableStringFieldUpdateOperationsInput | string | null
     catatan?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusPengumpulanTugasFieldUpdateOperationsInput | $Enums.StatusPengumpulanTugas
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     rating?: RatingUncheckedUpdateManyWithoutPengumpulanTugasNestedInput
+    files?: PengumpulanTugasFileUncheckedUpdateManyWithoutPengumpulan_tugasNestedInput
+    images?: PengumpulanTugasImageUncheckedUpdateManyWithoutPengumpulan_tugasNestedInput
   }
 
   export type PengumpulanTugasUncheckedUpdateManyWithoutTugasInput = {
     kd_pengumpulan_tugas?: StringFieldUpdateOperationsInput | string
     user_nip?: StringFieldUpdateOperationsInput | string
     tanggal_pengumpulan?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    file_path?: NullableStringFieldUpdateOperationsInput | string | null
     catatan?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusPengumpulanTugasFieldUpdateOperationsInput | $Enums.StatusPengumpulanTugas
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LaporanFileCreateManyLaporanInput = {
+    kd_file?: string
+    file_path: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type LaporanFileUpdateWithoutLaporanInput = {
+    kd_file?: StringFieldUpdateOperationsInput | string
+    file_path?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LaporanFileUncheckedUpdateWithoutLaporanInput = {
+    kd_file?: StringFieldUpdateOperationsInput | string
+    file_path?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LaporanFileUncheckedUpdateManyWithoutLaporanInput = {
+    kd_file?: StringFieldUpdateOperationsInput | string
+    file_path?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12677,6 +16827,20 @@ export namespace Prisma {
     nilai: number
     komentar?: string | null
     created_at?: Date | string
+  }
+
+  export type PengumpulanTugasFileCreateManyPengumpulan_tugasInput = {
+    kd_file?: string
+    file_path: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type PengumpulanTugasImageCreateManyPengumpulan_tugasInput = {
+    kd_image?: string
+    image_path: string
+    created_at?: Date | string
+    updated_at?: Date | string
   }
 
   export type RatingUpdateWithoutPengumpulanTugasInput = {
@@ -12698,6 +16862,48 @@ export namespace Prisma {
     nilai?: FloatFieldUpdateOperationsInput | number
     komentar?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PengumpulanTugasFileUpdateWithoutPengumpulan_tugasInput = {
+    kd_file?: StringFieldUpdateOperationsInput | string
+    file_path?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PengumpulanTugasFileUncheckedUpdateWithoutPengumpulan_tugasInput = {
+    kd_file?: StringFieldUpdateOperationsInput | string
+    file_path?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PengumpulanTugasFileUncheckedUpdateManyWithoutPengumpulan_tugasInput = {
+    kd_file?: StringFieldUpdateOperationsInput | string
+    file_path?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PengumpulanTugasImageUpdateWithoutPengumpulan_tugasInput = {
+    kd_image?: StringFieldUpdateOperationsInput | string
+    image_path?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PengumpulanTugasImageUncheckedUpdateWithoutPengumpulan_tugasInput = {
+    kd_image?: StringFieldUpdateOperationsInput | string
+    image_path?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PengumpulanTugasImageUncheckedUpdateManyWithoutPengumpulan_tugasInput = {
+    kd_image?: StringFieldUpdateOperationsInput | string
+    image_path?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

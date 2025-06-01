@@ -164,6 +164,13 @@ exports.Prisma.LaporanScalarFieldEnum = {
   isi_laporan: 'isi_laporan',
   judul_laporan: 'judul_laporan',
   user_nip: 'user_nip',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.LaporanFileScalarFieldEnum = {
+  kd_file: 'kd_file',
+  kd_laporan: 'kd_laporan',
   file_path: 'file_path',
   created_at: 'created_at',
   updated_at: 'updated_at'
@@ -174,10 +181,24 @@ exports.Prisma.PengumpulanTugasScalarFieldEnum = {
   kd_tugas: 'kd_tugas',
   user_nip: 'user_nip',
   tanggal_pengumpulan: 'tanggal_pengumpulan',
-  image: 'image',
-  file_path: 'file_path',
   catatan: 'catatan',
   status: 'status',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.PengumpulanTugasFileScalarFieldEnum = {
+  kd_file: 'kd_file',
+  kd_pengumpulan_tugas: 'kd_pengumpulan_tugas',
+  file_path: 'file_path',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.PengumpulanTugasImageScalarFieldEnum = {
+  kd_image: 'kd_image',
+  kd_pengumpulan_tugas: 'kd_pengumpulan_tugas',
+  image_path: 'image_path',
   created_at: 'created_at',
   updated_at: 'updated_at'
 };
@@ -231,7 +252,12 @@ exports.Prisma.LaporanOrderByRelevanceFieldEnum = {
   kd_laporan: 'kd_laporan',
   isi_laporan: 'isi_laporan',
   judul_laporan: 'judul_laporan',
-  user_nip: 'user_nip',
+  user_nip: 'user_nip'
+};
+
+exports.Prisma.LaporanFileOrderByRelevanceFieldEnum = {
+  kd_file: 'kd_file',
+  kd_laporan: 'kd_laporan',
   file_path: 'file_path'
 };
 
@@ -239,9 +265,19 @@ exports.Prisma.PengumpulanTugasOrderByRelevanceFieldEnum = {
   kd_pengumpulan_tugas: 'kd_pengumpulan_tugas',
   kd_tugas: 'kd_tugas',
   user_nip: 'user_nip',
-  image: 'image',
-  file_path: 'file_path',
   catatan: 'catatan'
+};
+
+exports.Prisma.PengumpulanTugasFileOrderByRelevanceFieldEnum = {
+  kd_file: 'kd_file',
+  kd_pengumpulan_tugas: 'kd_pengumpulan_tugas',
+  file_path: 'file_path'
+};
+
+exports.Prisma.PengumpulanTugasImageOrderByRelevanceFieldEnum = {
+  kd_image: 'kd_image',
+  kd_pengumpulan_tugas: 'kd_pengumpulan_tugas',
+  image_path: 'image_path'
 };
 
 exports.Prisma.RatingOrderByRelevanceFieldEnum = {
@@ -280,7 +316,10 @@ exports.Prisma.ModelName = {
   HistoryJabatan: 'HistoryJabatan',
   Tugas: 'Tugas',
   Laporan: 'Laporan',
+  LaporanFile: 'LaporanFile',
   PengumpulanTugas: 'PengumpulanTugas',
+  PengumpulanTugasFile: 'PengumpulanTugasFile',
+  PengumpulanTugasImage: 'PengumpulanTugasImage',
   Rating: 'Rating'
 };
 

@@ -82,13 +82,24 @@ model Laporan {
   isi_laporan String @db.Text
   judul_laporan String @db.VarChar(255)
   user_nip String @db.VarChar(18)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  @@index([user_nip])
+
+  user User @relation(fields: [user_nip],references: [nip],onDelete: Cascade,onUpdate: Cascade)
+  files LaporanFile[]
+}
+
+model LaporanFile {
+  kd_file String @id @default(cuid())
+  kd_laporan String
   file_path String
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
-    @@index([user_nip])
 
+  @@index([kd_laporan])
 
-  user User @relation(fields: [user_nip],references: [nip],onDelete: Cascade,onUpdate: Cascade)
+  laporan Laporan @relation(fields: [kd_laporan], references: [kd_laporan], onDelete: Cascade)
 }
 
 model PengumpulanTugas {
@@ -96,8 +107,6 @@ model PengumpulanTugas {
   kd_tugas String
   user_nip String @db.VarChar(18)
   tanggal_pengumpulan DateTime
-  image String?
-  file_path String?
   catatan String @db.Text
   status StatusPengumpulanTugas @default(menunggu)
   created_at DateTime @default(now())
@@ -109,6 +118,32 @@ model PengumpulanTugas {
   tugas Tugas @relation(fields: [kd_tugas],references: [kd_tugas])
   user User @relation(fields: [user_nip],references: [nip])
   rating Rating[]
+  files PengumpulanTugasFile[]
+  images PengumpulanTugasImage[]
+}
+
+model PengumpulanTugasFile {
+  kd_file String @id @default(cuid())
+  kd_pengumpulan_tugas String
+  file_path String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@index([kd_pengumpulan_tugas])
+
+  pengumpulan_tugas PengumpulanTugas @relation(fields: [kd_pengumpulan_tugas], references: [kd_pengumpulan_tugas], onDelete: Cascade)
+}
+
+model PengumpulanTugasImage {
+  kd_image String @id @default(cuid())
+  kd_pengumpulan_tugas String
+  image_path String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@index([kd_pengumpulan_tugas])
+
+  pengumpulan_tugas PengumpulanTugas @relation(fields: [kd_pengumpulan_tugas], references: [kd_pengumpulan_tugas], onDelete: Cascade)
 }
 
 model Rating {
