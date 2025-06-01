@@ -6,27 +6,37 @@ const multer = require("multer");
 const userImageStorage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: "user_profiles",
+    folder: "aplikasi_kominfo/user_profiles",
     allowed_formats: ["jpg", "jpeg", "png"],
     transformation: [{ width: 500, height: 500, crop: "limit" }],
   },
 });
 
 // Konfigurasi untuk multiple image upload (pengumpulan tugas)
-const tugasImageStorage = new CloudinaryStorage({
+const pengumpulanTugasImageStorage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: "tugas_images",
+    folder: "aplikasi_kominfo/pengumpulan_tugas/images",
     allowed_formats: ["jpg", "jpeg", "png"],
     transformation: [{ width: 1000, height: 1000, crop: "limit" }],
   },
 });
 
-// Konfigurasi untuk multiple file upload (laporan dan pengumpulan tugas)
-const fileStorage = new CloudinaryStorage({
+// Konfigurasi untuk multiple file upload (laporan)
+const laporanFileStorage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: "documents",
+    folder: "aplikasi_kominfo/laporan/files",
+    resource_type: "raw",
+    allowed_formats: ["pdf", "doc", "docx", "xls", "xlsx"],
+  },
+});
+
+// Konfigurasi untuk multiple file upload (pengumpulan tugas)
+const pengumpulanTugasFileStorage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "aplikasi_kominfo/pengumpulan_tugas/files",
     resource_type: "raw",
     allowed_formats: ["pdf", "doc", "docx", "xls", "xlsx"],
   },
@@ -41,8 +51,8 @@ const uploadUserImage = multer({
 }).single("image");
 
 // Middleware untuk multiple image upload (pengumpulan tugas)
-const uploadTugasImages = multer({
-  storage: tugasImageStorage,
+const uploadPengumpulanTugasImages = multer({
+  storage: pengumpulanTugasImageStorage,
   limits: {
     fileSize: 5 * 1024 * 1024, // 5MB limit per file
   },
@@ -50,15 +60,15 @@ const uploadTugasImages = multer({
 
 // Middleware untuk multiple file upload (laporan)
 const uploadLaporanFiles = multer({
-  storage: fileStorage,
+  storage: laporanFileStorage,
   limits: {
     fileSize: 10 * 1024 * 1024, // 10MB limit per file
   },
 }).array("files", 5); // Maksimal 5 file
 
 // Middleware untuk multiple file upload (pengumpulan tugas)
-const uploadTugasFiles = multer({
-  storage: fileStorage,
+const uploadPengumpulanTugasFiles = multer({
+  storage: pengumpulanTugasFileStorage,
   limits: {
     fileSize: 10 * 1024 * 1024, // 10MB limit per file
   },
@@ -66,7 +76,7 @@ const uploadTugasFiles = multer({
 
 module.exports = {
   uploadUserImage,
-  uploadTugasImages,
+  uploadPengumpulanTugasImages,
   uploadLaporanFiles,
-  uploadTugasFiles,
+  uploadPengumpulanTugasFiles,
 };
