@@ -6905,14 +6905,27 @@ export namespace Prisma {
 
   export type AggregateLaporanFile = {
     _count: LaporanFileCountAggregateOutputType | null
+    _avg: LaporanFileAvgAggregateOutputType | null
+    _sum: LaporanFileSumAggregateOutputType | null
     _min: LaporanFileMinAggregateOutputType | null
     _max: LaporanFileMaxAggregateOutputType | null
+  }
+
+  export type LaporanFileAvgAggregateOutputType = {
+    file_size: number | null
+  }
+
+  export type LaporanFileSumAggregateOutputType = {
+    file_size: number | null
   }
 
   export type LaporanFileMinAggregateOutputType = {
     kd_file: string | null
     kd_laporan: string | null
     file_path: string | null
+    file_name: string | null
+    file_type: string | null
+    file_size: number | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -6921,6 +6934,9 @@ export namespace Prisma {
     kd_file: string | null
     kd_laporan: string | null
     file_path: string | null
+    file_name: string | null
+    file_type: string | null
+    file_size: number | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -6929,16 +6945,30 @@ export namespace Prisma {
     kd_file: number
     kd_laporan: number
     file_path: number
+    file_name: number
+    file_type: number
+    file_size: number
     created_at: number
     updated_at: number
     _all: number
   }
 
 
+  export type LaporanFileAvgAggregateInputType = {
+    file_size?: true
+  }
+
+  export type LaporanFileSumAggregateInputType = {
+    file_size?: true
+  }
+
   export type LaporanFileMinAggregateInputType = {
     kd_file?: true
     kd_laporan?: true
     file_path?: true
+    file_name?: true
+    file_type?: true
+    file_size?: true
     created_at?: true
     updated_at?: true
   }
@@ -6947,6 +6977,9 @@ export namespace Prisma {
     kd_file?: true
     kd_laporan?: true
     file_path?: true
+    file_name?: true
+    file_type?: true
+    file_size?: true
     created_at?: true
     updated_at?: true
   }
@@ -6955,6 +6988,9 @@ export namespace Prisma {
     kd_file?: true
     kd_laporan?: true
     file_path?: true
+    file_name?: true
+    file_type?: true
+    file_size?: true
     created_at?: true
     updated_at?: true
     _all?: true
@@ -6998,6 +7034,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: LaporanFileAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: LaporanFileSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: LaporanFileMinAggregateInputType
@@ -7028,6 +7076,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: LaporanFileCountAggregateInputType | true
+    _avg?: LaporanFileAvgAggregateInputType
+    _sum?: LaporanFileSumAggregateInputType
     _min?: LaporanFileMinAggregateInputType
     _max?: LaporanFileMaxAggregateInputType
   }
@@ -7036,9 +7086,14 @@ export namespace Prisma {
     kd_file: string
     kd_laporan: string
     file_path: string
+    file_name: string
+    file_type: string
+    file_size: number
     created_at: Date
     updated_at: Date
     _count: LaporanFileCountAggregateOutputType | null
+    _avg: LaporanFileAvgAggregateOutputType | null
+    _sum: LaporanFileSumAggregateOutputType | null
     _min: LaporanFileMinAggregateOutputType | null
     _max: LaporanFileMaxAggregateOutputType | null
   }
@@ -7061,6 +7116,9 @@ export namespace Prisma {
     kd_file?: boolean
     kd_laporan?: boolean
     file_path?: boolean
+    file_name?: boolean
+    file_type?: boolean
+    file_size?: boolean
     created_at?: boolean
     updated_at?: boolean
     laporan?: boolean | LaporanDefaultArgs<ExtArgs>
@@ -7072,11 +7130,14 @@ export namespace Prisma {
     kd_file?: boolean
     kd_laporan?: boolean
     file_path?: boolean
+    file_name?: boolean
+    file_type?: boolean
+    file_size?: boolean
     created_at?: boolean
     updated_at?: boolean
   }
 
-  export type LaporanFileOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"kd_file" | "kd_laporan" | "file_path" | "created_at" | "updated_at", ExtArgs["result"]["laporanFile"]>
+  export type LaporanFileOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"kd_file" | "kd_laporan" | "file_path" | "file_name" | "file_type" | "file_size" | "created_at" | "updated_at", ExtArgs["result"]["laporanFile"]>
   export type LaporanFileInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     laporan?: boolean | LaporanDefaultArgs<ExtArgs>
   }
@@ -7090,6 +7151,9 @@ export namespace Prisma {
       kd_file: string
       kd_laporan: string
       file_path: string
+      file_name: string
+      file_type: string
+      file_size: number
       created_at: Date
       updated_at: Date
     }, ExtArgs["result"]["laporanFile"]>
@@ -7465,6 +7529,9 @@ export namespace Prisma {
     readonly kd_file: FieldRef<"LaporanFile", 'String'>
     readonly kd_laporan: FieldRef<"LaporanFile", 'String'>
     readonly file_path: FieldRef<"LaporanFile", 'String'>
+    readonly file_name: FieldRef<"LaporanFile", 'String'>
+    readonly file_type: FieldRef<"LaporanFile", 'String'>
+    readonly file_size: FieldRef<"LaporanFile", 'Int'>
     readonly created_at: FieldRef<"LaporanFile", 'DateTime'>
     readonly updated_at: FieldRef<"LaporanFile", 'DateTime'>
   }
@@ -8886,14 +8953,27 @@ export namespace Prisma {
 
   export type AggregatePengumpulanTugasFile = {
     _count: PengumpulanTugasFileCountAggregateOutputType | null
+    _avg: PengumpulanTugasFileAvgAggregateOutputType | null
+    _sum: PengumpulanTugasFileSumAggregateOutputType | null
     _min: PengumpulanTugasFileMinAggregateOutputType | null
     _max: PengumpulanTugasFileMaxAggregateOutputType | null
+  }
+
+  export type PengumpulanTugasFileAvgAggregateOutputType = {
+    file_size: number | null
+  }
+
+  export type PengumpulanTugasFileSumAggregateOutputType = {
+    file_size: number | null
   }
 
   export type PengumpulanTugasFileMinAggregateOutputType = {
     kd_file: string | null
     kd_pengumpulan_tugas: string | null
     file_path: string | null
+    file_name: string | null
+    file_type: string | null
+    file_size: number | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -8902,6 +8982,9 @@ export namespace Prisma {
     kd_file: string | null
     kd_pengumpulan_tugas: string | null
     file_path: string | null
+    file_name: string | null
+    file_type: string | null
+    file_size: number | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -8910,16 +8993,30 @@ export namespace Prisma {
     kd_file: number
     kd_pengumpulan_tugas: number
     file_path: number
+    file_name: number
+    file_type: number
+    file_size: number
     created_at: number
     updated_at: number
     _all: number
   }
 
 
+  export type PengumpulanTugasFileAvgAggregateInputType = {
+    file_size?: true
+  }
+
+  export type PengumpulanTugasFileSumAggregateInputType = {
+    file_size?: true
+  }
+
   export type PengumpulanTugasFileMinAggregateInputType = {
     kd_file?: true
     kd_pengumpulan_tugas?: true
     file_path?: true
+    file_name?: true
+    file_type?: true
+    file_size?: true
     created_at?: true
     updated_at?: true
   }
@@ -8928,6 +9025,9 @@ export namespace Prisma {
     kd_file?: true
     kd_pengumpulan_tugas?: true
     file_path?: true
+    file_name?: true
+    file_type?: true
+    file_size?: true
     created_at?: true
     updated_at?: true
   }
@@ -8936,6 +9036,9 @@ export namespace Prisma {
     kd_file?: true
     kd_pengumpulan_tugas?: true
     file_path?: true
+    file_name?: true
+    file_type?: true
+    file_size?: true
     created_at?: true
     updated_at?: true
     _all?: true
@@ -8979,6 +9082,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: PengumpulanTugasFileAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PengumpulanTugasFileSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: PengumpulanTugasFileMinAggregateInputType
@@ -9009,6 +9124,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: PengumpulanTugasFileCountAggregateInputType | true
+    _avg?: PengumpulanTugasFileAvgAggregateInputType
+    _sum?: PengumpulanTugasFileSumAggregateInputType
     _min?: PengumpulanTugasFileMinAggregateInputType
     _max?: PengumpulanTugasFileMaxAggregateInputType
   }
@@ -9017,9 +9134,14 @@ export namespace Prisma {
     kd_file: string
     kd_pengumpulan_tugas: string
     file_path: string
+    file_name: string
+    file_type: string
+    file_size: number
     created_at: Date
     updated_at: Date
     _count: PengumpulanTugasFileCountAggregateOutputType | null
+    _avg: PengumpulanTugasFileAvgAggregateOutputType | null
+    _sum: PengumpulanTugasFileSumAggregateOutputType | null
     _min: PengumpulanTugasFileMinAggregateOutputType | null
     _max: PengumpulanTugasFileMaxAggregateOutputType | null
   }
@@ -9042,6 +9164,9 @@ export namespace Prisma {
     kd_file?: boolean
     kd_pengumpulan_tugas?: boolean
     file_path?: boolean
+    file_name?: boolean
+    file_type?: boolean
+    file_size?: boolean
     created_at?: boolean
     updated_at?: boolean
     pengumpulan_tugas?: boolean | PengumpulanTugasDefaultArgs<ExtArgs>
@@ -9053,11 +9178,14 @@ export namespace Prisma {
     kd_file?: boolean
     kd_pengumpulan_tugas?: boolean
     file_path?: boolean
+    file_name?: boolean
+    file_type?: boolean
+    file_size?: boolean
     created_at?: boolean
     updated_at?: boolean
   }
 
-  export type PengumpulanTugasFileOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"kd_file" | "kd_pengumpulan_tugas" | "file_path" | "created_at" | "updated_at", ExtArgs["result"]["pengumpulanTugasFile"]>
+  export type PengumpulanTugasFileOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"kd_file" | "kd_pengumpulan_tugas" | "file_path" | "file_name" | "file_type" | "file_size" | "created_at" | "updated_at", ExtArgs["result"]["pengumpulanTugasFile"]>
   export type PengumpulanTugasFileInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     pengumpulan_tugas?: boolean | PengumpulanTugasDefaultArgs<ExtArgs>
   }
@@ -9071,6 +9199,9 @@ export namespace Prisma {
       kd_file: string
       kd_pengumpulan_tugas: string
       file_path: string
+      file_name: string
+      file_type: string
+      file_size: number
       created_at: Date
       updated_at: Date
     }, ExtArgs["result"]["pengumpulanTugasFile"]>
@@ -9446,6 +9577,9 @@ export namespace Prisma {
     readonly kd_file: FieldRef<"PengumpulanTugasFile", 'String'>
     readonly kd_pengumpulan_tugas: FieldRef<"PengumpulanTugasFile", 'String'>
     readonly file_path: FieldRef<"PengumpulanTugasFile", 'String'>
+    readonly file_name: FieldRef<"PengumpulanTugasFile", 'String'>
+    readonly file_type: FieldRef<"PengumpulanTugasFile", 'String'>
+    readonly file_size: FieldRef<"PengumpulanTugasFile", 'Int'>
     readonly created_at: FieldRef<"PengumpulanTugasFile", 'DateTime'>
     readonly updated_at: FieldRef<"PengumpulanTugasFile", 'DateTime'>
   }
@@ -9815,14 +9949,27 @@ export namespace Prisma {
 
   export type AggregatePengumpulanTugasImage = {
     _count: PengumpulanTugasImageCountAggregateOutputType | null
+    _avg: PengumpulanTugasImageAvgAggregateOutputType | null
+    _sum: PengumpulanTugasImageSumAggregateOutputType | null
     _min: PengumpulanTugasImageMinAggregateOutputType | null
     _max: PengumpulanTugasImageMaxAggregateOutputType | null
+  }
+
+  export type PengumpulanTugasImageAvgAggregateOutputType = {
+    image_size: number | null
+  }
+
+  export type PengumpulanTugasImageSumAggregateOutputType = {
+    image_size: number | null
   }
 
   export type PengumpulanTugasImageMinAggregateOutputType = {
     kd_image: string | null
     kd_pengumpulan_tugas: string | null
     image_path: string | null
+    image_name: string | null
+    image_type: string | null
+    image_size: number | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -9831,6 +9978,9 @@ export namespace Prisma {
     kd_image: string | null
     kd_pengumpulan_tugas: string | null
     image_path: string | null
+    image_name: string | null
+    image_type: string | null
+    image_size: number | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -9839,16 +9989,30 @@ export namespace Prisma {
     kd_image: number
     kd_pengumpulan_tugas: number
     image_path: number
+    image_name: number
+    image_type: number
+    image_size: number
     created_at: number
     updated_at: number
     _all: number
   }
 
 
+  export type PengumpulanTugasImageAvgAggregateInputType = {
+    image_size?: true
+  }
+
+  export type PengumpulanTugasImageSumAggregateInputType = {
+    image_size?: true
+  }
+
   export type PengumpulanTugasImageMinAggregateInputType = {
     kd_image?: true
     kd_pengumpulan_tugas?: true
     image_path?: true
+    image_name?: true
+    image_type?: true
+    image_size?: true
     created_at?: true
     updated_at?: true
   }
@@ -9857,6 +10021,9 @@ export namespace Prisma {
     kd_image?: true
     kd_pengumpulan_tugas?: true
     image_path?: true
+    image_name?: true
+    image_type?: true
+    image_size?: true
     created_at?: true
     updated_at?: true
   }
@@ -9865,6 +10032,9 @@ export namespace Prisma {
     kd_image?: true
     kd_pengumpulan_tugas?: true
     image_path?: true
+    image_name?: true
+    image_type?: true
+    image_size?: true
     created_at?: true
     updated_at?: true
     _all?: true
@@ -9908,6 +10078,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: PengumpulanTugasImageAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PengumpulanTugasImageSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: PengumpulanTugasImageMinAggregateInputType
@@ -9938,6 +10120,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: PengumpulanTugasImageCountAggregateInputType | true
+    _avg?: PengumpulanTugasImageAvgAggregateInputType
+    _sum?: PengumpulanTugasImageSumAggregateInputType
     _min?: PengumpulanTugasImageMinAggregateInputType
     _max?: PengumpulanTugasImageMaxAggregateInputType
   }
@@ -9946,9 +10130,14 @@ export namespace Prisma {
     kd_image: string
     kd_pengumpulan_tugas: string
     image_path: string
+    image_name: string
+    image_type: string
+    image_size: number
     created_at: Date
     updated_at: Date
     _count: PengumpulanTugasImageCountAggregateOutputType | null
+    _avg: PengumpulanTugasImageAvgAggregateOutputType | null
+    _sum: PengumpulanTugasImageSumAggregateOutputType | null
     _min: PengumpulanTugasImageMinAggregateOutputType | null
     _max: PengumpulanTugasImageMaxAggregateOutputType | null
   }
@@ -9971,6 +10160,9 @@ export namespace Prisma {
     kd_image?: boolean
     kd_pengumpulan_tugas?: boolean
     image_path?: boolean
+    image_name?: boolean
+    image_type?: boolean
+    image_size?: boolean
     created_at?: boolean
     updated_at?: boolean
     pengumpulan_tugas?: boolean | PengumpulanTugasDefaultArgs<ExtArgs>
@@ -9982,11 +10174,14 @@ export namespace Prisma {
     kd_image?: boolean
     kd_pengumpulan_tugas?: boolean
     image_path?: boolean
+    image_name?: boolean
+    image_type?: boolean
+    image_size?: boolean
     created_at?: boolean
     updated_at?: boolean
   }
 
-  export type PengumpulanTugasImageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"kd_image" | "kd_pengumpulan_tugas" | "image_path" | "created_at" | "updated_at", ExtArgs["result"]["pengumpulanTugasImage"]>
+  export type PengumpulanTugasImageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"kd_image" | "kd_pengumpulan_tugas" | "image_path" | "image_name" | "image_type" | "image_size" | "created_at" | "updated_at", ExtArgs["result"]["pengumpulanTugasImage"]>
   export type PengumpulanTugasImageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     pengumpulan_tugas?: boolean | PengumpulanTugasDefaultArgs<ExtArgs>
   }
@@ -10000,6 +10195,9 @@ export namespace Prisma {
       kd_image: string
       kd_pengumpulan_tugas: string
       image_path: string
+      image_name: string
+      image_type: string
+      image_size: number
       created_at: Date
       updated_at: Date
     }, ExtArgs["result"]["pengumpulanTugasImage"]>
@@ -10375,6 +10573,9 @@ export namespace Prisma {
     readonly kd_image: FieldRef<"PengumpulanTugasImage", 'String'>
     readonly kd_pengumpulan_tugas: FieldRef<"PengumpulanTugasImage", 'String'>
     readonly image_path: FieldRef<"PengumpulanTugasImage", 'String'>
+    readonly image_name: FieldRef<"PengumpulanTugasImage", 'String'>
+    readonly image_type: FieldRef<"PengumpulanTugasImage", 'String'>
+    readonly image_size: FieldRef<"PengumpulanTugasImage", 'Int'>
     readonly created_at: FieldRef<"PengumpulanTugasImage", 'DateTime'>
     readonly updated_at: FieldRef<"PengumpulanTugasImage", 'DateTime'>
   }
@@ -11782,6 +11983,9 @@ export namespace Prisma {
     kd_file: 'kd_file',
     kd_laporan: 'kd_laporan',
     file_path: 'file_path',
+    file_name: 'file_name',
+    file_type: 'file_type',
+    file_size: 'file_size',
     created_at: 'created_at',
     updated_at: 'updated_at'
   };
@@ -11807,6 +12011,9 @@ export namespace Prisma {
     kd_file: 'kd_file',
     kd_pengumpulan_tugas: 'kd_pengumpulan_tugas',
     file_path: 'file_path',
+    file_name: 'file_name',
+    file_type: 'file_type',
+    file_size: 'file_size',
     created_at: 'created_at',
     updated_at: 'updated_at'
   };
@@ -11818,6 +12025,9 @@ export namespace Prisma {
     kd_image: 'kd_image',
     kd_pengumpulan_tugas: 'kd_pengumpulan_tugas',
     image_path: 'image_path',
+    image_name: 'image_name',
+    image_type: 'image_type',
+    image_size: 'image_size',
     created_at: 'created_at',
     updated_at: 'updated_at'
   };
@@ -11904,7 +12114,9 @@ export namespace Prisma {
   export const LaporanFileOrderByRelevanceFieldEnum: {
     kd_file: 'kd_file',
     kd_laporan: 'kd_laporan',
-    file_path: 'file_path'
+    file_path: 'file_path',
+    file_name: 'file_name',
+    file_type: 'file_type'
   };
 
   export type LaporanFileOrderByRelevanceFieldEnum = (typeof LaporanFileOrderByRelevanceFieldEnum)[keyof typeof LaporanFileOrderByRelevanceFieldEnum]
@@ -11923,7 +12135,9 @@ export namespace Prisma {
   export const PengumpulanTugasFileOrderByRelevanceFieldEnum: {
     kd_file: 'kd_file',
     kd_pengumpulan_tugas: 'kd_pengumpulan_tugas',
-    file_path: 'file_path'
+    file_path: 'file_path',
+    file_name: 'file_name',
+    file_type: 'file_type'
   };
 
   export type PengumpulanTugasFileOrderByRelevanceFieldEnum = (typeof PengumpulanTugasFileOrderByRelevanceFieldEnum)[keyof typeof PengumpulanTugasFileOrderByRelevanceFieldEnum]
@@ -11932,7 +12146,9 @@ export namespace Prisma {
   export const PengumpulanTugasImageOrderByRelevanceFieldEnum: {
     kd_image: 'kd_image',
     kd_pengumpulan_tugas: 'kd_pengumpulan_tugas',
-    image_path: 'image_path'
+    image_path: 'image_path',
+    image_name: 'image_name',
+    image_type: 'image_type'
   };
 
   export type PengumpulanTugasImageOrderByRelevanceFieldEnum = (typeof PengumpulanTugasImageOrderByRelevanceFieldEnum)[keyof typeof PengumpulanTugasImageOrderByRelevanceFieldEnum]
@@ -11988,6 +12204,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Int'
+   */
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+  /**
    * Reference to a field of type 'StatusPengumpulanTugas'
    */
   export type EnumStatusPengumpulanTugasFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatusPengumpulanTugas'>
@@ -11998,13 +12221,6 @@ export namespace Prisma {
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
-    
-
-
-  /**
-   * Reference to a field of type 'Int'
-   */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
     
   /**
    * Deep Input Types
@@ -12368,6 +12584,9 @@ export namespace Prisma {
     kd_file?: StringFilter<"LaporanFile"> | string
     kd_laporan?: StringFilter<"LaporanFile"> | string
     file_path?: StringFilter<"LaporanFile"> | string
+    file_name?: StringFilter<"LaporanFile"> | string
+    file_type?: StringFilter<"LaporanFile"> | string
+    file_size?: IntFilter<"LaporanFile"> | number
     created_at?: DateTimeFilter<"LaporanFile"> | Date | string
     updated_at?: DateTimeFilter<"LaporanFile"> | Date | string
     laporan?: XOR<LaporanScalarRelationFilter, LaporanWhereInput>
@@ -12377,6 +12596,9 @@ export namespace Prisma {
     kd_file?: SortOrder
     kd_laporan?: SortOrder
     file_path?: SortOrder
+    file_name?: SortOrder
+    file_type?: SortOrder
+    file_size?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     laporan?: LaporanOrderByWithRelationInput
@@ -12390,6 +12612,9 @@ export namespace Prisma {
     NOT?: LaporanFileWhereInput | LaporanFileWhereInput[]
     kd_laporan?: StringFilter<"LaporanFile"> | string
     file_path?: StringFilter<"LaporanFile"> | string
+    file_name?: StringFilter<"LaporanFile"> | string
+    file_type?: StringFilter<"LaporanFile"> | string
+    file_size?: IntFilter<"LaporanFile"> | number
     created_at?: DateTimeFilter<"LaporanFile"> | Date | string
     updated_at?: DateTimeFilter<"LaporanFile"> | Date | string
     laporan?: XOR<LaporanScalarRelationFilter, LaporanWhereInput>
@@ -12399,11 +12624,16 @@ export namespace Prisma {
     kd_file?: SortOrder
     kd_laporan?: SortOrder
     file_path?: SortOrder
+    file_name?: SortOrder
+    file_type?: SortOrder
+    file_size?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     _count?: LaporanFileCountOrderByAggregateInput
+    _avg?: LaporanFileAvgOrderByAggregateInput
     _max?: LaporanFileMaxOrderByAggregateInput
     _min?: LaporanFileMinOrderByAggregateInput
+    _sum?: LaporanFileSumOrderByAggregateInput
   }
 
   export type LaporanFileScalarWhereWithAggregatesInput = {
@@ -12413,6 +12643,9 @@ export namespace Prisma {
     kd_file?: StringWithAggregatesFilter<"LaporanFile"> | string
     kd_laporan?: StringWithAggregatesFilter<"LaporanFile"> | string
     file_path?: StringWithAggregatesFilter<"LaporanFile"> | string
+    file_name?: StringWithAggregatesFilter<"LaporanFile"> | string
+    file_type?: StringWithAggregatesFilter<"LaporanFile"> | string
+    file_size?: IntWithAggregatesFilter<"LaporanFile"> | number
     created_at?: DateTimeWithAggregatesFilter<"LaporanFile"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"LaporanFile"> | Date | string
   }
@@ -12507,6 +12740,9 @@ export namespace Prisma {
     kd_file?: StringFilter<"PengumpulanTugasFile"> | string
     kd_pengumpulan_tugas?: StringFilter<"PengumpulanTugasFile"> | string
     file_path?: StringFilter<"PengumpulanTugasFile"> | string
+    file_name?: StringFilter<"PengumpulanTugasFile"> | string
+    file_type?: StringFilter<"PengumpulanTugasFile"> | string
+    file_size?: IntFilter<"PengumpulanTugasFile"> | number
     created_at?: DateTimeFilter<"PengumpulanTugasFile"> | Date | string
     updated_at?: DateTimeFilter<"PengumpulanTugasFile"> | Date | string
     pengumpulan_tugas?: XOR<PengumpulanTugasScalarRelationFilter, PengumpulanTugasWhereInput>
@@ -12516,6 +12752,9 @@ export namespace Prisma {
     kd_file?: SortOrder
     kd_pengumpulan_tugas?: SortOrder
     file_path?: SortOrder
+    file_name?: SortOrder
+    file_type?: SortOrder
+    file_size?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     pengumpulan_tugas?: PengumpulanTugasOrderByWithRelationInput
@@ -12529,6 +12768,9 @@ export namespace Prisma {
     NOT?: PengumpulanTugasFileWhereInput | PengumpulanTugasFileWhereInput[]
     kd_pengumpulan_tugas?: StringFilter<"PengumpulanTugasFile"> | string
     file_path?: StringFilter<"PengumpulanTugasFile"> | string
+    file_name?: StringFilter<"PengumpulanTugasFile"> | string
+    file_type?: StringFilter<"PengumpulanTugasFile"> | string
+    file_size?: IntFilter<"PengumpulanTugasFile"> | number
     created_at?: DateTimeFilter<"PengumpulanTugasFile"> | Date | string
     updated_at?: DateTimeFilter<"PengumpulanTugasFile"> | Date | string
     pengumpulan_tugas?: XOR<PengumpulanTugasScalarRelationFilter, PengumpulanTugasWhereInput>
@@ -12538,11 +12780,16 @@ export namespace Prisma {
     kd_file?: SortOrder
     kd_pengumpulan_tugas?: SortOrder
     file_path?: SortOrder
+    file_name?: SortOrder
+    file_type?: SortOrder
+    file_size?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     _count?: PengumpulanTugasFileCountOrderByAggregateInput
+    _avg?: PengumpulanTugasFileAvgOrderByAggregateInput
     _max?: PengumpulanTugasFileMaxOrderByAggregateInput
     _min?: PengumpulanTugasFileMinOrderByAggregateInput
+    _sum?: PengumpulanTugasFileSumOrderByAggregateInput
   }
 
   export type PengumpulanTugasFileScalarWhereWithAggregatesInput = {
@@ -12552,6 +12799,9 @@ export namespace Prisma {
     kd_file?: StringWithAggregatesFilter<"PengumpulanTugasFile"> | string
     kd_pengumpulan_tugas?: StringWithAggregatesFilter<"PengumpulanTugasFile"> | string
     file_path?: StringWithAggregatesFilter<"PengumpulanTugasFile"> | string
+    file_name?: StringWithAggregatesFilter<"PengumpulanTugasFile"> | string
+    file_type?: StringWithAggregatesFilter<"PengumpulanTugasFile"> | string
+    file_size?: IntWithAggregatesFilter<"PengumpulanTugasFile"> | number
     created_at?: DateTimeWithAggregatesFilter<"PengumpulanTugasFile"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"PengumpulanTugasFile"> | Date | string
   }
@@ -12563,6 +12813,9 @@ export namespace Prisma {
     kd_image?: StringFilter<"PengumpulanTugasImage"> | string
     kd_pengumpulan_tugas?: StringFilter<"PengumpulanTugasImage"> | string
     image_path?: StringFilter<"PengumpulanTugasImage"> | string
+    image_name?: StringFilter<"PengumpulanTugasImage"> | string
+    image_type?: StringFilter<"PengumpulanTugasImage"> | string
+    image_size?: IntFilter<"PengumpulanTugasImage"> | number
     created_at?: DateTimeFilter<"PengumpulanTugasImage"> | Date | string
     updated_at?: DateTimeFilter<"PengumpulanTugasImage"> | Date | string
     pengumpulan_tugas?: XOR<PengumpulanTugasScalarRelationFilter, PengumpulanTugasWhereInput>
@@ -12572,6 +12825,9 @@ export namespace Prisma {
     kd_image?: SortOrder
     kd_pengumpulan_tugas?: SortOrder
     image_path?: SortOrder
+    image_name?: SortOrder
+    image_type?: SortOrder
+    image_size?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     pengumpulan_tugas?: PengumpulanTugasOrderByWithRelationInput
@@ -12585,6 +12841,9 @@ export namespace Prisma {
     NOT?: PengumpulanTugasImageWhereInput | PengumpulanTugasImageWhereInput[]
     kd_pengumpulan_tugas?: StringFilter<"PengumpulanTugasImage"> | string
     image_path?: StringFilter<"PengumpulanTugasImage"> | string
+    image_name?: StringFilter<"PengumpulanTugasImage"> | string
+    image_type?: StringFilter<"PengumpulanTugasImage"> | string
+    image_size?: IntFilter<"PengumpulanTugasImage"> | number
     created_at?: DateTimeFilter<"PengumpulanTugasImage"> | Date | string
     updated_at?: DateTimeFilter<"PengumpulanTugasImage"> | Date | string
     pengumpulan_tugas?: XOR<PengumpulanTugasScalarRelationFilter, PengumpulanTugasWhereInput>
@@ -12594,11 +12853,16 @@ export namespace Prisma {
     kd_image?: SortOrder
     kd_pengumpulan_tugas?: SortOrder
     image_path?: SortOrder
+    image_name?: SortOrder
+    image_type?: SortOrder
+    image_size?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     _count?: PengumpulanTugasImageCountOrderByAggregateInput
+    _avg?: PengumpulanTugasImageAvgOrderByAggregateInput
     _max?: PengumpulanTugasImageMaxOrderByAggregateInput
     _min?: PengumpulanTugasImageMinOrderByAggregateInput
+    _sum?: PengumpulanTugasImageSumOrderByAggregateInput
   }
 
   export type PengumpulanTugasImageScalarWhereWithAggregatesInput = {
@@ -12608,6 +12872,9 @@ export namespace Prisma {
     kd_image?: StringWithAggregatesFilter<"PengumpulanTugasImage"> | string
     kd_pengumpulan_tugas?: StringWithAggregatesFilter<"PengumpulanTugasImage"> | string
     image_path?: StringWithAggregatesFilter<"PengumpulanTugasImage"> | string
+    image_name?: StringWithAggregatesFilter<"PengumpulanTugasImage"> | string
+    image_type?: StringWithAggregatesFilter<"PengumpulanTugasImage"> | string
+    image_size?: IntWithAggregatesFilter<"PengumpulanTugasImage"> | number
     created_at?: DateTimeWithAggregatesFilter<"PengumpulanTugasImage"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"PengumpulanTugasImage"> | Date | string
   }
@@ -13039,6 +13306,9 @@ export namespace Prisma {
   export type LaporanFileCreateInput = {
     kd_file?: string
     file_path: string
+    file_name: string
+    file_type: string
+    file_size: number
     created_at?: Date | string
     updated_at?: Date | string
     laporan: LaporanCreateNestedOneWithoutFilesInput
@@ -13048,6 +13318,9 @@ export namespace Prisma {
     kd_file?: string
     kd_laporan: string
     file_path: string
+    file_name: string
+    file_type: string
+    file_size: number
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -13055,6 +13328,9 @@ export namespace Prisma {
   export type LaporanFileUpdateInput = {
     kd_file?: StringFieldUpdateOperationsInput | string
     file_path?: StringFieldUpdateOperationsInput | string
+    file_name?: StringFieldUpdateOperationsInput | string
+    file_type?: StringFieldUpdateOperationsInput | string
+    file_size?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     laporan?: LaporanUpdateOneRequiredWithoutFilesNestedInput
@@ -13064,6 +13340,9 @@ export namespace Prisma {
     kd_file?: StringFieldUpdateOperationsInput | string
     kd_laporan?: StringFieldUpdateOperationsInput | string
     file_path?: StringFieldUpdateOperationsInput | string
+    file_name?: StringFieldUpdateOperationsInput | string
+    file_type?: StringFieldUpdateOperationsInput | string
+    file_size?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13072,6 +13351,9 @@ export namespace Prisma {
     kd_file?: string
     kd_laporan: string
     file_path: string
+    file_name: string
+    file_type: string
+    file_size: number
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -13079,6 +13361,9 @@ export namespace Prisma {
   export type LaporanFileUpdateManyMutationInput = {
     kd_file?: StringFieldUpdateOperationsInput | string
     file_path?: StringFieldUpdateOperationsInput | string
+    file_name?: StringFieldUpdateOperationsInput | string
+    file_type?: StringFieldUpdateOperationsInput | string
+    file_size?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13087,6 +13372,9 @@ export namespace Prisma {
     kd_file?: StringFieldUpdateOperationsInput | string
     kd_laporan?: StringFieldUpdateOperationsInput | string
     file_path?: StringFieldUpdateOperationsInput | string
+    file_name?: StringFieldUpdateOperationsInput | string
+    file_type?: StringFieldUpdateOperationsInput | string
+    file_size?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13181,6 +13469,9 @@ export namespace Prisma {
   export type PengumpulanTugasFileCreateInput = {
     kd_file?: string
     file_path: string
+    file_name: string
+    file_type: string
+    file_size: number
     created_at?: Date | string
     updated_at?: Date | string
     pengumpulan_tugas: PengumpulanTugasCreateNestedOneWithoutFilesInput
@@ -13190,6 +13481,9 @@ export namespace Prisma {
     kd_file?: string
     kd_pengumpulan_tugas: string
     file_path: string
+    file_name: string
+    file_type: string
+    file_size: number
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -13197,6 +13491,9 @@ export namespace Prisma {
   export type PengumpulanTugasFileUpdateInput = {
     kd_file?: StringFieldUpdateOperationsInput | string
     file_path?: StringFieldUpdateOperationsInput | string
+    file_name?: StringFieldUpdateOperationsInput | string
+    file_type?: StringFieldUpdateOperationsInput | string
+    file_size?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     pengumpulan_tugas?: PengumpulanTugasUpdateOneRequiredWithoutFilesNestedInput
@@ -13206,6 +13503,9 @@ export namespace Prisma {
     kd_file?: StringFieldUpdateOperationsInput | string
     kd_pengumpulan_tugas?: StringFieldUpdateOperationsInput | string
     file_path?: StringFieldUpdateOperationsInput | string
+    file_name?: StringFieldUpdateOperationsInput | string
+    file_type?: StringFieldUpdateOperationsInput | string
+    file_size?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13214,6 +13514,9 @@ export namespace Prisma {
     kd_file?: string
     kd_pengumpulan_tugas: string
     file_path: string
+    file_name: string
+    file_type: string
+    file_size: number
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -13221,6 +13524,9 @@ export namespace Prisma {
   export type PengumpulanTugasFileUpdateManyMutationInput = {
     kd_file?: StringFieldUpdateOperationsInput | string
     file_path?: StringFieldUpdateOperationsInput | string
+    file_name?: StringFieldUpdateOperationsInput | string
+    file_type?: StringFieldUpdateOperationsInput | string
+    file_size?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13229,6 +13535,9 @@ export namespace Prisma {
     kd_file?: StringFieldUpdateOperationsInput | string
     kd_pengumpulan_tugas?: StringFieldUpdateOperationsInput | string
     file_path?: StringFieldUpdateOperationsInput | string
+    file_name?: StringFieldUpdateOperationsInput | string
+    file_type?: StringFieldUpdateOperationsInput | string
+    file_size?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13236,6 +13545,9 @@ export namespace Prisma {
   export type PengumpulanTugasImageCreateInput = {
     kd_image?: string
     image_path: string
+    image_name: string
+    image_type: string
+    image_size: number
     created_at?: Date | string
     updated_at?: Date | string
     pengumpulan_tugas: PengumpulanTugasCreateNestedOneWithoutImagesInput
@@ -13245,6 +13557,9 @@ export namespace Prisma {
     kd_image?: string
     kd_pengumpulan_tugas: string
     image_path: string
+    image_name: string
+    image_type: string
+    image_size: number
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -13252,6 +13567,9 @@ export namespace Prisma {
   export type PengumpulanTugasImageUpdateInput = {
     kd_image?: StringFieldUpdateOperationsInput | string
     image_path?: StringFieldUpdateOperationsInput | string
+    image_name?: StringFieldUpdateOperationsInput | string
+    image_type?: StringFieldUpdateOperationsInput | string
+    image_size?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     pengumpulan_tugas?: PengumpulanTugasUpdateOneRequiredWithoutImagesNestedInput
@@ -13261,6 +13579,9 @@ export namespace Prisma {
     kd_image?: StringFieldUpdateOperationsInput | string
     kd_pengumpulan_tugas?: StringFieldUpdateOperationsInput | string
     image_path?: StringFieldUpdateOperationsInput | string
+    image_name?: StringFieldUpdateOperationsInput | string
+    image_type?: StringFieldUpdateOperationsInput | string
+    image_size?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13269,6 +13590,9 @@ export namespace Prisma {
     kd_image?: string
     kd_pengumpulan_tugas: string
     image_path: string
+    image_name: string
+    image_type: string
+    image_size: number
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -13276,6 +13600,9 @@ export namespace Prisma {
   export type PengumpulanTugasImageUpdateManyMutationInput = {
     kd_image?: StringFieldUpdateOperationsInput | string
     image_path?: StringFieldUpdateOperationsInput | string
+    image_name?: StringFieldUpdateOperationsInput | string
+    image_type?: StringFieldUpdateOperationsInput | string
+    image_size?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13284,6 +13611,9 @@ export namespace Prisma {
     kd_image?: StringFieldUpdateOperationsInput | string
     kd_pengumpulan_tugas?: StringFieldUpdateOperationsInput | string
     image_path?: StringFieldUpdateOperationsInput | string
+    image_name?: StringFieldUpdateOperationsInput | string
+    image_type?: StringFieldUpdateOperationsInput | string
+    image_size?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13764,6 +14094,17 @@ export namespace Prisma {
     updated_at?: SortOrder
   }
 
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type LaporanScalarRelationFilter = {
     is?: LaporanWhereInput
     isNot?: LaporanWhereInput
@@ -13779,14 +14120,24 @@ export namespace Prisma {
     kd_file?: SortOrder
     kd_laporan?: SortOrder
     file_path?: SortOrder
+    file_name?: SortOrder
+    file_type?: SortOrder
+    file_size?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
+  }
+
+  export type LaporanFileAvgOrderByAggregateInput = {
+    file_size?: SortOrder
   }
 
   export type LaporanFileMaxOrderByAggregateInput = {
     kd_file?: SortOrder
     kd_laporan?: SortOrder
     file_path?: SortOrder
+    file_name?: SortOrder
+    file_type?: SortOrder
+    file_size?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -13795,8 +14146,31 @@ export namespace Prisma {
     kd_file?: SortOrder
     kd_laporan?: SortOrder
     file_path?: SortOrder
+    file_name?: SortOrder
+    file_type?: SortOrder
+    file_size?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
+  }
+
+  export type LaporanFileSumOrderByAggregateInput = {
+    file_size?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type EnumStatusPengumpulanTugasFilter<$PrismaModel = never> = {
@@ -13905,14 +14279,24 @@ export namespace Prisma {
     kd_file?: SortOrder
     kd_pengumpulan_tugas?: SortOrder
     file_path?: SortOrder
+    file_name?: SortOrder
+    file_type?: SortOrder
+    file_size?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
+  }
+
+  export type PengumpulanTugasFileAvgOrderByAggregateInput = {
+    file_size?: SortOrder
   }
 
   export type PengumpulanTugasFileMaxOrderByAggregateInput = {
     kd_file?: SortOrder
     kd_pengumpulan_tugas?: SortOrder
     file_path?: SortOrder
+    file_name?: SortOrder
+    file_type?: SortOrder
+    file_size?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -13921,8 +14305,15 @@ export namespace Prisma {
     kd_file?: SortOrder
     kd_pengumpulan_tugas?: SortOrder
     file_path?: SortOrder
+    file_name?: SortOrder
+    file_type?: SortOrder
+    file_size?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
+  }
+
+  export type PengumpulanTugasFileSumOrderByAggregateInput = {
+    file_size?: SortOrder
   }
 
   export type PengumpulanTugasImageOrderByRelevanceInput = {
@@ -13935,14 +14326,24 @@ export namespace Prisma {
     kd_image?: SortOrder
     kd_pengumpulan_tugas?: SortOrder
     image_path?: SortOrder
+    image_name?: SortOrder
+    image_type?: SortOrder
+    image_size?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
+  }
+
+  export type PengumpulanTugasImageAvgOrderByAggregateInput = {
+    image_size?: SortOrder
   }
 
   export type PengumpulanTugasImageMaxOrderByAggregateInput = {
     kd_image?: SortOrder
     kd_pengumpulan_tugas?: SortOrder
     image_path?: SortOrder
+    image_name?: SortOrder
+    image_type?: SortOrder
+    image_size?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -13951,8 +14352,15 @@ export namespace Prisma {
     kd_image?: SortOrder
     kd_pengumpulan_tugas?: SortOrder
     image_path?: SortOrder
+    image_name?: SortOrder
+    image_type?: SortOrder
+    image_size?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
+  }
+
+  export type PengumpulanTugasImageSumOrderByAggregateInput = {
+    image_size?: SortOrder
   }
 
   export type FloatFilter<$PrismaModel = never> = {
@@ -14518,6 +14926,14 @@ export namespace Prisma {
     connect?: LaporanWhereUniqueInput
   }
 
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type LaporanUpdateOneRequiredWithoutFilesNestedInput = {
     create?: XOR<LaporanCreateWithoutFilesInput, LaporanUncheckedCreateWithoutFilesInput>
     connectOrCreate?: LaporanCreateOrConnectWithoutFilesInput
@@ -14923,6 +15339,33 @@ export namespace Prisma {
     _max?: NestedEnumPrioritasFilter<$PrismaModel>
   }
 
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
   export type NestedEnumStatusPengumpulanTugasFilter<$PrismaModel = never> = {
     equals?: $Enums.StatusPengumpulanTugas | EnumStatusPengumpulanTugasFieldRefInput<$PrismaModel>
     in?: $Enums.StatusPengumpulanTugas[]
@@ -14938,17 +15381,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumStatusPengumpulanTugasFilter<$PrismaModel>
     _max?: NestedEnumStatusPengumpulanTugasFilter<$PrismaModel>
-  }
-
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
@@ -15798,6 +16230,9 @@ export namespace Prisma {
   export type LaporanFileCreateWithoutLaporanInput = {
     kd_file?: string
     file_path: string
+    file_name: string
+    file_type: string
+    file_size: number
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -15805,6 +16240,9 @@ export namespace Prisma {
   export type LaporanFileUncheckedCreateWithoutLaporanInput = {
     kd_file?: string
     file_path: string
+    file_name: string
+    file_type: string
+    file_size: number
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -15885,6 +16323,9 @@ export namespace Prisma {
     kd_file?: StringFilter<"LaporanFile"> | string
     kd_laporan?: StringFilter<"LaporanFile"> | string
     file_path?: StringFilter<"LaporanFile"> | string
+    file_name?: StringFilter<"LaporanFile"> | string
+    file_type?: StringFilter<"LaporanFile"> | string
+    file_size?: IntFilter<"LaporanFile"> | number
     created_at?: DateTimeFilter<"LaporanFile"> | Date | string
     updated_at?: DateTimeFilter<"LaporanFile"> | Date | string
   }
@@ -16034,6 +16475,9 @@ export namespace Prisma {
   export type PengumpulanTugasFileCreateWithoutPengumpulan_tugasInput = {
     kd_file?: string
     file_path: string
+    file_name: string
+    file_type: string
+    file_size: number
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -16041,6 +16485,9 @@ export namespace Prisma {
   export type PengumpulanTugasFileUncheckedCreateWithoutPengumpulan_tugasInput = {
     kd_file?: string
     file_path: string
+    file_name: string
+    file_type: string
+    file_size: number
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -16058,6 +16505,9 @@ export namespace Prisma {
   export type PengumpulanTugasImageCreateWithoutPengumpulan_tugasInput = {
     kd_image?: string
     image_path: string
+    image_name: string
+    image_type: string
+    image_size: number
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -16065,6 +16515,9 @@ export namespace Prisma {
   export type PengumpulanTugasImageUncheckedCreateWithoutPengumpulan_tugasInput = {
     kd_image?: string
     image_path: string
+    image_name: string
+    image_type: string
+    image_size: number
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -16207,6 +16660,9 @@ export namespace Prisma {
     kd_file?: StringFilter<"PengumpulanTugasFile"> | string
     kd_pengumpulan_tugas?: StringFilter<"PengumpulanTugasFile"> | string
     file_path?: StringFilter<"PengumpulanTugasFile"> | string
+    file_name?: StringFilter<"PengumpulanTugasFile"> | string
+    file_type?: StringFilter<"PengumpulanTugasFile"> | string
+    file_size?: IntFilter<"PengumpulanTugasFile"> | number
     created_at?: DateTimeFilter<"PengumpulanTugasFile"> | Date | string
     updated_at?: DateTimeFilter<"PengumpulanTugasFile"> | Date | string
   }
@@ -16234,6 +16690,9 @@ export namespace Prisma {
     kd_image?: StringFilter<"PengumpulanTugasImage"> | string
     kd_pengumpulan_tugas?: StringFilter<"PengumpulanTugasImage"> | string
     image_path?: StringFilter<"PengumpulanTugasImage"> | string
+    image_name?: StringFilter<"PengumpulanTugasImage"> | string
+    image_type?: StringFilter<"PengumpulanTugasImage"> | string
+    image_size?: IntFilter<"PengumpulanTugasImage"> | number
     created_at?: DateTimeFilter<"PengumpulanTugasImage"> | Date | string
     updated_at?: DateTimeFilter<"PengumpulanTugasImage"> | Date | string
   }
@@ -16797,6 +17256,9 @@ export namespace Prisma {
   export type LaporanFileCreateManyLaporanInput = {
     kd_file?: string
     file_path: string
+    file_name: string
+    file_type: string
+    file_size: number
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -16804,6 +17266,9 @@ export namespace Prisma {
   export type LaporanFileUpdateWithoutLaporanInput = {
     kd_file?: StringFieldUpdateOperationsInput | string
     file_path?: StringFieldUpdateOperationsInput | string
+    file_name?: StringFieldUpdateOperationsInput | string
+    file_type?: StringFieldUpdateOperationsInput | string
+    file_size?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -16811,6 +17276,9 @@ export namespace Prisma {
   export type LaporanFileUncheckedUpdateWithoutLaporanInput = {
     kd_file?: StringFieldUpdateOperationsInput | string
     file_path?: StringFieldUpdateOperationsInput | string
+    file_name?: StringFieldUpdateOperationsInput | string
+    file_type?: StringFieldUpdateOperationsInput | string
+    file_size?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -16818,6 +17286,9 @@ export namespace Prisma {
   export type LaporanFileUncheckedUpdateManyWithoutLaporanInput = {
     kd_file?: StringFieldUpdateOperationsInput | string
     file_path?: StringFieldUpdateOperationsInput | string
+    file_name?: StringFieldUpdateOperationsInput | string
+    file_type?: StringFieldUpdateOperationsInput | string
+    file_size?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -16832,6 +17303,9 @@ export namespace Prisma {
   export type PengumpulanTugasFileCreateManyPengumpulan_tugasInput = {
     kd_file?: string
     file_path: string
+    file_name: string
+    file_type: string
+    file_size: number
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -16839,6 +17313,9 @@ export namespace Prisma {
   export type PengumpulanTugasImageCreateManyPengumpulan_tugasInput = {
     kd_image?: string
     image_path: string
+    image_name: string
+    image_type: string
+    image_size: number
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -16867,6 +17344,9 @@ export namespace Prisma {
   export type PengumpulanTugasFileUpdateWithoutPengumpulan_tugasInput = {
     kd_file?: StringFieldUpdateOperationsInput | string
     file_path?: StringFieldUpdateOperationsInput | string
+    file_name?: StringFieldUpdateOperationsInput | string
+    file_type?: StringFieldUpdateOperationsInput | string
+    file_size?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -16874,6 +17354,9 @@ export namespace Prisma {
   export type PengumpulanTugasFileUncheckedUpdateWithoutPengumpulan_tugasInput = {
     kd_file?: StringFieldUpdateOperationsInput | string
     file_path?: StringFieldUpdateOperationsInput | string
+    file_name?: StringFieldUpdateOperationsInput | string
+    file_type?: StringFieldUpdateOperationsInput | string
+    file_size?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -16881,6 +17364,9 @@ export namespace Prisma {
   export type PengumpulanTugasFileUncheckedUpdateManyWithoutPengumpulan_tugasInput = {
     kd_file?: StringFieldUpdateOperationsInput | string
     file_path?: StringFieldUpdateOperationsInput | string
+    file_name?: StringFieldUpdateOperationsInput | string
+    file_type?: StringFieldUpdateOperationsInput | string
+    file_size?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -16888,6 +17374,9 @@ export namespace Prisma {
   export type PengumpulanTugasImageUpdateWithoutPengumpulan_tugasInput = {
     kd_image?: StringFieldUpdateOperationsInput | string
     image_path?: StringFieldUpdateOperationsInput | string
+    image_name?: StringFieldUpdateOperationsInput | string
+    image_type?: StringFieldUpdateOperationsInput | string
+    image_size?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -16895,6 +17384,9 @@ export namespace Prisma {
   export type PengumpulanTugasImageUncheckedUpdateWithoutPengumpulan_tugasInput = {
     kd_image?: StringFieldUpdateOperationsInput | string
     image_path?: StringFieldUpdateOperationsInput | string
+    image_name?: StringFieldUpdateOperationsInput | string
+    image_type?: StringFieldUpdateOperationsInput | string
+    image_size?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -16902,6 +17394,9 @@ export namespace Prisma {
   export type PengumpulanTugasImageUncheckedUpdateManyWithoutPengumpulan_tugasInput = {
     kd_image?: StringFieldUpdateOperationsInput | string
     image_path?: StringFieldUpdateOperationsInput | string
+    image_name?: StringFieldUpdateOperationsInput | string
+    image_type?: StringFieldUpdateOperationsInput | string
+    image_size?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }

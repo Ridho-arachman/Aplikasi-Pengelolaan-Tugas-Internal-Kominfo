@@ -172,6 +172,9 @@ exports.Prisma.LaporanFileScalarFieldEnum = {
   kd_file: 'kd_file',
   kd_laporan: 'kd_laporan',
   file_path: 'file_path',
+  file_name: 'file_name',
+  file_type: 'file_type',
+  file_size: 'file_size',
   created_at: 'created_at',
   updated_at: 'updated_at'
 };
@@ -191,6 +194,9 @@ exports.Prisma.PengumpulanTugasFileScalarFieldEnum = {
   kd_file: 'kd_file',
   kd_pengumpulan_tugas: 'kd_pengumpulan_tugas',
   file_path: 'file_path',
+  file_name: 'file_name',
+  file_type: 'file_type',
+  file_size: 'file_size',
   created_at: 'created_at',
   updated_at: 'updated_at'
 };
@@ -199,6 +205,9 @@ exports.Prisma.PengumpulanTugasImageScalarFieldEnum = {
   kd_image: 'kd_image',
   kd_pengumpulan_tugas: 'kd_pengumpulan_tugas',
   image_path: 'image_path',
+  image_name: 'image_name',
+  image_type: 'image_type',
+  image_size: 'image_size',
   created_at: 'created_at',
   updated_at: 'updated_at'
 };
@@ -258,7 +267,9 @@ exports.Prisma.LaporanOrderByRelevanceFieldEnum = {
 exports.Prisma.LaporanFileOrderByRelevanceFieldEnum = {
   kd_file: 'kd_file',
   kd_laporan: 'kd_laporan',
-  file_path: 'file_path'
+  file_path: 'file_path',
+  file_name: 'file_name',
+  file_type: 'file_type'
 };
 
 exports.Prisma.PengumpulanTugasOrderByRelevanceFieldEnum = {
@@ -271,13 +282,17 @@ exports.Prisma.PengumpulanTugasOrderByRelevanceFieldEnum = {
 exports.Prisma.PengumpulanTugasFileOrderByRelevanceFieldEnum = {
   kd_file: 'kd_file',
   kd_pengumpulan_tugas: 'kd_pengumpulan_tugas',
-  file_path: 'file_path'
+  file_path: 'file_path',
+  file_name: 'file_name',
+  file_type: 'file_type'
 };
 
 exports.Prisma.PengumpulanTugasImageOrderByRelevanceFieldEnum = {
   kd_image: 'kd_image',
   kd_pengumpulan_tugas: 'kd_pengumpulan_tugas',
-  image_path: 'image_path'
+  image_path: 'image_path',
+  image_name: 'image_name',
+  image_type: 'image_type'
 };
 
 exports.Prisma.RatingOrderByRelevanceFieldEnum = {

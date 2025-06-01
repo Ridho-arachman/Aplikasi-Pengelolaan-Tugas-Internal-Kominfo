@@ -93,6 +93,9 @@ model LaporanFile {
   kd_file    String   @id @default(cuid())
   kd_laporan String
   file_path  String
+  file_name  String
+  file_type  String
+  file_size  Int
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
@@ -125,6 +128,9 @@ model PengumpulanTugasFile {
   kd_file              String   @id @default(cuid())
   kd_pengumpulan_tugas String
   file_path            String
+  file_name            String
+  file_type            String
+  file_size            Int
   created_at           DateTime @default(now())
   updated_at           DateTime @updatedAt
 
@@ -137,6 +143,9 @@ model PengumpulanTugasImage {
   kd_image             String   @id @default(cuid())
   kd_pengumpulan_tugas String
   image_path           String
+  image_name           String
+  image_type           String
+  image_size           Int
   created_at           DateTime @default(now())
   updated_at           DateTime @updatedAt
 
