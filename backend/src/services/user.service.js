@@ -1,4 +1,29 @@
 const prisma = require("../libs/prisma");
+const { cloudinary } = require("../configs/cloudinary");
+
+// Fungsi untuk menghapus image dari Cloudinary
+const deleteImageFromCloudinary = async (imageUrl) => {
+  if (!imageUrl) return;
+
+  try {
+    // Ekstrak public_id dari URL Cloudinary dengan lebih akurat
+    const urlParts = imageUrl.split("/");
+    const uploadIndex = urlParts.indexOf("upload");
+    if (uploadIndex === -1) return;
+
+    // Ambil bagian setelah 'upload' dan sebelum format file
+    const publicId = urlParts
+      .slice(uploadIndex + 2)
+      .join("/")
+      .split(".")[0];
+
+    console.log("Deleting image with public_id:", publicId);
+    const result = await cloudinary.uploader.destroy(publicId);
+    console.log("Delete result:", result);
+  } catch (error) {
+    console.error("Error deleting image from Cloudinary:", error);
+  }
+};
 
 const createUser = async (data) => {
   const user = await prisma.user.create({
@@ -97,6 +122,21 @@ const getAllUser = async (nip, nama, role, kd_jabatan, nip_atasan) => {
 };
 
 const updateUser = async (nip, data) => {
+  // Jika ada image baru, hapus image lama
+  if (data.image) {
+    const existingUser = await getUser(nip);
+    if (existingUser && existingUser.image) {
+      try {
+        await deleteImageFromCloudinary(existingUser.image);
+        // Tunggu sebentar untuk memastikan penghapusan selesai
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+      } catch (error) {
+        console.error("Error deleting old image:", error);
+        // Lanjutkan proses meskipun gagal menghapus
+      }
+    }
+  }
+
   return await prisma.user.update({
     where: { nip },
     data,
@@ -121,6 +161,14 @@ const updateUser = async (nip, data) => {
 };
 
 const deleteUser = async (nip) => {
+  // Ambil data user sebelum dihapus
+  const user = await getUser(nip);
+
+  // Hapus image dari Cloudinary jika ada
+  if (user && user.image) {
+    await deleteImageFromCloudinary(user.image);
+  }
+
   return await prisma.user.delete({
     where: { nip },
     include: {

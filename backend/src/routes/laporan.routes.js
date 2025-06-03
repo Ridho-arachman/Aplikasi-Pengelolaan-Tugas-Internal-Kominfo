@@ -28,7 +28,6 @@ router.use(authenticateJWT);
 router.post(
   "/",
   authorizeRoles(["user"]),
-  uploadPDF.single("file_path"),
   validate({ body: createLaporanSchema }),
   CreateLaporan
 );

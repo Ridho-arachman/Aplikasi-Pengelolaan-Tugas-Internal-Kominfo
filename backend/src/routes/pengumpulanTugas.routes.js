@@ -28,8 +28,6 @@ router.use(authenticateJWT);
 router.post(
   "/",
   authorizeRoles(["user"]),
-  uploadImage.single("image"),
-  uploadPDF.single("file_path"),
   validate({ body: createPengumpulanTugasSchema }),
   CreatePengumpulanTugas
 );
