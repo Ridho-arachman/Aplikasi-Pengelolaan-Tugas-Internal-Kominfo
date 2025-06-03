@@ -15,9 +15,7 @@ const CreateUser = async (req, res) => {
 
     // Upload image jika ada
     if (req.file) {
-      console.log("File info:", req.file);
       image = req.file.path;
-      console.log("Image path:", image);
     }
 
     const hashedPassword = await createPassword(password);
@@ -32,15 +30,12 @@ const CreateUser = async (req, res) => {
       image,
     });
 
-    console.log("Created user:", user);
-
     return res.status(201).json({
       status: "success",
       message: "User berhasil dibuat",
       data: user,
     });
   } catch (error) {
-    console.error("Error in CreateUser:", error);
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       switch (error.code) {
         case "P2002":

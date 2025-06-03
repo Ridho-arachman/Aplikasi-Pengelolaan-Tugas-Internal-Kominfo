@@ -17,12 +17,8 @@ const deleteImageFromCloudinary = async (imageUrl) => {
       .join("/")
       .split(".")[0];
 
-    console.log("Deleting image with public_id:", publicId);
     const result = await cloudinary.uploader.destroy(publicId);
-    console.log("Delete result:", result);
-  } catch (error) {
-    console.error("Error deleting image from Cloudinary:", error);
-  }
+  } catch (error) {}
 };
 
 const createUser = async (data) => {
@@ -131,7 +127,6 @@ const updateUser = async (nip, data) => {
         // Tunggu sebentar untuk memastikan penghapusan selesai
         await new Promise((resolve) => setTimeout(resolve, 1000));
       } catch (error) {
-        console.error("Error deleting old image:", error);
         // Lanjutkan proses meskipun gagal menghapus
       }
     }
