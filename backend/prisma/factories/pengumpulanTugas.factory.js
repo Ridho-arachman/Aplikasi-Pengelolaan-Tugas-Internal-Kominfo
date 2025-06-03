@@ -2,11 +2,10 @@ const { faker } = require("@faker-js/faker");
 
 function pengumpulanTugasFactory(override = {}) {
   return {
-    kd_tugas: override.kd_tugas,
-    user_nip: override.user_nip,
+    kd_tugas: override.kd_tugas || faker.string.uuid(),
+    user_nip: override.user_nip || faker.string.numeric({ length: 18 }),
     tanggal_pengumpulan: faker.date.recent(),
-    file_path: faker.system.filePath(),
-    catatan: faker.lorem.sentence(),
+    catatan: faker.lorem.paragraph(),
     status: "menunggu",
     ...override,
   };

@@ -10,6 +10,7 @@ async function userFactory(override = {}) {
     role: "user",
     kd_jabatan: override.kd_jabatan || faker.string.uuid(),
     nip_atasan: null,
+    image: null,
     ...override,
   };
 }

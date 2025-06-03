@@ -1,15 +1,17 @@
 const { faker } = require("@faker-js/faker");
 
 function historyJabatanFactory(override = {}) {
-  const tanggalMulai = faker.date.past({ years: 2 });
-  const tanggalAkhir = faker.datatype.boolean()
-    ? faker.date.between({ from: tanggalMulai, to: new Date() })
-    : null;
+  const tanggal_mulai = faker.date.past();
+  const tanggal_akhir = faker.date.between({
+    from: tanggal_mulai,
+    to: new Date(),
+  });
+
   return {
-    user_nip: override.user_nip,
-    kd_jabatan: override.kd_jabatan,
-    tanggal_mulai: tanggalMulai,
-    tanggal_akhir: tanggalAkhir,
+    user_nip: override.user_nip || faker.string.numeric({ length: 18 }),
+    kd_jabatan: override.kd_jabatan || faker.string.uuid(),
+    tanggal_mulai,
+    tanggal_akhir,
     ...override,
   };
 }

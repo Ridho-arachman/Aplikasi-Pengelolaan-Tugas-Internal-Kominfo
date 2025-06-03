@@ -3,9 +3,16 @@ const { userFactory } = require("./factories/user.factory");
 const { jabatanFactory } = require("./factories/jabatan.factory");
 const { tugasFactory } = require("./factories/tugas.factory");
 const { laporanFactory } = require("./factories/laporan.factory");
+const { laporanFileFactory } = require("./factories/laporanFile.factory");
 const {
   pengumpulanTugasFactory,
 } = require("./factories/pengumpulanTugas.factory");
+const {
+  pengumpulanTugasFileFactory,
+} = require("./factories/pengumpulanTugasFile.factory");
+const {
+  pengumpulanTugasImageFactory,
+} = require("./factories/pengumpulanTugasImage.factory");
 const { ratingFactory } = require("./factories/rating.factory");
 const { historyJabatanFactory } = require("./factories/historyJabatan.factory");
 const prisma = new PrismaClient();
@@ -13,7 +20,10 @@ const prisma = new PrismaClient();
 async function clearDatabase() {
   // Hapus data dari tabel paling child ke parent (urutan penting!)
   await prisma.rating.deleteMany();
+  await prisma.pengumpulanTugasFile.deleteMany();
+  await prisma.pengumpulanTugasImage.deleteMany();
   await prisma.pengumpulanTugas.deleteMany();
+  await prisma.laporanFile.deleteMany();
   await prisma.laporan.deleteMany();
   await prisma.tugas.deleteMany();
   await prisma.historyJabatan.deleteMany();
@@ -85,15 +95,26 @@ async function main() {
 
   // 6. Seed tugas & laporan untuk setiap user (kecuali admin)
   const tugasList = [];
+  const laporanList = [];
   for (const user of userList) {
+    // Seed tugas
     for (let i = 0; i < 2; i++) {
       const tugasData = tugasFactory({ user_nip: user.nip });
       const tugas = await prisma.tugas.create({ data: tugasData });
       tugasList.push(tugas);
     }
+    // Seed laporan
     for (let i = 0; i < 2; i++) {
       const laporanData = laporanFactory({ user_nip: user.nip });
-      await prisma.laporan.create({ data: laporanData });
+      const laporan = await prisma.laporan.create({ data: laporanData });
+      laporanList.push(laporan);
+
+      // Seed file laporan
+      const jumlahFile = Math.floor(Math.random() * 3) + 1;
+      for (let j = 0; j < jumlahFile; j++) {
+        const fileData = laporanFileFactory({ kd_laporan: laporan.kd_laporan });
+        await prisma.laporanFile.create({ data: fileData });
+      }
     }
   }
 
@@ -108,6 +129,24 @@ async function main() {
       data: pengumpulanData,
     });
     pengumpulanList.push(pengumpulan);
+
+    // Seed file pengumpulan tugas
+    const jumlahFile = Math.floor(Math.random() * 3) + 1;
+    for (let i = 0; i < jumlahFile; i++) {
+      const fileData = pengumpulanTugasFileFactory({
+        kd_pengumpulan_tugas: pengumpulan.kd_pengumpulan_tugas,
+      });
+      await prisma.pengumpulanTugasFile.create({ data: fileData });
+    }
+
+    // Seed image pengumpulan tugas
+    const jumlahImage = Math.floor(Math.random() * 3) + 1;
+    for (let i = 0; i < jumlahImage; i++) {
+      const imageData = pengumpulanTugasImageFactory({
+        kd_pengumpulan_tugas: pengumpulan.kd_pengumpulan_tugas,
+      });
+      await prisma.pengumpulanTugasImage.create({ data: imageData });
+    }
   }
 
   // 8. Seed rating untuk setiap pengumpulan tugas

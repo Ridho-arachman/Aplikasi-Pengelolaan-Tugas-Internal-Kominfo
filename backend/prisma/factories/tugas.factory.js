@@ -1,13 +1,16 @@
 const { faker } = require("@faker-js/faker");
 
 function tugasFactory(override = {}) {
+  const prioritas = ["tinggi", "sedang", "rendah"][
+    Math.floor(Math.random() * 3)
+  ];
   return {
-    judul: faker.lorem.sentence(3),
+    judul: faker.lorem.sentence(),
     deskripsi: faker.lorem.paragraph(),
-    user_nip: override.user_nip,
+    user_nip: override.user_nip || faker.string.numeric({ length: 18 }),
     status: "pending",
-    deadline: faker.date.soon({ days: 10 }),
-    prioritas: faker.helpers.arrayElement(["tinggi", "sedang", "rendah"]),
+    prioritas,
+    deadline: faker.date.future(),
     ...override,
   };
 }
