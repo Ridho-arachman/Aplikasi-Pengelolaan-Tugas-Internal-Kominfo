@@ -1,6 +1,7 @@
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const { cloudinary } = require("./cloudinary");
 const multer = require("multer");
+const path = require("path");
 
 // Konfigurasi untuk single image upload (user profile)
 const userImageStorage = new CloudinaryStorage({
@@ -26,23 +27,17 @@ const pengumpulanTugasImageStorage = new CloudinaryStorage({
   },
 });
 
-// Konfigurasi untuk multiple file upload (laporan)
-const laporanFileStorage = new CloudinaryStorage({
-  cloudinary: cloudinary,
-  params: {
-    folder: "aplikasi_kominfo/laporan/files",
-    resource_type: "raw",
-    allowed_formats: ["pdf", "doc", "docx", "xls", "xlsx"],
+// Konfigurasi disk storage untuk file laporan
+const diskStorage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.join(__dirname, "../../uploads/laporan"));
   },
-});
-
-// Konfigurasi untuk multiple file upload (pengumpulan tugas)
-const pengumpulanTugasFileStorage = new CloudinaryStorage({
-  cloudinary: cloudinary,
-  params: {
-    folder: "aplikasi_kominfo/pengumpulan_tugas/files",
-    resource_type: "raw",
-    allowed_formats: ["pdf", "doc", "docx", "xls", "xlsx"],
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(
+      null,
+      file.fieldname + "-" + uniqueSuffix + path.extname(file.originalname)
+    );
   },
 });
 
@@ -77,9 +72,10 @@ const uploadPengumpulanTugasImages = multer({
 
 // Middleware untuk multiple file upload (laporan)
 const uploadLaporanFiles = multer({
-  storage: laporanFileStorage,
+  storage: diskStorage,
   limits: {
     fileSize: 10 * 1024 * 1024, // 10MB limit per file
+    files: 5, // Maksimal 5 file
   },
   fileFilter: (req, file, cb) => {
     const allowedMimes = [
@@ -89,12 +85,28 @@ const uploadLaporanFiles = multer({
       "application/vnd.ms-excel",
       "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     ];
+
     if (!allowedMimes.includes(file.mimetype)) {
-      return cb(new Error("Format file tidak didukung!"), false);
+      return cb(
+        new Error(
+          "Format file tidak didukung! Hanya file PDF, DOC, DOCX, XLS, dan XLSX yang diperbolehkan."
+        ),
+        false
+      );
     }
     cb(null, true);
   },
 }).array("files", 5); // Maksimal 5 file
+
+// Konfigurasi untuk multiple file upload (pengumpulan tugas)
+const pengumpulanTugasFileStorage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "aplikasi_kominfo/pengumpulan_tugas/files",
+    resource_type: "raw",
+    allowed_formats: ["pdf", "doc", "docx", "xls", "xlsx"],
+  },
+});
 
 // Middleware untuk multiple file upload (pengumpulan tugas)
 const uploadPengumpulanTugasFiles = multer({

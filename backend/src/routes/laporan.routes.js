@@ -4,6 +4,9 @@ const {
   authenticateJWT,
   authorizeRoles,
 } = require("../middlewares/auth.middleware");
+const {
+  uploadLaporanFilesMiddleware,
+} = require("../middlewares/upload.middleware");
 const { uploadPDF } = require("../configs/cloudinary");
 const {
   createLaporanSchema,
@@ -28,6 +31,7 @@ router.use(authenticateJWT);
 router.post(
   "/",
   authorizeRoles(["user"]),
+  uploadLaporanFilesMiddleware,
   validate({ body: createLaporanSchema }),
   CreateLaporan
 );

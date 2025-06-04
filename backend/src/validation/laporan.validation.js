@@ -20,12 +20,6 @@ const baseFields = {
   user_nip: z
     .string({ message: "NIP user harus berupa string" })
     .length(18, "NIP harus terdiri dari 18 karakter"),
-
-  file_path: z
-    .string({ message: "File path harus berupa string" })
-    .trim()
-    .min(1, "File path harus diisi")
-    .max(255, "File path terlalu panjang"),
 };
 
 // Skema untuk membuat laporan baru
@@ -33,7 +27,6 @@ const createLaporanSchema = z.object({
   isi_laporan: baseFields.isi_laporan,
   judul_laporan: baseFields.judul_laporan,
   user_nip: baseFields.user_nip,
-  file_path: baseFields.file_path,
 });
 
 // Skema untuk mendapatkan laporan berdasarkan kode
@@ -52,7 +45,6 @@ const getAllLaporanSchema = z.object({
 const updateLaporanSchema = z.object({
   isi_laporan: baseFields.isi_laporan.optional(),
   judul_laporan: baseFields.judul_laporan.optional(),
-  file_path: baseFields.file_path.optional(),
 });
 
 // Skema untuk menghapus laporan

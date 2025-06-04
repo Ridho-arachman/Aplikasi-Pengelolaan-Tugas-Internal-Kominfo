@@ -8,7 +8,11 @@ const prisma = require("../libs/prisma");
 const createLaporan = async (data) => {
   try {
     const laporan = await prisma.laporan.create({
-      data,
+      data: {
+        isi_laporan: data.isi_laporan,
+        judul_laporan: data.judul_laporan,
+        user_nip: data.user_nip,
+      },
     });
 
     return laporan;
@@ -30,6 +34,7 @@ const getLaporanById = async (kd_laporan) => {
       },
       include: {
         user: true,
+        files: true,
       },
     });
 

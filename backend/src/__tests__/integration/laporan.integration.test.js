@@ -1,4 +1,6 @@
 const request = require("supertest");
+const path = require("path");
+const fs = require("fs");
 const app = require("../../../app");
 const prisma = require("../../libs/prisma");
 const {
@@ -18,6 +20,12 @@ describe("Integration test for Laporan routes", () => {
 
   beforeAll(async () => {
     try {
+      // Buat folder uploads jika belum ada
+      const uploadsDir = path.join(__dirname, "../../../uploads/laporan");
+      if (!fs.existsSync(uploadsDir)) {
+        fs.mkdirSync(uploadsDir, { recursive: true });
+      }
+
       // Setup test user dan dapatkan token
       const { testUserNip, testUserKdJabatan } = await setupTestUser();
       userNip = testUserNip;
@@ -32,6 +40,15 @@ describe("Integration test for Laporan routes", () => {
 
   afterAll(async () => {
     try {
+      // Bersihkan file yang diupload
+      const uploadsDir = path.join(__dirname, "../../../uploads/laporan");
+      if (fs.existsSync(uploadsDir)) {
+        const files = fs.readdirSync(uploadsDir);
+        files.forEach((file) => {
+          fs.unlinkSync(path.join(uploadsDir, file));
+        });
+      }
+
       await cleanupTestData();
       await prisma.$disconnect();
     } catch (error) {
@@ -40,19 +57,39 @@ describe("Integration test for Laporan routes", () => {
   });
 
   // Create Laporan
-  it("should create a new Laporan", async () => {
+  it("should create a new Laporan with multiple files", async () => {
     try {
       const data = {
         isi_laporan: "Ini adalah isi laporan test",
         judul_laporan: "Laporan Bulanan Test",
         user_nip: userNip,
-        file_path: "/uploads/test-laporan.pdf",
       };
+
+      // Periksa keberadaan file test
+      const fixturesPath = path.join(__dirname, "../fixtures");
+      const testPdfPath = path.join(fixturesPath, "test.pdf");
+      const testDocxPath = path.join(fixturesPath, "test.docx");
+      const testXlsxPath = path.join(fixturesPath, "test.xlsx");
+
+      if (!fs.existsSync(testPdfPath)) {
+        throw new Error(`File test.pdf tidak ditemukan di ${testPdfPath}`);
+      }
+      if (!fs.existsSync(testDocxPath)) {
+        throw new Error(`File test.docx tidak ditemukan di ${testDocxPath}`);
+      }
+      if (!fs.existsSync(testXlsxPath)) {
+        throw new Error(`File test.xlsx tidak ditemukan di ${testXlsxPath}`);
+      }
 
       const res = await request(app)
         .post("/api/laporan")
         .set("Authorization", `Bearer ${accessToken}`)
-        .send(data);
+        .field("isi_laporan", data.isi_laporan)
+        .field("judul_laporan", data.judul_laporan)
+        .field("user_nip", data.user_nip)
+        .attach("files", testPdfPath)
+        .attach("files", testDocxPath)
+        .attach("files", testXlsxPath);
 
       expect(res.status).toBe(201);
       expect(res.body).toHaveProperty("message", "Laporan berhasil dibuat");
@@ -63,9 +100,11 @@ describe("Integration test for Laporan routes", () => {
         "Laporan Bulanan Test"
       );
       expect(res.body.data).toHaveProperty("user_nip", userNip);
+      expect(res.body.data.files).toHaveLength(3);
 
       createdLaporan = res.body.data;
     } catch (error) {
+      console.error("Test error:", error);
       throw error;
     }
   });

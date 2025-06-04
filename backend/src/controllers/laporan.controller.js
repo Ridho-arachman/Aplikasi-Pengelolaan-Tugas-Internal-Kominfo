@@ -1,5 +1,8 @@
 const { Prisma } = require("../../generated/prisma");
-const { uploadPDF } = require("../configs/cloudinary");
+const prisma = require("../libs/prisma");
+const path = require("path");
+const fs = require("fs");
+const cloudinary = require("cloudinary").v2;
 const {
   createLaporan,
   getLaporanById,
@@ -20,25 +23,83 @@ const CreateLaporan = async (req, res) => {
     const { isi_laporan, judul_laporan } = req.body;
     const user_nip = req.user.nip;
 
-    // Upload file jika ada
-    let file_path = null;
-    if (req.file) {
-      file_path = req.file.path;
-    }
-
+    // Buat laporan baru
     const laporan = await createLaporan({
       isi_laporan,
       judul_laporan,
       user_nip,
-      file_path,
+    });
+
+    // Jika ada file yang diupload, simpan informasi file
+    if (req.files && req.files.length > 0) {
+      const fileData = [];
+
+      // Upload setiap file ke Cloudinary
+      for (const file of req.files) {
+        try {
+          // Upload langsung ke Cloudinary
+          const result = await cloudinary.uploader.upload(file.path, {
+            folder: "aplikasi_kominfo/laporan/files",
+            resource_type: "auto",
+          });
+
+          // Simpan informasi file
+          fileData.push({
+            kd_laporan: laporan.kd_laporan,
+            file_path: result.secure_url,
+            file_name: file.originalname,
+            file_type: file.mimetype,
+            file_size: file.size,
+          });
+
+          // Hapus file dari disk setelah berhasil diupload ke Cloudinary
+          fs.unlinkSync(file.path);
+        } catch (error) {
+          console.error("Error uploading file to Cloudinary:", error);
+          // Hapus file dari disk jika gagal upload ke Cloudinary
+          fs.unlinkSync(file.path);
+          throw new Error("Gagal mengupload file ke Cloudinary");
+        }
+      }
+
+      // Simpan data file ke database
+      if (fileData.length > 0) {
+        await prisma.laporanFile.createMany({
+          data: fileData,
+        });
+      }
+    }
+
+    // Ambil laporan dengan file yang terkait
+    const laporanWithFiles = await prisma.laporan.findUnique({
+      where: {
+        kd_laporan: laporan.kd_laporan,
+      },
+      include: {
+        files: true,
+        user: true,
+      },
     });
 
     return res.status(201).json({
       status: "success",
       message: "Laporan berhasil dibuat",
-      data: laporan,
+      data: laporanWithFiles,
     });
   } catch (error) {
+    console.error("Error in CreateLaporan:", error);
+
+    // Hapus file yang sudah diupload jika terjadi error
+    if (req.files && req.files.length > 0) {
+      req.files.forEach((file) => {
+        try {
+          fs.unlinkSync(file.path);
+        } catch (err) {
+          console.error("Error deleting file:", err);
+        }
+      });
+    }
+
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       switch (error.code) {
         case "P2003":
@@ -47,13 +108,16 @@ const CreateLaporan = async (req, res) => {
             message: "User tidak ditemukan",
           });
         default:
-          break;
+          return res.status(400).json({
+            status: "error",
+            message: "Terjadi kesalahan saat menyimpan data",
+          });
       }
     }
 
     return res.status(500).json({
       status: "error",
-      message: error.message,
+      message: error.message || "Terjadi kesalahan pada server",
     });
   }
 };

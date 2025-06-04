@@ -8,6 +8,8 @@ const {
 
 // Middleware untuk handle error upload
 const handleUploadError = (err, req, res, next) => {
+  console.error("Upload error:", err);
+
   if (err instanceof multer.MulterError) {
     if (err.code === "LIMIT_FILE_SIZE") {
       return res.status(400).json({
@@ -26,7 +28,31 @@ const handleUploadError = (err, req, res, next) => {
       message: "Error saat upload file",
     });
   }
-  next(err);
+
+  // Handle error dari Cloudinary
+  if (
+    err.http_code === 400 &&
+    err.message.includes("file format not allowed")
+  ) {
+    return res.status(400).json({
+      status: "error",
+      message: "Format file tidak didukung oleh sistem",
+    });
+  }
+
+  // Handle error dari fileFilter
+  if (err.message && err.message.includes("Format file tidak didukung")) {
+    return res.status(400).json({
+      status: "error",
+      message: err.message,
+    });
+  }
+
+  // Handle error umum
+  return res.status(500).json({
+    status: "error",
+    message: "Terjadi kesalahan saat mengupload file",
+  });
 };
 
 // Middleware untuk upload image user (opsional)
