@@ -1,6 +1,17 @@
 const { Prisma } = require("../../generated/prisma");
-const pengumpulanTugasService = require("../services/pengumpulanTugas.service");
-const { uploadImage, uploadPDF } = require("../configs/cloudinary");
+const prisma = require("../libs/prisma");
+const path = require("path");
+const fs = require("fs");
+const cloudinary = require("cloudinary").v2;
+const {
+  createPengumpulanTugas,
+  getPengumpulanTugasById,
+  getAllPengumpulanTugas,
+  updatePengumpulanTugas,
+  deletePengumpulanTugas,
+  getPengumpulanTugasByTugasId,
+  getPengumpulanTugasByUserNip,
+} = require("../services/pengumpulanTugas.service");
 
 /**
  * Controller untuk membuat pengumpulan tugas baru
@@ -14,36 +25,113 @@ const CreatePengumpulanTugas = async (req, res) => {
     const user_nip = req.user.nip;
     const tanggal_pengumpulan = new Date();
 
-    // Upload file jika ada
-    let image = null;
-    let file_path = null;
+    // Buat pengumpulan tugas baru
+    const pengumpulanTugas = await createPengumpulanTugas({
+      kd_tugas,
+      user_nip,
+      tanggal_pengumpulan,
+      catatan,
+      status: "menunggu",
+    });
 
-    if (req.files) {
-      if (req.files.image) {
-        image = req.files.image[0].path;
+    // Jika ada file yang diupload, simpan informasi file
+    if (req.files && req.files.length > 0) {
+      const fileData = [];
+      const imageData = [];
+
+      // Upload setiap file ke Cloudinary
+      for (const file of req.files) {
+        try {
+          // Upload ke Cloudinary
+          const result = await cloudinary.uploader.upload(file.path, {
+            folder: "aplikasi_kominfo/pengumpulan_tugas/files",
+            resource_type: "auto",
+          });
+
+          // Tentukan apakah file adalah gambar atau dokumen
+          const isImage = file.mimetype.startsWith("image/");
+
+          if (isImage) {
+            imageData.push({
+              kd_pengumpulan_tugas: pengumpulanTugas.kd_pengumpulan_tugas,
+              image_path: result.secure_url,
+              image_name: file.originalname,
+              image_type: file.mimetype,
+              image_size: file.size,
+            });
+          } else {
+            fileData.push({
+              kd_pengumpulan_tugas: pengumpulanTugas.kd_pengumpulan_tugas,
+              file_path: result.secure_url,
+              file_name: file.originalname,
+              file_type: file.mimetype,
+              file_size: file.size,
+            });
+          }
+
+          // Hapus file dari disk setelah berhasil diupload ke Cloudinary
+          fs.unlinkSync(file.path);
+        } catch (error) {
+          console.error("Error uploading file to Cloudinary:", error);
+          // Hapus file dari disk jika gagal upload ke Cloudinary
+          fs.unlinkSync(file.path);
+          throw new Error("Gagal mengupload file ke Cloudinary");
+        }
       }
-      if (req.files.file_path) {
-        file_path = req.files.file_path[0].path;
+
+      // Simpan data file ke database
+      if (fileData.length > 0) {
+        await prisma.pengumpulanTugasFile.createMany({
+          data: fileData,
+        });
+      }
+
+      // Simpan data gambar ke database
+      if (imageData.length > 0) {
+        await prisma.pengumpulanTugasImage.createMany({
+          data: imageData,
+        });
       }
     }
 
-    const pengumpulanTugas =
-      await pengumpulanTugasService.createPengumpulanTugas({
-        kd_tugas,
-        user_nip,
-        tanggal_pengumpulan,
-        image,
-        file_path,
-        catatan,
-        status: "menunggu",
-      });
+    // Ambil pengumpulan tugas dengan file yang terkait
+    const pengumpulanTugasWithFiles = await prisma.pengumpulanTugas.findUnique({
+      where: {
+        kd_pengumpulan_tugas: pengumpulanTugas.kd_pengumpulan_tugas,
+      },
+      include: {
+        files: true,
+        images: true,
+        tugas: true,
+        user: {
+          select: {
+            nip: true,
+            nama: true,
+            jabatan: true,
+          },
+        },
+      },
+    });
 
     return res.status(201).json({
       status: "success",
       message: "Pengumpulan tugas berhasil dibuat",
-      data: pengumpulanTugas,
+      data: pengumpulanTugasWithFiles,
     });
   } catch (error) {
+    console.error("Error in CreatePengumpulanTugas:", error);
+
+    // Hapus file yang sudah diupload jika terjadi error
+    if (req.files && req.files.length > 0) {
+      req.files.forEach((file) => {
+        try {
+          fs.unlinkSync(file.path);
+        } catch (err) {
+          console.error("Error deleting file:", err);
+        }
+      });
+    }
+
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       switch (error.code) {
         case "P2003":
@@ -52,13 +140,16 @@ const CreatePengumpulanTugas = async (req, res) => {
             message: "Tugas atau user tidak ditemukan",
           });
         default:
-          break;
+          return res.status(400).json({
+            status: "error",
+            message: "Terjadi kesalahan saat menyimpan data",
+          });
       }
     }
 
     return res.status(500).json({
       status: "error",
-      message: error.message,
+      message: error.message || "Terjadi kesalahan pada server",
     });
   }
 };

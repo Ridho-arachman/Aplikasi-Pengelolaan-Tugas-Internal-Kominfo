@@ -4,7 +4,9 @@ const {
   authenticateJWT,
   authorizeRoles,
 } = require("../middlewares/auth.middleware");
-const { uploadImage, uploadPDF } = require("../configs/cloudinary");
+const {
+  uploadPengumpulanTugasFilesMiddleware,
+} = require("../middlewares/upload.middleware");
 const {
   createPengumpulanTugasSchema,
   getPengumpulanTugasSchema,
@@ -28,6 +30,7 @@ router.use(authenticateJWT);
 router.post(
   "/",
   authorizeRoles(["user"]),
+  uploadPengumpulanTugasFilesMiddleware,
   validate({ body: createPengumpulanTugasSchema }),
   CreatePengumpulanTugas
 );
@@ -52,6 +55,7 @@ router.get(
 router.put(
   "/:kd_pengumpulan_tugas",
   authorizeRoles(["user"]),
+  uploadPengumpulanTugasFilesMiddleware,
   validate({
     params: updatePengumpulanTugasSchema.pick({ kd_pengumpulan_tugas: true }),
     body: updatePengumpulanTugasSchema.omit({ kd_pengumpulan_tugas: true }),
