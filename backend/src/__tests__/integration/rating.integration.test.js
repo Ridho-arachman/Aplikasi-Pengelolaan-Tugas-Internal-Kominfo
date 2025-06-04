@@ -56,9 +56,16 @@ describe("Integration test for Rating routes", () => {
           kd_tugas: tugasKode,
           user_nip: userNip,
           tanggal_pengumpulan: new Date(),
-          file_path: "/path/to/test/file.pdf",
           catatan: "Catatan pengumpulan tugas test",
           status: "menunggu",
+          files: {
+            create: {
+              file_path: "/path/to/test/file.pdf",
+              file_name: "test-file.pdf",
+              file_type: "application/pdf",
+              file_size: 1024,
+            },
+          },
         },
       });
 
